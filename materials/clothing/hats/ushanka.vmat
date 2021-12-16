@@ -10,13 +10,13 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "materials/dump_raw_sourcefiles_in_here/ushanka_ao.tga"
+	TextureAmbientOcclusion "materials/clothing/hats/ushanka_ao.tga"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[0.325490 0.325490 0.325490 0.000000]"
-	TextureColor "materials/dump_raw_sourcefiles_in_here/ushanka_color.tga"
-	TextureTintMask "materials/dump_raw_sourcefiles_in_here/ushanka_mask.tga"
+	TextureColor "materials/clothing/hats/ushanka_color.tga"
+	TextureTintMask "materials/clothing/hats/ushanka_mask.tga"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -32,10 +32,10 @@ Layer0
 	g_flMetalness "0.000"
 
 	//---- Normal ----
-	TextureNormal "materials/dump_raw_sourcefiles_in_here/ushanka_normal.tga"
+	TextureNormal "materials/clothing/hats/ushanka_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "materials/dump_raw_sourcefiles_in_here/ushanka_rough.tga"
+	TextureRoughness "materials/clothing/hats/ushanka_rough.tga"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
