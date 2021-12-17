@@ -1,0 +1,169 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"1",
+							"trunk",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 100.0
+						meshes = 
+						[
+							"2",
+							"trunk",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 250.0
+						meshes = 
+						[
+							"3",
+							"trunk",
+						]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "wood.vmat"
+								to = "models/sbox_props/trees/horse_chestnut/horse_chestnut.vmat"
+							},
+							{
+								from = "pine_01.vmat"
+								to = "models/tree/leaves/pine_01.vmat"
+							},
+							{
+								from = "pine_02.vmat"
+								to = "models/tree/leaves/pine_02.vmat"
+							},
+							{
+								from = "pine_03.vmat"
+								to = "models/tree/leaves/pine_03.vmat"
+							},
+							{
+								from = "pine_04.vmat"
+								to = "models/tree/leaves/pine_04.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeCylinder"
+						parent_bone = ""
+						surface_prop = "wood"
+						collision_prop = "default"
+						radius = 24.093512
+						point0 = [ 14.670723, -7.674599, -19.963287 ]
+						point1 = [ 14.670723, -7.674599, 497.027557 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "1"
+						filename = "models/tree/ctree_undecorated.lod0.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "2"
+						filename = "models/tree/ctree_undecorated.lod1.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "3"
+						filename = "models/tree/ctree_undecorated.lod2.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "trunk"
+						filename = "models/tree/trunk.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = "static_prop_model"
+		primary_associated_entity = "prop_static"
+		anim_graph_name = ""
+	}
+}
