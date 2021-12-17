@@ -58,7 +58,7 @@ namespace Frostrial
 
 			if ( hasNewAngle && input.InputDirection.IsNearZeroLength ) // if the player have stopped moving
 			{
-				Player.ChangeMovementDirection( new Vector3( TargetAngles.pitch, TargetAngles.yaw, TargetAngles.roll ) ); // change the angle
+				Player.ChangeMovementDirection( TargetAngles.yaw ); // change the angle
 				hasNewAngle = false;
 			}
 		}

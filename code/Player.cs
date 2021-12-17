@@ -7,11 +7,10 @@ namespace Frostrial
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 45, 0 ).ToRotation();
 
 		[ServerCmd]
-		public static void ChangeMovementDirection(Vector3 a) // FIXME: replace it with Angles as soon as passing Angles to the ServerCmd is fixed
+		public static void ChangeMovementDirection( float yaw ) // FIXME: replace it with Angles as soon as passing Angles to the ServerCmd is fixed
 		{
 			var pawn = ConsoleSystem.Caller.Pawn as Player;
-			var angle = new Angles( a.x, a.y, a.z );
-			pawn.MovementDirection = angle.ToRotation();
+			pawn.MovementDirection = Rotation.FromYaw( yaw );
 		}
 
 		public override void Respawn()
