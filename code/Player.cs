@@ -11,7 +11,6 @@ namespace Frostrial
 		{
 			var pawn = ConsoleSystem.Caller.Pawn as Player;
 			var angle = new Angles( a.x, a.y, a.z );
-			Log.Info( $"New movement direction for the player {pawn.Name}: {angle.yaw}" );
 			pawn.MovementDirection = angle.ToRotation();
 		}
 

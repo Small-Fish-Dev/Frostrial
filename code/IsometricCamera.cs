@@ -8,7 +8,7 @@ namespace Frostrial
 
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 45, 45, 0 );
-		Angles CurrentAngles = Angles.Zero;
+		Rotation TargetRotation = new();
 		bool hasNewAngle = false;
 
 		public IsometricCamera()
@@ -16,7 +16,8 @@ namespace Frostrial
 			Ortho = true;
 			OrthoSize = 1f;
 
-			CurrentAngles = TargetAngles;
+			TargetRotation = TargetAngles.ToRotation();
+			Rotation = TargetRotation;
 		}
 
 		public override void Update()
@@ -25,10 +26,8 @@ namespace Frostrial
 			if ( player == null )
 				return;
 
-			ZNear = -102400; // just a big number to make the world not cut off
-			Position = player.Position + new Vector3( 0, 0, 72 / 2 ); // + half a player's height
-			CurrentAngles = CurrentAngles.WithYaw( MathX.LerpTo( CurrentAngles.yaw, TargetAngles.yaw, 5f * Time.Delta ) );
-			Rotation = CurrentAngles.ToRotation();
+			Rotation = Rotation.Slerp( Rotation, TargetRotation, 5f * Time.Delta );
+			Position = player.Position + Rotation.Backward * 1024; // move it back a little bit
 			Viewer = null;
 		}
 
@@ -36,11 +35,12 @@ namespace Frostrial
 		{
 			if ( LastAngleChange >= AngleChangeDelay )
 			{
-				float rotDir = (input.Down( InputButton.Menu ) ? 1 : 0) + (input.Down( InputButton.Use ) ? -1 : 0);
+				float rotDir = (input.Down( InputButton.Menu ) ? -1 : 0) + (input.Down( InputButton.Use ) ? 1 : 0);
 
 				if ( rotDir != 0 )
 				{
-					TargetAngles = TargetAngles.WithYaw( TargetAngles.yaw + rotDir * 90 );
+					TargetAngles = TargetAngles.WithYaw( MathX.NormalizeDegrees( TargetAngles.yaw + rotDir * 90 ) );
+					TargetRotation = TargetAngles.ToRotation();
 
 					LastAngleChange = 0;
 					hasNewAngle = true;
@@ -58,8 +58,7 @@ namespace Frostrial
 
 			if ( hasNewAngle && input.InputDirection.IsNearZeroLength ) // if the player have stopped moving
 			{
-				Log.Info( $"Sending new angle {TargetAngles}..." );
-				Player.ChangeMovementDirection( new Vector3(TargetAngles.pitch, TargetAngles.yaw, TargetAngles.roll) ); // change the angle
+				Player.ChangeMovementDirection( new Vector3( TargetAngles.pitch, TargetAngles.yaw, TargetAngles.roll ) ); // change the angle
 				hasNewAngle = false;
 			}
 		}
