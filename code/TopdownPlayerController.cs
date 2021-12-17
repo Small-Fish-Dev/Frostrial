@@ -112,11 +112,9 @@ namespace Frostrial
 			//
 			// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
 			//
-			WishVelocity = new Vector3( Input.Forward, Input.Left, 0 );
+			var player = Pawn as Player;
+			WishVelocity = Input.Forward * player.MovementDirection.Forward + Input.Left * player.MovementDirection.Left;
 			var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
-			WishVelocity *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
-
-			WishVelocity = WishVelocity.WithZ( 0 );
 
 			WishVelocity = WishVelocity.Normal * inSpeed;
 			WishVelocity *= GetWishSpeed();
@@ -127,6 +125,7 @@ namespace Frostrial
 
 			if ( Debug )
 			{
+				DebugOverlay.Line( player.Position, player.Position + WishVelocity );
 				DebugOverlay.Box( Position + TraceOffset, mins, maxs, Color.Red );
 				DebugOverlay.Box( Position, mins, maxs, Color.Blue );
 
