@@ -25,9 +25,8 @@ namespace Frostrial
 			if ( player == null )
 				return;
 
-			ZNear = -102400; // just a big number to make the world not cut off
-			Position = player.Position + new Vector3( 0, 0, 72 / 2 ); // + half a player's height
 			CurrentAngles = CurrentAngles.WithYaw( MathX.LerpTo( CurrentAngles.yaw, TargetAngles.yaw, 5f * Time.Delta ) );
+			Position = player.Position + CurrentAngles.ToRotation().Backward * 1024; // move it back a little bit
 			Rotation = CurrentAngles.ToRotation();
 			Viewer = null;
 		}
@@ -36,7 +35,7 @@ namespace Frostrial
 		{
 			if ( LastAngleChange >= AngleChangeDelay )
 			{
-				float rotDir = (input.Down( InputButton.Menu ) ? 1 : 0) + (input.Down( InputButton.Use ) ? -1 : 0);
+				float rotDir = (input.Down( InputButton.Menu ) ? -1 : 0) + (input.Down( InputButton.Use ) ? 1 : 0);
 
 				if ( rotDir != 0 )
 				{
@@ -58,8 +57,7 @@ namespace Frostrial
 
 			if ( hasNewAngle && input.InputDirection.IsNearZeroLength ) // if the player have stopped moving
 			{
-				Log.Info( $"Sending new angle {TargetAngles}..." );
-				Player.ChangeMovementDirection( new Vector3(TargetAngles.pitch, TargetAngles.yaw, TargetAngles.roll) ); // change the angle
+				Player.ChangeMovementDirection( new Vector3( TargetAngles.pitch, TargetAngles.yaw, TargetAngles.roll ) ); // change the angle
 				hasNewAngle = false;
 			}
 		}
