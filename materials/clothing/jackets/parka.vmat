@@ -17,7 +17,7 @@ Layer0
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
-	g_vColorTint "[0.215686 0.203922 0.270588 0.000000]"
+	g_vColorTint "[0.200000 0.270588 0.211765 0.000000]"
 	TextureColor "materials/clothing/jackets/parka_color.tga"
 	TextureTintMask "materials/clothing/jackets/parka_mask.tga"
 
