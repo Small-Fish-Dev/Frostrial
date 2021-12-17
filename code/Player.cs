@@ -10,9 +10,9 @@ namespace Frostrial
 
 			Controller = new TopdownPlayerController();
 
-			Animator = new StandardPlayerAnimator();
+			Animator = new TopdownPlayerAnimator();
 
-			Camera = new ThirdPersonCamera();
+			Camera = new IsometricCamera();
 
 			EnableAllCollisions = true;
 			EnableDrawing = true;
