@@ -16,7 +16,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 20.0
+				m_flLiteralValue = 50.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -67,7 +67,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 5.0
+				m_flLiteralValue = 10.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -312,7 +312,7 @@
 			m_LocalCoordinateSystemSpeedMin = 
 			{
 				m_nType = "PVEC_TYPE_LITERAL"
-				m_vLiteralValue = [ -30.0, -30.0, 10.0 ]
+				m_vLiteralValue = [ -60.0, -60.0, 30.0 ]
 				m_LiteralColor = [ 0, 0, 0, 0 ]
 				m_nVectorAttribute = 6
 				m_vVectorAttributeScale = [ 1.0, 1.0, 1.0 ]
@@ -512,7 +512,7 @@
 			m_LocalCoordinateSystemSpeedMax = 
 			{
 				m_nType = "PVEC_TYPE_LITERAL"
-				m_vLiteralValue = [ 30.0, 30.0, 55.0 ]
+				m_vLiteralValue = [ 60.0, 60.0, 55.0 ]
 				m_LiteralColor = [ 0, 0, 0, 0 ]
 				m_nVectorAttribute = 6
 				m_vVectorAttributeScale = [ 1.0, 1.0, 1.0 ]
@@ -766,8 +766,8 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 1.5
-				m_flRandomMax = 3.0
+				m_flRandomMin = 2.5
+				m_flRandomMax = 4.0
 				m_nRandomMode = "PF_RANDOM_MODE_VARYING"
 				m_flLOD0 = 0.0
 				m_flLOD1 = 0.0
@@ -1128,11 +1128,11 @@
 					[
 						{
 							m_flPosition = 0.0
-							m_Color = [ 236, 236, 236, 255 ]
+							m_Color = [ 157, 162, 165, 255 ]
 						},
 						{
 							m_flPosition = 1.0
-							m_Color = [ 206, 240, 239, 255 ]
+							m_Color = [ 135, 135, 135, 255 ]
 						},
 					]
 				}
@@ -1149,7 +1149,7 @@
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.102
-			m_Gravity = [ 0.0, 0.0, -35.0 ]
+			m_Gravity = [ 0.0, 0.0, -130.0 ]
 		},
 		{
 			_class = "C_OP_FadeAndKill"

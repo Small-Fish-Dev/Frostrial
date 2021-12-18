@@ -45,8 +45,8 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/tools/rod.fbx"
-						import_translation = [ -3.0, 0.0, -5.0 ]
-						import_rotation = [ -100.0, 0.0, 0.0 ]
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -57,6 +57,35 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = "hold_R"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+				bone_cull_type = "Aggressive"
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "rodend"
+						parent_bone = "rod7_end"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
 			},
