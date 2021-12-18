@@ -30,7 +30,7 @@ namespace Frostrial
 					.WorldOnly()
 					.Run();
 
-					if ( trace.Surface.Name != "glass" )
+					if ( trace.Surface.Name != "ice" )
 					{
 
 						return false;
