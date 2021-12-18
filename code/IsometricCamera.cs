@@ -81,7 +81,7 @@ namespace Frostrial
 		{
 			if ( LastAngleChange >= AngleChangeDelay )
 			{
-				float rotDir = (input.Down( InputButton.Menu ) ? -1 : 0) + (input.Down( InputButton.Use ) ? 1 : 0);
+				float rotDir = (input.Pressed( InputButton.Menu ) ? -1 : 0) + (input.Pressed( InputButton.Use ) ? 1 : 0);
 
 				if ( rotDir != 0 )
 				{
