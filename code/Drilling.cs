@@ -1,5 +1,4 @@
 ﻿using Sandbox;
-using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -68,10 +67,10 @@ namespace Frostrial
 
 					}
 					else
-					{ 
-						
+					{
+
 						// Show error messag here
-					
+
 					}
 
 					lastAttempt = Time.Now + attemptCooldown;
@@ -124,7 +123,7 @@ namespace Frostrial
 		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
 		{
 
-			if( fxState )
+			if ( fxState )
 			{
 
 				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
