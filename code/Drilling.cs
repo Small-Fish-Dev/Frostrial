@@ -1,5 +1,4 @@
 ﻿using Sandbox;
-using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -8,8 +7,8 @@ namespace Frostrial
 	{
 
 		[Net] public bool Drilling { get; set; } = false;
-		[Net] float drillingCompletion { get; set; } = 0f;
-		[Net] float lastAttempt { get; set; } = 0f;
+		[Net] RealTimeUntil drillingCompletion { get; set; } = 0f;
+		[Net] RealTimeSince lastAttempt { get; set; } = 0f;
 		[Net] float attemptCooldown { get; set; } = 0.5f;
 
 		[Net]
@@ -46,35 +45,35 @@ namespace Frostrial
 
 		}
 
+		Vector3 holePosition = new();
+
 		public void HandleDrilling()
 		{
 
 			if ( IsClient ) return;
 
-			Vector3 holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 40f;
-
 			if ( Input.Pressed( InputButton.Attack1 ) )
 			{
 
-				if ( lastAttempt <= Time.Now )
+				if ( lastAttempt >= attemptCooldown )
 				{
 
-					if ( IsOnIce )
+					if ( Controller.Velocity.LengthSquared < 1 && IsOnIce ) // Don't allow the player to make holes while sliding
 					{
-
+						holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 40f;
 						Drilling = true;
 						HandleDrillingEffects( true, holePosition );
-						drillingCompletion = Time.Now + 2f; // TODO: Better drilling speed depends on drill
-
+						drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
+						BlockMovement = true;
 					}
 					else
-					{ 
-						
+					{
+
 						// Show error messag here
-					
+
 					}
 
-					lastAttempt = Time.Now + attemptCooldown;
+					lastAttempt = 0;
 
 				}
 
@@ -89,6 +88,7 @@ namespace Frostrial
 					Drilling = false;
 					HandleDrillingEffects( false, holePosition );
 					drillingCompletion = 0f;
+					BlockMovement = false;
 
 				}
 
@@ -100,7 +100,7 @@ namespace Frostrial
 				if ( Drilling )
 				{
 
-					if ( drillingCompletion <= Time.Now )
+					if ( drillingCompletion <= 0 )
 					{
 
 						Drilling = false;
@@ -109,6 +109,7 @@ namespace Frostrial
 						var hole = new Hole();
 						hole.Position = holePosition;
 						hole.CreationTime = Time.Now;
+						BlockMovement = false;
 
 					}
 
@@ -124,7 +125,7 @@ namespace Frostrial
 		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
 		{
 
-			if( fxState )
+			if ( fxState )
 			{
 
 				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling

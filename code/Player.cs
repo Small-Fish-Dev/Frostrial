@@ -5,9 +5,10 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 45, 0 ).ToRotation();
+		[Net, Local] public bool BlockMovement { get; set; } = false;
 
 		[ServerCmd]
-		public static void ChangeMovementDirection( float yaw ) // FIXME: replace it with Angles as soon as passing Angles to the ServerCmd is fixed
+		public static void ChangeMovementDirection( float yaw )
 		{
 			var pawn = ConsoleSystem.Caller.Pawn as Player;
 			pawn.MovementDirection = Rotation.FromYaw( yaw );
@@ -51,7 +52,7 @@ namespace Frostrial
 
 		public override void OnKilled()
 		{
-		
+
 			// Do nothing because we won't die but override it because of kill command
 
 		}
