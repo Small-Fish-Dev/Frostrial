@@ -4,9 +4,9 @@ namespace Frostrial
 {
 	public partial class TopdownPlayerController : BasePlayerController
 	{
-		[Net] public float SprintSpeed { get; set; } = 320.0f;
-		[Net] public float WalkSpeed { get; set; } = 150.0f;
-		[Net] public float DefaultSpeed { get; set; } = 190.0f;
+		[Net] public float SprintSpeed { get; set; } = 150.0f;
+		[Net] public float WalkSpeed { get; set; } = 110.0f;
+		[Net] public float DefaultSpeed { get; set; } = 110.0f;
 		[Net] public float Acceleration { get; set; } = 10.0f;
 		[Net] public float GroundFriction { get; set; } = 4.0f;
 		[Net] public float StopSpeed { get; set; } = 100.0f;
