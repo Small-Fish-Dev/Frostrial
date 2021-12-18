@@ -51,9 +51,9 @@ namespace Frostrial
 
 		public override void OnKilled()
 		{
-			base.OnKilled();
+		
+			// Do nothing because we won't die but override it because of kill command
 
-			EnableDrawing = false;
 		}
 
 	}
