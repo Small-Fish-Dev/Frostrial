@@ -42,7 +42,7 @@ namespace Frostrial
 					{
 
 						Drilling = true;
-						drillingCompletion = Time.Now + 3f; // TODO: Better drilling speed depends on drill
+						drillingCompletion = Time.Now + 0.2f; // TODO: Better drilling speed depends on drill
 
 					}
 					else
@@ -82,7 +82,8 @@ namespace Frostrial
 
 						Drilling = false;
 
-						//Create hole here
+						var hole = new Hole();
+						hole.Position = Position;
 
 					}
 
