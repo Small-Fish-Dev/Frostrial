@@ -18,7 +18,19 @@ namespace Frostrial
 
 			TargetRotation = TargetAngles.ToRotation();
 			Rotation = TargetRotation;
-			
+
+			LastAngleChange = AngleChangeDelay;
+		}
+
+		[ClientCmd("camera_pitch")]
+		public static void ChangeCameraPitch(float newPitch)
+		{
+			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			if ( cam == null )
+				return;
+
+			cam.TargetAngles = cam.TargetAngles.WithPitch( newPitch.Clamp( 15.0f, 45.0f ) );
+			cam.TargetRotation = cam.TargetAngles.ToRotation();
 		}
 
 		public override void Update()
@@ -28,7 +40,7 @@ namespace Frostrial
 				return;
 
 			Rotation = Rotation.Slerp( Rotation, TargetRotation, 5f * Time.Delta );
-			Position = player.Position + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 300; // move it back a little bit
+			Position = player.Position + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
 			Viewer = null;
 		}
 
