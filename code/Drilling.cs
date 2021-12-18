@@ -7,30 +7,10 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public float DrillingCompletion { get; set; }
-		private bool _drilling;
-		/*[Net]
-		public bool Drilling
-		{
-			get { return _drilling; }
-
-			set
-			{
-
-				bool canDrill = HandleDrilling( value ); // TODO: Fix this mess before pushing please
-
-				if ( _drilling != value )
-				{
-
-					DrillingCompletion = value ? Time.Now + 3f : 0f; // REPLACE WITH DRILLING SPEED
-
-				}
-
-				_drilling = HandleDrilling( value );
-
-			}
-
-		}*/
+		[Net] public bool Drilling { get; set; } = false;
+		[Net] float drillingCompletion { get; set; } = 0f;
+		[Net] float lastAttempt { get; set; } = 0f;
+		[Net] float attemptCooldown { get; set; } = 0.5f;
 		[Net] public bool IsOnIce
 		{
 
@@ -47,16 +27,70 @@ namespace Frostrial
 
 		}
 
-
-		/*public bool HandleDrilling( bool shouldDrill )
+		public void HandleDrilling()
 		{
 
-			if()
+			if ( IsClient ) return;
 
+			if ( Input.Pressed( InputButton.Attack1 ) )
+			{
 
-			return false;
+				if ( lastAttempt <= Time.Now )
+				{
 
-		}*/
+					if ( IsOnIce )
+					{
+
+						Drilling = true;
+						drillingCompletion = Time.Now + 3f; // TODO: Better drilling speed depends on drill
+
+					}
+					else
+					{ 
+						
+						// Show error messag here
+					
+					}
+
+					lastAttempt = Time.Now + attemptCooldown;
+
+				}
+
+			}
+
+			if ( Input.Released( InputButton.Attack1 ) )
+			{
+
+				if ( Drilling )
+				{
+
+					Drilling = false;
+					drillingCompletion = 0f;
+
+				}
+
+			}
+
+			if ( Input.Down( InputButton.Attack1 ) )
+			{
+
+				if ( Drilling )
+				{
+
+					if ( drillingCompletion <= Time.Now )
+					{
+
+						Drilling = false;
+
+						//Create hole here
+
+					}
+
+				}
+
+			}
+
+		}
 
 	}
 

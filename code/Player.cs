@@ -45,7 +45,7 @@ namespace Frostrial
 			//
 			SimulateActiveChild( cl, ActiveChild );
 
-			//Drilling = Input.Down( InputButton.Attack1 );
+			HandleDrilling();
 
 		}
 
