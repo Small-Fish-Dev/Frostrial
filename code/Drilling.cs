@@ -26,7 +26,7 @@ namespace Frostrial
 					float checkDistance = 80f;
 					Vector3 checkPos = Rotation.FromYaw( i * 45f ).Forward * checkDistance;
 
-					var trace = Trace.Ray( Position + checkPos + Vector3.Up * 16f, Position + checkPos + Vector3.Down * 16f )
+					var trace = Trace.Ray( Position + checkPos + Vector3.Up * 2f, Position + checkPos + Vector3.Down * 2f )
 					.WorldOnly()
 					.Run();
 
