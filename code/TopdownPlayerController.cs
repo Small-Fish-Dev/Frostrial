@@ -113,11 +113,16 @@ namespace Frostrial
 			// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
 			//
 			var player = Pawn as Player;
-			WishVelocity = Input.Forward * player.MovementDirection.Forward + Input.Left * player.MovementDirection.Left;
-			var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
+			if ( player.BlockMovement )
+				WishVelocity = Vector3.Zero;
+			else
+			{
+				WishVelocity = Input.Forward * player.MovementDirection.Forward + Input.Left * player.MovementDirection.Left;
+				var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 
-			WishVelocity = WishVelocity.Normal * inSpeed;
-			WishVelocity *= GetWishSpeed();
+				WishVelocity = WishVelocity.Normal * inSpeed;
+				WishVelocity *= GetWishSpeed();
+			}
 
 			WalkMove();
 
@@ -295,7 +300,13 @@ namespace Frostrial
 
 		public virtual void CategorizePosition()
 		{
-			SurfaceFriction = 1.0f;
+
+			var trace = Trace.Ray( Position, Position + Vector3.Down * 16f )
+			.WorldOnly()
+			.Run();
+
+			if ( trace.Hit )
+				SurfaceFriction = trace.Surface.Friction;
 
 			// Doing this before we move may introduce a potential latency in water detection, but
 			// doing it after can get us stuck on the bottom in water if the amount we move up
