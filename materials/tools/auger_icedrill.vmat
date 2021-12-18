@@ -18,7 +18,7 @@ Layer0
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
-	g_vColorTint "[0.058824 0.698039 0.827451 0.000000]"
+	g_vColorTint "[0.721569 0.721569 0.721569 0.000000]"
 	TextureColor "materials/tools/auger_icedrill_color.tga"
 	TextureTintMask "materials/tools/auger_icedrill_mask.tga"
 

@@ -1,0 +1,39 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "water.vfx"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_vWaterFogColor "[0.349020 0.423529 0.466667 0.000000]"
+	g_vWaterFogDistanceFalloff "[250.000 0.100]"
+
+	//---- Material ----
+	TextureColor "materials/default/default_color.tga"
+	TextureTintMask "materials/default/default.tga"
+
+	//---- Tessellation ----
+	fTesselationFalloff "1800.000"
+	sMaxTesselation "10"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Water ----
+	g_fAmplitude "0.000"
+	g_fPhase "4.060"
+	g_fScale "12.418"
+	g_fSpeed "0.716"
+	g_fWeight "0.487"
+}

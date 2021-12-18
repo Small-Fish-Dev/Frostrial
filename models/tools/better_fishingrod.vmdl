@@ -51,7 +51,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_R"
 						import_filter = 
 						{
 							exclude_by_default = false
@@ -61,31 +61,33 @@
 				]
 			},
 			{
-				_class = "IKData"
+				_class = "AttachmentList"
 				children = 
 				[
 					{
-						_class = "IKChain"
-						name = "rod_IK"
-						m_bDoBonesOrientAlongPositiveX = true
-						"m_DefaultSolverSettings.m_nNumIterations" = 6
-						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_Fabrik"
-						"m_DefaultTargetSettings.m_Bone" = 
-						{
-							m_Name = "endrod"
-						}
-						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
-						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
-						{
-							m_id = 4294967295
-						}
-						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
-						{
-							m_Name = ""
-						}
-						"m_Data.m_bParentJointRequiresAlignment" = true
+						_class = "Attachment"
+						name = "rodend"
+						parent_bone = "rod7_end"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = "hold_R"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+				bone_cull_type = "Aggressive"
 			},
 		]
 		model_archetype = ""

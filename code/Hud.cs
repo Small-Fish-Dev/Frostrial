@@ -15,7 +15,7 @@ namespace Frostrial
 		{
 			if ( IsClient )
 			{
-				RootPanel.SetTemplate( "/minimalhud.html" );
+				RootPanel.SetTemplate( "/hud.html" );
 			}
 		}
 	}

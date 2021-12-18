@@ -32,6 +32,7 @@ namespace Frostrial
 
 			player.Respawn();
 		}
+
 	}
 
 }

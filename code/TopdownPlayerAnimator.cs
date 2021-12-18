@@ -14,41 +14,13 @@ namespace Frostrial
 			DoRotation( idealRotation );
 			DoWalk();
 
-			//
-			// Let the animation graph know some shit
-			//
-			bool sitting = HasTag( "sitting" );
-			bool noclip = HasTag( "noclip" ) && !sitting;
-
-			SetParam( "b_grounded", true );
-			SetParam( "b_noclip", noclip );
-			SetParam( "b_sit", sitting );
-
-			if ( Host.IsClient && Client.IsValid() )
-			{
-				SetParam( "voice", Client.TimeSinceLastVoice < 0.5f ? Client.VoiceLevel : 0.0f );
-			}
-
 			Vector3 aimPos = Pawn.EyePos + Input.Rotation.Forward * 200;
 			Vector3 lookPos = aimPos;
 
-			//
-			// Look in the direction what the player's input is facing
-			//
 			SetLookAt( "aim_eyes", lookPos );
 			SetLookAt( "aim_head", lookPos );
 			SetLookAt( "aim_body", aimPos );
 
-			if ( Pawn.ActiveChild is BaseCarriable carry )
-			{
-				carry.SimulateAnimator( this );
-			}
-			else
-			{
-				SetParam( "holdtype", 0 );
-				SetParam( "aimat_weight", 0.5f ); // old
-				SetParam( "aim_body_weight", 0.5f );
-			}
 
 		}
 
@@ -81,7 +53,6 @@ namespace Frostrial
 
 		void DoWalk()
 		{
-			// Move Speed
 			{
 				var dir = Velocity;
 				var forward = Rotation.Forward.Dot( dir );
@@ -94,24 +65,11 @@ namespace Frostrial
 				SetParam( "move_groundspeed", Velocity.WithZ( 0 ).Length );
 				SetParam( "move_y", sideward );
 				SetParam( "move_x", forward );
-				SetParam( "move_z", Velocity.z );
+
 			}
 
-			// Wish Speed
-			{
-				var dir = WishVelocity;
-				var forward = Rotation.Forward.Dot( dir );
-				var sideward = Rotation.Right.Dot( dir );
-
-				var angle = MathF.Atan2( sideward, forward ).RadianToDegree().NormalizeDegrees();
-
-				SetParam( "wish_direction", angle );
-				SetParam( "wish_speed", WishVelocity.Length );
-				SetParam( "wish_groundspeed", WishVelocity.WithZ( 0 ).Length );
-				SetParam( "wish_y", sideward );
-				SetParam( "wish_x", forward );
-				SetParam( "wish_z", WishVelocity.z );
-			}
 		}
+
 	}
+
 }
