@@ -8,14 +8,13 @@ namespace Frostrial
 
 		[Net] public float CreationTime { get; set; }
 
-		[Event.Tick.Server]
-		public void OnTick()
+		public override void Spawn()
 		{
 
-			float speed = 0.5f;
-			float progress = Math.Clamp( Time.Now - CreationTime, 0, speed ) / speed;
+			base.Spawn();
 
-			DebugOverlay.Circle( Position, Rotation.FromPitch( 90 ), 10f * progress, new Color( 0.02f, 0.04f, 0.15f, progress ) ); ;
+			SetModel( "models/randommodels/icehole_low.vmdl" );
+			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 		}
 

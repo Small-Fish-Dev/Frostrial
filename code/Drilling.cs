@@ -60,7 +60,7 @@ namespace Frostrial
 
 					if ( Controller.Velocity.LengthSquared < 1 && IsOnIce ) // Don't allow the player to make holes while sliding
 					{
-						holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 40f;
+						holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
 						Drilling = true;
 						HandleDrillingEffects( true, holePosition );
 						drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
