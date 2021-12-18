@@ -7,17 +7,18 @@ namespace Frostrial
 		public float AngleChangeDelay => 0.2f;
 
 		TimeSince LastAngleChange = 0;
-		Angles TargetAngles = new Angles( 45, 45, 0 );
+		Angles TargetAngles = new Angles( 30, 45, 0 );
 		Rotation TargetRotation = new();
 		bool hasNewAngle = false;
 
 		public IsometricCamera()
 		{
 			Ortho = true;
-			OrthoSize = 1f;
+			OrthoSize = 0.7f;
 
 			TargetRotation = TargetAngles.ToRotation();
 			Rotation = TargetRotation;
+			
 		}
 
 		public override void Update()
@@ -27,7 +28,7 @@ namespace Frostrial
 				return;
 
 			Rotation = Rotation.Slerp( Rotation, TargetRotation, 5f * Time.Delta );
-			Position = player.Position + Rotation.Backward * 1024; // move it back a little bit
+			Position = player.Position + Rotation.Backward * 2048; // move it back a little bit
 			Viewer = null;
 		}
 

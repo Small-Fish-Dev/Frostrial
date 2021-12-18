@@ -28,6 +28,8 @@ namespace Frostrial
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
 
+			BasicClothes();
+
 			base.Respawn();
 		}
 

@@ -6,39 +6,6 @@
 		children = 
 		[
 			{
-				_class = "LODGroupList"
-				children = 
-				[
-					{
-						_class = "LODGroup"
-						switch_threshold = 0.0
-						meshes = 
-						[
-							"1",
-							"trunk",
-						]
-					},
-					{
-						_class = "LODGroup"
-						switch_threshold = 100.0
-						meshes = 
-						[
-							"2",
-							"trunk",
-						]
-					},
-					{
-						_class = "LODGroup"
-						switch_threshold = 250.0
-						meshes = 
-						[
-							"3",
-							"trunk",
-						]
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -91,40 +58,6 @@
 				_class = "RenderMeshList"
 				children = 
 				[
-					{
-						_class = "RenderMeshFile"
-						name = "1"
-						filename = "models/tree/ctree_undecorated.lod0.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "2"
-						filename = "models/tree/ctree_undecorated.lod1.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
 					{
 						_class = "RenderMeshFile"
 						name = "3"
