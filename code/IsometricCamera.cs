@@ -5,16 +5,18 @@ namespace Frostrial
 	public class IsometricCamera : Camera
 	{
 		public float AngleChangeDelay => 0.2f;
+		public Vector3? PointOfInterest { get; set; } = null;
 
+		Vector3 PositionBeforeZoomOut = new();
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 30, 45, 0 );
 		Rotation TargetRotation = new();
+		float Zoom = 0.7f;
 		bool hasNewAngle = false;
 
 		public IsometricCamera()
 		{
 			Ortho = true;
-			OrthoSize = 0.7f;
 
 			TargetRotation = TargetAngles.ToRotation();
 			Rotation = TargetRotation;
@@ -22,8 +24,8 @@ namespace Frostrial
 			LastAngleChange = AngleChangeDelay;
 		}
 
-		[ClientCmd("camera_pitch")]
-		public static void ChangeCameraPitch(float newPitch)
+		[ClientCmd( "camera_pitch" )]
+		public static void ChangeCameraPitch( float newPitch )
 		{
 			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
 			if ( cam == null )
@@ -33,6 +35,28 @@ namespace Frostrial
 			cam.TargetRotation = cam.TargetAngles.ToRotation();
 		}
 
+		[ClientCmd( "debug_set_poi" )]
+		public static void DebugSetPOI( float x, float y, float z )
+		{
+			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			if ( cam == null )
+				return;
+
+			var poi = new Vector3( x, y, z );
+			Log.Info( $"New Point of Interest: {poi}" );
+			cam.PointOfInterest = poi;
+		}
+
+		[ClientCmd( "debug_reset_poi" )]
+		public static void DebugSetPOI()
+		{
+			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			if ( cam == null )
+				return;
+
+			cam.PointOfInterest = null;
+		}
+
 		public override void Update()
 		{
 			var player = Local.Pawn as Player;
@@ -40,7 +64,16 @@ namespace Frostrial
 				return;
 
 			Rotation = Rotation.Slerp( Rotation, TargetRotation, 5f * Time.Delta );
-			Position = player.Position + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
+			if ( PointOfInterest.HasValue )
+			{
+				PositionBeforeZoomOut = PositionBeforeZoomOut.LerpTo( PointOfInterest.Value, 5f * Time.Delta );
+			}
+			else
+			{
+				PositionBeforeZoomOut = player.Position;
+			}
+			Position = PositionBeforeZoomOut + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
+			OrthoSize = MathX.LerpTo( OrthoSize, Zoom, 7.5f * Time.Delta );
 			Viewer = null;
 		}
 
@@ -60,6 +93,11 @@ namespace Frostrial
 
 					// TODO: play a sound when the camera was rotated
 				}
+			}
+
+			if ( input.MouseWheel != 0 )
+			{
+				Zoom = (Zoom - input.MouseWheel * 0.15f).Clamp( 0.5f, 1.5f );
 			}
 
 			// add the view move, clamp pitch
