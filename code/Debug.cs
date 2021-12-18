@@ -15,6 +15,15 @@ namespace Frostrial
 
 		}
 
+		[ServerCmd( "checkground" )]
+		public static void CheckGround()
+		{
+
+			var player = ConsoleSystem.Caller.Pawn as Player;
+			Log.Info( player.IsOnIce );
+
+		}
+
 	}
 
 }

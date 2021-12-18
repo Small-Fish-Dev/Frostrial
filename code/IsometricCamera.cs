@@ -28,7 +28,7 @@ namespace Frostrial
 				return;
 
 			Rotation = Rotation.Slerp( Rotation, TargetRotation, 5f * Time.Delta );
-			Position = player.Position + Rotation.Backward * 1300; // move it back a little bit
+			Position = player.Position + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 300; // move it back a little bit
 			Viewer = null;
 		}
 

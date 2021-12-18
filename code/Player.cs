@@ -44,6 +44,9 @@ namespace Frostrial
 			// Called to simulate fishing rod/drill/etc
 			//
 			SimulateActiveChild( cl, ActiveChild );
+
+			//Drilling = Input.Down( InputButton.Attack1 );
+
 		}
 
 		public override void OnKilled()

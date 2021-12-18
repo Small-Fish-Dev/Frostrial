@@ -12,7 +12,7 @@ namespace Frostrial
 		{
 
 			// Delete pre-existing clothes on the same slot
-			if( clothes.ContainsKey( clothingSlot ) )
+			if ( clothes.ContainsKey( clothingSlot ) )
 			{
 
 				clothes[clothingSlot].Delete();
@@ -34,7 +34,7 @@ namespace Frostrial
 			SetClothing( "jacket", "models/clothing/jackets/parka.vmdl" );
 			SetClothing( "trousers", "models/clothing/trousers/fishing_trousers.vmdl" );
 			SetClothing( "gloves", "models/citizen_clothes/gloves/gloves_workgloves.vmdl" );
-			SetClothing( "boots", "models/citizen_clothes/shoes/shoes_securityboots.vmdl" );
+			SetClothing( "boots", "models/citizen_clothes/shoes/shoes_securityboots.vmdl" ); // They too big!
 
 		}
 
