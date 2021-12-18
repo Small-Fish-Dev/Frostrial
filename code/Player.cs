@@ -52,5 +52,7 @@ namespace Frostrial
 
 			EnableDrawing = false;
 		}
+
 	}
+
 }
