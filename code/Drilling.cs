@@ -11,17 +11,36 @@ namespace Frostrial
 		[Net] float drillingCompletion { get; set; } = 0f;
 		[Net] float lastAttempt { get; set; } = 0f;
 		[Net] float attemptCooldown { get; set; } = 0.5f;
-		[Net] public bool IsOnIce
+
+		[Net]
+		public bool IsOnIce
 		{
 
 			get
 			{
 
-				var trace = Trace.Ray( Position, Position + Vector3.Down * 16f )
-				.WorldOnly()
-				.Run();
+				for ( var i = 0; i < 9; i++ )
+				{
 
-				return trace.Surface.Name == "glass";
+					Log.Info( i );
+
+					float checkDistance = 80f;
+					Vector3 checkPos = Rotation.FromYaw( i * 45f ).Forward * checkDistance;
+
+					var trace = Trace.Ray( Position + checkPos + Vector3.Up * 16f, Position + checkPos + Vector3.Down * 16f )
+					.WorldOnly()
+					.Run();
+
+					if ( trace.Surface.Name != "glass" )
+					{
+
+						return false;
+
+					}
+
+				}
+
+				return true;
 
 			}
 
@@ -31,6 +50,8 @@ namespace Frostrial
 		{
 
 			if ( IsClient ) return;
+
+			Vector3 holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 40f;
 
 			if ( Input.Pressed( InputButton.Attack1 ) )
 			{
@@ -42,7 +63,8 @@ namespace Frostrial
 					{
 
 						Drilling = true;
-						drillingCompletion = Time.Now + 0.2f; // TODO: Better drilling speed depends on drill
+						HandleDrillingEffects( true, holePosition );
+						drillingCompletion = Time.Now + 2f; // TODO: Better drilling speed depends on drill
 
 					}
 					else
@@ -65,6 +87,7 @@ namespace Frostrial
 				{
 
 					Drilling = false;
+					HandleDrillingEffects( false, holePosition );
 					drillingCompletion = 0f;
 
 				}
@@ -81,11 +104,40 @@ namespace Frostrial
 					{
 
 						Drilling = false;
+						HandleDrillingEffects( false, holePosition );
 
 						var hole = new Hole();
-						hole.Position = Position;
+						hole.Position = holePosition;
+						hole.CreationTime = Time.Now;
 
 					}
+
+				}
+
+			}
+
+		}
+		Particles drillingParticle { get; set; }
+		Sound drillingSound { get; set; }
+
+		[ClientRpc]
+		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
+		{
+
+			if( fxState )
+			{
+
+				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
+				drillingParticle = Particles.Create( "particles/drilling_particle.vpcf", fxPosition );
+
+			}
+			else
+			{
+
+				if ( drillingParticle != null )
+				{
+
+					drillingParticle.Destroy();
 
 				}
 
