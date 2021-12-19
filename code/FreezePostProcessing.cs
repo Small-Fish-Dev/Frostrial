@@ -7,30 +7,16 @@ namespace Sandbox
 
 	public class FreezePostProcessEffect : BasePostProcess
 	{
-		public static Material PostProcessMaterial;
+		private Material PostProcessMaterial;
 
-		public class FreezeSettings
+		public float FreezeStrength
 		{
-			internal BasePostProcess parent;
-
-			internal bool _enabled;
-
-
-			public float FreezeStrength
-			{
-				set
-				{
-					parent.Set( "freeze.strength", in value );
-				}
-			}
-
+			set => Set("freeze.strength", value);
 		}
-		public FreezeSettings Freeze = new FreezeSettings();
 
 		public FreezePostProcessEffect()
 		{
 			PostProcessMaterial = Material.Load( "materials/postprocessing/postprocess_freeze.vmat" );
-			Freeze.parent = this;
 		}
 
 		public override void Render()
