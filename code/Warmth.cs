@@ -14,7 +14,24 @@ namespace Frostrial
 		public void HandleWarmth()
 		{
 
-			Warmth = Math.Clamp( Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 );
+			Log.Info( Warmth );
+			Log.Info( ColdMultiplier );
+
+			if ( IsClient ) return;
+
+			Game current = Game.Current as Game;
+			float hutDistance = Position.Distance( current.Hut.Position );
+
+			if ( hutDistance <= 400f )
+			{
+
+				ColdMultiplier -= 6f;
+
+			}
+
+			Warmth = Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 );
+
+			ColdMultiplier = 1f;
 
 		}
 
