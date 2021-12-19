@@ -33,7 +33,11 @@ namespace Frostrial
 			Style.Left = Length.Fraction( left );
 			Style.Top = Length.Fraction( top );
 
-			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - 500 ) / 500, 0, 1f ) * 0.15f;
+			var baseDistance = 500f;
+			var baseOpacity = 0.15f;
+			var dangerLevel = 1 - player.Warmth;
+
+			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
 
 			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
