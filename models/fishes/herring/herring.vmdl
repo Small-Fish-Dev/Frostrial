@@ -15,7 +15,7 @@
 						[
 							{
 								from = "herring.vmat"
-								to = "models/fishes/minnow/minnow.vmat"
+								to = "models/fishes/herring/herring.vmat"
 							},
 						]
 						use_global_default = false
