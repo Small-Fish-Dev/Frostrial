@@ -16,6 +16,8 @@ namespace Frostrial
 			SetModel( "models/randommodels/icehole_low.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
+			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
+
 		}
 
 	}
