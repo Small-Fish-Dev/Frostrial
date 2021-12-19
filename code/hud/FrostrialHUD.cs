@@ -50,8 +50,6 @@ namespace Frostrial
 			arrow.Style.Left = Length.Percent( -100 );
 			arrow.Style.Top = Length.Percent( -125 );
 
-			
-
 		}
 		
 	}
@@ -81,6 +79,8 @@ namespace Frostrial
 
 		public override void Tick()
 		{
+
+
 
 		}
 
@@ -151,6 +151,8 @@ namespace Frostrial
 			pp.Vignette.Color = Color.Black;
 			pp.Vignette.Smoothness = 3f;
 			pp.Vignette.Roundness = 2f;
+
+			DebugOverlay.Box( player.MouseWorldPosition - new Vector3( -5 ), player.MouseWorldPosition - new Vector3( 5 ) );
 
 		}
 
