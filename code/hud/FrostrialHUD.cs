@@ -10,10 +10,13 @@ namespace Frostrial
 	public class HutIndicator : Panel
 	{
 
+		Panel arrow;
+
 		public HutIndicator()
 		{
 
 			Panel hut = Add.Panel( "HutIndicator" );
+			arrow = hut.Add.Panel( "Arrow" );
 
 		}
 
@@ -32,9 +35,7 @@ namespace Frostrial
 
 			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - 500 ) / 500, 0, 1f ) * 0.15f;
 
-			/* The arrows is slightly off sometimes, it irritates me so I disable it for now
-
-			var rotation = MathX.RadianToDegree( (float)Math.Atan2( hutScreen.x , -hutScreen.y ) );
+			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
 			var arrowRotate = new PanelTransform();
 			arrowRotate.AddTranslateX( Length.Percent( ( MathF.Sin( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
@@ -45,7 +46,7 @@ namespace Frostrial
 			arrow.Style.Left = Length.Percent( -100 );
 			arrow.Style.Top = Length.Percent( -125 );
 
-			*/
+			
 
 		}
 		
