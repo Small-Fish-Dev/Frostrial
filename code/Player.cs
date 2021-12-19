@@ -47,6 +47,7 @@ namespace Frostrial
 			SimulateActiveChild( cl, ActiveChild );
 
 			HandleDrilling();
+			HandleWarmth();
 
 		}
 

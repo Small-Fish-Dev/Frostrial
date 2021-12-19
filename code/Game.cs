@@ -12,11 +12,14 @@ namespace Frostrial
 	/// </summary>
 	public partial class Game : Sandbox.Game
 	{
+
+		[Net] public Hut Hut { get; set; }
+
 		public Game()
 		{
 			if ( IsServer )
 			{
-				new HudEntity();
+				new FrostrialHUD();
 			}
 		}
 

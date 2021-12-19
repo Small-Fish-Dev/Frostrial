@@ -21,8 +21,6 @@ namespace Frostrial
 				for ( var i = 0; i < 9; i++ )
 				{
 
-					Log.Info( i );
-
 					float checkDistance = 80f;
 					Vector3 checkPos = Rotation.FromYaw( i * 45f ).Forward * checkDistance;
 

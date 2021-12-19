@@ -1,0 +1,21 @@
+RootPanel {
+	pointer-events: all;
+	.HutIndicator {
+		position: absolute;
+		height: 100px;
+		width: 100px;
+		transform: translate( -50%, -50% );
+		background-image: url( ui/hut.png );
+		background-size: 101px;
+		background-image-tint: #c5d4ed;
+
+		.Arrow {
+			position: absolute;
+			height: 200px;
+			width: 200px;
+			background-image: url( ui/arrow.png );
+			background-size: 200px;
+			background-image-tint: #c5d4ed;
+		}
+	}
+}
