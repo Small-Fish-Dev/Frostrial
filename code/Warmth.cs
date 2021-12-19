@@ -27,6 +27,13 @@ namespace Frostrial
 
 			}
 
+			if ( Game.IsOnIce( Position ) )
+			{
+
+				ColdMultiplier += 2f;
+
+			}
+
 			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
 
 			if ( Warmth == 0 )

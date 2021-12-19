@@ -34,7 +34,7 @@ namespace Frostrial
 			Style.Top = Length.Fraction( top );
 
 			var baseDistance = 500f;
-			var baseOpacity = 0.15f;
+			var baseOpacity = 0.25f;
 			var dangerLevel = 1 - player.Warmth;
 
 			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
@@ -57,14 +57,30 @@ namespace Frostrial
 	public class Hint : Panel
 	{
 
+		Label hintTitle;
+
 		public Hint()
 		{
+
+			Player player = Local.Pawn as Player;
+
+			Panel hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
+			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
 
 		}
 
 		public override void Tick()
 		{
 
+			float fadeTime = 1f;
+			float textSpeed = 20f; // Letters per second
+
+			Player player = Local.Pawn as Player;
+
+			hintTitle.Text = player.HintText.Truncate( (int)( ( Time.Now - player.HintLifeTime ) * textSpeed ) );
+
+			// Don't punish me, RealTimeSince doesn't seem to work when networked
+			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
 		}
 
 	}
@@ -124,11 +140,14 @@ namespace Frostrial
 
 			if ( !IsClient ) return;
 
+			var player = Local.Pawn as Player;
+
+			PostProcess.Add( new StandardPostProcess() );
+
 			RootPanel.StyleSheet.Load( "hud/FrostrialHUD.scss" );
 
 			RootPanel.AddChild<HutIndicator>();
-
-			PostProcess.Add( new StandardPostProcess() );
+			RootPanel.AddChild<Hint>();
 
 		}
 
@@ -152,7 +171,22 @@ namespace Frostrial
 			pp.Vignette.Smoothness = 3f;
 			pp.Vignette.Roundness = 2f;
 
-			DebugOverlay.Box( player.MouseWorldPosition - new Vector3( -5 ), player.MouseWorldPosition - new Vector3( 5 ) );
+		}
+
+	}
+
+	partial class Player : Sandbox.Player
+	{
+		[Net] public string HintText { get; set; } = "";
+		[Net] public float HintLifeTime { get; set; } = 0f;
+		[Net] public float HintLifeDuration { get; set; } = 0f;
+
+		public void Hint( string text, float duration )
+		{
+
+			HintText = text;
+			HintLifeDuration = duration;
+			HintLifeTime = Time.Now;
 
 		}
 

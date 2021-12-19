@@ -11,38 +11,6 @@ namespace Frostrial
 		[Net] RealTimeSince lastAttempt { get; set; } = 0f;
 		[Net] float attemptCooldown { get; set; } = 0.5f;
 
-		[Net]
-		public bool IsOnIce
-		{
-
-			get
-			{
-
-				for ( var i = 0; i < 9; i++ )
-				{
-
-					float checkDistance = 80f;
-					Vector3 checkPos = Rotation.FromYaw( i * 45f ).Forward * checkDistance;
-
-					var trace = Trace.Ray( Position + checkPos + Vector3.Up * 2f, Position + checkPos + Vector3.Down * 2f )
-					.WorldOnly()
-					.Run();
-
-					if ( trace.Surface.Name != "ice" )
-					{
-
-						return false;
-
-					}
-
-				}
-
-				return true;
-
-			}
-
-		}
-
 		Vector3 holePosition = new();
 
 		public void HandleDrilling()
@@ -56,18 +24,21 @@ namespace Frostrial
 				if ( lastAttempt >= attemptCooldown )
 				{
 
-					if ( Controller.Velocity.LengthSquared < 1 && IsOnIce ) // Don't allow the player to make holes while sliding
+					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
+
+					if ( Controller.Velocity.LengthSquared < 1 && Game.IsOnIce( holePosition ) ) // Don't allow the player to make holes while sliding
 					{
-						holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
+
 						Drilling = true;
 						HandleDrillingEffects( true, holePosition );
 						drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
 						BlockMovement = true;
+
 					}
 					else
 					{
 
-						// Show error messag here
+						Hint( "I can't drill here", 3f ) ;
 
 					}
 
