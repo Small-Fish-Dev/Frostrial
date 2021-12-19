@@ -37,7 +37,7 @@
 						[
 							{
 								from = "minnow.vmat"
-								to = "models/fishes/minnow/minnow.vmat"
+								to = "models/fishes/minnow/minnowfinal.vmat"
 							},
 						]
 						use_global_default = false
