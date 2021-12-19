@@ -10,6 +10,7 @@ namespace Frostrial
 		[Net] public float Warmth { get; set; } = 1f;
 		[Net] public float ColdMultiplier { get; set; } = 1f; // Negative will recover warmth
 		[Net] public float BaseColdSpeed { get; set; } = 30f; // Total seconds to perish in neutral conditions ( Standing on Dirt and not moving )
+		[Net] public bool SuffersCold { get; set; } = true;
 
 		public void HandleWarmth()
 		{
@@ -26,7 +27,7 @@ namespace Frostrial
 
 			}
 
-			Warmth = Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 );
+			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
 
 			if ( Warmth == 0 )
 			{

@@ -15,12 +15,12 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd( "checkground" )]
-		public static void CheckGround()
+		[ServerCmd( "sufferscold" )]
+		public static void DisableCold( bool var )
 		{
 
 			var player = ConsoleSystem.Caller.Pawn as Player;
-			Log.Info( player.IsOnIce );
+			player.SuffersCold = var;
 
 		}
 
