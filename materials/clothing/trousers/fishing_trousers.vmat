@@ -17,7 +17,7 @@ Layer0
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
-	g_vColorTint "[0.490196 0.639216 0.505882 0.000000]"
+	g_vColorTint "[0.466667 0.568627 0.482353 1.000000]"
 	TextureColor "materials/clothing/trousers/fishing_trousers_color.tga"
 	TextureTintMask "materials/clothing/trousers/fishing_trousers_mask.tga"
 
