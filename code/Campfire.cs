@@ -3,7 +3,7 @@ using System;
 
 namespace Frostrial
 {
-	public partial class Hole : AnimEntity
+	public partial class Campfire : AnimEntity
 	{
 
 		public override void Spawn()
@@ -11,7 +11,7 @@ namespace Frostrial
 
 			base.Spawn();
 
-			SetModel( "models/randommodels/icehole_low.vmdl" );
+			SetModel( "models/randommodels/campfire.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );

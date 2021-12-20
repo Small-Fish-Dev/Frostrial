@@ -29,16 +29,32 @@ namespace Frostrial
 					if ( Controller.Velocity.LengthSquared < 1 && Game.IsOnIce( holePosition ) ) // Don't allow the player to make holes while sliding
 					{
 
-						Drilling = true;
-						HandleDrillingEffects( true, holePosition );
-						drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
-						BlockMovement = true;
+						if( Game.IsOnIce( holePosition ) )
+						{
 
-					}
-					else
-					{
+							if( !Game.IsNearEntity( holePosition, 5f ) )
+							{
 
-						Hint( "I can't drill here", 3f ) ;
+								Drilling = true;
+								HandleDrillingEffects( true, holePosition );
+								drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
+								BlockMovement = true;
+
+							}
+							else
+							{
+
+								Hint( "Too close!", 2 );
+
+							}
+
+						}
+						else
+						{
+
+							Hint( "I can't drill here", 3f );
+
+						}
 
 					}
 
@@ -75,9 +91,9 @@ namespace Frostrial
 						Drilling = false;
 						HandleDrillingEffects( false, holePosition );
 
-						var hole = new Hole();
+						Hole hole = new Hole();
 						hole.Position = holePosition;
-						hole.CreationTime = Time.Now;
+
 						BlockMovement = false;
 
 					}

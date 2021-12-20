@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Linq;
 
 namespace Frostrial
 {
@@ -44,6 +45,25 @@ namespace Frostrial
 			.Run();
 
 			return trace.Surface.Name == "ice";
+
+		}
+
+		public static bool IsNearEntity( Vector3 position, float range )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Player ) continue;
+				if ( ent is not Hole && ent is not Campfire) continue;
+
+				return true;
+
+			}
+
+			return false;
 
 		}
 
