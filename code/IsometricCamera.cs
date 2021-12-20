@@ -9,7 +9,7 @@ namespace Frostrial
 
 		Vector3 PositionBeforeZoomOut = new();
 		TimeSince LastAngleChange = 0;
-		Angles TargetAngles = new Angles( 30, 45, 0 );
+		Angles TargetAngles = new Angles( 30, 90, 0 );
 		Rotation TargetRotation = new();
 		float Zoom = 0.7f;
 		bool hasNewAngle = false;

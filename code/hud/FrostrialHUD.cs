@@ -3,6 +3,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
 using System;
+using System.Numerics;
 
 namespace Frostrial
 {
@@ -102,11 +103,10 @@ namespace Frostrial
 		{
 
 			Player player = Local.Pawn as Player;
+			var pos = player.Position;
 			mapPanel.SetClass( "open", player.OpenMap );
-			playerPanel.Style.Left = Length.Percent( player.Position.x );
-			playerPanel.Style.Top = Length.Percent( player.Position.y );
-
-			Log.Info( player.Position );
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while
+			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
 
 		}
 
