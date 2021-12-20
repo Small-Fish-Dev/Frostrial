@@ -101,8 +101,7 @@ namespace Frostrial
 			}
 
 
-			var player = Local.Pawn as Player;
-			if ( player != null )
+			if ( ( Local.Pawn as Player ) is var player && player != null && !player.BlockMovement )
 			{
 				// add the view move
 				input.ViewAngles = Rotation.LookAt((player.MouseWorldPosition - player.Position).WithZ(0), Vector3.Up).Angles();
