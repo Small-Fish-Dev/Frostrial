@@ -34,7 +34,8 @@ namespace Frostrial
 			Style.Left = Length.Fraction( left );
 			Style.Top = Length.Fraction( top );
 
-			var baseDistance = 500f;
+			var camera = player.Camera as IsometricCamera;
+			var baseDistance = 800f * camera.Zoom;
 			var baseOpacity = 0.25f;
 			var dangerLevel = 1 - player.Warmth;
 
