@@ -6,6 +6,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
+		[Net] public float DrillingSpeed { get; set; } = 5f; // Seconds before completing, better drill = faster
 		[Net] public bool Drilling { get; set; } = false;
 		[Net] RealTimeUntil drillingCompletion { get; set; } = 0f;
 		[Net] RealTimeSince lastAttempt { get; set; } = 0f;
@@ -37,7 +38,7 @@ namespace Frostrial
 
 								Drilling = true;
 								HandleDrillingEffects( true, holePosition );
-								drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
+								drillingCompletion = DrillingSpeed; // TODO: Better drilling speed depends on drill
 								BlockMovement = true;
 
 							}
@@ -99,14 +100,6 @@ namespace Frostrial
 					}
 
 				}
-
-			}
-
-			if ( Input.Pressed( InputButton.Attack2 ) )
-			{
-
-				string entName = Game.NearestEntity( MouseWorldPosition, 90 ).GetType().Name;
-				Hint( $"That is a {entName}", 2);
 
 			}
 
