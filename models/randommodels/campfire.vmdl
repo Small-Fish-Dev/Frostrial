@@ -43,28 +43,13 @@
 				children = 
 				[
 					{
-						_class = "PhysicsHullFile"
-						name = "icehole_low"
+						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_prop = "default"
-						recenter_on_parent_bone = false
-						offset_origin = [ 0.0, 0.0, 0.0 ]
-						offset_angles = [ 0.0, 0.0, 0.0 ]
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						filename = "models/randommodels/campfire_low.fbx"
-						import_scale = 0.6
-						faceMergeAngle = 11.86
-						maxHullVertices = 25
-						import_mode = "SingleHull"
-						optimization_algorithm = "QEM"
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
+						radius = 25.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 0.0, 0.0, 500.0 ]
 					},
 				]
 			},
