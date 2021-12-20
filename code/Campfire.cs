@@ -17,6 +17,14 @@ namespace Frostrial
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
 
 		}
+		public override void ClientSpawn()
+		{
+
+			base.ClientSpawn();
+
+			Particles.Create( "particles/fire_embers.vpcf", Position );
+
+		}
 
 	}
 

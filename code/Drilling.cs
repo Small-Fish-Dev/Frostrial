@@ -91,7 +91,7 @@ namespace Frostrial
 						Drilling = false;
 						HandleDrillingEffects( false, holePosition );
 
-						Hole hole = new Hole();
+						var hole = new Hole();
 						hole.Position = holePosition;
 
 						BlockMovement = false;
