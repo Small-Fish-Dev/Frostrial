@@ -10,11 +10,40 @@ namespace Frostrial
 		[Net] public float Warmth { get; set; } = 1f;
 		[Net] public float ColdMultiplier { get; set; } = 1f; // Negative will recover warmth
 		[Net] public float BaseColdSpeed { get; set; } = 30f; // Total seconds to perish in neutral conditions ( Standing on Dirt and not moving )
+		[Net] public bool SuffersCold { get; set; } = true;
 
 		public void HandleWarmth()
 		{
 
-			Warmth = Math.Clamp( Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 );
+			if ( IsClient ) return;
+
+			Game current = Game.Current as Game;
+			float hutDistance = Position.Distance( current.Hut.Position );
+
+			if ( hutDistance <= 400f )
+			{
+
+				ColdMultiplier -= ( 1f - hutDistance / 400f ) * 6f;
+
+			}
+
+			if ( Game.IsOnIce( Position ) )
+			{
+
+				ColdMultiplier += 2f;
+
+			}
+
+			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
+
+			if ( Warmth == 0 )
+			{
+
+				Client.Kick(); // TODO: Don't haha :-)
+
+			}
+
+			ColdMultiplier = 1f;
 
 		}
 

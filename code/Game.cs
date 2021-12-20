@@ -36,6 +36,17 @@ namespace Frostrial
 			player.Respawn();
 		}
 
+		public static bool IsOnIce( Vector3 position )
+		{ 
+			
+			var trace = Trace.Ray( position + Vector3.Up * 2f, position + Vector3.Down * 2f )
+			.WorldOnly()
+			.Run();
+
+			return trace.Surface.Name == "ice";
+
+		}
+
 	}
 
 }

@@ -5,7 +5,7 @@ namespace Frostrial
 {
 
 	[Library( "frostrial_hut", Description = "main base" )]
-	[Hammer.EditorModel( "models/tools/auger_icedrill.vmdl" )]
+	[Hammer.EditorModel( "models/randommodels/campfire.vmdl" )]
 	public partial class Hut : AnimEntity
 	{
 
@@ -14,7 +14,7 @@ namespace Frostrial
 
 			base.Spawn();
 
-			SetModel( "models/tools/auger_icedrill.vmdl" );
+			SetModel( "models/randommodels/campfire.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
@@ -24,9 +24,19 @@ namespace Frostrial
 
 		}
 
+		public override void ClientSpawn()
+		{
+
+			base.ClientSpawn();
+
+			Particles.Create( "particles/fire_embers.vpcf", Position );
+
+		}
+
 		[Event.Tick.Server]
 		public void OnTick()
 		{
+
 
 
 		}

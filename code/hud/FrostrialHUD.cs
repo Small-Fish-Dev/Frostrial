@@ -3,6 +3,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
 using System;
+using System.Numerics;
 
 namespace Frostrial
 {
@@ -10,10 +11,13 @@ namespace Frostrial
 	public class HutIndicator : Panel
 	{
 
+		Panel arrow;
+
 		public HutIndicator()
 		{
 
 			Panel hut = Add.Panel( "HutIndicator" );
+			arrow = hut.Add.Panel( "Arrow" );
 
 		}
 
@@ -30,11 +34,13 @@ namespace Frostrial
 			Style.Left = Length.Fraction( left );
 			Style.Top = Length.Fraction( top );
 
-			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - 500 ) / 500, 0, 1f ) * 0.15f;
+			var baseDistance = 500f;
+			var baseOpacity = 0.25f;
+			var dangerLevel = 1 - player.Warmth;
 
-			/* The arrows is slightly off sometimes, it irritates me so I disable it for now
+			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
 
-			var rotation = MathX.RadianToDegree( (float)Math.Atan2( hutScreen.x , -hutScreen.y ) );
+			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
 			var arrowRotate = new PanelTransform();
 			arrowRotate.AddTranslateX( Length.Percent( ( MathF.Sin( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
@@ -45,8 +51,6 @@ namespace Frostrial
 			arrow.Style.Left = Length.Percent( -100 );
 			arrow.Style.Top = Length.Percent( -125 );
 
-			*/
-
 		}
 		
 	}
@@ -54,14 +58,30 @@ namespace Frostrial
 	public class Hint : Panel
 	{
 
+		Label hintTitle;
+
 		public Hint()
 		{
+
+			Player player = Local.Pawn as Player;
+
+			Panel hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
+			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
 
 		}
 
 		public override void Tick()
 		{
 
+			float fadeTime = 1f;
+			float textSpeed = 20f; // Letters per second
+
+			Player player = Local.Pawn as Player;
+
+			hintTitle.Text = player.HintText.Truncate( (int)( ( Time.Now - player.HintLifeTime ) * textSpeed ) );
+
+			// Don't punish me, RealTimeSince doesn't seem to work when networked
+			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
 		}
 
 	}
@@ -69,13 +89,24 @@ namespace Frostrial
 	public class Map : Panel
 	{
 
+		Panel mapPanel;
+		Panel playerPanel;
 		public Map()
 		{
+
+			mapPanel = Add.Panel( "Map" ).Add.Panel( "MapContainer" );
+			playerPanel = mapPanel.Add.Panel( "Player" );
 
 		}
 
 		public override void Tick()
 		{
+
+			Player player = Local.Pawn as Player;
+			var pos = player.Position;
+			mapPanel.SetClass( "open", player.OpenMap );
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while
+			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
 
 		}
 
@@ -119,11 +150,17 @@ namespace Frostrial
 
 			if ( !IsClient ) return;
 
+			var player = Local.Pawn as Player;
+
+			PostProcess.Add( new StandardPostProcess() );
+
 			RootPanel.StyleSheet.Load( "hud/FrostrialHUD.scss" );
 
 			RootPanel.AddChild<HutIndicator>();
+			RootPanel.AddChild<Hint>();
+			RootPanel.AddChild<Map>();
 
-			PostProcess.Add( new StandardPostProcess() );
+			PostProcess.Add( new FreezePostProcessEffect() );
 
 		}
 
@@ -133,19 +170,50 @@ namespace Frostrial
 
 			var player = Local.Pawn as Player;
 
-			var pp = PostProcess.Get<StandardPostProcess>();
+			var pp = PostProcess.Get<FreezePostProcessEffect>();
 
-			pp.Saturate.Enabled = true;
-			pp.Saturate.Amount = player.Warmth;
+			pp.FreezeStrength = 1 - player.Warmth;
 
-			pp.Blur.Enabled = true;
-			pp.Blur.Strength = ( 1f - player.Warmth ) * 0.2f;
+		}
 
-			pp.Vignette.Enabled = true;
-			pp.Vignette.Intensity = 1f - player.Warmth;
-			pp.Vignette.Color = Color.Black;
-			pp.Vignette.Smoothness = 3f;
-			pp.Vignette.Roundness = 2f;
+	}
+
+	partial class Player : Sandbox.Player
+	{
+		[Net] public string HintText { get; set; } = "";
+		[Net] public float HintLifeTime { get; set; } = 0f;
+		[Net] public float HintLifeDuration { get; set; } = 0f;
+		public bool OpenMap { get; set; } = false;
+
+		public void Hint( string text, float duration )
+		{
+
+			HintText = text;
+			HintLifeDuration = duration;
+			HintLifeTime = Time.Now;
+
+		}
+
+		public void HandleHUD()
+		{
+
+			if ( IsClient )
+			{
+
+				if ( Input.Down( InputButton.Score ) )
+				{
+
+					OpenMap = true;
+
+				}
+				else
+				{
+
+					OpenMap = false;
+
+				}
+
+			}
 
 		}
 

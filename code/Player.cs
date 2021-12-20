@@ -4,8 +4,22 @@ namespace Frostrial
 {
 	partial class Player : Sandbox.Player
 	{
-		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 45, 0 ).ToRotation();
+		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 90, 0 ).ToRotation();
 		[Net, Local] public bool BlockMovement { get; set; } = false;
+		[Net]
+		public Vector3 MouseWorldPosition
+		{
+			get
+			{
+
+				var tr = Trace.Ray( Input.Cursor, 5000.0f )
+				.WorldOnly()
+				.Run();
+
+				return tr.EndPos;
+
+			}
+		}
 
 		[ServerCmd]
 		public static void ChangeMovementDirection( float yaw )
@@ -48,6 +62,7 @@ namespace Frostrial
 
 			HandleDrilling();
 			HandleWarmth();
+			HandleHUD();
 
 		}
 

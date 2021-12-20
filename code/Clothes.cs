@@ -32,10 +32,10 @@ namespace Frostrial
 
 			SetClothing( "tool", "models/tools/basic_fishingrod.vmdl" );
 			SetClothing( "hat", "models/clothing/hats/ushanka.vmdl" );
-			SetClothing( "jacket", "models/clothing/jackets/parka.vmdl" );
+			SetClothing( "jacket", "models/clothing/jackets/jumper.vmdl");
 			SetClothing( "trousers", "models/clothing/trousers/fishing_trousers.vmdl" );
 			SetClothing( "gloves", "models/citizen_clothes/gloves/gloves_workgloves.vmdl" );
-			//SetClothing( "boots", "models/citizen_clothes/shoes/shoes_securityboots.vmdl" ); // They too big!
+			SetClothing( "boots", "models/clothing/shoes/winter_boots.vmdl" ); // They too big! -- They are now perfect size!
 
 		}
 
