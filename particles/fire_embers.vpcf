@@ -312,7 +312,7 @@
 			m_LocalCoordinateSystemSpeedMin = 
 			{
 				m_nType = "PVEC_TYPE_LITERAL"
-				m_vLiteralValue = [ -60.0, -60.0, 30.0 ]
+				m_vLiteralValue = [ -20.0, -20.0, 10.0 ]
 				m_LiteralColor = [ 0, 0, 0, 0 ]
 				m_nVectorAttribute = 6
 				m_vVectorAttributeScale = [ 1.0, 1.0, 1.0 ]
@@ -512,7 +512,7 @@
 			m_LocalCoordinateSystemSpeedMax = 
 			{
 				m_nType = "PVEC_TYPE_LITERAL"
-				m_vLiteralValue = [ 60.0, 60.0, 55.0 ]
+				m_vLiteralValue = [ 20.0, 20.0, -30.0 ]
 				m_LiteralColor = [ 0, 0, 0, 0 ]
 				m_nVectorAttribute = 6
 				m_vVectorAttributeScale = [ 1.0, 1.0, 1.0 ]
@@ -1465,10 +1465,10 @@
 				m_flMultFactor = 1.0
 				m_flInput0 = 0.0
 				m_flInput1 = 1.0
-				m_flOutput0 = 15.0
-				m_flOutput1 = 30.0
+				m_flOutput0 = 5.0
+				m_flOutput1 = 20.0
 				m_nBiasType = "PF_BIAS_TYPE_EXPONENTIAL"
-				m_flBiasParameter = -0.135
+				m_flBiasParameter = -0.049
 				m_Curve = 
 				{
 					m_spline = [  ]
