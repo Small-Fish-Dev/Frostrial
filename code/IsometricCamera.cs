@@ -11,7 +11,7 @@ namespace Frostrial
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 30, 90, 0 );
 		Rotation TargetRotation = new();
-		float Zoom = 0.7f;
+		public float Zoom = 0.7f; // Sorry I need this!
 		bool hasNewAngle = false;
 
 		public IsometricCamera()
@@ -72,7 +72,7 @@ namespace Frostrial
 			{
 				PositionBeforeZoomOut = player.Position;
 			}
-			Position = PositionBeforeZoomOut + Rotation.Backward * 1500 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
+			Position = PositionBeforeZoomOut + Rotation.Backward * 2000 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
 			OrthoSize = MathX.LerpTo( OrthoSize, Zoom, 7.5f * Time.Delta );
 			Viewer = null;
 		}
@@ -97,12 +97,16 @@ namespace Frostrial
 
 			if ( input.MouseWheel != 0 )
 			{
-				Zoom = (Zoom - input.MouseWheel * 0.15f).Clamp( 0.5f, 1.5f );
+				Zoom = (Zoom - input.MouseWheel * 0.15f).Clamp( 0.3f, 1.3f );
 			}
 
-			// add the view move, clamp pitch
-			input.ViewAngles += input.AnalogLook;
-			input.ViewAngles.roll = 0;
+
+			if ( ( Local.Pawn as Player ) is var player && player != null && !player.BlockMovement )
+			{
+				// add the view move
+				input.ViewAngles = Rotation.LookAt((player.MouseWorldPosition - player.Position).WithZ(0), Vector3.Up).Angles();
+				input.ViewAngles.roll = 0;
+			}
 
 			// Just copy input as is
 			input.InputDirection = input.AnalogMove;

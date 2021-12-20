@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using System;
+using System.Linq;
 
 namespace Frostrial
 {
@@ -44,6 +46,53 @@ namespace Frostrial
 			.Run();
 
 			return trace.Surface.Name == "ice";
+
+		}
+
+		public static bool IsNearEntity( Vector3 position, float range )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Player ) continue;
+				if ( ent is not Hole && ent is not Campfire) continue;
+
+				return true;
+
+			}
+
+			return false;
+
+		}
+
+		public static Entity NearestEntity( Vector3 position, float range = 30f )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+			Entity currentEntity = PhysicsWorld.WorldBody.Entity; // Technically correct to return the world
+			float currentDistance = range;
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( !ent.GetType().IsSubclassOf( typeof( ModelEntity ) ) ) continue; // I don't want ModelEntity, but since it's a parent class I have to do this to exclude it
+
+				float entDistance = ent.Position.Distance( position );
+
+				if ( entDistance < currentDistance )
+				{
+
+					currentEntity = ent;
+					currentDistance = entDistance;
+
+				}
+
+			}
+
+			return currentEntity;
 
 		}
 

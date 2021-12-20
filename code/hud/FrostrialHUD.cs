@@ -34,8 +34,9 @@ namespace Frostrial
 			Style.Left = Length.Fraction( left );
 			Style.Top = Length.Fraction( top );
 
-			var baseDistance = 500f;
-			var baseOpacity = 0.25f;
+			var camera = player.Camera as IsometricCamera;
+			var baseDistance = 800f * camera.Zoom;
+			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
 			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
@@ -185,7 +186,7 @@ namespace Frostrial
 		[Net] public float HintLifeDuration { get; set; } = 0f;
 		public bool OpenMap { get; set; } = false;
 
-		public void Hint( string text, float duration )
+		public void Hint( string text, float duration = 1f )
 		{
 
 			HintText = text;

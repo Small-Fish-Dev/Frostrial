@@ -6,6 +6,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
+		[Net] public float DrillingSpeed { get; set; } = 5f; // Seconds before completing, better drill = faster
 		[Net] public bool Drilling { get; set; } = false;
 		[Net] RealTimeUntil drillingCompletion { get; set; } = 0f;
 		[Net] RealTimeSince lastAttempt { get; set; } = 0f;
@@ -26,19 +27,35 @@ namespace Frostrial
 
 					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
 
-					if ( Controller.Velocity.LengthSquared < 1 && Game.IsOnIce( holePosition ) ) // Don't allow the player to make holes while sliding
+					if ( Controller.Velocity.LengthSquared < 1 ) // Don't allow the player to make holes while sliding
 					{
 
-						Drilling = true;
-						HandleDrillingEffects( true, holePosition );
-						drillingCompletion = 2f; // TODO: Better drilling speed depends on drill
-						BlockMovement = true;
+						if( Game.IsOnIce( holePosition ) )
+						{
 
-					}
-					else
-					{
+							if( !Game.IsNearEntity( holePosition, 5f ) )
+							{
 
-						Hint( "I can't drill here", 3f ) ;
+								Drilling = true;
+								HandleDrillingEffects( true, holePosition );
+								drillingCompletion = DrillingSpeed; // TODO: Better drilling speed depends on drill
+								BlockMovement = true;
+
+							}
+							else
+							{
+
+								Hint( "I'm not drilling there.", 2f );
+
+							}
+
+						}
+						else
+						{
+
+							Hint( "I can't drill on here!", 2f );
+
+						}
 
 					}
 
@@ -77,7 +94,7 @@ namespace Frostrial
 
 						var hole = new Hole();
 						hole.Position = holePosition;
-						hole.CreationTime = Time.Now;
+
 						BlockMovement = false;
 
 					}

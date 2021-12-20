@@ -6,8 +6,6 @@ namespace Frostrial
 	public partial class Hole : AnimEntity
 	{
 
-		[Net] public float CreationTime { get; set; }
-
 		public override void Spawn()
 		{
 

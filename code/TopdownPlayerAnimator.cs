@@ -9,7 +9,7 @@ namespace Frostrial
 
 		public override void Simulate()
 		{
-			var idealRotation = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up ); // TODO: point at mouse
+			var idealRotation = Rotation.LookAt( Input.Rotation.Forward, Vector3.Up ); // TODO: point at mouse
 
 			DoRotation( idealRotation );
 			DoWalk();
