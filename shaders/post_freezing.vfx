@@ -107,23 +107,26 @@ PS
         // uvs
         float2 vScreenUv = i.vTexCoord.xy - g_vViewportOffset.xy / g_vRenderTargetSize;
 
-        // round expanding black and white mask
-        float FreezeMask = 1 - (theCircleMask(vScreenUv, 0.0f, saturate(1 - flFreezeStrength + 0.8)));
+        // round expanding black and white vignette mask
+        float FreezeMask = 1 - (theCircleMask(vScreenUv, 0.0f, saturate(1 - flFreezeStrength + 0.65)));
 
-        // add image to this (ice)
+        // add image to this (ice), then lerp between a normal and darker version for faking the vignette later on
         float3 ImageOverlay = Tex2DS( g_tColor, TextureFiltering, vScreenUv.xy).rgb;
+        ImageOverlay = lerp(ImageOverlay*1.2, ImageOverlay*0.15, saturate((flFreezeStrength -0.2) * 2));
+
+        // add noise to vignette mask (makes holes in the mask that shrink, to make it look like ice is spreading
         float masknoise = (1 - (saturate(Simplex2D(vScreenUv*5)-(0.7 + flFreezeStrength)))) * FreezeMask;
 
         // current frame normal, blurry and a grey version of the blur, that gets more grey as the strength gets stronger
         float3 vFrameBufferColor = Tex2D( g_tColorBuffer, vScreenUv.xy ).rgb;
-        float3 vFrameBufferBlur = GaussianBlur(g_tColorBuffer, TextureFiltering, vScreenUv.xy, 0.02f);
+        float3 vFrameBufferBlur = GaussianBlur(g_tColorBuffer, TextureFiltering, vScreenUv.xy, 0.013f);
         float3 vFrameBufferFreeze = lerp(vFrameBufferBlur, greyscale(vFrameBufferBlur), saturate(flFreezeStrength));
 
-        // first add the ice overlay/blur
-        o.vColor.rgb = lerp(vFrameBufferFreeze, greyscale(ImageOverlay), masknoise);
+        // add the ice overlay/blur
+        o.vColor.rgb = lerp(vFrameBufferFreeze*0.5, greyscale(ImageOverlay), saturate(masknoise*1.5));
+
         // then go from normal to that freezing
         o.vColor.rgb = lerp(vFrameBufferColor, o.vColor.rgb, flFreezeStrength);
-        //o.vColor.rgb = FreezeMask;
         o.vColor.a = 1.0f;
 
         return o;
