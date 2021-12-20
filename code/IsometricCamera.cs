@@ -100,9 +100,14 @@ namespace Frostrial
 				Zoom = (Zoom - input.MouseWheel * 0.15f).Clamp( 0.3f, 1.3f );
 			}
 
-			// add the view move, clamp pitch
-			input.ViewAngles += input.AnalogLook;
-			input.ViewAngles.roll = 0;
+
+			var player = Local.Pawn as Player;
+			if ( player != null )
+			{
+				// add the view move
+				input.ViewAngles = Rotation.LookAt((player.MouseWorldPosition - player.Position).WithZ(0), Vector3.Up).Angles();
+				input.ViewAngles.roll = 0;
+			}
 
 			// Just copy input as is
 			input.InputDirection = input.AnalogMove;
