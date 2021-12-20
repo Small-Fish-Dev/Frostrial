@@ -60,6 +60,55 @@
 					},
 				]
 			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "auger_drilling_anim"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/tools/auger_drilling_anim.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 35.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "auger_idle_anim"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/tools/auger_idle_anim.fbx"
+						start_frame = 0
+						end_frame = 1
+						framerate = 0.0
+						take = 1
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
