@@ -26,7 +26,7 @@ namespace Frostrial
 
 					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
 
-					if ( Controller.Velocity.LengthSquared < 1 && Game.IsOnIce( holePosition ) ) // Don't allow the player to make holes while sliding
+					if ( Controller.Velocity.LengthSquared < 1 ) // Don't allow the player to make holes while sliding
 					{
 
 						if( Game.IsOnIce( holePosition ) )
@@ -44,7 +44,7 @@ namespace Frostrial
 							else
 							{
 
-								Hint( "Too close!", 2 );
+								Hint( "I'm not drilling there.", 2f );
 
 							}
 
@@ -52,7 +52,7 @@ namespace Frostrial
 						else
 						{
 
-							Hint( "I can't drill here", 3f );
+							Hint( "I can't drill on here!", 2f );
 
 						}
 
@@ -99,6 +99,14 @@ namespace Frostrial
 					}
 
 				}
+
+			}
+
+			if ( Input.Pressed( InputButton.Attack2 ) )
+			{
+
+				string entName = Game.NearestEntity( MouseWorldPosition, 90 ).GetType().Name;
+				Hint( $"That is a {entName}", 2);
 
 			}
 
