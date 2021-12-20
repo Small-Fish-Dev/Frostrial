@@ -149,6 +149,8 @@ namespace Frostrial
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Hint>();
 
+			PostProcess.Add( new FreezePostProcessEffect() );
+
 		}
 
 		[Event.Tick.Client]
@@ -157,19 +159,9 @@ namespace Frostrial
 
 			var player = Local.Pawn as Player;
 
-			var pp = PostProcess.Get<StandardPostProcess>();
+			var pp = PostProcess.Get<FreezePostProcessEffect>();
 
-			pp.Saturate.Enabled = true;
-			pp.Saturate.Amount = player.Warmth;
-
-			pp.Blur.Enabled = true;
-			pp.Blur.Strength = ( 1f - player.Warmth ) * 0.2f;
-
-			pp.Vignette.Enabled = true;
-			pp.Vignette.Intensity = 1f - player.Warmth;
-			pp.Vignette.Color = Color.Black;
-			pp.Vignette.Smoothness = 3f;
-			pp.Vignette.Roundness = 2f;
+			pp.FreezeStrength = 1 - player.Warmth;
 
 		}
 

@@ -9,9 +9,17 @@ namespace Sandbox
 	{
 		private Material PostProcessMaterial;
 
+		float freezeStrength { get; set; } = 0f;
 		public float FreezeStrength
 		{
-			set => Set("freeze.strength", value);
+			get { return freezeStrength; }
+			set
+			{
+
+				freezeStrength = value;
+				Set( "freeze.strength", value );
+
+			}
 		}
 
 		public FreezePostProcessEffect()

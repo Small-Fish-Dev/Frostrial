@@ -1,5 +1,5 @@
 
-@BaseClass = BaseProperties_Frostrial
+@BaseClass = BaseProperties_frostrial
 [
 	parentname(target_destination) [ group="Hierarchy" ] : "Parent" : : "The name of this entity's parent in the movement hierarchy. Entities with parents move with their parent."
 	parentAttachmentName(parentAttachment) [ group="Hierarchy" ] : "Parent Model Bone/Attachment Name" : : "The name of the bone or attachment to attach to on the entity's parent in the movement hierarchy. Use !bonemerge to use bone-merge style attachment."
@@ -16,7 +16,7 @@
 //
 // Frostrial.Hut
 //
-@PointClass base(BaseProperties_Frostrial) editormodel( "models/tools/auger_icedrill.vmdl" ) = frostrial_hut : "main base"
+@PointClass base(BaseProperties_frostrial) editormodel( "models/tools/auger_icedrill.vmdl" ) = frostrial_hut : "main base"
 [
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
