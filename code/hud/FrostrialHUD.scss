@@ -41,4 +41,40 @@ RootPanel {
 			}
 		}
 	}
+
+	.Map {
+		pointer-events: none;
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.MapContainer {
+			top: 100%;
+			height: 90%;
+			aspect-ratio: 1;
+			transition: all 0.4s ease-in;
+			background-image: url( /ui/map.png );
+			background-position: center;
+			background-size: 101%;
+			background-repeat: no-repeat;
+
+			.Player {
+				height: 5%;
+				width: 5%;
+				background-image: url( /ui/you.png );
+				background-size: 110%;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+
+			&.open {
+				top: 0%;
+			}
+		}
+	}
 }

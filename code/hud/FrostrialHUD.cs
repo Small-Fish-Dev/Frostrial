@@ -88,15 +88,25 @@ namespace Frostrial
 	public class Map : Panel
 	{
 
+		Panel mapPanel;
+		Panel playerPanel;
 		public Map()
 		{
+
+			mapPanel = Add.Panel( "Map" ).Add.Panel( "MapContainer" );
+			playerPanel = mapPanel.Add.Panel( "Player" );
 
 		}
 
 		public override void Tick()
 		{
 
+			Player player = Local.Pawn as Player;
+			mapPanel.SetClass( "open", player.OpenMap );
+			playerPanel.Style.Left = Length.Percent( player.Position.x );
+			playerPanel.Style.Top = Length.Percent( player.Position.y );
 
+			Log.Info( player.Position );
 
 		}
 
@@ -148,6 +158,7 @@ namespace Frostrial
 
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Hint>();
+			RootPanel.AddChild<Map>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
 
@@ -172,6 +183,7 @@ namespace Frostrial
 		[Net] public string HintText { get; set; } = "";
 		[Net] public float HintLifeTime { get; set; } = 0f;
 		[Net] public float HintLifeDuration { get; set; } = 0f;
+		public bool OpenMap { get; set; } = false;
 
 		public void Hint( string text, float duration )
 		{
@@ -179,6 +191,29 @@ namespace Frostrial
 			HintText = text;
 			HintLifeDuration = duration;
 			HintLifeTime = Time.Now;
+
+		}
+
+		public void HandleHUD()
+		{
+
+			if ( IsClient )
+			{
+
+				if ( Input.Down( InputButton.Score ) )
+				{
+
+					OpenMap = true;
+
+				}
+				else
+				{
+
+					OpenMap = false;
+
+				}
+
+			}
 
 		}
 

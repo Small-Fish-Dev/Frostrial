@@ -62,6 +62,7 @@ namespace Frostrial
 
 			HandleDrilling();
 			HandleWarmth();
+			HandleHUD();
 
 		}
 
