@@ -106,8 +106,38 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 			var pos = player.Position;
 			mapPanel.SetClass( "open", player.OpenMap );
-			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
 			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
+
+		}
+
+	}
+
+	public class Interact : Panel
+	{
+
+		Panel interactContainer;
+		Label interactTitle;
+
+		public Interact()
+		{
+
+			Player player = Local.Pawn as Player;
+
+			interactContainer = Add.Panel( "Interact" ).Add.Panel( "InteractContainer" );
+			interactTitle = interactContainer.Add.Label( "Lorem Ipsum", "InteractTitle" );
+
+		}
+
+		public override void Tick()
+		{
+
+			Player player = Local.Pawn as Player;
+
+			string type = Game.NearestEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
+			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : "";
+
+			interactTitle.Text = text;
 
 		}
 
@@ -159,6 +189,7 @@ namespace Frostrial
 
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Hint>();
+			RootPanel.AddChild<Interact>();
 			RootPanel.AddChild<Map>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );

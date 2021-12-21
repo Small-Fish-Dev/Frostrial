@@ -38,7 +38,7 @@ namespace Frostrial
 
 								Drilling = true;
 								HandleDrillingEffects( true, holePosition );
-								drillingCompletion = DrillingSpeed; // TODO: Better drilling speed depends on drill
+								drillingCompletion = DrillingSpeed; 
 								BlockMovement = true;
 
 							}
