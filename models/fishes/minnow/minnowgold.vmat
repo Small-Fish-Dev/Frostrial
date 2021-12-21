@@ -41,7 +41,7 @@ Layer0
 	TextureNormal "models/fishes/minnow/minnowgold_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "models/fishes/minnow/minnowgold_rough.png"
+	TextureRoughness "models/fishes/minnow/minnow_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
