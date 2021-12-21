@@ -149,36 +149,6 @@ namespace Frostrial
 
 	}
 
-	public class Trophies : Panel
-	{
-
-		public Trophies()
-		{
-
-		}
-
-		public override void Tick()
-		{
-
-		}
-
-	}
-
-	public class Items : Panel
-	{
-
-		public Items()
-		{
-
-		}
-
-		public override void Tick()
-		{
-
-		}
-
-	}
-
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
 
