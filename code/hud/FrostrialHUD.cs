@@ -67,7 +67,7 @@ namespace Frostrial
 
 			Player player = Local.Pawn as Player;
 
-			 hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
+			hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
 			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
 
 		}
@@ -81,7 +81,7 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 			IsometricCamera camera = player.Camera as IsometricCamera;
 
-			hintTitle.Text = player.HintText.Truncate( (int)( ( Time.Now - player.HintLifeTime ) * textSpeed ) );
+			hintTitle.Text = player.HintText.Truncate( (int)( Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed ) );
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
@@ -142,6 +142,20 @@ namespace Frostrial
 
 			string type = Game.NearestEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
 			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : "";
+
+			if ( player.PlacingCampfire )
+			{
+
+				text = "Click to place down the campfire";
+
+			}
+
+			if ( player.ItemsOpen )
+			{
+
+				text = "Select an item or Right Click to exit";
+
+			}
 
 			interactTitle.Text = text;
 

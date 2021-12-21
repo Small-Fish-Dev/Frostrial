@@ -28,6 +28,8 @@ namespace Frostrial
 			pawn.MovementDirection = Rotation.FromYaw( yaw );
 		}
 
+		private AmbientWindVMix vMix = new();
+
 		public override void Respawn()
 		{
 			SetModel( "models/citizen/citizen.vmdl" );
@@ -66,6 +68,11 @@ namespace Frostrial
 			HandleInteractions();
 			HandleItems();
 
+			if ( IsClient )
+			{
+				vMix.Update( 1 - Warmth, Game.IsOnIce( Position ), Position.Distance( Game.Instance.HutEntity?.Position ?? Vector3.Zero ) < 200f );
+				vMix.Tick();
+			}
 		}
 
 		public override void OnKilled()
