@@ -1,6 +1,4 @@
 ﻿using Sandbox;
-using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace Frostrial
@@ -15,12 +13,14 @@ namespace Frostrial
 	/// </summary>
 	public partial class Game : Sandbox.Game
 	{
+		public static Game Instance { get; internal set; }
 
 		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
 		public Game()
 		{
+			Instance = this;
 
 			if ( IsServer )
 			{
@@ -53,8 +53,8 @@ namespace Frostrial
 		}
 
 		public static bool IsOnIce( Vector3 position )
-		{ 
-			
+		{
+
 			var trace = Trace.Ray( position + Vector3.Up * 2f, position + Vector3.Down * 2f )
 			.WorldOnly()
 			.Run();
@@ -72,7 +72,7 @@ namespace Frostrial
 			{
 
 				if ( ent is Player ) continue;
-				if ( ent is not Hole && ent is not Campfire && ent is not Hut) continue;
+				if ( ent is not Hole && ent is not Campfire && ent is not Hut ) continue;
 
 				return true;
 
