@@ -39,8 +39,6 @@ namespace Frostrial
 		public void OnTick()
 		{
 
-			var startFadeDistance = 300f;
-			var endFadeDistance = 150f;
 			var player = Local.Pawn as Player;
 			var distance = player.Position.Distance( this.Position );
 

@@ -20,7 +20,7 @@ namespace Frostrial
 
 				var selectedEntity = Game.NearestEntity( MouseWorldPosition, InteractionRange );
 
-				if( selectedEntity is not WorldEntity )
+				if ( selectedEntity is not WorldEntity )
 				{
 
 					if ( selectedEntity.Position.Distance( Position ) < InteractionMaxDistance )
@@ -47,7 +47,9 @@ namespace Frostrial
 						if ( selectedEntity is Hole )
 						{
 
-							Hint( "....................", 1f );
+							Fishing = true;
+							BlockMovement = true;
+							Hint( ".   .   .   .   .", 1f );
 
 						}
 
@@ -75,6 +77,14 @@ namespace Frostrial
 					Hint( "I hate this place.", 1f );
 
 				}
+
+			}
+
+			if ( Input.Released( InputButton.Attack2 ) )
+			{
+
+				Fishing = false;
+				BlockMovement = false;
 
 			}
 

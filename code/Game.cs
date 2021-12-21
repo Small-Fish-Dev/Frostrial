@@ -110,6 +110,35 @@ namespace Frostrial
 
 		}
 
+		public static float CampfireDistance( Vector3 position, float range = 100f )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+			float currentDistance = range;
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Campfire )
+				{
+
+					float entDistance = ent.Position.Distance( position );
+
+					if ( entDistance < currentDistance )
+					{
+
+						currentDistance = entDistance;
+
+					}
+
+				}
+
+			}
+
+			return currentDistance;
+
+		}
+
 	}
 
 }
