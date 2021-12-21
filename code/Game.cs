@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -16,13 +17,26 @@ namespace Frostrial
 	{
 
 		[Net] public Hut Hut { get; set; }
+		public static Dictionary<string, string> InteractionsText = new();
 
 		public Game()
 		{
+
 			if ( IsServer )
 			{
+
 				new FrostrialHUD();
+
 			}
+			else
+			{
+
+				InteractionsText.Add( "Hut", "Interact with the hut to buy items and upgrades." );
+				InteractionsText.Add( "Hole", "Interact with this hole to fish." );
+				InteractionsText.Add( "Player", "Interact with yourself to use items." );
+
+			}
+
 		}
 
 		/// <summary>
