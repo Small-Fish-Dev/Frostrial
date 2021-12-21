@@ -157,6 +157,20 @@ namespace Frostrial
 
 			}
 
+			if ( player.Fishing )
+			{
+
+				text = "Let go to catch the fish as he bites";
+
+			}
+
+			if ( player.Shopping )
+			{
+
+				text = "Select items/upgrades or Right Click to exit";
+
+			}
+
 			interactTitle.Text = text;
 
 		}
