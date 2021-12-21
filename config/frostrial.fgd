@@ -16,7 +16,7 @@
 //
 // Frostrial.Hut
 //
-@PointClass base(BaseProperties_frostrial) editormodel( "models/randommodels/campfire.vmdl" ) = frostrial_hut : "main base"
+@PointClass base(BaseProperties_frostrial) editormodel( "models/randommodels/cabin_walls.vmdl" ) = frostrial_hut : "main base"
 [
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
