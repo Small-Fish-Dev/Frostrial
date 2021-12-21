@@ -9,7 +9,7 @@ namespace Frostrial
 	public partial class Hut : AnimEntity
 	{
 
-		[Net] PointLightEntity light { get; set; }
+		PointLightEntity light { get; set; }
 
 		public override void Spawn()
 		{
@@ -28,11 +28,6 @@ namespace Frostrial
 			fire.Position = Position + Vector3.Up * 12;
 			fire.EnableShadowCasting = false;
 
-			light = new PointLightEntity();
-			light.Position = Position + Vector3.Up * 16;
-			light.Color = Color.Orange;
-			light.DynamicShadows = true;
-
 			ModelEntity floor = new ModelEntity( "models/randommodels/cabin_floor.vmdl" );
 			floor.Position = Position;
 			floor.Rotation = Rotation.FromYaw( -90 );
@@ -45,6 +40,11 @@ namespace Frostrial
 			base.ClientSpawn();
 
 			Particles.Create( "particles/fire_embers.vpcf", Position + Vector3.Up * 12 );
+
+			light = new PointLightEntity();
+			light.Position = Position + Vector3.Up * 22;
+			light.Color = Color.Orange;
+			light.DynamicShadows = true;
 
 		}
 

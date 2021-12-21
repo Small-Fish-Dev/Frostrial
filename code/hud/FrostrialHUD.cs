@@ -59,6 +59,7 @@ namespace Frostrial
 	public class Hint : Panel
 	{
 
+		Panel hintContainer;
 		Label hintTitle;
 
 		public Hint()
@@ -66,7 +67,7 @@ namespace Frostrial
 
 			Player player = Local.Pawn as Player;
 
-			Panel hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
+			 hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
 			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
 
 		}
@@ -78,8 +79,13 @@ namespace Frostrial
 			float textSpeed = 20f; // Letters per second
 
 			Player player = Local.Pawn as Player;
+			IsometricCamera camera = player.Camera as IsometricCamera;
 
 			hintTitle.Text = player.HintText.Truncate( (int)( ( Time.Now - player.HintLifeTime ) * textSpeed ) );
+			hintTitle.Style.FontSize = 20 / camera.Zoom;
+			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
+			hintTitle.Style.TextStrokeColor = Color.Black;
+			hintContainer.Style.Top = Length.Pixels( -110 / camera.Zoom);
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
 			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );

@@ -6,6 +6,8 @@ namespace Frostrial
 	public partial class Campfire : AnimEntity
 	{
 
+		PointLightEntity light { get; set; }
+
 		public override void Spawn()
 		{
 
@@ -22,7 +24,27 @@ namespace Frostrial
 
 			base.ClientSpawn();
 
-			Particles.Create( "particles/fire_embers.vpcf", Position );
+			Particles.Create( "particles/fire_embers.vpcf", Position + Vector3.Up * 10 );
+
+			EnableShadowCasting = false;
+
+			light = new PointLightEntity();
+			light.Position = Position + Vector3.Up * 16;
+			light.Color = Color.Orange;
+			light.DynamicShadows = true;
+
+		}
+
+		[Event.Tick.Client]
+		public void OnTick()
+		{
+
+			var startFadeDistance = 300f;
+			var endFadeDistance = 150f;
+			var player = Local.Pawn as Player;
+			var distance = player.Position.Distance( this.Position );
+
+			light.SetLightBrightness( 2f + (float)Math.Cos( (float)Time.Now * 25 ) * 0.2f * (1 + Time.Now % 1) );
 
 		}
 
