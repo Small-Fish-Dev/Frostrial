@@ -64,6 +64,7 @@ namespace Frostrial
 			HandleWarmth();
 			HandleHUD();
 			HandleInteractions();
+			HandleItems();
 
 		}
 

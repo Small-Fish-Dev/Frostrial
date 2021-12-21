@@ -20,12 +20,50 @@ namespace Frostrial
 
 				var selectedEntity = Game.NearestEntity( MouseWorldPosition, InteractionRange );
 
-				if ( selectedEntity == this || selectedEntity is Hole || selectedEntity is Hut )
+				if ( selectedEntity is not WorldEntity )
 				{
 
 					if ( selectedEntity.Position.Distance( Position ) < InteractionMaxDistance )
 					{
 
+						if ( selectedEntity is Player )
+						{
+
+							if ( selectedEntity == this )
+							{
+
+								ItemsOpen = true;
+								BlockMovement = true;
+
+								Hint( "Let's see...", 1.2f );
+
+							}
+							else
+							{
+
+								Hint( "Idiot.", 1f );
+
+							}
+
+						}
+
+						if ( selectedEntity is Hole )
+						{
+
+							Fishing = true;
+							BlockMovement = true;
+
+							Hint( ".   .   .   .   .", 1f );
+
+						}
+
+
+						if ( selectedEntity is Hut )
+						{
+
+							Hint( "I'm almost there", 2f );
+
+						}
 
 
 					}
@@ -40,7 +78,20 @@ namespace Frostrial
 				else
 				{
 
-					Hint( "What a beautiful world, I hate it.", 3f );
+					Hint( "I hate this place.", 1f );
+
+				}
+
+			}
+
+			if ( Input.Released( InputButton.Attack2 ) )
+			{
+
+				if( Fishing )
+				{
+
+					Fishing = false;
+					BlockMovement = false;
 
 				}
 

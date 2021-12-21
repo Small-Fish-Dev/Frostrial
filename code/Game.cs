@@ -16,7 +16,7 @@ namespace Frostrial
 	public partial class Game : Sandbox.Game
 	{
 
-		[Net] public Hut Hut { get; set; }
+		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
 		public Game()
@@ -72,7 +72,7 @@ namespace Frostrial
 			{
 
 				if ( ent is Player ) continue;
-				if ( ent is not Hole && ent is not Campfire) continue;
+				if ( ent is not Hole && ent is not Campfire && ent is not Hut) continue;
 
 				return true;
 
@@ -107,6 +107,35 @@ namespace Frostrial
 			}
 
 			return currentEntity;
+
+		}
+
+		public static float CampfireDistance( Vector3 position, float range = 100f )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+			float currentDistance = range;
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Campfire )
+				{
+
+					float entDistance = ent.Position.Distance( position );
+
+					if ( entDistance < currentDistance )
+					{
+
+						currentDistance = entDistance;
+
+					}
+
+				}
+
+			}
+
+			return currentDistance;
 
 		}
 

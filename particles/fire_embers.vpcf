@@ -849,14 +849,14 @@
 						{
 							x = 0.00804
 							y = 2.0
-							m_flSlopeIncoming = 3.83446
-							m_flSlopeOutgoing = 3.83446
+							m_flSlopeIncoming = 1.91723
+							m_flSlopeOutgoing = 1.91723
 						},
 						{
 							x = 0.8
-							y = 4.0
-							m_flSlopeIncoming = -0.476443
-							m_flSlopeOutgoing = -0.476443
+							y = 3.0
+							m_flSlopeIncoming = -0.238222
+							m_flSlopeOutgoing = -0.238222
 						},
 					]
 					m_tangents = 
@@ -871,7 +871,7 @@
 						},
 					]
 					m_vDomainMins = [ 0.0, 2.0 ]
-					m_vDomainMaxs = [ 0.8, 4.0 ]
+					m_vDomainMaxs = [ 0.8, 3.0 ]
 				}
 			}
 			m_nOutputField = "1"
@@ -1459,7 +1459,7 @@
 				m_flMultFactor = 1.0
 				m_flInput0 = 0.0
 				m_flInput1 = 1.0
-				m_flOutput0 = 5.0
+				m_flOutput0 = 8.0
 				m_flOutput1 = 30.0
 				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
 				m_flBiasParameter = -0.719
@@ -1510,7 +1510,7 @@
 				m_flOutput0 = 1.0
 				m_flOutput1 = 0.0
 				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
-				m_flBiasParameter = 0.765
+				m_flBiasParameter = 0.79
 				m_Curve = 
 				{
 					m_spline = [  ]

@@ -18,7 +18,7 @@ namespace Frostrial
 			if ( IsClient ) return;
 
 			Game current = Game.Current as Game;
-			float hutDistance = Position.Distance( current.Hut.Position );
+			float hutDistance = Position.Distance( current.HutEntity.Position );
 
 			if ( hutDistance <= 400f )
 			{
@@ -33,6 +33,8 @@ namespace Frostrial
 				ColdMultiplier += 2f;
 
 			}
+
+			ColdMultiplier -= (1f - Game.CampfireDistance( Position, 120 ) / 240) * 5;
 
 			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
 
