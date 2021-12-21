@@ -40,12 +40,39 @@
 				[
 					{
 						_class = "PhysicsShapeCapsule"
-						parent_bone = ""
-						surface_prop = "default"
+						parent_bone = "body"
+						surface_prop = "flesh"
 						collision_prop = "default"
-						radius = 0.705084
-						point0 = [ -2.665286, 0.0, 0.0 ]
-						point1 = [ 2.095218, 0.0, 0.0 ]
+						radius = 0.669124
+						point0 = [ 0.044865, -0.333828, 0.000002 ]
+						point1 = [ 0.046524, 0.762928, 0.000001 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 0.536589
+						point0 = [ 0.0, 0.06221, 0.0 ]
+						point1 = [ 0.0, 0.721887, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 0.579993
+						point0 = [ 0.0, -0.407719, 0.0 ]
+						point1 = [ 0.0, 1.419387, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ 0.0, 0.828581, -0.026933 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 0.08, 1.29831, 1.35751 ]
 					},
 				]
 			},
@@ -68,6 +95,74 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = ""
+							radius = 0.745812
+							point0 = [ -3.45779, 0.0, 0.654804 ]
+							point1 = [ 2.11859, 0.0, 0.654804 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "head"
+						anchor_origin = [ 0.055292, 1.231759, 0.0 ]
+						anchor_angles = [ 0.00002, -92.792908, -89.999878 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ 0.04194, -1.515613, -0.0 ]
+						anchor_angles = [ -0.000015, 87.914108, -179.999878 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "fin"
+						anchor_origin = [ 0.0, 1.60411, -0.000006 ]
+						anchor_angles = [ -1.026626, -90.000008, -90.000114 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
 					},
 				]
 			},
