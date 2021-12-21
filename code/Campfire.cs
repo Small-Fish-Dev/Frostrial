@@ -3,6 +3,7 @@ using System;
 
 namespace Frostrial
 {
+
 	public partial class Campfire : AnimEntity
 	{
 
@@ -47,7 +48,12 @@ namespace Frostrial
 			if( IsClient )
 			{
 
-				LightEffect.SetLightBrightness( 2f + (float)Math.Cos( (float)Time.Now * 25 ) * 0.2f * (1 + Time.Now % 1) );
+				if( IsValid ) // I am sick of getting random "Error calling event 'tick'" messages. Hopefully this fixes it
+				{
+
+					LightEffect.SetLightBrightness( 2f + (float)Math.Cos( (float)Time.Now * 25 ) * 0.2f * (1 + Time.Now % 1) );
+
+				}
 
 			}
 			else

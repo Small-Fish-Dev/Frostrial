@@ -23,3 +23,13 @@
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
 
+//
+// Frostrial.Lake
+//
+@PointClass base(BaseProperties_frostrial) editormodel( "maps/lake.vmdl" ) = frostrial_lake : "This is the lake it's a separate entity so I am able to change the renderAlpha without compromising the particles"
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+

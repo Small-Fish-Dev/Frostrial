@@ -24,6 +24,9 @@ namespace Frostrial
 			player.ItemsOpen = false;
 			player.BlockMovement = false;
 
+			Campfire fire = new Campfire();
+			fire.Position = player.Position;
+
 		}
 
 	}
