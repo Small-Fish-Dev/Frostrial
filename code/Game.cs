@@ -16,7 +16,7 @@ namespace Frostrial
 	public partial class Game : Sandbox.Game
 	{
 
-		[Net] public Hut Hut { get; set; }
+		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
 		public Game()
@@ -72,7 +72,7 @@ namespace Frostrial
 			{
 
 				if ( ent is Player ) continue;
-				if ( ent is not Hole && ent is not Campfire) continue;
+				if ( ent is not Hole && ent is not Campfire && ent is not Hut) continue;
 
 				return true;
 

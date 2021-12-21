@@ -22,7 +22,7 @@ namespace Frostrial
 			Rotation = Rotation.FromYaw( -90 );
 
 			Game current = Game.Current as Game;
-			current.Hut = this;
+			current.HutEntity = this;
 
 			var fire = new ModelEntity( "models/randommodels/campfire.vmdl" );
 			fire.Position = Position + Vector3.Up * 12;

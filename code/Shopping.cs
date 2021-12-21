@@ -27,7 +27,7 @@ namespace Frostrial
 
 		public override void Tick()
 		{
-
+		
 		}
 
 	}

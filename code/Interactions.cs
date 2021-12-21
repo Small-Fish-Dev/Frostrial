@@ -32,6 +32,9 @@ namespace Frostrial
 							if ( selectedEntity == this )
 							{
 
+								ItemsOpen = true;
+								BlockMovement = true;
+
 								Hint( "Let's see...", 1.2f );
 
 							}
@@ -49,6 +52,7 @@ namespace Frostrial
 
 							Fishing = true;
 							BlockMovement = true;
+
 							Hint( ".   .   .   .   .", 1f );
 
 						}
@@ -83,8 +87,13 @@ namespace Frostrial
 			if ( Input.Released( InputButton.Attack2 ) )
 			{
 
-				Fishing = false;
-				BlockMovement = false;
+				if( Fishing )
+				{
+
+					Fishing = false;
+					BlockMovement = false;
+
+				}
 
 			}
 

@@ -18,7 +18,7 @@ namespace Frostrial
 			if ( IsClient ) return;
 
 			Game current = Game.Current as Game;
-			float hutDistance = Position.Distance( current.Hut.Position );
+			float hutDistance = Position.Distance( current.HutEntity.Position );
 
 			if ( hutDistance <= 400f )
 			{

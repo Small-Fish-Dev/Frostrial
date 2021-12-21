@@ -26,7 +26,7 @@ namespace Frostrial
 
 			Game current = Game.Current as Game;
 			var player = Local.Pawn as Player;
-			var hut = current.Hut;
+			var hut = current.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
 			var left = MathX.Clamp( hutScreen.x, 0.15f / Screen.Aspect, 1 - 0.15f / Screen.Aspect );
 			var top = MathX.Clamp( hutScreen.y, 0.15f, 0.85f );
@@ -166,6 +166,7 @@ namespace Frostrial
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Interact>();
+			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Map>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
