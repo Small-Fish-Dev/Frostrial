@@ -10,7 +10,7 @@
 			m_nNodesCreated = 
 			[
 				0, 0, 2, 3,
-				3, 4, 3, 0,
+				3, 5, 3, 0,
 				0, 0, 1, 1,
 				0, 3, 0, 0,
 				0, 0, 0, 0,
@@ -158,16 +158,16 @@
 							m_spline = 
 							[
 								{
-									x = 0.214126
-									y = 0.999275
+									x = 0.49763
+									y = 1.002273
 									m_flSlopeIncoming = 0.0
-									m_flSlopeOutgoing = 0.064545
+									m_flSlopeOutgoing = 0.095004
 								},
 								{
 									x = 1.0
 									y = 1.05
-									m_flSlopeIncoming = 0.064545
-									m_flSlopeOutgoing = 0.064545
+									m_flSlopeIncoming = 0.095004
+									m_flSlopeOutgoing = 0.095004
 								},
 							]
 							m_tangents = 
@@ -225,54 +225,6 @@
 						m_flVolume6 = 1.0
 						m_flVolume7 = 1.0
 						m_flVolume8 = 1.0
-					}
-				},
-				{
-					name = "control.Curve4"
-					friendlyname = "Ambient Wind volume"
-					type = "control.Curve"
-					editor_pos = [ 112.0, 240.0 ]
-					editor_size = [ 140.0, 85.0 ]
-					properties = 
-					{
-						_class = "CMixControlCurve"
-						m_Comment = ""
-						m_name = "Ambient Wind volume"
-						m_flInputMin = 0.0
-						m_flInputMax = 1.0
-						m_flOutputMin = 0.0
-						m_flOutputMax = 1.0
-						m_curve = 
-						{
-							m_spline = 
-							[
-								{
-									x = 0.0
-									y = 0.202899
-									m_flSlopeIncoming = 0.797101
-									m_flSlopeOutgoing = 0.797101
-								},
-								{
-									x = 1.0
-									y = 1.0
-									m_flSlopeIncoming = 0.797101
-									m_flSlopeOutgoing = 0.797101
-								},
-							]
-							m_tangents = 
-							[
-								{
-									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
-								},
-								{
-									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
-								},
-							]
-							m_vDomainMins = [ 0.0, 0.0 ]
-							m_vDomainMaxs = [ 1.0, 1.0 ]
-						}
 					}
 				},
 				{
@@ -365,6 +317,54 @@
 						m_bUseDecibels = false
 					}
 				},
+				{
+					name = "control.Curve5"
+					friendlyname = "Ambient Wind volume"
+					type = "control.Curve"
+					editor_pos = [ 112.0, 272.0 ]
+					editor_size = [ 140.0, 85.0 ]
+					properties = 
+					{
+						_class = "CMixControlCurve"
+						m_Comment = ""
+						m_name = "Ambient Wind volume"
+						m_flInputMin = 0.0
+						m_flInputMax = 1.0
+						m_flOutputMin = 0.0
+						m_flOutputMax = 1.0
+						m_curve = 
+						{
+							m_spline = 
+							[
+								{
+									x = 0.045024
+									y = 0.5
+									m_flSlopeIncoming = 1.104712
+									m_flSlopeOutgoing = 1.104712
+								},
+								{
+									x = 0.49763
+									y = 1.0
+									m_flSlopeIncoming = 1.104712
+									m_flSlopeOutgoing = 1.104712
+								},
+							]
+							m_tangents = 
+							[
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+							]
+							m_vDomainMins = [ 0.0, 0.0 ]
+							m_vDomainMaxs = [ 1.0, 1.0 ]
+						}
+					}
+				},
 			]
 			m_EditorEdges = 
 			[
@@ -385,8 +385,8 @@
 					plug1 = "control.Curve2/valueIn"
 				},
 				{
-					plug0 = "control.Curve4/valueOut"
-					plug1 = "audio.Mix2/volume1"
+					plug0 = "audio.EQ81/audio:Out"
+					plug1 = "audio.Output3/audio:In1"
 				},
 				{
 					plug0 = "audio.PitchShift2/audio:Out"
@@ -401,20 +401,20 @@
 					plug1 = "audio.Mix2/audio:In2"
 				},
 				{
-					plug0 = "control.Input2/value"
-					plug1 = "control.Curve4/valueIn"
+					plug0 = "control.Input3/value"
+					plug1 = "audio.EQ81/enable"
 				},
 				{
 					plug0 = "audio.Mix2/audio:Out"
 					plug1 = "audio.EQ81/audio:In"
 				},
 				{
-					plug0 = "audio.EQ81/audio:Out"
-					plug1 = "audio.Output3/audio:In1"
+					plug0 = "control.Input2/value"
+					plug1 = "control.Curve5/valueIn"
 				},
 				{
-					plug0 = "control.Input3/value"
-					plug1 = "audio.EQ81/enable"
+					plug0 = "control.Curve5/valueOut"
+					plug1 = "audio.Mix2/volume1"
 				},
 			]
 			m_EditorState = 
@@ -422,15 +422,15 @@
 				XAxis = 
 				{
 					pos = 0.0
-					min = -71949.0
-					max = 71143.0
+					min = -72040.0
+					max = 71137.0
 					scale = 0.721221
 				}
 				YAxis = 
 				{
 					pos = 0.0
-					min = -72014.0
-					max = 71627.0
+					min = -72121.0
+					max = 71576.0
 					scale = 0.721221
 				}
 			}
@@ -815,17 +815,17 @@
 			]
 			m_values = 
 			[
-				0.0, 60468523882132809024974880768.0, 1.0, 72249576829774613377164771328.0,
+				0.0, 60468523882132809024974880768.0, 1.0, 0.0,
 				0.0, 1.0,
 			]
 			m_controlPoints = 
 			[
-				0.214126, 0.999275, 0.0, 0.064545,
-				1.0, 1.05, 0.064545, 0.064545,
-				0.0, 0.202899, 0.797101, 0.797101,
-				1.0, 1.0, 0.797101, 0.797101,
-				0.496637, 0.0, 1.986637, 1.986637,
-				1.0, 1.0, 1.986637, 1.986637,
+				0.49763, 1.002273, 0.0, 0.095004,
+				1.0, 1.05, 0.095004, 0.095004,
+				0.045024, 0.5, 1.104712, 1.104712,
+				0.49763, 1.0, 1.104712, 1.104712,
+				0.496637, 0.0, 1.986638, 1.986638,
+				1.0, 1.0, 1.986638, 1.986638,
 			]
 			m_curves = 
 			[
@@ -868,7 +868,7 @@
 					value = 1
 				},
 				{
-					name = "control.Curve4/valueOut"
+					name = "control.Curve5/valueOut"
 					value = 2
 				},
 				{

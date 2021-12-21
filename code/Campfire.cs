@@ -47,8 +47,8 @@ namespace Frostrial
 
 			if( IsClient )
 			{
-
-				if( IsValid ) // I am sick of getting random "Error calling event 'tick'" messages. Hopefully this fixes it
+				
+				if( timeOfDeath > 0.1f ) // I am sick of getting random "Error calling event 'tick'" messages. Hopefully this fixes it
 				{
 
 					LightEffect.SetLightBrightness( 2f + (float)Math.Cos( (float)Time.Now * 25 ) * 0.2f * (1 + Time.Now % 1) );
