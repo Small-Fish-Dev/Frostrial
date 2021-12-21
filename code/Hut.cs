@@ -5,22 +5,32 @@ namespace Frostrial
 {
 
 	[Library( "frostrial_hut", Description = "main base" )]
-	[Hammer.EditorModel( "models/randommodels/campfire.vmdl" )]
+	[Hammer.EditorModel( "models/randommodels/cabin_walls.vmdl" )]
 	public partial class Hut : AnimEntity
 	{
+
+		PointLightEntity light { get; set; }
 
 		public override void Spawn()
 		{
 
 			base.Spawn();
 
-			SetModel( "models/randommodels/campfire.vmdl" );
-			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			SetModel( "models/randommodels/cabin_walls.vmdl" );
+			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -100, -170, 0 ), new Vector3( 100, 150, 12 ) );
 
-			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
+			Rotation = Rotation.FromYaw( -90 );
 
 			Game current = Game.Current as Game;
-			current.Hut = this;
+			current.HutEntity = this;
+
+			var fire = new ModelEntity( "models/randommodels/campfire.vmdl" );
+			fire.Position = Position + Vector3.Up * 12;
+			fire.EnableShadowCasting = false;
+
+			ModelEntity floor = new ModelEntity( "models/randommodels/cabin_floor.vmdl" );
+			floor.Position = Position;
+			floor.Rotation = Rotation.FromYaw( -90 );
 
 		}
 
@@ -29,14 +39,27 @@ namespace Frostrial
 
 			base.ClientSpawn();
 
-			Particles.Create( "particles/fire_embers.vpcf", Position );
+			Particles.Create( "particles/fire_embers.vpcf", Position + Vector3.Up * 12 );
+
+			light = new PointLightEntity();
+			light.Position = Position + Vector3.Up * 22;
+			light.Color = Color.Orange;
+			light.DynamicShadows = true;
 
 		}
 
-		[Event.Tick.Server]
+		[Event.Tick.Client]
 		public void OnTick()
 		{
 
+			var startFadeDistance = 300f;
+			var endFadeDistance = 150f;
+			var player = Local.Pawn as Player;
+			var distance = player.Position.Distance( this.Position );
+
+			RenderColor = RenderColor.WithAlpha( 1 - (startFadeDistance - distance ) / endFadeDistance );
+
+			light.SetLightBrightness( 20 + (float)Math.Cos( (float)Time.Now * 25 ) * 2 * ( 1 + Time.Now % 1 ) ); // Acceptable flickering
 
 		}
 

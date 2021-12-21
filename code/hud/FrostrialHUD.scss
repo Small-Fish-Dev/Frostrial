@@ -23,28 +23,26 @@ RootPanel {
 	.Hint {
 		position: relative;
 		top: 0px;
-		left: 75%;
+		left: -35%;
 		display: flex;
 		flex-shrink: 0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		width: 100%;
+		width: 200%;
 
 		.HintContainer {
 			height: 100px;
+			width: 100%;
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
 			left: 50%;
-			top: -200px;
 
 			.HintTitle {
 				font-family: akaPosse;
 				color: white;
-				font-size: 50px;
-				text-stroke: 7px #110c2e;
 			}
 		}
 	}
@@ -52,13 +50,13 @@ RootPanel {
 	.Interact {
 		position: relative;
 		top: -40%;
-		left: 25%;
+		margin-left: -88%;
 		display: flex;
 		flex-shrink: 0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		width: 100%;
+		width: 300%;
 		height: 100%;
 		opacity: 0.8;
 
@@ -76,11 +74,53 @@ RootPanel {
 		}
 	}
 
+	.Items {
+		height: 100%;
+		width: 100%;
+		pointer-events: all;
+		left: -133%;
+
+		.button {
+			background-color: rgba( black, 0.2 );
+			border-radius: 30px;
+			flex-shrink: 1;
+			width: 50%;
+			aspect-ratio: 3;
+			top: 50%;
+			backdrop-filter: blur( 5px );
+			background-color: rgba ( 80, 80, 80, 0.4 );
+			border: 5px solid rgba ( 20, 20, 20, 0.4 );
+			border-radius: 3px;
+			mix-blend-mode: color;
+			cursor: pointer;
+			opacity: 0.4;
+			transition: all 0.1s ease-in;
+			align-items: center;
+			justify-content: center;
+
+			.title {
+				font-family: Georgia;
+				color: white;
+				font-size: 20px;
+				text-shadow: 0px 0px 10px rgba( black, 1 );
+				text-stroke: 3px black;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+
+			&.active, &:active {
+				opacity: 1;
+			}
+		}
+	}
+
 	.Map {
 		position: relative;
 		pointer-events: none;
 		top: 0%;
-		left: -67%; // May god help me
+		left: -166%;
 		width: 150%;
 		height: 100%;
 		display: flex;
@@ -105,10 +145,12 @@ RootPanel {
 				background-size: 110%;
 				background-repeat: no-repeat;
 				background-position: center;
+
 			}
 
 			&.open {
 				top: 0%;
+
 			}
 		}
 	}
