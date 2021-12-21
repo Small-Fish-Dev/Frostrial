@@ -1,0 +1,915 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	dsp_presets = [  ]
+	dsp_preview = null
+	Graphs = 
+	[
+		{
+			m_nGraphOutputChannels = -1
+			Name = "main"
+			m_nNodesCreated = 
+			[
+				0, 0, 2, 3,
+				3, 4, 3, 0,
+				0, 0, 1, 1,
+				0, 3, 0, 0,
+				0, 0, 0, 0,
+				0, 0, 1, 0,
+				1, 0,
+			]
+			m_EditorNodes = 
+			[
+				{
+					name = "audio.Track2"
+					friendlyname = "Ambient Wind"
+					type = "audio.Track"
+					editor_pos = [ 112.0, 48.0 ]
+					editor_size = [ 140.0, 75.0 ]
+					properties = 
+					{
+						_class = "CMixSubmixTrack"
+						m_Comment = ""
+						m_trackName = "Ambient Wind"
+						m_nChannels = -1
+						m_nMixDownRule = 0
+						m_sendOperator = "SendAllVoices"
+						m_Send1 = ""
+						m_Send2 = ""
+						m_Send3 = ""
+						m_Send4 = ""
+					}
+				},
+				{
+					name = "audio.Output3"
+					friendlyname = "audio.Output3"
+					type = "audio.Output"
+					editor_pos = [ 1144.0, 152.0 ]
+					editor_size = [ 140.0, 120.0 ]
+					properties = 
+					{
+						_class = "CMixOutput"
+						m_Comment = ""
+						m_name = "audio.Output3"
+						m_flVolume1 = 1.0
+						m_flVolume2 = 1.0
+						m_sendTo = ""
+					}
+				},
+				{
+					name = "control.Input2"
+					friendlyname = "Wind Power"
+					type = "control.Input"
+					editor_pos = [ -88.0, 272.0 ]
+					editor_size = [ 140.0, 70.0 ]
+					properties = 
+					{
+						_class = "CMixControlInput"
+						m_Comment = ""
+						m_name = "Wind Power"
+						m_flDefaultValue = 0.0
+						m_flMinRange = 1.0
+						m_flMaxRange = 0.0
+						m_bUseDecibels = false
+					}
+				},
+				{
+					name = "control.Curve1"
+					friendlyname = "Blizzard volume"
+					type = "control.Curve"
+					editor_pos = [ 112.0, 536.0 ]
+					editor_size = [ 140.0, 85.0 ]
+					properties = 
+					{
+						_class = "CMixControlCurve"
+						m_Comment = ""
+						m_name = "Blizzard volume"
+						m_flInputMin = 0.0
+						m_flInputMax = 1.0
+						m_flOutputMin = 0.0
+						m_flOutputMax = 1.0
+						m_curve = 
+						{
+							m_spline = 
+							[
+								{
+									x = 0.496637
+									y = 0.0
+									m_flSlopeIncoming = 1.986637
+									m_flSlopeOutgoing = 1.986637
+								},
+								{
+									x = 1.0
+									y = 1.0
+									m_flSlopeIncoming = 1.986637
+									m_flSlopeOutgoing = 1.986637
+								},
+							]
+							m_tangents = 
+							[
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+							]
+							m_vDomainMins = [ 0.0, 0.0 ]
+							m_vDomainMaxs = [ 1.0, 1.0 ]
+						}
+					}
+				},
+				{
+					name = "audio.PitchShift2"
+					friendlyname = "audio.PitchShift2"
+					type = "audio.PitchShift"
+					editor_pos = [ 368.0, 48.0 ]
+					editor_size = [ 140.0, 120.0 ]
+					properties = 
+					{
+						_class = "CMixPitchShift"
+						m_Comment = ""
+						m_name = "audio.PitchShift2"
+						m_nChannels = -1
+						m_flPitchScale = 1.0
+						m_flGrainMs = 100.0
+						m_nProcType = 0
+						m_nQuality = 1
+					}
+				},
+				{
+					name = "control.Curve2"
+					friendlyname = "Ambient Wind pitch shift"
+					type = "control.Curve"
+					editor_pos = [ 112.0, 136.0 ]
+					editor_size = [ 140.0, 85.0 ]
+					properties = 
+					{
+						_class = "CMixControlCurve"
+						m_Comment = ""
+						m_name = "Ambient Wind pitch shift"
+						m_flInputMin = 0.0
+						m_flInputMax = 1.0
+						m_flOutputMin = 0.0
+						m_flOutputMax = 1.05
+						m_curve = 
+						{
+							m_spline = 
+							[
+								{
+									x = 0.214126
+									y = 0.999275
+									m_flSlopeIncoming = 0.0
+									m_flSlopeOutgoing = 0.064545
+								},
+								{
+									x = 1.0
+									y = 1.05
+									m_flSlopeIncoming = 0.064545
+									m_flSlopeOutgoing = 0.064545
+								},
+							]
+							m_tangents = 
+							[
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_LINEAR"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+							]
+							m_vDomainMins = [ 0.0, 0.0 ]
+							m_vDomainMaxs = [ 1.0, 1.05 ]
+						}
+					}
+				},
+				{
+					name = "audio.Track3"
+					friendlyname = "Blizzard"
+					type = "audio.Track"
+					editor_pos = [ 112.0, 448.0 ]
+					editor_size = [ 140.0, 75.0 ]
+					properties = 
+					{
+						_class = "CMixSubmixTrack"
+						m_Comment = ""
+						m_trackName = "Blizzard"
+						m_nChannels = -1
+						m_nMixDownRule = 0
+						m_sendOperator = "SendAllVoices"
+						m_Send1 = ""
+						m_Send2 = ""
+						m_Send3 = ""
+						m_Send4 = ""
+					}
+				},
+				{
+					name = "audio.Mix2"
+					friendlyname = "audio.Mix2"
+					type = "audio.Mix"
+					editor_pos = [ 544.0, 152.0 ]
+					editor_size = [ 140.0, 300.0 ]
+					properties = 
+					{
+						_class = "CMixSum"
+						m_Comment = ""
+						m_name = "audio.Mix2"
+						m_flVolume1 = 1.0
+						m_flVolume2 = 1.0
+						m_flVolume3 = 1.0
+						m_flVolume4 = 1.0
+						m_flVolume5 = 1.0
+						m_flVolume6 = 1.0
+						m_flVolume7 = 1.0
+						m_flVolume8 = 1.0
+					}
+				},
+				{
+					name = "control.Curve4"
+					friendlyname = "Ambient Wind volume"
+					type = "control.Curve"
+					editor_pos = [ 112.0, 240.0 ]
+					editor_size = [ 140.0, 85.0 ]
+					properties = 
+					{
+						_class = "CMixControlCurve"
+						m_Comment = ""
+						m_name = "Ambient Wind volume"
+						m_flInputMin = 0.0
+						m_flInputMax = 1.0
+						m_flOutputMin = 0.0
+						m_flOutputMax = 1.0
+						m_curve = 
+						{
+							m_spline = 
+							[
+								{
+									x = 0.0
+									y = 0.202899
+									m_flSlopeIncoming = 0.797101
+									m_flSlopeOutgoing = 0.797101
+								},
+								{
+									x = 1.0
+									y = 1.0
+									m_flSlopeIncoming = 0.797101
+									m_flSlopeOutgoing = 0.797101
+								},
+							]
+							m_tangents = 
+							[
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+								{
+									m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+									m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+								},
+							]
+							m_vDomainMins = [ 0.0, 0.0 ]
+							m_vDomainMaxs = [ 1.0, 1.0 ]
+						}
+					}
+				},
+				{
+					name = "audio.EQ81"
+					friendlyname = "audio.EQ81"
+					type = "audio.EQ8"
+					editor_pos = [ 928.0, 152.0 ]
+					editor_size = [ 186.0, 120.0 ]
+					properties = 
+					{
+						_class = "CMixEQ8"
+						m_Comment = ""
+						m_name = "audio.EQ81"
+						m_nChannels = -1
+						m_stages = 
+						[
+							{
+								m_filterType = "FILTER_LOWPASS"
+								m_flFrequency = 560.913208
+								m_flQ = 0.2
+								m_fldbGain = 0.0
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_PEAKING_EQ"
+								m_flFrequency = 1059.522705
+								m_flQ = 0.474739
+								m_fldbGain = -19.527649
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_PEAKING_EQ"
+								m_flFrequency = 750.0
+								m_flQ = 3.0
+								m_fldbGain = 0.0
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_PEAKING_EQ"
+								m_flFrequency = 686.723999
+								m_flQ = 0.235606
+								m_fldbGain = -5.529953
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_LOWPASS"
+								m_flFrequency = 314.623413
+								m_flQ = 0.2
+								m_fldbGain = 0.0
+								m_bEnable = true
+							},
+							{
+								m_filterType = "FILTER_PEAKING_EQ"
+								m_flFrequency = 476.156158
+								m_flQ = 0.2
+								m_fldbGain = -11.025345
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_PEAKING_EQ"
+								m_flFrequency = 673.615112
+								m_flQ = 0.769701
+								m_fldbGain = -13.306452
+								m_bEnable = false
+							},
+							{
+								m_filterType = "FILTER_LOWPASS"
+								m_flFrequency = 7421.562012
+								m_flQ = 0.2
+								m_fldbGain = 0.0
+								m_bEnable = false
+							},
+						]
+					}
+				},
+				{
+					name = "control.Input3"
+					friendlyname = "Indoors"
+					type = "control.Input"
+					editor_pos = [ 736.0, 240.0 ]
+					editor_size = [ 140.0, 70.0 ]
+					properties = 
+					{
+						_class = "CMixControlInput"
+						m_Comment = ""
+						m_name = "Indoors"
+						m_flDefaultValue = 0.0
+						m_flMinRange = 0.0
+						m_flMaxRange = 1.0
+						m_bUseDecibels = false
+					}
+				},
+			]
+			m_EditorEdges = 
+			[
+				{
+					plug0 = "control.Input2/value"
+					plug1 = "control.Curve1/valueIn"
+				},
+				{
+					plug0 = "audio.Track2/audio:Source"
+					plug1 = "audio.PitchShift2/audio:In"
+				},
+				{
+					plug0 = "control.Curve2/valueOut"
+					plug1 = "audio.PitchShift2/pitchScale"
+				},
+				{
+					plug0 = "control.Input2/value"
+					plug1 = "control.Curve2/valueIn"
+				},
+				{
+					plug0 = "control.Curve4/valueOut"
+					plug1 = "audio.Mix2/volume1"
+				},
+				{
+					plug0 = "audio.PitchShift2/audio:Out"
+					plug1 = "audio.Mix2/audio:In1"
+				},
+				{
+					plug0 = "control.Curve1/valueOut"
+					plug1 = "audio.Mix2/volume2"
+				},
+				{
+					plug0 = "audio.Track3/audio:Source"
+					plug1 = "audio.Mix2/audio:In2"
+				},
+				{
+					plug0 = "control.Input2/value"
+					plug1 = "control.Curve4/valueIn"
+				},
+				{
+					plug0 = "audio.Mix2/audio:Out"
+					plug1 = "audio.EQ81/audio:In"
+				},
+				{
+					plug0 = "audio.EQ81/audio:Out"
+					plug1 = "audio.Output3/audio:In1"
+				},
+				{
+					plug0 = "control.Input3/value"
+					plug1 = "audio.EQ81/enable"
+				},
+			]
+			m_EditorState = 
+			{
+				XAxis = 
+				{
+					pos = 0.0
+					min = -71949.0
+					max = 71143.0
+					scale = 0.721221
+				}
+				YAxis = 
+				{
+					pos = 0.0
+					min = -72014.0
+					max = 71627.0
+					scale = 0.721221
+				}
+			}
+			m_Submixes = 
+			[
+				{
+					name = "Ambient Wind"
+					sendOperator = "SendAllVoices"
+					soloname = 54958013
+					channels = -1
+					mixDownRule = 0
+				},
+				{
+					name = "Blizzard"
+					sendOperator = "SendAllVoices"
+					soloname = 2258390383
+					channels = -1
+					mixDownRule = 0
+				},
+			]
+			m_Processors = 
+			[
+				{
+					m_name = "audio.PitchShift2"
+					m_effectName = ""
+					m_nProcessorType = "VPROCESSOR_RT_PITCH"
+					m_bAffectsGlobals = false
+					m_nChannels = -1
+					m_flxfade = 0.1
+					m_params = 
+					{
+						m_nGrainSampleCount = 4410
+						m_flPitchShift = 1.0
+						m_nQuality = 1
+						m_nProcType = 0
+					}
+				},
+				{
+					m_name = "audio.EQ81"
+					m_effectName = ""
+					m_nProcessorType = "VPROCESSOR_EQ8"
+					m_bAffectsGlobals = false
+					m_nChannels = -1
+					m_flxfade = 0.1
+					m_params = 
+					{
+						m_stages = 
+						[
+							{
+								m_nFilterType = "FILTER_LOWPASS"
+								m_bEnabled = false
+								m_fldbGain = 0.0
+								m_flCutoffFreq = 560.913208
+								m_flQ = 0.2
+							},
+							{
+								m_nFilterType = "FILTER_PEAKING_EQ"
+								m_bEnabled = false
+								m_fldbGain = -19.527649
+								m_flCutoffFreq = 1059.522705
+								m_flQ = 0.474739
+							},
+							{
+								m_nFilterType = "FILTER_PEAKING_EQ"
+								m_bEnabled = false
+								m_fldbGain = 0.0
+								m_flCutoffFreq = 750.0
+								m_flQ = 3.0
+							},
+							{
+								m_nFilterType = "FILTER_PEAKING_EQ"
+								m_bEnabled = false
+								m_fldbGain = -5.529953
+								m_flCutoffFreq = 686.723999
+								m_flQ = 0.235606
+							},
+							{
+								m_nFilterType = "FILTER_LOWPASS"
+								m_bEnabled = true
+								m_fldbGain = 0.0
+								m_flCutoffFreq = 314.623413
+								m_flQ = 0.2
+							},
+							{
+								m_nFilterType = "FILTER_PEAKING_EQ"
+								m_bEnabled = false
+								m_fldbGain = -11.025345
+								m_flCutoffFreq = 476.156158
+								m_flQ = 0.2
+							},
+							{
+								m_nFilterType = "FILTER_PEAKING_EQ"
+								m_bEnabled = false
+								m_fldbGain = -13.306452
+								m_flCutoffFreq = 673.615112
+								m_flQ = 0.769701
+							},
+							{
+								m_nFilterType = "FILTER_LOWPASS"
+								m_bEnabled = false
+								m_fldbGain = 0.0
+								m_flCutoffFreq = 7421.562012
+								m_flQ = 0.2
+							},
+						]
+					}
+				},
+			]
+			m_controlInputs = 
+			[
+				{
+					name = "Wind Power"
+					value = 0.0
+				},
+				{
+					name = "Indoors"
+					value = 0.0
+				},
+			]
+			m_MixCommands = 
+			[
+				{
+					command = "submix.debug"
+					paramName = 54958013
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.meter"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 0
+					inputValue1 = -1
+				},
+				{
+					command = "submix.debug"
+					paramName = -2036576913
+					outputSubmix = -1
+					inputSubmix0 = 1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.meter"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = 1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 1
+					inputValue1 = -1
+				},
+				{
+					command = "control.store"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 0
+					inputValue1 = 0
+				},
+				{
+					command = "control.copy"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 1
+					inputValue1 = 0
+				},
+				{
+					command = "control.curve"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 1
+					inputValue1 = 0
+				},
+				{
+					command = "processor.setparameter"
+					paramName = -128852665
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = 0
+					inputValue0 = 1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.process"
+					paramName = -1498020675
+					outputSubmix = 0
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = 0
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.debug"
+					paramName = 1292085259
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "control.copy"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 2
+					inputValue1 = 0
+				},
+				{
+					command = "control.curve"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 2
+					inputValue1 = 1
+				},
+				{
+					command = "control.copy"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 3
+					inputValue1 = 0
+				},
+				{
+					command = "control.curve"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 3
+					inputValue1 = 2
+				},
+				{
+					command = "submix.copy"
+					paramName = 0
+					outputSubmix = 0
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 2
+					inputValue1 = -1
+				},
+				{
+					command = "submix.accumulate_single"
+					paramName = 0
+					outputSubmix = 0
+					inputSubmix0 = 1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 3
+					inputValue1 = -1
+				},
+				{
+					command = "submix.meter"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 2
+					inputValue1 = -1
+				},
+				{
+					command = "submix.debug"
+					paramName = -666126924
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "control.store"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 4
+					inputValue1 = 1
+				},
+				{
+					command = "processor.setparameter"
+					paramName = -993947661
+					outputSubmix = -1
+					inputSubmix0 = -1
+					inputSubmix1 = -1
+					processor = 1
+					inputValue0 = 4
+					inputValue1 = -1
+				},
+				{
+					command = "submix.spectrum"
+					paramName = -29408888
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.process"
+					paramName = -2027502429
+					outputSubmix = 0
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = 1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.debug"
+					paramName = -1539959702
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.spectrum"
+					paramName = -1539959702
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = -1
+					inputValue1 = -1
+				},
+				{
+					command = "submix.output"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 5
+					inputValue1 = -1
+				},
+				{
+					command = "submix.meter"
+					paramName = 0
+					outputSubmix = -1
+					inputSubmix0 = 0
+					inputSubmix1 = -1
+					processor = -1
+					inputValue0 = 3
+					inputValue1 = -1
+				},
+			]
+			m_values = 
+			[
+				0.0, 60468523882132809024974880768.0, 1.0, 72249576829774613377164771328.0,
+				0.0, 1.0,
+			]
+			m_controlPoints = 
+			[
+				0.214126, 0.999275, 0.0, 0.064545,
+				1.0, 1.05, 0.064545, 0.064545,
+				0.0, 0.202899, 0.797101, 0.797101,
+				1.0, 1.0, 0.797101, 0.797101,
+				0.496637, 0.0, 1.986637, 1.986637,
+				1.0, 1.0, 1.986637, 1.986637,
+			]
+			m_curves = 
+			[
+				{
+					start = 0
+					count = 2
+				},
+				{
+					start = 8
+					count = 2
+				},
+				{
+					start = 16
+					count = 2
+				},
+			]
+			m_audioMeters = 
+			[
+				{
+					name = "Ambient Wind"
+				},
+				{
+					name = "Blizzard"
+				},
+				{
+					name = "audio.Mix2"
+				},
+				{
+					name = "audio.Output3"
+				},
+			]
+			m_controlMeters = 
+			[
+				{
+					name = "control.Input2/value"
+					value = 0
+				},
+				{
+					name = "control.Curve2/valueOut"
+					value = 1
+				},
+				{
+					name = "control.Curve4/valueOut"
+					value = 2
+				},
+				{
+					name = "control.Curve1/valueOut"
+					value = 3
+				},
+				{
+					name = "audio.Mix2/volume1"
+					value = 2
+				},
+				{
+					name = "audio.Mix2/volume2"
+					value = 3
+				},
+				{
+					name = "control.Input3/value"
+					value = 4
+				},
+			]
+			m_EditorPreview = 
+			{
+				volume = 1.0
+				mix = 1.0
+				voiceList = 
+				[
+					{
+						sound = "sounds/ambient.wind.normal.vsnd"
+						track = "Ambient Wind"
+						isEvent = false
+					},
+					{
+						sound = "sounds/ambient.wind.strong.vsnd"
+						track = "Blizzard"
+						isEvent = false
+					},
+				]
+			}
+		},
+	]
+	Editor = 
+	{
+		SelectedGraph = 0
+	}
+}
