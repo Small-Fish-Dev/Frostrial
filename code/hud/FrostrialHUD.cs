@@ -160,7 +160,7 @@ namespace Frostrial
 			if ( player.Fishing )
 			{
 
-				text = "Let go to catch the fish as he bites";
+				text = "Let go to catch the fish as it bites";
 
 			}
 

@@ -27,6 +27,38 @@ namespace Frostrial
 
 				new FrostrialHUD();
 
+				//I could do this with an fgd, but time's running out!
+				var zone1 = new FishSpawner();
+				zone1.Position = new Vector3( -400, 150, -9 );
+				zone1.Range = 900f;
+				zone1.RarityLevel = 0;
+
+				var zone12 = new FishSpawner();
+				zone12.Position = new Vector3( 920, -1260, -9 );
+				zone12.Range = 570f;
+				zone12.RarityLevel = 0;
+
+				var zone2 = new FishSpawner();
+				zone2.Position = new Vector3( 2500, -1600, -9 );
+				zone2.Range = 700f;
+				zone2.RarityLevel = 1;
+
+				var zone3 = new FishSpawner();
+				zone3.Position = new Vector3( 1200, 280, -9 );
+				zone3.Range = 700f;
+				zone3.RarityLevel = 1;
+
+				var zone4 = new FishSpawner();
+				zone4.Position = new Vector3( 2500, 1000, -9 );
+				zone4.Range = 700f;
+				zone4.RarityLevel = 2;
+
+				var zone5 = new FishSpawner();
+				zone5.Position = new Vector3( 500, 2250, -9 );
+				zone5.Range = 700f;
+				zone5.RarityLevel = 2;
+
+
 			}
 			else
 			{
@@ -55,7 +87,7 @@ namespace Frostrial
 		public static bool IsOnIce( Vector3 position )
 		{
 
-			var trace = Trace.Ray( position + Vector3.Up * 2f, position + Vector3.Down * 2f )
+			var trace = Trace.Ray( position + Vector3.Up * 10f, position + Vector3.Down * 2f )
 			.WorldOnly()
 			.Run();
 
@@ -93,6 +125,7 @@ namespace Frostrial
 			{
 
 				if ( !ent.GetType().IsSubclassOf( typeof( ModelEntity ) ) ) continue; // I don't want ModelEntity, but since it's a parent class I have to do this to exclude it
+				if ( ent is Fish || ent is FishSpawner ) continue;
 
 				float entDistance = ent.Position.Distance( position );
 

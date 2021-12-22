@@ -23,7 +23,7 @@ namespace Frostrial
 			if ( hutDistance <= 400f )
 			{
 
-				ColdMultiplier -= ( 1f - hutDistance / 400f ) * 6f;
+				ColdMultiplier -= ( 1f - hutDistance / 400f ) * 7f;
 
 			}
 
@@ -34,7 +34,7 @@ namespace Frostrial
 
 			}
 
-			ColdMultiplier -= (1f - Game.CampfireDistance( Position, 120 ) / 120) * 5;
+			ColdMultiplier -= (1f - Game.CampfireDistance( Position, 240 ) / 240) * 7;
 
 			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
 
