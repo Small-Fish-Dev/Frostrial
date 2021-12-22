@@ -29,6 +29,7 @@ namespace Frostrial
 		}
 
 		private AmbientWindVMix vMix = new();
+		private MusicPlayer musicPlayer = new();
 
 		public override void Respawn()
 		{
@@ -46,6 +47,9 @@ namespace Frostrial
 			EnableShadowInFirstPerson = true;
 
 			BasicClothes();
+
+			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan
+			musicPlayer.Initialize();
 
 			base.Respawn();
 		}
@@ -68,6 +72,8 @@ namespace Frostrial
 			{
 				vMix.Update( 1 - Warmth, Game.IsOnIce( Position ), Position.Distance( Game.Instance.HutEntity?.Position ?? Vector3.Zero ) < 200f );
 				vMix.Tick();
+
+				musicPlayer.Tick();
 			}
 		}
 
