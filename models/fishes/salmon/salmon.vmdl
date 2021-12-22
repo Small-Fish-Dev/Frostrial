@@ -29,12 +29,66 @@
 				[
 					{
 						_class = "PhysicsShapeCapsule"
-						parent_bone = ""
-						surface_prop = "default"
+						parent_bone = "body"
+						surface_prop = "flesh"
 						collision_prop = "default"
-						radius = 2.760713
-						point0 = [ -8.950254, -0.164673, 0.52788 ]
-						point1 = [ 7.661829, -0.164673, 0.52788 ]
+						radius = 1.565173
+						point0 = [ -0.913085, -3.03049, -0.000004 ]
+						point1 = [ -1.058851, 1.912999, -0.000011 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.565173
+						point0 = [ 0.994037, -3.400018, 0.000005 ]
+						point1 = [ 1.207617, 2.092546, -0.000007 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "neck"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.734542
+						point0 = [ -0.789058, 1.335973, -0.000017 ]
+						point1 = [ 0.922129, 1.364946, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.553694
+						point0 = [ 0.34895, 0.019704, -0.000001 ]
+						point1 = [ -0.698482, 3.334112, 0.000008 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.591432
+						point0 = [ -0.000016, 2.051964, -0.797963 ]
+						point1 = [ -0.000007, 1.972177, 0.394769 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "tail2"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ 0.000008, 1.412156, 0.232483 ]
+						angles = [ 0.000087, -0.000068, 9.789642 ]
+						dimensions = [ 2.0, 3.461021, 2.581668 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ -0.000045, 1.971641, 0.453787 ]
+						angles = [ 0.00001, -0.000002, 1.195588 ]
+						dimensions = [ 0.3, 3.101844, 4.891745 ]
 					},
 				]
 			},
@@ -56,6 +110,159 @@
 						{
 							exclude_by_default = false
 							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "neck"
+						anchor_origin = [ 0.149806, 2.642722, -0.000002 ]
+						anchor_angles = [ 0.000015, -92.793411, -89.999969 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "neck"
+						child_body = "head"
+						anchor_origin = [ -0.168476, 3.027004, -0.000003 ]
+						anchor_angles = [ -0.000012, 88.953667, -90.000206 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ -0.315394, -3.531991, -0.000002 ]
+						anchor_angles = [ -0.000026, -92.086067, -0.000119 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "tail2"
+						anchor_origin = [ 0.000004, 3.124655, 0.294641 ]
+						anchor_angles = [ -1.026315, -90.000008, -89.99987 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail2"
+						child_body = "fin"
+						anchor_origin = [ 0.000007, 2.471364, 0.568965 ]
+						anchor_angles = [ -3.885489, -89.999985, -90.000305 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "body"
+							radius = 2.53174
+							point0 = [ -0.209816, -3.38725, 0.000002 ]
+							point1 = [ 0.003767, 2.10532, -0.00001 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "neck"
+							radius = 1.734542
+							point0 = [ -0.789058, 1.335973, -0.000017 ]
+							point1 = [ 0.922129, 1.364946, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "head"
+							radius = 1.553694
+							point0 = [ 0.34895, 0.019704, -0.000001 ]
+							point1 = [ -0.698482, 3.334112, 0.000008 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 1.591432
+							point0 = [ -0.000016, 2.051964, -0.797963 ]
+							point1 = [ -0.000007, 1.972177, 0.394769 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "tail2"
+							dimensions = [ 2.0, 4.53861, 2.90828 ]
+							offset_origin = [ 0.000003, 0.950132, -0.018263 ]
+							offset_angles = [ 0.000131, -0.000093, 14.2654 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "fin"
+							dimensions = [ 0.5, 3.20775, 4.7358 ]
+							offset_origin = [ 0.0, 1.87595, 0.532895 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
 						}
 					},
 				]

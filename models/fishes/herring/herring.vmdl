@@ -107,10 +107,21 @@
 						game_class = "ao_proxy_capsule"
 						game_keys = 
 						{
-							bonename = ""
-							radius = 0.745812
-							point0 = [ -3.45779, 0.0, 0.654804 ]
-							point1 = [ 2.11859, 0.0, 0.654804 ]
+							bonename = "body"
+							radius = 0.669124
+							point0 = [ 0.044865, -0.333828, 0.000002 ]
+							point1 = [ 0.058313, 1.87415, -0.000008 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 0.579993
+							point0 = [ 0.000002, -0.616124, 0.005378 ]
+							point1 = [ -0.000007, 2.21346, -0.02049 ]
 						}
 					},
 				]

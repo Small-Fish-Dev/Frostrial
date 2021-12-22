@@ -40,12 +40,39 @@
 				[
 					{
 						_class = "PhysicsShapeCapsule"
-						parent_bone = ""
-						surface_prop = "default"
+						parent_bone = "head"
+						surface_prop = "flesh"
 						collision_prop = "default"
-						radius = 1.536317
-						point0 = [ -4.790678, 0.136465, -0.291258 ]
-						point1 = [ 2.770875, 0.136465, -0.291258 ]
+						radius = 0.956303
+						point0 = [ 0.11136, 0.097775, -0.0 ]
+						point1 = [ 0.11136, 1.583953, -0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 0.911145
+						point0 = [ -0.000001, 0.31479, -0.008123 ]
+						point1 = [ -0.000003, 2.308347, -0.030403 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ 0.0, 1.320022, -0.140599 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 0.15, 2.25282, 2.195201 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ -0.011666, 0.002483, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 2.899025, 4.173941, 1.5 ]
 					},
 				]
 			},
@@ -67,6 +94,107 @@
 						{
 							exclude_by_default = false
 							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "head"
+						anchor_origin = [ 0.011258, 2.137368, -0.0 ]
+						anchor_angles = [ 0.000017, -92.793083, -89.999718 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ 0.103137, -2.133746, 0.0 ]
+						anchor_angles = [ 0.000009, 87.914169, -179.999802 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "fin"
+						anchor_origin = [ 0.000001, 2.676837, 0.06169 ]
+						anchor_angles = [ -1.026567, -90.0, -89.99987 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "head"
+							radius = 0.956303
+							point0 = [ 0.11136, 0.097775, -0.0 ]
+							point1 = [ 0.11136, 1.583953, -0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 0.911145
+							point0 = [ -0.000001, 0.31479, -0.008123 ]
+							point1 = [ -0.000003, 2.308347, -0.030403 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "body"
+							dimensions = [ 2.93775, 3.76724, 2.0 ]
+							offset_origin = [ 0.02776, -0.103216, 0.0 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "fin"
+							dimensions = [ 0.1, 1.45053, 2.27821 ]
+							offset_origin = [ 0.0, 1.69484, -0.128984 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
 						}
 					},
 				]

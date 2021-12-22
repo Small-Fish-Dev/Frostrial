@@ -29,12 +29,66 @@
 				[
 					{
 						_class = "PhysicsShapeCapsule"
-						parent_bone = ""
-						surface_prop = "default"
+						parent_bone = "body"
+						surface_prop = "flesh"
 						collision_prop = "default"
-						radius = 3.416725
-						point0 = [ -10.33077, 0.0, 0.0 ]
-						point1 = [ 10.98502, 0.0, 0.0 ]
+						radius = 1.806524
+						point0 = [ -0.899522, -1.84177, -0.000002 ]
+						point1 = [ -1.169849, 2.012409, -0.000002 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.806524
+						point0 = [ 1.153897, -1.863552, 0.000002 ]
+						point1 = [ 1.433988, 1.984788, 0.000003 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "neck"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.612224
+						point0 = [ -0.9617, 1.434241, -0.000004 ]
+						point1 = [ 1.0383, 1.434241, -0.000004 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.534754
+						point0 = [ -0.206827, -0.117175, -0.0 ]
+						point1 = [ -0.430831, 4.138179, -0.000004 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						radius = 1.455805
+						point0 = [ 0.000001, 0.955434, -1.163283 ]
+						point1 = [ 0.000009, 0.919804, 0.847779 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "tail2"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ -0.000005, 2.475548, -0.002318 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 2.0, 9.37488, 3.19222 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_prop = "default"
+						origin = [ 0.0, 3.562706, 0.339466 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 0.5, 3.84116, 8.29865 ]
 					},
 				]
 			},
@@ -57,6 +111,159 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "body"
+							radius = 2.96901
+							point0 = [ 0.079032, -1.85215, 0.0 ]
+							point1 = [ 0.066835, 1.99929, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "neck"
+							radius = 1.612224
+							point0 = [ -0.9617, 1.434241, -0.000004 ]
+							point1 = [ 1.0383, 1.434241, -0.000004 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "head"
+							radius = 2.30895
+							point0 = [ -0.206827, -0.117175, -0.0 ]
+							point1 = [ -0.430831, 4.138179, -0.000004 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 1.455805
+							point0 = [ 0.000001, 0.955434, -1.163283 ]
+							point1 = [ 0.000009, 0.919804, 0.847779 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "tail2"
+							dimensions = [ 2.0, 7.74704, 3.77965 ]
+							offset_origin = [ 0.0, 3.58886, -0.093634 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "fin"
+							dimensions = [ 1.0, 3.72611, 8.20481 ]
+							offset_origin = [ 0.0, 3.69803, 0.398512 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "neck"
+						anchor_origin = [ 0.064179, 3.548333, 0.000002 ]
+						anchor_angles = [ 0.000014, -92.793396, -89.999977 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "neck"
+						child_body = "head"
+						anchor_origin = [ 0.221599, 4.042496, 0.000001 ]
+						anchor_angles = [ 0.000003, -91.046043, -90.000038 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ 0.112602, -3.584149, -0.0 ]
+						anchor_angles = [ 0.000004, 87.913826, -179.999924 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "tail2"
+						anchor_origin = [ -0.000001, 3.831245, -0.009379 ]
+						anchor_angles = [ 1.026504, 90.000015, -89.999977 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail2"
+						child_body = "fin"
+						anchor_origin = [ -0.000002, 4.704979, 0.027588 ]
+						anchor_angles = [ 3.885663, 90.000015, -89.999481 ]
+						collision_enabled = false
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -15.0
+						max_twist_angle = 15.0
 					},
 				]
 			},
