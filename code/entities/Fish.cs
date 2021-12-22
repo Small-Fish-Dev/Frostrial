@@ -12,15 +12,21 @@ namespace Frostrial
 		[Net] public float Size { get; set; } = 0.1f; // Meters
 		[Net] public bool Variant { get; set; } = false;
 		[Net] public float Rarity { get; set; } = 0;
-		public bool Baited { get; set; } = false;
-		public bool Trapped { get; set; } = false;
-		RealTimeUntil freeFromBait = 0f;
-		[Net] public Vector3 BaitPosition { get; set; } = Vector3.Zero;
+		[Net] public bool Baited { get; set; } = false;
+		[Net] public bool Trapped { get; set; } = false;
+		[Net] public Entity Fisherman { get; set; }
+		[Net] internal RealTimeUntil growth { get; set; } = 1;
+
+		public Rotation WishRotation { get; set; }
 		public FishSpawner Spawner { get; set; }
-		public IList<Fish> FishList;
-		public Entity Fisherman { get; set; }
-		[Net] RealTimeUntil growth { get; set; } = 1;
-		RealTimeUntil nextMove = 0f;
+		public IList<Fish> FishList { get; set; }
+
+		RealTimeUntil freeFromBait = 0f;
+		Vector3 baitPosition = Vector3.Zero;
+
+		RealTimeUntil nextAction = 0f;
+		RealTimeSince lerpPosition = 0f;
+		Vector3 originalPosition;
 		Rotation originalRotation;
 
 		public override void Spawn()
@@ -30,7 +36,6 @@ namespace Frostrial
 
 			SetModel( "models/fishes/fishshadow.vmdl" );
 			EnableShadowCasting = false;
-			growth = 1;
 
 			Velocity = Vector3.Forward * 50f;
 
@@ -40,25 +45,41 @@ namespace Frostrial
 		public void OnTick()
 		{
 
-			if ( nextMove < 0f )
+			Scale = Size * 3 * Math.Min( 1 - growth, 1 );
+
+			if ( Baited )
 			{
+				///////// During action
 
-				Entity nearPlayer = Game.NearestPlayer( Position, 200f ); // TODO Bigger search if you put bait and have rod
-
-				if ( nearPlayer is Player )
+				if ( nextAction <= 0f )
 				{
 
-					Player player = nearPlayer as Player;
-					Entity nearHole = player.CurrentHole;
+					lerpPosition = 0;
 
-					if ( nearHole is Hole )
+					nextAction = Rand.Float( 1.5f, 2.5f );
+
+				}
+
+				///////// During every tick
+
+				if ( Trapped )
+				{
+					Rotation = originalRotation + Rotation.FromYaw( Time.Now * 300 ) * ((float)Math.Cos( Time.Now * 15 ) * 0.05f);
+
+					if ( freeFromBait <= 0 )
 					{
 
-						var holePosition = nearHole.Position.WithZ( Position.z );
-						Velocity = (holePosition - Position).Normal * 100f;
-						Baited = true;
-						BaitPosition = holePosition;
-						Fisherman = player;
+						Baited = false;
+						Trapped = false;
+						Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 120f, 200f );
+						Rotation = originalRotation;
+
+						Player player = Fisherman as Player;
+
+						player.FishBaited = false;
+						player.CaughtFish = null;
+
+						nextAction = Rand.Float( 2f, 3f );
 
 					}
 
@@ -66,36 +87,77 @@ namespace Frostrial
 				else
 				{
 
-					Baited = false;
+					Position = Vector3.Lerp( originalPosition, baitPosition, lerpPosition );
+					Rotation = Rotation.Slerp( Rotation, WishRotation, Time.Delta * 4 );
 
 				}
 
-				if ( !Baited )
+			}
+			else
+			{
+
+				///////// During action
+				
+				if ( nextAction <= 0f )
 				{
+
+					Entity nearPlayer = Game.NearestPlayer( Position, 200f ); // TODO Bigger search if you put bait and have rod
+
+					if ( nearPlayer is Player )
+					{
+
+						Player player = nearPlayer as Player;
+						Entity nearHole = player.CurrentHole;
+
+						if ( nearHole is Hole )
+						{
+
+							var holePosition = nearHole.Position.WithZ( Position.z );
+							Baited = true;
+							Fisherman = player;
+							WishRotation = Rotation.LookAt( holePosition - Position, Vector3.Up );
+							originalPosition = Position;
+							baitPosition = holePosition;
+							lerpPosition = 0;
+
+						}
+
+					}
 
 					if ( Position.Distance( Spawner.Position ) > Spawner.Range )
 					{
 
-						Velocity = (Spawner.Position - Position).Normal * 70f;
+						// Go back towards the center of your zone
+						Velocity = (Spawner.Position - Position).Normal * 100f;
 
 					}
 					else
 					{
 
-						Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 20f, 60f );
+						// Go to random direction
+						Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 40f, 100f );
 
 					}
 
+					nextAction = Rand.Float( 1.5f, 3.5f );
+
 				}
 
-				nextMove = Rand.Float( 1, 4 );
+				///////// During every tick
+				
+				Position += Rotation.Forward * Velocity.Length * Time.Delta;
+
+				WishRotation = Velocity.EulerAngles.ToRotation();
+				Rotation = Rotation.Slerp( Rotation, WishRotation, Time.Delta * 2 );
 
 			}
 
-			if ( Baited )
+		/*	if ( Baited )
 			{
 
-				if ( Position.Distance( BaitPosition ) <= 40f )
+				
+
+				if ( Position.Distance( baitPosition ) <= 40f / Scale )
 				{
 
 					Player player = Fisherman as Player;
@@ -106,43 +168,20 @@ namespace Frostrial
 						TryBait();
 
 					}
+					else
+					{
+
+						Baited = false;
+
+					}
 
 				}
 
-			}
 
-			Scale = Size * 3 * Math.Min( 1 - growth, 1 );
-
-			Position += Rotation.Forward * Velocity.Length * Time.Delta;
-
-			Rotation rotation = Velocity.EulerAngles.ToRotation();
-			Rotation = Rotation.Slerp( Rotation, rotation, Time.Delta * ( Baited ? 40 : 2 ) );
-			if ( Trapped )
-			{
-
-				Velocity = Vector3.Zero;
-				Rotation = originalRotation + Rotation.FromYaw( Time.Now * 300 ) * ((float)Math.Cos( Time.Now * 15 ) * 0.05f);
-
-				if ( freeFromBait <= 0 )
-				{
-
-					Trapped = false;
-					Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 120f, 200f );
-					Rotation = originalRotation;
-
-					Player player = Fisherman as Player;
-
-					player.FishBaited = false;
-					player.CaughtFish = null;
-
-				}
-
-			}
+			}*/
 
 		}
-
-		RealTimeUntil nextBaitTest = 0f;
-
+		/*
 		public void TryBait()
 		{
 
@@ -151,7 +190,7 @@ namespace Frostrial
 
 				//TODO Play the sound bait check here
 
-				float random = Rand.Float( 10 ); //
+				float random = Rand.Float( 10 ); // Set back to 10
 
 				if( random <= 1f / Rarity ) // TODO Better with tools and bait
 				{
@@ -169,7 +208,9 @@ namespace Frostrial
 
 				}
 
-				nextBaitTest = 1f;
+				Velocity = -Velocity;
+
+				nextBaitTest = nextMove;
 
 			}
 
@@ -180,27 +221,29 @@ namespace Frostrial
 
 			CreateEffects( this );
 
-			Vector3 throwDirection = ( (Fisherman.Position - BaitPosition).Normal * 100 + Vector3.Up * 300 ) * ( 1 + Size / 2) ;
+			Vector3 throwDirection = (Fisherman.Position - baitPosition).Normal * 140  ;
 
 			var ragdoll = new DeadFish( Species, Size, Variant, Rarity )
 			{
 
-				Position = BaitPosition + Vector3.Up * 200 * Size
+				Position = baitPosition + Vector3.Up * Size * 60,
+				Rotation = Rotation.LookAt( throwDirection )
 
 			};
-			ragdoll.PhysicsGroup.Velocity = throwDirection;
+			ragdoll.PhysicsGroup.Velocity = throwDirection + Vector3.Up * 400f;
+			ragdoll.PhysicsGroup.AngularVelocity = Vector3.Cross( throwDirection, Vector3.Up).Normal * -10 ;
 
 			FishList.Remove( this );
 			Delete();
 
-		}
+		}*/
 
 		[ClientRpc]
 		public static void CreateEffects( Fish fish )
 		{
 
 			//TODO Sounds and particles
-			Particles.Create( "particles/splash_particle.vpcf", fish.BaitPosition + Vector3.Up * 10 );
+			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 );
 			
 
 

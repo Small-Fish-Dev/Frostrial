@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -25,7 +26,7 @@ namespace Frostrial
 						if ( CaughtFish.IsValid )
 						{
 
-							CaughtFish.Catch();
+							//CaughtFish.Catch();
 							FishBaited = false;
 
 						}
