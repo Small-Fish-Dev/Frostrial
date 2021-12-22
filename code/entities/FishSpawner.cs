@@ -12,7 +12,7 @@ namespace Frostrial
 		public Dictionary<string, float> FishSizes = new();
 		[Net] public int RarityLevel { get; set; } = 0; // 0 = $, 1 = $$, 2 = $$$
 		[Net] public float Range { get; set; } = 500f;
-		[Net] public List<Fish> Fishes { get; set;} = new List<Fish>();
+		[Net] public IList<Fish> Fishes { get; set;} = new List<Fish>();
 		int fishNumber => (int)Range / 50;
 
 		public override void Spawn()
@@ -78,7 +78,8 @@ namespace Frostrial
 				fish.Rotation = Rotation.FromYaw( Rand.Float( 360 ) );
 				fish.Species = randomFish;
 				fish.Size = randomSize;
-				fish.Scale = randomSize * 3f;
+				fish.Spawner = this;
+				fish.FishList = Fishes;
 
 				Fishes.Add( fish );
 
@@ -100,7 +101,7 @@ namespace Frostrial
 		public void ClientTick()
 		{
 
-			DebugOverlay.Circle( Position, Rotation.FromPitch( 90 ), Range, new Color( 1, 0, 0, 0.7f ) );
+			//DebugOverlay.Circle( Position, Rotation.FromPitch( 90 ), Range, new Color( 1, 0, 0, 0.7f ) );
 
 		}
 
