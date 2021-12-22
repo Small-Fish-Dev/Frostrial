@@ -123,6 +123,11 @@ namespace Frostrial
 					Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 120f, 200f );
 					Rotation = originalRotation;
 
+					Player player = Fisherman as Player;
+
+					player.FishBaited = false;
+					player.CaughtFish = null;
+
 				}
 
 			}
@@ -145,7 +150,7 @@ namespace Frostrial
 				{
 
 					originalRotation = Rotation;
-					freeFromBait = 0.3f / Rarity;
+					freeFromBait = 0.6f / Rarity;
 					Trapped = true;
 
 					Player player = Fisherman as Player;
