@@ -53,6 +53,8 @@ namespace Frostrial
 							Fishing = true;
 							BlockMovement = true;
 
+							CurrentHole = selectedEntity;
+
 							Hint( ".   .   .   .   .", 1f );
 
 						}
@@ -92,6 +94,8 @@ namespace Frostrial
 
 					Fishing = false;
 					BlockMovement = false;
+
+					CurrentHole = PhysicsWorld.WorldBody.Entity;
 
 				}
 

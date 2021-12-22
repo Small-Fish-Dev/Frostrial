@@ -9,7 +9,7 @@ namespace Frostrial
 
 		public Particles ParticleEffect { get; set; }
 		public PointLightEntity LightEffect { get; set; }
-		float durability { get; set; } = 15f; // How long before it breaks
+		float durability { get; set; } = 30f; // How long before it breaks
 		[Net] RealTimeUntil timeOfDeath { get; set; }
 
 		public override void Spawn()

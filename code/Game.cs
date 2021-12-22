@@ -143,6 +143,37 @@ namespace Frostrial
 
 		}
 
+		public static Entity NearestPlayer( Vector3 position, float range = 30f )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+			Entity currentEntity = PhysicsWorld.WorldBody.Entity;
+			float currentDistance = range;
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Player )
+				{
+
+					float entDistance = ent.Position.Distance( position );
+
+					if ( entDistance < currentDistance )
+					{
+
+						currentEntity = ent;
+						currentDistance = entDistance;
+
+					}
+
+				}
+
+			}
+
+			return currentEntity;
+
+		}
+
 		public static float CampfireDistance( Vector3 position, float range = 100f )
 		{
 
