@@ -127,14 +127,14 @@
 						[
 							{
 								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
 								meshes = 
 								[
 									"bobber",
 								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								meshes = [  ]
 							},
 						]
 						hidden_in_tools = false
