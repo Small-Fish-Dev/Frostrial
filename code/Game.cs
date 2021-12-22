@@ -18,6 +18,8 @@ namespace Frostrial
 		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
+		public Dictionary<string, string> FishNames = new();
+
 		public Game()
 		{
 			Instance = this;
@@ -68,8 +70,17 @@ namespace Frostrial
 				InteractionsText.Add( "Player", "Interact with yourself to use items." );
 				InteractionsText.Add( "YetiHand", "Interact to pick up the Yeti Hand." );
 				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
+				InteractionsText.Add( "DeadFish", "Interact to pick up the Dead Fish." );
 
 			}
+
+			FishNames.Add( "goldfish", "models/fishes/fishshadow.vmdl" );
+			FishNames.Add( "minnow", "models/fishes/minnow/minnow.vmdl" );
+			FishNames.Add( "herring", "models/fishes/herring/herring.vmdl" );
+			FishNames.Add( "perch", "models/fishes/perch/perch.vmdl" );
+			FishNames.Add( "pike", "models/fishes/pike/pike.vmdl" );
+			FishNames.Add( "salmon", "models/fishes/salmon/salmon.vmdl" );
+			FishNames.Add( "trout", "models/fishes/trout/trout.vmdl" );
 
 		}
 

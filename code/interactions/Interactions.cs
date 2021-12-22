@@ -65,7 +65,7 @@ namespace Frostrial
 							selectedEntity.Delete();
 							//TODO GIVE YOU MONEY
 
-							Hint( "This Yeti hand is old, lucky", 2f );
+							Hint( "This Yeti Hand is old, lucky", 2f );
 
 						}
 
@@ -76,7 +76,7 @@ namespace Frostrial
 
 							//TODO GIVE YOU MONEY and play sound maybe? lol
 
-							Hint( "The blood on this Yeti scalp is still fresh", 3f );
+							Hint( "The blood on this Yeti Scalp is still fresh", 3f );
 
 						}
 
@@ -85,6 +85,34 @@ namespace Frostrial
 						{
 
 							Hint( "I'm almost there", 2f );
+
+						}
+
+						if ( selectedEntity is DeadFish )
+						{
+
+							DeadFish selectedFish = selectedEntity as DeadFish;
+
+							selectedFish.Delete();
+
+							//TODO get money
+
+							switch ( selectedFish.Rarity )
+							{
+
+								case <= 0.3f:
+									Hint( "This isn't going to cut it", 1.7f );
+									break;
+
+								case <= 0.6f:
+									Hint( "There we go!", 1f );
+									break;
+
+								case > 0.6f:
+									Hint( "That's a big one!", 1.2f );
+									break;
+
+							}
 
 						}
 

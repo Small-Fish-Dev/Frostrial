@@ -15,7 +15,7 @@ namespace Frostrial
 		public bool Baited { get; set; } = false;
 		public bool Trapped { get; set; } = false;
 		RealTimeUntil freeFromBait = 0f;
-		public Vector3 BaitPosition { get; set; } = Vector3.Zero;
+		[Net] public Vector3 BaitPosition { get; set; } = Vector3.Zero;
 		public FishSpawner Spawner { get; set; }
 		public IList<Fish> FishList;
 		public Entity Fisherman { get; set; }
@@ -95,7 +95,7 @@ namespace Frostrial
 			if ( Baited )
 			{
 
-				if ( Position.Distance( BaitPosition ) <= 30f )
+				if ( Position.Distance( BaitPosition ) <= 40f )
 				{
 
 					Player player = Fisherman as Player;
@@ -151,7 +151,7 @@ namespace Frostrial
 
 				//TODO Play the sound bait check here
 
-				float random = Rand.Float( 10 );
+				float random = Rand.Float( 10 ); //
 
 				if( random <= 1f / Rarity ) // TODO Better with tools and bait
 				{
@@ -178,9 +178,31 @@ namespace Frostrial
 		public void Catch()
 		{
 
-			//TODO Sounds and particles
+			CreateEffects( this );
+
+			Vector3 throwDirection = ( (Fisherman.Position - BaitPosition).Normal * 100 + Vector3.Up * 300 ) * ( 1 + Size / 2) ;
+
+			var ragdoll = new DeadFish( Species, Size, Variant, Rarity )
+			{
+
+				Position = BaitPosition + Vector3.Up * 200 * Size
+
+			};
+			ragdoll.PhysicsGroup.Velocity = throwDirection;
+
 			FishList.Remove( this );
 			Delete();
+
+		}
+
+		[ClientRpc]
+		public static void CreateEffects( Fish fish )
+		{
+
+			//TODO Sounds and particles
+			Particles.Create( "particles/splash_particle.vpcf", fish.BaitPosition + Vector3.Up * 10 );
+			
+
 
 		}
 
