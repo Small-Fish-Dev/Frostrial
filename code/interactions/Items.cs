@@ -41,7 +41,7 @@ namespace Frostrial
 							PlacingCampfire = false;
 							BlockMovement = false;
 
-							var ent = new FishSpawner();
+							var ent = new Campfire();
 							ent.Position = MouseWorldPosition;
 
 							Campfires--;
