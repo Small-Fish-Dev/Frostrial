@@ -10,12 +10,12 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "materials/randommodels/mattress_ao.tga"
+	TextureAmbientOcclusion "materials/randommodels/mattress_piss_varient_ao.tga"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[0.768628 0.741176 0.701961 0.000000]"
-	TextureColor "materials/randommodels/mattress_albedo.tga"
+	TextureColor "materials/randommodels/mattress_piss_varient_albedo.tga"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -31,10 +31,10 @@ Layer0
 	g_flMetalness "0.000"
 
 	//---- Normal ----
-	TextureNormal "materials/randommodels/mattress_normal.tga"
+	TextureNormal "materials/randommodels/mattress_piss_varient_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "materials/randommodels/mattress_rough.tga"
+	TextureRoughness "materials/randommodels/mattress_piss_varient_rough.tga"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
