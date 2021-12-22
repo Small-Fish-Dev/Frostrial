@@ -28,6 +28,7 @@ namespace Frostrial
 		RealTimeSince lerpPosition = 0f;
 		Vector3 originalPosition;
 		Rotation originalRotation;
+		bool decidingBait = false;
 
 		public override void Spawn()
 		{
@@ -55,26 +56,31 @@ namespace Frostrial
 				{
 
 					lerpPosition = 0;
+					decidingBait = false;
 
 					nextAction = Rand.Float( 1.5f, 2.5f );
 
 				}
 
 				///////// During every tick
+				
+				Vector3 localBaitPosition = baitPosition - Rotation.LookAt( baitPosition - originalPosition ).Forward * Size * 50;
+
+				Player player = Fisherman as Player;
 
 				if ( Trapped )
 				{
-					Rotation = originalRotation + Rotation.FromYaw( Time.Now * 300 ) * ((float)Math.Cos( Time.Now * 15 ) * 0.05f);
+
+					Position = localBaitPosition;
+					Rotation = originalRotation + Rotation.FromYaw( Time.Now * 300 ) * ((float)Math.Cos( Time.Now * 15 ) * 0.15f);
 
 					if ( freeFromBait <= 0 )
 					{
 
 						Baited = false;
 						Trapped = false;
-						Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 120f, 200f );
+						Velocity = new Vector3( Rand.Float( -1f, 1f ), Rand.Float( -1f, 1f ), 0f ).Normal * Rand.Float( 120f, 200f );
 						Rotation = originalRotation;
-
-						Player player = Fisherman as Player;
 
 						player.FishBaited = false;
 						player.CaughtFish = null;
@@ -87,8 +93,23 @@ namespace Frostrial
 				else
 				{
 
-					Position = Vector3.Lerp( originalPosition, baitPosition, lerpPosition );
-					Rotation = Rotation.Slerp( Rotation, WishRotation, Time.Delta * 4 );
+					Position = Vector3.Lerp( originalPosition, localBaitPosition, 1 - Math.Abs( lerpPosition * 2 - 2 ) );
+					Rotation = Rotation.Slerp( Rotation, Rotation.LookAt( localBaitPosition - originalPosition ), Time.Delta * 4 );
+
+					if( lerpPosition >= 1f && !decidingBait )
+					{
+
+						TryBait();
+						decidingBait = true;
+
+					}
+
+				}
+
+				if ( !player.Fishing ) //Check if he's still fishing
+				{
+
+					Baited = false;
 
 				}
 
@@ -115,7 +136,6 @@ namespace Frostrial
 							var holePosition = nearHole.Position.WithZ( Position.z );
 							Baited = true;
 							Fisherman = player;
-							WishRotation = Rotation.LookAt( holePosition - Position, Vector3.Up );
 							originalPosition = Position;
 							baitPosition = holePosition;
 							lerpPosition = 0;
@@ -135,7 +155,7 @@ namespace Frostrial
 					{
 
 						// Go to random direction
-						Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 40f, 100f );
+						Velocity = new Vector3( Rand.Float( -1f, 1f ), Rand.Float( -1f, 1f ), 0f ).Normal * Rand.Float( 40f, 100f );
 
 					}
 
@@ -152,65 +172,28 @@ namespace Frostrial
 
 			}
 
-		/*	if ( Baited )
-			{
-
-				
-
-				if ( Position.Distance( baitPosition ) <= 40f / Scale )
-				{
-
-					Player player = Fisherman as Player;
-
-					if ( player.Fishing ) //Check if he's still fishing hahaa
-					{
-
-						TryBait();
-
-					}
-					else
-					{
-
-						Baited = false;
-
-					}
-
-				}
-
-
-			}*/
-
 		}
-		/*
+		
 		public void TryBait()
 		{
 
-			if ( nextBaitTest <= 0f )
+			//TODO Play the sound bait check here
+
+			float random = Rand.Float( 10 );
+
+			if( random <= 1f / Rarity ) // TODO Better with tools and bait
 			{
 
-				//TODO Play the sound bait check here
+				originalRotation = Rotation;
+				freeFromBait = 0.6f / Rarity;
+				Trapped = true;
 
-				float random = Rand.Float( 10 ); // Set back to 10
+				Player player = Fisherman as Player;
 
-				if( random <= 1f / Rarity ) // TODO Better with tools and bait
-				{
-
-					originalRotation = Rotation;
-					freeFromBait = 0.6f / Rarity;
-					Trapped = true;
-
-					Player player = Fisherman as Player;
-
-					player.FishBaited = true;
-					player.CaughtFish = this;
+				player.FishBaited = true;
+				player.CaughtFish = this;
 					
-					//TODO PLAY TRAPPED SOUND and particles
-
-				}
-
-				Velocity = -Velocity;
-
-				nextBaitTest = nextMove;
+				//TODO PLAY TRAPPED SOUND and particles
 
 			}
 
@@ -226,17 +209,17 @@ namespace Frostrial
 			var ragdoll = new DeadFish( Species, Size, Variant, Rarity )
 			{
 
-				Position = baitPosition + Vector3.Up * Size * 60,
+				Position = baitPosition + Vector3.Up * Size * 40,
 				Rotation = Rotation.LookAt( throwDirection )
 
 			};
 			ragdoll.PhysicsGroup.Velocity = throwDirection + Vector3.Up * 400f;
-			ragdoll.PhysicsGroup.AngularVelocity = Vector3.Cross( throwDirection, Vector3.Up).Normal * -10 ;
+			ragdoll.PhysicsGroup.AngularVelocity = Vector3.Cross( throwDirection, Vector3.Up).Normal * -400 ;
 
 			FishList.Remove( this );
 			Delete();
 
-		}*/
+		}
 
 		[ClientRpc]
 		public static void CreateEffects( Fish fish )

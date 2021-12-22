@@ -26,7 +26,7 @@ namespace Frostrial
 						if ( CaughtFish.IsValid )
 						{
 
-							//CaughtFish.Catch();
+							CaughtFish.Catch();
 							FishBaited = false;
 
 						}
