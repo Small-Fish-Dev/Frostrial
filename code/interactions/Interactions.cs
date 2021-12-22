@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using Sandbox.UI;
+using Sandbox.UI.Construct;
 
 namespace Frostrial
 {
@@ -84,6 +86,9 @@ namespace Frostrial
 						if ( selectedEntity is Hut )
 						{
 
+
+							ShopOpen = true;
+							BlockMovement = true;
 							Hint( "I'm almost there", 2f );
 
 						}

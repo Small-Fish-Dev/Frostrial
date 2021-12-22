@@ -93,31 +93,6 @@ namespace Frostrial
 
 	}
 
-	public class Map : Panel
-	{
-
-		Panel mapPanel;
-		Panel playerPanel;
-		public Map()
-		{
-
-			mapPanel = Add.Panel( "Map" ).Add.Panel( "MapContainer" );
-			playerPanel = mapPanel.Add.Panel( "Player" );
-
-		}
-
-		public override void Tick()
-		{
-
-			Player player = Local.Pawn as Player;
-			var pos = player.Position;
-			mapPanel.SetClass( "open", player.OpenMap );
-			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
-			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
-
-		}
-
-	}
 
 	public class Interact : Panel
 	{
@@ -164,7 +139,7 @@ namespace Frostrial
 
 			}
 
-			if ( player.Shopping )
+			if ( player.ShopOpen )
 			{
 
 				text = "Select items/upgrades or Right Click to exit";
@@ -172,6 +147,32 @@ namespace Frostrial
 			}
 
 			interactTitle.Text = text;
+
+		}
+
+	}
+
+	public class Map : Panel
+	{
+
+		Panel mapPanel;
+		Panel playerPanel;
+		public Map()
+		{
+
+			mapPanel = Add.Panel( "Map" ).Add.Panel( "MapContainer" );
+			playerPanel = mapPanel.Add.Panel( "Player" );
+
+		}
+
+		public override void Tick()
+		{
+
+			Player player = Local.Pawn as Player;
+			var pos = player.Position;
+			mapPanel.SetClass( "open", player.OpenMap );
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
+			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
 
 		}
 
@@ -195,6 +196,7 @@ namespace Frostrial
 			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Interact>();
 			RootPanel.AddChild<Items>();
+			RootPanel.AddChild<Shop>();
 			RootPanel.AddChild<Map>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );

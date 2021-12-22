@@ -62,6 +62,7 @@ namespace Frostrial
 			HandleInteractions();
 			HandleItems();
 			HandleFishing();
+			HandleShopping();
 
 			if ( IsClient )
 			{
