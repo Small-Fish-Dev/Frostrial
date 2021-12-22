@@ -10,6 +10,7 @@ namespace Frostrial
 
 		public Dictionary<string, float[]> FishVariety = new();
 		public Dictionary<string, float> FishSizes = new();
+		public Dictionary<string, float> FishRarity = new();
 		[Net] public int RarityLevel { get; set; } = 0; // 0 = $, 1 = $$, 2 = $$$
 		[Net] public float Range { get; set; } = 500f;
 		[Net] public IList<Fish> Fishes { get; set;} = new List<Fish>();
@@ -33,6 +34,14 @@ namespace Frostrial
 			FishSizes.Add( "pike",			0.60f );
 			FishSizes.Add( "salmon",		0.80f );
 			FishSizes.Add( "trout",			1.00f );
+
+			FishRarity.Add( "goldfish",		0.1f );
+			FishRarity.Add( "minnow",		0.2f );
+			FishRarity.Add( "herring",		0.3f );
+			FishRarity.Add( "perch",		0.5f );
+			FishRarity.Add( "pike",			0.6f );
+			FishRarity.Add( "salmon",		0.9f );
+			FishRarity.Add( "trout",		1.0f );
 
 			base.Spawn();
 
@@ -80,6 +89,7 @@ namespace Frostrial
 				fish.Size = randomSize;
 				fish.Spawner = this;
 				fish.FishList = Fishes;
+				fish.Rarity = FishRarity[randomFish];
 
 				Fishes.Add( fish );
 

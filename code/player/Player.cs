@@ -50,16 +50,10 @@ namespace Frostrial
 			base.Respawn();
 		}
 
-		/// <summary>
-		/// Called every tick, clientside and serverside.
-		/// </summary>
 		public override void Simulate( Client cl )
 		{
 			base.Simulate( cl );
 
-			//
-			// Called to simulate fishing rod/drill/etc
-			//
 			SimulateActiveChild( cl, ActiveChild );
 
 			HandleDrilling();
@@ -67,6 +61,8 @@ namespace Frostrial
 			HandleHUD();
 			HandleInteractions();
 			HandleItems();
+			HandleFishing();
+			HandleShopping();
 
 			if ( IsClient )
 			{

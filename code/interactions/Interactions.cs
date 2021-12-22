@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using Sandbox.UI;
+using Sandbox.UI.Construct;
 
 namespace Frostrial
 {
@@ -53,7 +55,30 @@ namespace Frostrial
 							Fishing = true;
 							BlockMovement = true;
 
+							CurrentHole = selectedEntity;
+
 							Hint( ".   .   .   .   .", 1f );
+
+						}
+
+						if ( selectedEntity is YetiHand )
+						{
+
+							selectedEntity.Delete();
+							//TODO GIVE YOU MONEY
+
+							Hint( "This Yeti Hand is old, lucky", 2f );
+
+						}
+
+						if ( selectedEntity is YetiScalp )
+						{
+
+							selectedEntity.Delete();
+
+							//TODO GIVE YOU MONEY and play sound maybe? lol
+
+							Hint( "The blood on this Yeti Scalp is still fresh", 3f );
 
 						}
 
@@ -61,7 +86,38 @@ namespace Frostrial
 						if ( selectedEntity is Hut )
 						{
 
+
+							ShopOpen = true;
+							BlockMovement = true;
 							Hint( "I'm almost there", 2f );
+
+						}
+
+						if ( selectedEntity is DeadFish )
+						{
+
+							DeadFish selectedFish = selectedEntity as DeadFish;
+
+							selectedFish.Delete();
+
+							//TODO get money
+
+							switch ( selectedFish.Rarity )
+							{
+
+								case <= 0.3f:
+									Hint( "This isn't going to cut it", 1.7f );
+									break;
+
+								case <= 0.6f:
+									Hint( "There we go!", 1f );
+									break;
+
+								case > 0.6f:
+									Hint( "That's a big one!", 1.2f );
+									break;
+
+							}
 
 						}
 
@@ -79,19 +135,6 @@ namespace Frostrial
 				{
 
 					Hint( "I hate this place.", 1f );
-
-				}
-
-			}
-
-			if ( Input.Released( InputButton.Attack2 ) )
-			{
-
-				if( Fishing )
-				{
-
-					Fishing = false;
-					BlockMovement = false;
 
 				}
 

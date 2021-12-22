@@ -18,6 +18,8 @@ namespace Frostrial
 		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
+		public Dictionary<string, string> FishNames = new();
+
 		public Game()
 		{
 			Instance = this;
@@ -66,8 +68,19 @@ namespace Frostrial
 				InteractionsText.Add( "Hut", "Interact with the hut to buy items and upgrades." );
 				InteractionsText.Add( "Hole", "Interact with this hole to fish." );
 				InteractionsText.Add( "Player", "Interact with yourself to use items." );
+				InteractionsText.Add( "YetiHand", "Interact to pick up the Yeti Hand." );
+				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
+				InteractionsText.Add( "DeadFish", "Interact to pick up the Dead Fish." );
 
 			}
+
+			FishNames.Add( "goldfish", "models/fishes/fishshadow.vmdl" );
+			FishNames.Add( "minnow", "models/fishes/minnow/minnow.vmdl" );
+			FishNames.Add( "herring", "models/fishes/herring/herring.vmdl" );
+			FishNames.Add( "perch", "models/fishes/perch/perch.vmdl" );
+			FishNames.Add( "pike", "models/fishes/pike/pike.vmdl" );
+			FishNames.Add( "salmon", "models/fishes/salmon/salmon.vmdl" );
+			FishNames.Add( "trout", "models/fishes/trout/trout.vmdl" );
 
 		}
 
@@ -134,6 +147,37 @@ namespace Frostrial
 
 					currentEntity = ent;
 					currentDistance = entDistance;
+
+				}
+
+			}
+
+			return currentEntity;
+
+		}
+
+		public static Entity NearestPlayer( Vector3 position, float range = 30f )
+		{
+
+			var entityList = Physics.GetEntitiesInSphere( position, range );
+			Entity currentEntity = PhysicsWorld.WorldBody.Entity;
+			float currentDistance = range;
+
+			foreach ( Entity ent in entityList )
+			{
+
+				if ( ent is Player )
+				{
+
+					float entDistance = ent.Position.Distance( position );
+
+					if ( entDistance < currentDistance )
+					{
+
+						currentEntity = ent;
+						currentDistance = entDistance;
+
+					}
 
 				}
 

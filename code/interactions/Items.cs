@@ -190,7 +190,7 @@ namespace Frostrial
 			Parent.Style.PointerEvents = player.ItemsOpen ? "all" : "visible";
 			Style.Opacity = player.ItemsOpen ? 1 : 0;
 
-			text1.Text = $"Bait ({player.Baits})"; // TODO Track amount of items
+			text1.Text = $"Bait ({player.Baits})";
 			text2.Text = $"Campfire ({player.Campfires})";
 
 		}

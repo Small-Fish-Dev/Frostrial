@@ -3,6 +3,13 @@ using System;
 
 namespace Frostrial
 {
+
+	partial class Player : Sandbox.Player
+	{
+
+		[Net] public Entity CurrentHole { get; set; } = PhysicsWorld.WorldBody.Entity;
+
+	}
 	public partial class Hole : AnimEntity
 	{
 
