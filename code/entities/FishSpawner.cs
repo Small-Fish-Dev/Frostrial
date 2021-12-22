@@ -8,10 +8,11 @@ namespace Frostrial
 	public partial class FishSpawner : AnimEntity
 	{
 
-		public Dictionary<string, float[]> FishVariety = new(); 
-
+		public Dictionary<string, float[]> FishVariety = new();
 		[Net] public int RarityLevel { get; set; } = 0; // 0 = $, 1 = $$, 2 = $$$
 		[Net] public float Range { get; set; } = 500f;
+		[Net] public List<Fish> Fishes { get; set;} = new List<Fish>();
+		int fishNumber => (int)Range / 100;
 
 		public override void Spawn()
 		{
@@ -28,19 +29,56 @@ namespace Frostrial
 
 
 		}
+		// Do not look
+		public string GetRandomFish( int rarity )
+		{
+
+			string[] selectArray = new string[100];
+			int randomNumber = Rand.Int( 99 );
+			int currentNumber = 0;
+
+			foreach ( var fish in FishVariety )
+			{
+
+				for ( int i = 0; i < fish.Value[rarity]; i++ )
+				{
+					selectArray[currentNumber] = fish.Key;
+					currentNumber++;
+
+				}
+
+			}
+
+			return selectArray[randomNumber];
+
+		}
 
 		[Event.Tick.Server]
 		public void OnTick()
 		{
 
+			if ( Fishes.Count < fishNumber )
+			{
+
+				var fish = new Fish();
+				fish.Position = Position + new Vector3( Rand.Float( -1, 1 ), Rand.Float( -1, 1 ), 0 ).Normal * Rand.Float( Range );
+				fish.Rotation = Rotation.FromYaw( Rand.Float( 360 ) );
+				fish.Species = GetRandomFish( RarityLevel );
+				fish.Size = Rand.Float( 1f, 3f );
+				fish.Scale = fish.Size;
+
+				Fishes.Add( fish );
+
+			}
+
 
 		}
 
 		[Event.Tick.Client]
-		public void CLientTick()
+		public void ClientTick()
 		{
 
-			DebugOverlay.Circle( Position, Rotation.FromPitch( 90 ), Range, Color.Red ); ;
+			DebugOverlay.Circle( Position, Rotation.FromPitch( 90 ), Range, new Color( 1, 0, 0, 0.7f ) );
 
 		}
 
