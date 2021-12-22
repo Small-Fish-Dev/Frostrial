@@ -1,0 +1,12 @@
+//
+// Frostrial.Music
+//
+@BaseClass = music : ""
+[
+	artist(string) : "Artist" :  : ""
+	album(string) : "Album" :  : ""
+	song(string) : "Song" :  : ""
+	length(float) : "Length" : 0 : ""
+	url(string) : "URL" :  : ""
+]
+
