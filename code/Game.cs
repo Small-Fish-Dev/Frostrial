@@ -66,6 +66,8 @@ namespace Frostrial
 				InteractionsText.Add( "Hut", "Interact with the hut to buy items and upgrades." );
 				InteractionsText.Add( "Hole", "Interact with this hole to fish." );
 				InteractionsText.Add( "Player", "Interact with yourself to use items." );
+				InteractionsText.Add( "YetiHand", "Interact to pick up the Yeti Hand." );
+				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
 
 			}
 

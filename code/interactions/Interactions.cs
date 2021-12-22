@@ -59,6 +59,27 @@ namespace Frostrial
 
 						}
 
+						if ( selectedEntity is YetiHand )
+						{
+
+							selectedEntity.Delete();
+							//TODO GIVE YOU MONEY
+
+							Hint( "This Yeti hand is old, lucky", 2f );
+
+						}
+
+						if ( selectedEntity is YetiScalp )
+						{
+
+							selectedEntity.Delete();
+
+							//TODO GIVE YOU MONEY and play sound maybe? lol
+
+							Hint( "The blood on this Yeti scalp is still fresh", 3f );
+
+						}
+
 
 						if ( selectedEntity is Hut )
 						{
