@@ -19,8 +19,9 @@ namespace Frostrial
 		public FishSpawner Spawner { get; set; }
 		public IList<Fish> FishList;
 		public Entity Fisherman { get; set; }
-		[Net] RealTimeUntil growth { get; set; }
+		[Net] RealTimeUntil growth { get; set; } = 1;
 		RealTimeUntil nextMove = 0f;
+		Rotation originalRotation;
 
 		public override void Spawn()
 		{
@@ -54,7 +55,7 @@ namespace Frostrial
 					{
 
 						var holePosition = nearHole.Position.WithZ( Position.z );
-						Velocity = (holePosition - Position).Normal * 120f;
+						Velocity = (holePosition - Position).Normal * 100f;
 						Baited = true;
 						BaitPosition = holePosition;
 						Fisherman = player;
@@ -109,6 +110,22 @@ namespace Frostrial
 
 			Rotation rotation = Velocity.EulerAngles.ToRotation();
 			Rotation = Rotation.Slerp( Rotation, rotation, Time.Delta * ( Baited ? 40 : 2 ) );
+			if ( Trapped )
+			{
+
+				Velocity = Vector3.Zero;
+				Rotation = originalRotation + Rotation.FromYaw( Time.Now * 300 ) * ((float)Math.Cos( Time.Now * 15 ) * 0.05f);
+
+				if ( freeFromBait <= 0 )
+				{
+
+					Trapped = false;
+					Velocity = new Vector3( Rand.Float( 2f ) - 1f, Rand.Float( 2f ) - 1f, 0f ).Normal * Rand.Float( 120f, 200f );
+					Rotation = originalRotation;
+
+				}
+
+			}
 
 		}
 
@@ -127,14 +144,31 @@ namespace Frostrial
 				if( random <= 1f / Rarity ) // TODO Better with tools and bait
 				{
 
-					FishList.Remove( this );
-					Delete();
+					originalRotation = Rotation;
+					freeFromBait = 0.3f / Rarity;
+					Trapped = true;
+
+					Player player = Fisherman as Player;
+
+					player.FishBaited = true;
+					player.CaughtFish = this;
+					
+					//TODO PLAY TRAPPED SOUND and particles
 
 				}
 
 				nextBaitTest = 1f;
 
 			}
+
+		}
+
+		public void Catch()
+		{
+
+			//TODO Sounds and particles
+			FishList.Remove( this );
+			Delete();
 
 		}
 

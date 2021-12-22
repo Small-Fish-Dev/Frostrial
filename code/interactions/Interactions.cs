@@ -86,21 +86,6 @@ namespace Frostrial
 
 			}
 
-			if ( Input.Released( InputButton.Attack2 ) )
-			{
-
-				if( Fishing )
-				{
-
-					Fishing = false;
-					BlockMovement = false;
-
-					CurrentHole = PhysicsWorld.WorldBody.Entity;
-
-				}
-
-			}
-
 		}
 
 	}
