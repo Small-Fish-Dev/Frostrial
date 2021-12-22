@@ -98,7 +98,14 @@ namespace Frostrial
 				if ( Position.Distance( BaitPosition ) <= 30f )
 				{
 
-					TryBait();
+					Player player = Fisherman as Player;
+
+					if ( player.Fishing ) //Check if he's still fishing hahaa
+					{
+
+						TryBait();
+
+					}
 
 				}
 
