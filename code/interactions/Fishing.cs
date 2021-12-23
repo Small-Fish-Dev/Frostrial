@@ -8,9 +8,42 @@ namespace Frostrial
 	{
 
 		[Net] public bool Fishing { get; set; } = false;
+		public Dictionary<string, int> FishTotalCaught = new();
+		public Dictionary<string, float> FishHighestRarity = new();
+		public Dictionary<string, float> FishBiggest = new();
+
 		public bool FishBaited { get; set; } = false;
 		public List<Fish> CaughtFish { get; set; }
 		RealTimeUntil removeTools { get; set; }
+
+		public Player()
+		{
+
+			FishTotalCaught.Add( "goldfish", 0 );
+			FishTotalCaught.Add( "minnow", 0 );
+			FishTotalCaught.Add( "herring", 0 );
+			FishTotalCaught.Add( "perch", 0 );
+			FishTotalCaught.Add( "pike", 0 );
+			FishTotalCaught.Add( "salmon", 0 );
+			FishTotalCaught.Add( "trout", 0 );
+
+			FishHighestRarity.Add( "goldfish", 0 );
+			FishHighestRarity.Add( "minnow", 0 );
+			FishHighestRarity.Add( "herring", 0 );
+			FishHighestRarity.Add( "perch", 0 );
+			FishHighestRarity.Add( "pike", 0 );
+			FishHighestRarity.Add( "salmon", 0 );
+			FishHighestRarity.Add( "trout", 0 );
+
+			FishBiggest.Add( "goldfish", 0 );
+			FishBiggest.Add( "minnow", 0 );
+			FishBiggest.Add( "herring", 0 );
+			FishBiggest.Add( "perch", 0 );
+			FishBiggest.Add( "pike", 0 );
+			FishBiggest.Add( "salmon", 0 );
+			FishBiggest.Add( "trout", 0 );
+
+		}
 
 		public void HandleFishing()
 		{
@@ -43,6 +76,18 @@ namespace Frostrial
 
 								fish.Catch();
 								FishBaited = false;
+
+								FishTotalCaught[fish.Species]++;
+
+								if ( fish.Size > FishBiggest[fish.Species] ) { FishBiggest[fish.Species] = fish.Size; }
+								if ( fish.TotalRarity > FishHighestRarity[fish.Species] ) { FishHighestRarity[fish.Species] = fish.TotalRarity; }
+
+								if( FishTotalCaught[fish.Species] >= 5 )
+								{
+
+									Game.FishUnlock[fish.Species] = true;
+
+								}
 
 							}
 

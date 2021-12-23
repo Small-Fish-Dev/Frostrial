@@ -87,7 +87,7 @@ namespace Frostrial
 
 				player.ItemsOpen = false;
 				player.BlockMovement = false;
-				player.BaitEffect = 20f;
+				player.BaitEffect = 15f;
 
 				player.Baits--;
 

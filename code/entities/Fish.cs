@@ -15,6 +15,25 @@ namespace Frostrial
 		[Net] public bool Baited { get; set; } = false;
 		[Net] public bool Trapped { get; set; } = false;
 		[Net] public Entity Fisherman { get; set; }
+		public float TotalRarity
+		{
+			get
+			{
+
+				return (float)Math.Pow( 15, Size / Game.FishSizes[Species] * ( Rarity + 0.5f ) ) * ( Variant ? 5 : 1 );
+
+			}
+		}
+
+		public float Value
+		{
+			get
+			{
+
+				return (float)Math.Round( Math.Pow( 15, Size / Game.FishSizes[Species] * (Rarity + 0.5f) ) * (Variant ? 3 : 1), 2 );
+
+			}
+		}
 		[Net] internal RealTimeUntil growth { get; set; } = 1;
 
 		public Rotation WishRotation { get; set; }

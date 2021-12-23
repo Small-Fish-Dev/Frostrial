@@ -7,10 +7,12 @@ namespace Frostrial
 
 	partial class Player : Sandbox.Player
 	{
+
+		[Net] public float Money { get; set; } = 1000f;
 		[Net] public bool ShopOpen { get; set; } = false;
-		[Net] public bool UpgradedDrill { get; set; } = true; //TODO REMEMBER TO TURN OFF
+		[Net] public bool UpgradedDrill { get; set; } = false;
 		[Net] public bool UpgradedRod { get; set; } = false;
-		[Net] public bool UpgradedCoat { get; set; } = true;
+		[Net] public bool UpgradedCoat { get; set; } = false;
 
 		public void HandleShopping()
 		{
@@ -33,6 +35,119 @@ namespace Frostrial
 		[ServerCmd]
 		public static void BuyBait()
 		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["bait"] )
+			{
+
+				player.Baits++;
+				player.AddMoney( -Game.Prices["bait"] );
+
+			}
+
+		}
+
+		[ServerCmd]
+		public static void BuyCampfire()
+		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["campfire"] )
+			{
+
+				player.Campfires++;
+				player.AddMoney( -Game.Prices["campfire"] );
+
+			}
+
+		}
+
+		[ServerCmd]
+		public static void UpgradeCoat()
+		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["coat"] )
+			{
+
+				player.UpgradedCoat = true;
+				player.AddMoney( -Game.Prices["coat"] );
+
+			}
+
+		}
+
+		[ServerCmd]
+		public static void UpgradeDrill()
+		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["drill"] )
+			{
+
+				player.UpgradedDrill = true;
+				player.AddMoney( -Game.Prices["drill"] );
+
+			}
+
+		}
+
+		[ServerCmd]
+		public static void UpgradeRod()
+		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["rod"] )
+			{
+
+				player.UpgradedRod = true;
+				player.AddMoney( -Game.Prices["rod"] );
+
+			}
+
+
+		}
+
+		[ServerCmd]
+		public static void Win()
+		{
+
+			Player player = ConsoleSystem.Caller.Pawn as Player;
+
+			if ( player.Money >= Game.Prices["plane"] )
+			{
+
+				//TODO WIN STUFF
+				player.AddMoney( -Game.Prices["plane"] );
+
+			}
+
+		}
+
+		public void AddMoney( float amount )
+		{
+
+			Money += amount;
+
+
+			if( amount < 0 )
+			{
+
+				// TODO LESS MONEY EFFECT
+
+			}
+
+			if( amount > 0 )
+			{
+
+				// TODO MORE MONEY EFFECT
+
+			}
 
 		}
 
@@ -71,15 +186,16 @@ namespace Frostrial
 			baitButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Player.BuyBait();
 
 			} );
 
 			baitText = baitButton.Add.Label( "Buy Bait", "title" );
 
 			campfireButton = shopPanel.Add.Button( "", "button", () =>
-
 			{
 
+				Player.BuyCampfire();
 
 			} );
 
@@ -88,15 +204,16 @@ namespace Frostrial
 			coatButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Player.UpgradeCoat();
 
 			} );
 
 			coatText = coatButton.Add.Label( "Upgrade Coat", "title" );
 
 			drillButton = shopPanel.Add.Button( "", "button", () =>
-
 			{
 
+				Player.UpgradeDrill();
 
 			} );
 
@@ -105,15 +222,17 @@ namespace Frostrial
 			rodButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Player.UpgradeRod();
 
 			} );
 
 			rodText = rodButton.Add.Label( "Upgrade Rod", "title" );
 
 			planeButton = shopPanel.Add.Button( "", "button", () =>
-
 			{
 
+				Player.Win();
+				Player.CloseShop();
 
 			} );
 
@@ -128,11 +247,11 @@ namespace Frostrial
 			Parent.Style.PointerEvents = player.ShopOpen ? "all" : "visible";
 			Style.Opacity = player.ShopOpen ? 1 : 0;
 
-			baitText.Text = $"Buy Bait ({player.Baits})";
-			campfireText.Text = $"Buy Campfire ({player.Campfires})";
-			coatText.Text = $"Upgrade Coat ({0})"; //TODO Actual stuff + Do "BOUGHT" after buying
-			drillText.Text = $"Upgrade Drill ({0})";
-			rodText.Text = $"Upgrade Rod ({0})";
+			baitText.Text = $"( ${Game.Prices["bait"]} )Buy Bait ({player.Baits})";
+			campfireText.Text = $"( ${Game.Prices["campfire"]} )Buy Campfire ({player.Campfires})";
+			coatText.Text = player.UpgradedCoat ? "[BOUGHT]" : $"( ${Game.Prices["coat"]} ) Upgrade Coat";
+			drillText.Text = player.UpgradedDrill ? "[BOUGHT]" : $"( ${Game.Prices["drill"]} ) Upgrade Drill";
+			rodText.Text = player.UpgradedRod ? "[BOUGHT]" :  $"( ${Game.Prices["rod"]} ) Upgrade Rod";
 			planeText.Text = $"BUY PLANE TICKET";
 
 		}

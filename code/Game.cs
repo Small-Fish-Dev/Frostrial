@@ -22,6 +22,9 @@ namespace Frostrial
 		public static Dictionary<string, float[]> FishVariety = new();
 		public static Dictionary<string, float> FishSizes = new();
 		public static Dictionary<string, float> FishRarity = new();
+		public static Dictionary<string, bool> FishUnlock = new();
+
+		public static Dictionary<string, float> Prices = new();
 
 		public Game()
 		{
@@ -101,13 +104,28 @@ namespace Frostrial
 			FishSizes.Add( "salmon",	0.80f );
 			FishSizes.Add( "trout",		1.00f );
 
-			FishRarity.Add( "goldfish", 0.1f );
-			FishRarity.Add( "minnow",	0.2f );
-			FishRarity.Add( "herring",	0.3f );
-			FishRarity.Add( "perch",	0.5f );
-			FishRarity.Add( "pike",		0.6f );
-			FishRarity.Add( "salmon",	0.9f );
+			FishRarity.Add( "goldfish", 0.01f );
+			FishRarity.Add( "minnow",	0.1f );
+			FishRarity.Add( "herring",	0.2f );
+			FishRarity.Add( "perch",	0.35f );
+			FishRarity.Add( "pike",		0.5f );
+			FishRarity.Add( "salmon",	0.75f );
 			FishRarity.Add( "trout",	1.0f );
+
+			FishUnlock.Add( "goldfish", false );
+			FishUnlock.Add( "minnow", false );
+			FishUnlock.Add( "herring", false );
+			FishUnlock.Add( "perch", false );
+			FishUnlock.Add( "pike", false );
+			FishUnlock.Add( "salmon", false );
+			FishUnlock.Add( "trout", false );
+
+			Prices.Add( "bait", 1.49f );
+			Prices.Add( "campfire", 3.99f );
+			Prices.Add( "coat", 49.99f );
+			Prices.Add( "drill", 299.99f );
+			Prices.Add( "rod", 649.99f );
+			Prices.Add( "plane", 3000f );
 
 		}
 

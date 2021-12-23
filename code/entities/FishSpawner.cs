@@ -60,6 +60,7 @@ namespace Frostrial
 					Position = Position + new Vector3( Rand.Float( -1, 1 ), Rand.Float( -1, 1 ), 0 ).Normal * Rand.Float( Range ),
 					Rotation = Rotation.FromYaw( Rand.Float( 360 ) ),
 					Species = randomFish,
+					Variant = Game.FishUnlock[randomFish] ? Rand.Int( 0, 4 ) == 0 : false,
 					Size = randomSize,
 					Scale = 0,
 					Spawner = this,

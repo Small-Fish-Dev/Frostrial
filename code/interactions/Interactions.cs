@@ -68,7 +68,8 @@ namespace Frostrial
 						{
 
 							selectedEntity.Delete();
-							//TODO GIVE YOU MONEY
+
+							AddMoney( 300f );
 
 							Hint( "This Yeti Hand is old, lucky", 2f );
 
@@ -78,6 +79,8 @@ namespace Frostrial
 						{
 
 							selectedEntity.Delete();
+
+							AddMoney( 1500f );
 
 							//TODO GIVE YOU MONEY and play sound maybe? lol
 

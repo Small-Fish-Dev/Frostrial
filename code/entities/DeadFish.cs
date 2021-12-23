@@ -12,6 +12,25 @@ namespace Frostrial
 		[Net] public float Size { get; set; } = 0.1f; // Meters
 		[Net] public bool Variant { get; set; } = false;
 		[Net] public float Rarity { get; set; } = 0;
+		public float TotalRarity
+		{
+			get
+			{
+
+				return (float)Math.Pow( 15, Size / Game.FishSizes[Species] * (Rarity + 0.5f) ) * (Variant ? 5 : 1);
+
+			}
+		}
+
+		public float Value
+		{
+			get
+			{
+
+				return (float)Math.Round( Math.Pow( 15, Size / Game.FishSizes[Species] * (Rarity + 0.5f) ) * (Variant ? 3 : 1), 2 );
+
+			}
+		}
 
 		public DeadFish()
 		{ }
