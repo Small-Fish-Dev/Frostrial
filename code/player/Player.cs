@@ -48,6 +48,8 @@ namespace Frostrial
 
 			CaughtFish = new();
 
+			Money = Rand.Float( 2f, 9f );
+
 			BasicClothes();
 
 			ClientSide();

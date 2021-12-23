@@ -43,6 +43,10 @@ namespace Frostrial
 			SetClothing( "gloves", "models/citizen_clothes/gloves/gloves_workgloves.vmdl" );
 			SetClothing( "boots", "models/clothing/shoes/winter_boots.vmdl" );
 
+			SetBodyGroup( 4, 1 ); // Remove Feet
+			SetBodyGroup( 3, 1 ); // Remove Hands
+			SetBodyGroup( 2, 1 ); // Remove Legs
+
 		}
 
 	}

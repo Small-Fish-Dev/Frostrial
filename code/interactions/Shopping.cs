@@ -8,7 +8,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public float Money { get; set; } = 1000f;
+		[Net] public float Money { get; set; } = 0f;
 		[Net] public bool ShopOpen { get; set; } = false;
 		[Net] public bool UpgradedDrill { get; set; } = false;
 		[Net] public bool UpgradedRod { get; set; } = false;
@@ -106,7 +106,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["coat"] )
+			if ( player.Money >= Game.Prices["coat"] && !player.UpgradedCoat )
 			{
 
 				player.UpgradedCoat = true;
@@ -122,7 +122,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["drill"] )
+			if ( player.Money >= Game.Prices["drill"] && !player.UpgradedDrill )
 			{
 
 				player.UpgradedDrill = true;
@@ -138,7 +138,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["rod"] )
+			if ( player.Money >= Game.Prices["rod"] && !player.UpgradedRod )
 			{
 
 				player.UpgradedRod = true;
