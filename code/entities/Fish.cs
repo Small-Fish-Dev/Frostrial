@@ -122,7 +122,7 @@ namespace Frostrial
 				if ( nextAction <= 0f )
 				{
 
-					Entity nearPlayer = Game.NearestPlayer( Position, 200f ); // TODO Bigger search if you put bait and have rod
+					Entity nearPlayer = Game.NearestPlayer( Position, 500f ); // TODO Bigger search if you put bait and have rod
 
 					if ( nearPlayer is Player )
 					{
@@ -130,15 +130,23 @@ namespace Frostrial
 						Player player = nearPlayer as Player;
 						Entity nearHole = player.CurrentHole;
 
-						if ( nearHole is Hole )
+						var distance = player.Position.Distance( Position );
+
+						if ( distance <= ( 200 + ( player.UpgradedRod ? 200 : 0 ) + ( player.BaitEffect >= 0 ? 100 : 0 ) ) )
 						{
 
-							var holePosition = nearHole.Position.WithZ( Position.z );
-							Baited = true;
-							Fisherman = player;
-							originalPosition = Position;
-							baitPosition = holePosition;
-							lerpPosition = 0;
+
+							if ( nearHole is Hole )
+							{
+
+								var holePosition = nearHole.Position.WithZ( Position.z );
+								Baited = true;
+								Fisherman = player;
+								originalPosition = Position;
+								baitPosition = holePosition;
+								lerpPosition = 0;
+
+							}
 
 						}
 

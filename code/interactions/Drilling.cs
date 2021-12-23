@@ -6,7 +6,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public float DrillingSpeed { get; set; } = 5f; // Seconds before completing, better drill = faster
+		[Net] public float DrillingSpeed { get; set; } = 5f; // Seconds before completing, Upgraded drill = 1/5th
 		[Net] public bool Drilling { get; set; } = false;
 		[Net] RealTimeUntil drillingCompletion { get; set; } = 0f;
 		[Net] RealTimeSince lastAttempt { get; set; } = 0f;
@@ -17,12 +17,25 @@ namespace Frostrial
 		public void HandleDrilling()
 		{
 
-			SetAnimBool( "handdrill", Drilling );
-
 			if ( !Fishing )
 			{
 
-				SetClothing( "tool", Drilling ? "models/tools/hand_icedrill.vmdl" : "none" );
+				if( Drilling )
+				{
+
+					SetClothing( "tool", UpgradedDrill ? "models/tools/auger_icedrill.vmdl" : "models/tools/hand_icedrill.vmdl" );
+
+					SetAnimBool( "handdrill", !UpgradedDrill );
+					SetAnimBool( "autodrill", UpgradedDrill );
+
+				}
+				else
+				{
+
+					SetAnimBool( "handdrill", false );
+					SetAnimBool( "autodrill", false );
+
+				}
 
 			}
 
@@ -47,7 +60,7 @@ namespace Frostrial
 
 								Drilling = true;
 								HandleDrillingEffects( true, holePosition );
-								drillingCompletion = DrillingSpeed; 
+								drillingCompletion = DrillingSpeed * ( UpgradedDrill ? 0.2f : 1f ); 
 								BlockMovement = true;
 
 							}
