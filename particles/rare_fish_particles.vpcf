@@ -17,7 +17,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 6.0
+				m_flLiteralValue = 8.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -338,11 +338,11 @@
 					[
 						{
 							m_flPosition = 0.0
-							m_Color = [ 236, 198, 94, 255 ]
+							m_Color = [ 255, 212, 105, 255 ]
 						},
 						{
 							m_flPosition = 0.997416
-							m_Color = [ 248, 225, 55, 255 ]
+							m_Color = [ 255, 247, 193, 255 ]
 						},
 					]
 				}
@@ -393,13 +393,13 @@
 					[
 						{
 							x = 0.076387
-							y = 8.0
+							y = 10.0
 							m_flSlopeIncoming = 4.100923
 							m_flSlopeOutgoing = 4.100923
 						},
 						{
 							x = 0.449832
-							y = 4.032321
+							y = 6.032321
 							m_flSlopeIncoming = -1.269333
 							m_flSlopeOutgoing = -1.269333
 						},
@@ -415,8 +415,8 @@
 							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
 						},
 					]
-					m_vDomainMins = [ 0.0, 4.0 ]
-					m_vDomainMaxs = [ 1.0, 8.0 ]
+					m_vDomainMins = [ 0.0, 6.0 ]
+					m_vDomainMaxs = [ 1.0, 10.0 ]
 				}
 			}
 		},
@@ -432,7 +432,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 8.0
+				m_flLiteralValue = 14.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
