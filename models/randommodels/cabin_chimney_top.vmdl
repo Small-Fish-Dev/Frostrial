@@ -29,10 +29,6 @@
 						remaps = 
 						[
 							{
-								from = "wood.vmat"
-								to = "materials/randommodels/campfire.vmat"
-							},
-							{
 								from = "chimney.vmat"
 								to = "materials/randommodels/chimney.vmat"
 							},
@@ -61,9 +57,14 @@
 							exclude_by_default = false
 							exception_list = 
 							[
-								"Cube_010",
-								"Cube_015",
-								"Cube_014",
+								"Cylinder_078",
+								"Cylinder_084",
+								"Cylinder_081",
+								"Cylinder_080",
+								"Cylinder_082",
+								"Cylinder_083",
+								"Cylinder_079",
+								"Cube_013",
 							]
 						}
 					},
