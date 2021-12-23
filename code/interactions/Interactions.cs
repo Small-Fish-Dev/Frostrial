@@ -71,7 +71,7 @@ namespace Frostrial
 
 							AddMoney( 800f );
 
-							Hint( "This Yeti Hand is old, lucky", 2f );
+							Hint( "This Yeti Hand is old, lucky", 2f, true );
 
 						}
 
@@ -89,7 +89,7 @@ namespace Frostrial
 
 							};
 
-							Hint( "The blood on this Yeti Scalp is still fresh", 3f );
+							Hint( "It's the Finnish Yeti! I must head back to the cabin!", 4f, true );
 
 						}
 

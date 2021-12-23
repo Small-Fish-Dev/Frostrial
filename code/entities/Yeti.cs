@@ -34,39 +34,66 @@ namespace Frostrial
 			Velocity = Rotation.Forward * 165f;
 			Rotation = (Victim.Position.WithZ(0) - Position.WithZ(0)).EulerAngles.ToRotation();
 
-			Position += Velocity * Time.Delta;
-
-			SetAnimFloat( "move_x", Velocity.Length / Scale );
-
 			if ( Victim.Position.Distance( Position ) < 40f )
 			{
 
 				Player player = Victim as Player;
 
-				player.Jumpscare = 1;
+				if ( player.Jumpscare == 0 )
+				{
+
+					player.BlockMovement = true;
+					player.Jumpscare = 1;
+					player.JumpscareTimer = 4f;
+
+				}
+
+				if ( player.JumpscareTimer <= 0f )
+				{
+
+					player.Client.Kick();
+
+				}
 
 			}
 
 			if ( Game.IsInside( Victim.Position, new Vector3( -1395, -2745, 0 ), new Vector3( -1164, -2394, 40 ) ) )
 			{
 
-
-				if ( Position.Distance( Game.HutEntity.Position ) <= 200 )
+				if ( Position.Distance( Game.HutEntity.Position ) <= 210 )
 				{
+
+					Player player = Victim as Player;
+
+					if ( player.Jumpscare == 0 )
+					{
+
+						player.JumpscareTimer = 3f;
+						player.BlockMovement = true;
+
+						player.Jumpscare = 2;
+
+					}
+
+					if ( player.JumpscareTimer <= -4f )
+					{
+
+						player.BlockMovement = false;
+						player.Jumpscare = 0;
+						Delete();
+
+					}
 
 					Velocity = Vector3.Zero;
 
+
 				}
-
-				//Player player = Victim as Player;
-
-				//player.Jumpscare = 2;
-
-				//Delete();
 
 			}
 
 			Position += Velocity * Time.Delta;
+
+			SetAnimFloat( "move_x", Velocity.Length / Scale );
 
 		}
 

@@ -262,7 +262,7 @@ namespace Frostrial
 
 			var player = Local.Pawn as Player;
 
-			jumpscarePanel.Style.Opacity = player.Jumpscare;
+			jumpscarePanel.Style.Opacity = player.Jumpscare == 2 ? 1 - player.JumpscareTimer/3 : player.Jumpscare;
 
 			if ( player.Jumpscare != 0 )
 			{
@@ -323,16 +323,34 @@ namespace Frostrial
 		[Net] public float HintLifeTime { get; set; } = 0f;
 		[Net] public float HintLifeDuration { get; set; } = 0f;
 		[Net] public int Jumpscare { get; set; } = 0;
+		[Net] public RealTimeUntil JumpscareTimer { get; set; } = 0;
+		[Net] public float? ForceUnskippable { get; set; };
 		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
 		RealTimeSince spawnedSince { get; set; } = 0f; 
 
-		public void Hint( string text, float duration = 1f )
+		public void Hint( string text, float duration = 1f, bool unskippable = false) // "Unskippable" dialog will be skipped by other unskippale dialogs
 		{
 
-			HintText = text;
-			HintLifeDuration = duration;
-			HintLifeTime = Time.Now;
+			if ( ForceUnskippable == null || Time.Now >= ForceUnskippable )
+			{
+
+				HintText = text;
+				HintLifeDuration = duration;
+				HintLifeTime = Time.Now;
+
+			}
+
+			if ( unskippable )
+			{
+
+				ForceUnskippable = Time.Now + duration;
+
+				HintText = text;
+				HintLifeDuration = duration;
+				HintLifeTime = Time.Now;
+
+			}
 
 		}
 
