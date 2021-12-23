@@ -21,6 +21,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "coho"
+						remaps = 
+						[
+							{
+								from = "models/fishes/salmon/salmon.vmat"
+								to = "models/fishes/salmon/salmon_coho.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
