@@ -39,7 +39,7 @@ namespace Frostrial
 
 			var player = ConsoleSystem.Caller.Pawn as Player;
 
-			var spawnPos = player.Position + player.Rotation.Forward.WithZ( 0f ).Normal * 20f;
+			var spawnPos = player.Position + player.Rotation.Forward.WithZ( 0f ).Normal * 500f;
 
 			new Yeti()
 			{

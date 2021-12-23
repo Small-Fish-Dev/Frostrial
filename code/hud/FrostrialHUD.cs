@@ -24,9 +24,8 @@ namespace Frostrial
 		public override void Tick()
 		{
 
-			Game current = Game.Current as Game;
 			var player = Local.Pawn as Player;
-			var hut = current.HutEntity;
+			var hut = Game.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
 			var left = MathX.Clamp( hutScreen.x, 0.21f, 0.75f );
 			var top = MathX.Clamp( hutScreen.y, 0f, 1f);
@@ -83,7 +82,7 @@ namespace Frostrial
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom - 650 );
+			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom - 800 );
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
 			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
@@ -225,8 +224,8 @@ namespace Frostrial
 		{
 
 			curtainsPanel = Add.Panel( "Curtains" ).Add.Panel( "MapContainer" );
-			curtainsTitle = curtainsPanel.Add.Panel( "titleContainer" ).Add.Label( "Wake Up", "curtainsTitle" );
-			curtainsSubtitle = curtainsPanel.Add.Panel( "subtitleContainer" ).Add.Label( "Today might just be your last day here", "curtainsSubtitle" );
+			curtainsTitle = curtainsPanel.Add.Panel( "titleContainer" ).Add.Label( "null", "curtainsTitle" );
+			curtainsSubtitle = curtainsPanel.Add.Panel( "subtitleContainer" ).Add.Label( "null", "curtainsSubtitle" );
 
 		}
 
@@ -234,7 +233,43 @@ namespace Frostrial
 		{
 			var player = Local.Pawn as Player;
 
+			curtainsTitle.Text = Game.CurrentTitle;
+			curtainsSubtitle.Text = Game.CurrentSubtitle;
+
 			curtainsPanel.Parent.SetClass( "closed", !player.Curtains );
+
+		}
+
+	}
+
+	public class Jumpscare : Panel
+	{
+
+		Panel jumpscarePanel;
+		Dictionary<int, string> jumpscareImages = new();
+		public Jumpscare()
+		{
+
+			jumpscarePanel = Add.Panel( "Jumpscare" );
+
+			jumpscareImages[1] = "ui/yeti_jumpscare.jpg";
+			jumpscareImages[2] = "ui/yeti_window.jpg";
+
+		}
+
+		public override void Tick()
+		{
+
+			var player = Local.Pawn as Player;
+
+			jumpscarePanel.Style.Opacity = player.Jumpscare;
+
+			if ( player.Jumpscare != 0 )
+			{
+
+				jumpscarePanel.Style.SetBackgroundImage( jumpscareImages[player.Jumpscare] );
+
+			}
 
 		}
 
@@ -259,6 +294,7 @@ namespace Frostrial
 			RootPanel.AddChild<Map>();
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Curtains>();
+			RootPanel.AddChild<Jumpscare>();
 			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
@@ -286,6 +322,7 @@ namespace Frostrial
 		[Net] public string HintText { get; set; } = "";
 		[Net] public float HintLifeTime { get; set; } = 0f;
 		[Net] public float HintLifeDuration { get; set; } = 0f;
+		[Net] public int Jumpscare { get; set; } = 0;
 		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
 		RealTimeSince spawnedSince { get; set; } = 0f; 

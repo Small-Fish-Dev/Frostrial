@@ -133,7 +133,7 @@ RootPanel {
 		height: 100px;
 		width: 100%;
 		pointer-events: all;
-		top: -100px;
+		top: -220px;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -178,8 +178,8 @@ RootPanel {
 		height: 150px;
 		width: 100%;
 		pointer-events: all;
-		top: 0px; // 200% for items
-		left: 0px; // 25% for items
+		top: -100px;
+		left: 0px;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -223,7 +223,7 @@ RootPanel {
 		height: 300px;
 		width: 100%;
 		pointer-events: all;
-		top: -350px;
+		top: -450px;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -347,5 +347,23 @@ RootPanel {
 		&.closed {
 			opacity: 0;
 		}
+	}
+
+	.Jumpscare {
+		pointer-events: none;
+		cursor: none;
+		top: -110%;
+		left: 0;
+		width: 110%;
+		height: 1200px; // This should cover about any screens...
+		display: flex;
+		flex-direction: row; //This doesn't work haha . . .
+		align-items: center;
+		justify-content: center;
+		background-image: url( /ui/yeti_window.jpg );
+		background-position: center;
+		background-size: 101%;
+		background-repeat: no-repeat;
+		opacity: 0; // We need to start with it already on
 	}
 }

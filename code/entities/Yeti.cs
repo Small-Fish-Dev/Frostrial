@@ -36,8 +36,37 @@ namespace Frostrial
 
 			Position += Velocity * Time.Delta;
 
-
 			SetAnimFloat( "move_x", Velocity.Length / Scale );
+
+			if ( Victim.Position.Distance( Position ) < 40f )
+			{
+
+				Player player = Victim as Player;
+
+				player.Jumpscare = 1;
+
+			}
+
+			if ( Game.IsInside( Victim.Position, new Vector3( -1395, -2745, 0 ), new Vector3( -1164, -2394, 40 ) ) )
+			{
+
+
+				if ( Position.Distance( Game.HutEntity.Position ) <= 200 )
+				{
+
+					Velocity = Vector3.Zero;
+
+				}
+
+				//Player player = Victim as Player;
+
+				//player.Jumpscare = 2;
+
+				//Delete();
+
+			}
+
+			Position += Velocity * Time.Delta;
 
 		}
 

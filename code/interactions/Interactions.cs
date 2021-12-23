@@ -82,6 +82,13 @@ namespace Frostrial
 
 							AddMoney( 2500f );
 
+							new Yeti()
+							{
+								Position = new Vector3( 3275f, 3511.5f, 8f ),
+								Victim = this as Entity
+
+							};
+
 							Hint( "The blood on this Yeti Scalp is still fresh", 3f );
 
 						}

@@ -14,9 +14,10 @@ namespace Frostrial
 	/// </summary>
 	public partial class Game : Sandbox.Game
 	{
-		public static Game Instance { get; internal set; }
 
-		[Net] public Hut HutEntity { get; set; }
+		[Net] public static Hut HutEntity { get; set; }
+		[Net] public static string CurrentTitle { get; set; } = "Wake up";
+		[Net] public static string CurrentSubtitle { get; set; } = "";
 		public static Dictionary<string, string> InteractionsText = new();
 
 		public static Dictionary<string, string> FishNames = new();
@@ -30,7 +31,6 @@ namespace Frostrial
 
 		public Game()
 		{
-			Instance = this;
 
 			if ( IsServer )
 			{
@@ -279,6 +279,17 @@ namespace Frostrial
 			}
 
 			return currentDistance;
+
+		}
+
+		public static bool IsInside( Vector3 position, Vector3 min, Vector3 max )
+		{
+
+			if ( position.x < min.x || position.x > max.x ) { return false; }
+			if ( position.y < min.y || position.y > max.y ) { return false; }
+			if ( position.z < min.z || position.z > max.z ) { return false; }
+
+			return true;
 
 		}
 

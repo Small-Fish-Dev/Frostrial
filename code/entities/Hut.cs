@@ -21,8 +21,7 @@ namespace Frostrial
 
 			Rotation = Rotation.FromYaw( -90 );
 
-			Game current = Game.Current as Game;
-			current.HutEntity = this;
+			Game.HutEntity = this;
 
 			var fire = new ModelEntity( "models/randommodels/campfire.vmdl" );
 			fire.Position = Position + Vector3.Up * 12;
@@ -45,6 +44,8 @@ namespace Frostrial
 			light.Position = Position + Vector3.Up * 22;
 			light.Color = Color.Orange;
 			light.DynamicShadows = true;
+
+			Game.HutEntity = this;
 
 		}
 

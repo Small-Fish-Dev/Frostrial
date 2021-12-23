@@ -72,7 +72,7 @@ namespace Frostrial
 
 			if ( IsClient )
 			{
-				vMix.Update( 1 - Warmth, Game.IsOnIce( Position ), Position.Distance( Game.Instance.HutEntity?.Position ?? Vector3.Zero ) < 200f );
+				vMix.Update( 1 - Warmth, Game.IsOnIce( Position ), Position.Distance( Game.HutEntity?.Position ?? Vector3.Zero ) < 200f );
 				vMix.Tick();
 
 				musicPlayer.Tick();
