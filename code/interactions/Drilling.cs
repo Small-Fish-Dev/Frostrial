@@ -126,6 +126,7 @@ namespace Frostrial
 
 							Baits++;
 							Hint( "I found a worm, good for bait I guess.", 2.5f );
+							WormsParticle();
 
 						}
 						
@@ -141,6 +142,14 @@ namespace Frostrial
 		}
 		Particles drillingParticle { get; set; }
 		Sound drillingSound { get; set; }
+
+		[ClientRpc]
+		public void WormsParticle()
+		{
+
+			Particles.Create( "particles/small_worms_particle.vpcf", Position + Vector3.Up );
+
+		}
 
 		[ClientRpc]
 		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
