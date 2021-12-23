@@ -52,10 +52,16 @@ namespace Frostrial
 
 			BasicClothes();
 
-			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan
-			musicPlayer.Initialize();
+			ClientSide();
 
 			base.Respawn();
+		}
+
+		[ClientRpc]
+		protected void ClientSide()
+		{
+			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan
+			musicPlayer.Initialize();
 		}
 
 		public override void Simulate( Client cl )

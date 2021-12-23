@@ -106,7 +106,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["coat"] )
+			if ( player.Money >= Game.Prices["coat"] && !player.UpgradedCoat )
 			{
 
 				player.UpgradedCoat = true;
@@ -122,7 +122,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["drill"] )
+			if ( player.Money >= Game.Prices["drill"] && !player.UpgradedDrill )
 			{
 
 				player.UpgradedDrill = true;
@@ -138,7 +138,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["rod"] )
+			if ( player.Money >= Game.Prices["rod"] && !player.UpgradedRod )
 			{
 
 				player.UpgradedRod = true;
