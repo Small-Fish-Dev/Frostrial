@@ -67,6 +67,12 @@
 					{
 						_class = "AnimFile"
 						name = "auger_drilling_anim"
+						children = 
+						[
+							{
+								_class = "AnimAutoLayer"
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
