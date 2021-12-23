@@ -86,11 +86,10 @@ RootPanel {
 	}
 
 	.Items {
-		height: 70px;
+		height: 100px;
 		width: 100%;
 		pointer-events: all;
-		top: 480px;
-		margin-left: 100%;
+		top: -100px;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -131,11 +130,12 @@ RootPanel {
 	}
 
 	.Close {
+		position: absolute;
 		height: 150px;
 		width: 100%;
 		pointer-events: all;
-		top: 620px;
-		left: -100%;
+		top: 0px; // 200% for items
+		left: 0px; // 25% for items
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -176,11 +176,10 @@ RootPanel {
 	}
 
 	.Shop {
-		height: 400px;
+		height: 300px;
 		width: 100%;
 		pointer-events: all;
-		top: 200px;
-		margin-left: 100%;
+		top: -350px;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -190,7 +189,7 @@ RootPanel {
 			border-radius: 30px;
 			flex-shrink: 1;
 			height: 25%;
-			aspect-ratio: 4;
+			aspect-ratio: 6;
 			top: 0;
 			backdrop-filter: blur( 5px );
 			background-color: rgba ( 80, 80, 80, 0.4 );
@@ -229,14 +228,13 @@ RootPanel {
 		width: 100%;
 		height: 1080;
 		display: flex;
-		transform: translate( -25% );
 		align-items: center;
 		justify-content: center;
 
 		.MapContainer {
 			top: 100%;
 			height: 90%;
-			left: -25%;
+			left: -50%;
 			flex-shrink: 0;
 			aspect-ratio: 1;
 			transition: all 0.4s ease-in;
@@ -257,6 +255,52 @@ RootPanel {
 			&.open {
 				top: -10%;
 			}
+		}
+	}
+
+	.Curtains {
+		pointer-events: none;
+		cursor: none;
+		top: -100px;
+		left: 0;
+		width: 100%;
+		height: 1200px; // This should cover about any screens...
+		display: flex;
+		flex-direction: row; //This doesn't work haha . . .
+		align-items: center;
+		justify-content: center;
+		background-color: black;
+		transition: all 2s ease-in;
+		opacity: 0; // We need to start with it already on
+
+		.titleContainer {
+			position: absolute;
+			width: 100%;
+			top: -20%;
+			align-items: center;
+			justify-content: center;
+
+			.curtainsTitle {
+				font-family: akaPosse;
+				color: white;
+				font-size: 200px;
+			}
+		}
+
+		.subtitleContainer {
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+
+			.curtainsSubtitle {
+				font-family: akaPosse;
+				color: white;
+				font-size: 90px;
+			}
+		}
+
+		&.closed {
+			opacity: 0;
 		}
 	}
 }
