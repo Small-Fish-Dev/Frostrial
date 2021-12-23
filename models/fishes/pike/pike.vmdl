@@ -23,12 +23,12 @@
 					},
 					{
 						_class = "MaterialGroup"
-						name = "niger"
+						name = "chain"
 						remaps = 
 						[
 							{
 								from = "models/fishes/pike/pike.vmat"
-								to = "models/fishes/pike/pikeniger.vmat"
+								to = "models/fishes/pike/pikechain.vmat"
 							},
 						]
 					},
