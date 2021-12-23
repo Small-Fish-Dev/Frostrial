@@ -14,6 +14,8 @@ namespace Frostrial
 		public void HandleFishing()
 		{
 
+			SetAnimBool( "fishing", Fishing );
+
 			if ( Input.Released( InputButton.Attack2 ) )
 			{
 

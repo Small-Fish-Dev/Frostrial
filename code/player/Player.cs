@@ -33,7 +33,7 @@ namespace Frostrial
 
 		public override void Respawn()
 		{
-			SetModel( "models/citizen/citizen.vmdl" );
+			SetModel( "models/jorma/jorma.vmdl" );
 
 			Controller = new TopdownPlayerController();
 
