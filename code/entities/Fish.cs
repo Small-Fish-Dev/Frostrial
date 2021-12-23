@@ -64,7 +64,7 @@ namespace Frostrial
 
 				///////// During every tick
 				
-				Vector3 localBaitPosition = baitPosition - Rotation.LookAt( baitPosition - originalPosition ).Forward * Size * 50;
+				Vector3 localBaitPosition = baitPosition - Rotation.LookAt( baitPosition - originalPosition ).Forward * (float)Math.Pow( 2, Size ) * 20;
 
 				Player player = Fisherman as Player;
 
