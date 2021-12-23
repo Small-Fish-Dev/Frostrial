@@ -324,7 +324,7 @@ namespace Frostrial
 		[Net] public float HintLifeDuration { get; set; } = 0f;
 		[Net] public int Jumpscare { get; set; } = 0;
 		[Net] public RealTimeUntil JumpscareTimer { get; set; } = 0;
-		[Net] public float? ForceUnskippable { get; set; };
+		[Net] public float? ForceUnskippable { get; set; }
 		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
 		RealTimeSince spawnedSince { get; set; } = 0f; 
