@@ -46,6 +46,8 @@ namespace Frostrial
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
 
+			CaughtFish = new();
+
 			BasicClothes();
 
 			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan

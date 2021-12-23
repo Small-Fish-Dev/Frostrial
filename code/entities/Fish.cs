@@ -22,7 +22,7 @@ namespace Frostrial
 		public IList<Fish> FishList { get; set; }
 
 		RealTimeUntil freeFromBait = 0f;
-		Vector3 baitPosition = Vector3.Zero;
+		[Net] Vector3 baitPosition { get; set; } = Vector3.Zero;
 
 		RealTimeUntil nextAction = 0f;
 		RealTimeSince lerpPosition = 0f;
@@ -187,19 +187,21 @@ namespace Frostrial
 
 			//TODO Play the sound bait check here
 
-			float random = Rand.Float( 10 );
+			Player player = Fisherman as Player;
 
-			if( random <= 1f / Rarity ) // TODO Better with tools and bait
+			float proMultiplier = (player.UpgradedRod ? 3f : 0) + (player.BaitEffect >= 0 ? 2f : 0);
+
+			float random = Rand.Float( 10 - proMultiplier); // Better chances with better tools
+
+			if( random <= 1f / Rarity )
 			{
 
 				originalRotation = Rotation;
-				freeFromBait = 0.6f / Rarity;
+				freeFromBait = 0.6f / Rarity * ( proMultiplier / 2.5f );
 				Trapped = true;
 
-				Player player = Fisherman as Player;
-
 				player.FishBaited = true;
-				player.CaughtFish = this;
+				player.CaughtFish.Add( this );
 					
 				//TODO PLAY TRAPPED SOUND and particles
 
@@ -224,6 +226,9 @@ namespace Frostrial
 			ragdoll.PhysicsGroup.Velocity = throwDirection + Vector3.Up * 400f;
 			ragdoll.PhysicsGroup.AngularVelocity = Vector3.Cross( throwDirection, Vector3.Up).Normal * -400 ;
 
+			Player player = Fisherman as Player;
+
+			player.CaughtFish.Remove( this );
 			FishList.Remove( this );
 			Delete();
 
@@ -234,7 +239,7 @@ namespace Frostrial
 		{
 
 			//TODO Sounds and particles
-			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 );
+			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 ); // TODO it spawns in the middle of the map! what?!
 			
 
 
