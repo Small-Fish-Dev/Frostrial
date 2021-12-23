@@ -87,9 +87,9 @@ namespace Frostrial
 
 			FishVariety.Add( "goldfish", new float[3]	{ 0, 0, 0 } );
 			FishVariety.Add( "minnow", new float[3]		{ 55, 5, 1 } );
-			FishVariety.Add( "herring", new float[3]	{ 30, 15, 4 } );
+			FishVariety.Add( "herring", new float[3]	{ 30, 20, 4 } );
 			FishVariety.Add( "perch", new float[3]		{ 10, 40, 15 } );
-			FishVariety.Add( "pike", new float[3]		{ 4, 25, 25 } );
+			FishVariety.Add( "pike", new float[3]		{ 4, 30, 25 } );
 			FishVariety.Add( "salmon", new float[3]		{ 1, 4, 35 } );
 			FishVariety.Add( "trout", new float[3]		{ 0, 1, 20 } );
 

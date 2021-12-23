@@ -136,10 +136,10 @@ namespace Frostrial
 	public class Items : Panel
 	{
 
-		Button button1;
-		Button button2;
-		Label text1;
-		Label text2;
+		Button baitButton;
+		Button campfireButton;
+		Label baitText;
+		Label campfireText;
 
 		public Items()
 		{
@@ -148,16 +148,23 @@ namespace Frostrial
 
 			Panel itemPanel = Add.Panel( "Items" );
 
-			button1 = itemPanel.Add.Button( "", "button", () =>
+			Add.Panel( "Close" ).Add.Button( "", "button", () =>
+			{
+
+				Player.CloseItems();
+
+			} ).Add.Label( "Close", "title" );
+
+			baitButton = itemPanel.Add.Button( "", "button", () =>
 			{
 
 				Player.BaitSelected();
 
 			} );
 			
-			text1 = button1.Add.Label( "Bait", "title" );
+			baitText = baitButton.Add.Label( "Bait", "title" );
 
-			button2 = itemPanel.Add.Button( "", "button", () =>
+			campfireButton = itemPanel.Add.Button( "", "button", () =>
 
 			{
 
@@ -165,21 +172,7 @@ namespace Frostrial
 
 			} );
 			
-			text2 = button2.Add.Label( "Campfire", "title" );
-
-		}
-
-		public override void OnButtonEvent( ButtonEvent e )
-		{
-
-			base.OnButtonEvent( e );
-
-			if ( e.Pressed == true && e.Button == "mouseright")
-			{
-
-				Player.CloseItems();
-
-			}
+			campfireText = campfireButton.Add.Label( "Campfire", "title" );
 
 		}
 
@@ -190,8 +183,8 @@ namespace Frostrial
 			Parent.Style.PointerEvents = player.ItemsOpen ? "all" : "visible";
 			Style.Opacity = player.ItemsOpen ? 1 : 0;
 
-			text1.Text = $"Bait ({player.Baits})";
-			text2.Text = $"Campfire ({player.Campfires})";
+			baitText.Text = $"Bait ({player.Baits})";
+			campfireText.Text = $"Campfire ({player.Campfires})";
 
 		}
 

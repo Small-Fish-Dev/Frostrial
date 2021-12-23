@@ -1,14 +1,25 @@
 RootPanel {
 	pointer-events: visible;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 
 	.HutIndicator {
-		position: absolute;
-		height: 100px;
-		width: 100px;
-		transform: translate( -50%, -50% );
+		position: relative;
+		height: 100;
+		width: 100;
+		top: 800;
+		left: 1000;
 		background-image: url( ui/hut.png );
 		background-size: 101px;
 		background-image-tint: #c5d4ed;
+		background-color: red;
 
 		.Arrow {
 			position: absolute;
@@ -21,16 +32,15 @@ RootPanel {
 	}
 
 	.Hint {
-		position: relative;
-		top: 0px;
-		left: -35%;
+		top: 10px;
+		left: 0%;
 		display: flex;
 		flex-shrink: 0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		width: 200%;
+		width: 100%;
 
 		.HintContainer {
 			height: 100px;
@@ -38,7 +48,6 @@ RootPanel {
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
-			left: 50%;
 
 			.HintTitle {
 				font-family: akaPosse;
@@ -48,16 +57,15 @@ RootPanel {
 	}
 
 	.Interact {
-		position: relative;
-		top: -40%;
-		margin-left: -88%;
+		top: 300%;
+		left: 0%;
 		display: flex;
 		flex-shrink: 0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		width: 300%;
-		height: 100%;
+		width: 100%;
+		height: 30px;
 		opacity: 0.8;
 
 		.InteractContainer {
@@ -75,18 +83,21 @@ RootPanel {
 	}
 
 	.Items {
-		height: 100%;
-		width: 500%;
+		height: 70px;
+		width: 100%;
 		pointer-events: all;
-		left: 25%;
+		top: 480px;
+		margin-left: 100%;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 
 		.button {
 			background-color: rgba( black, 0.2 );
 			border-radius: 30px;
 			flex-shrink: 1;
-			width: 20%;
+			height: 100%;
 			aspect-ratio: 3;
-			top: 50%;
 			backdrop-filter: blur( 5px );
 			background-color: rgba ( 80, 80, 80, 0.4 );
 			border: 5px solid rgba ( 20, 20, 20, 0.4 );
@@ -116,19 +127,68 @@ RootPanel {
 		}
 	}
 
-	.Shop {
-		height: 100%;
+	.Close {
+		height: 150px;
 		width: 100%;
 		pointer-events: all;
-		left: -133%;
+		top: 620px;
+		left: -100%;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 
 		.button {
 			background-color: rgba( black, 0.2 );
 			border-radius: 30px;
 			flex-shrink: 1;
-			width: 50%;
+			height: 100%;
 			aspect-ratio: 3;
-			top: 50%;
+			backdrop-filter: blur( 5px );
+			background-color: rgba ( 80, 80, 80, 0.4 );
+			border: 5px solid rgba ( 20, 20, 20, 0.4 );
+			border-radius: 3px;
+			mix-blend-mode: color;
+			cursor: pointer;
+			opacity: 0.4;
+			transition: all 0.1s ease-in;
+			align-items: center;
+			justify-content: center;
+
+			.title {
+				font-family: Georgia;
+				color: white;
+				font-size: 50px;
+				text-shadow: 0px 0px 10px rgba( black, 1 );
+				text-stroke: 3px black;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+
+			&.active, &:active {
+				opacity: 1;
+			}
+		}
+	}
+
+	.Shop {
+		height: 400px;
+		width: 100%;
+		pointer-events: all;
+		top: 200px;
+		margin-left: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.button {
+			background-color: rgba( black, 0.2 );
+			border-radius: 30px;
+			flex-shrink: 1;
+			height: 25%;
+			aspect-ratio: 4;
+			top: 0;
 			backdrop-filter: blur( 5px );
 			background-color: rgba ( 80, 80, 80, 0.4 );
 			border: 5px solid rgba ( 20, 20, 20, 0.4 );
@@ -159,19 +219,21 @@ RootPanel {
 	}
 
 	.Map {
-		position: relative;
+		position: absolute;
 		pointer-events: none;
-		top: 0%;
-		left: -166%;
-		width: 150%;
-		height: 100%;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 1080;
 		display: flex;
+		transform: translate( -25% );
 		align-items: center;
 		justify-content: center;
 
 		.MapContainer {
 			top: 100%;
 			height: 90%;
+			left: -25%;
 			flex-shrink: 0;
 			aspect-ratio: 1;
 			transition: all 0.4s ease-in;
@@ -190,7 +252,7 @@ RootPanel {
 			}
 
 			&.open {
-				top: 0%;
+				top: -10%;
 			}
 		}
 	}
