@@ -13,6 +13,8 @@ namespace Frostrial
 		[Net] public bool UpgradedDrill { get; set; } = false;
 		[Net] public bool UpgradedRod { get; set; } = false;
 		[Net] public bool UpgradedCoat { get; set; } = false;
+		[Net] public float LastProfit { get; set; } = 0f;
+		[Net] public RealTimeUntil ProfitTime { get; set; } = 0f;
 
 		public void HandleShopping()
 		{
@@ -134,20 +136,8 @@ namespace Frostrial
 
 			Money += amount;
 
-
-			if( amount < 0 )
-			{
-
-				// TODO LESS MONEY EFFECT
-
-			}
-
-			if( amount > 0 )
-			{
-
-				// TODO MORE MONEY EFFECT
-
-			}
+			LastProfit = amount;
+			ProfitTime = 2f;
 
 		}
 
@@ -252,7 +242,7 @@ namespace Frostrial
 			coatText.Text = player.UpgradedCoat ? "[BOUGHT]" : $"( ${Game.Prices["coat"]} ) Upgrade Coat";
 			drillText.Text = player.UpgradedDrill ? "[BOUGHT]" : $"( ${Game.Prices["drill"]} ) Upgrade Drill";
 			rodText.Text = player.UpgradedRod ? "[BOUGHT]" :  $"( ${Game.Prices["rod"]} ) Upgrade Rod";
-			planeText.Text = $"BUY PLANE TICKET";
+			planeText.Text = $"( ${Game.Prices["plane"]} ) Buy Plane Ticket";
 
 		}
 

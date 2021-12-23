@@ -104,9 +104,6 @@ namespace Frostrial
 
 							DeadFish selectedFish = selectedEntity as DeadFish;
 
-							selectedFish.Delete();
-
-							//TODO get money
 
 							switch ( selectedFish.Rarity )
 							{
@@ -124,6 +121,10 @@ namespace Frostrial
 									break;
 
 							}
+
+							AddMoney( selectedFish.Value );
+
+							selectedFish.Delete();
 
 						}
 

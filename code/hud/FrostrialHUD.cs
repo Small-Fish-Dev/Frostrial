@@ -29,10 +29,10 @@ namespace Frostrial
 			var hut = current.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
 			var left = MathX.Clamp( hutScreen.x, 0.21f, 0.75f );
-			var top = MathX.Clamp( hutScreen.y + 0.1f, 0.1f, 1.1f);
+			var top = MathX.Clamp( hutScreen.y, 0f, 1f);
 
 			Style.Left = Length.Pixels( ( left - 0.5f ) * 3000 );
-			Style.Top = Length.Pixels( ( top - 0.1f ) * 800 );
+			Style.Top = Length.Pixels( ( top + 0.1f ) * 800 );
 
 
 			var camera = player.Camera as IsometricCamera;
@@ -150,6 +150,43 @@ namespace Frostrial
 
 	}
 
+	public class Money : Panel
+	{
+		Panel moneyContainer;
+		Label moneyTitle;
+		Label moreMoneyTitle;
+		Label lessMoneyTitle;
+
+		public Money()
+		{
+
+			Player player = Local.Pawn as Player;
+
+			moneyContainer = Add.Panel( "Money" ).Add.Panel( "moneyContainer" );
+			moneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moneyTitle" );
+			moreMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moreMoney" );
+			lessMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "lessMoney" );
+
+		}
+
+		public override void Tick()
+		{
+
+			Player player = Local.Pawn as Player;
+
+			double text = Math.Round( player.Money, 2 );
+			moneyTitle.Text = $"$ { text }";
+
+			moreMoneyTitle.Text = player.LastProfit > 0 ? $"$+{player.LastProfit}" : "" ;
+			lessMoneyTitle.Text = player.LastProfit < 0 ? $"${player.LastProfit}" : "" ;
+
+			moreMoneyTitle.Style.Opacity = player.ProfitTime;
+			lessMoneyTitle.Style.Opacity = player.ProfitTime;
+
+		}
+
+	}
+
 	public class Map : Panel
 	{
 
@@ -216,6 +253,7 @@ namespace Frostrial
 			RootPanel.StyleSheet.Load( "hud/FrostrialHUD.scss" );
 
 			RootPanel.AddChild<Interact>();
+			RootPanel.AddChild<Money>();
 			RootPanel.AddChild<Map>();
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Curtains>();

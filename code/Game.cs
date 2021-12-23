@@ -125,7 +125,7 @@ namespace Frostrial
 			Prices.Add( "coat", 49.99f );
 			Prices.Add( "drill", 299.99f );
 			Prices.Add( "rod", 649.99f );
-			Prices.Add( "plane", 3000f );
+			Prices.Add( "plane", 3999.99f );
 
 		}
 

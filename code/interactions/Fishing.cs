@@ -73,8 +73,6 @@ namespace Frostrial
 
 							if ( fish.IsValid )
 							{
-
-								fish.Catch();
 								FishBaited = false;
 
 								FishTotalCaught[fish.Species]++;
@@ -88,6 +86,8 @@ namespace Frostrial
 									Game.FishUnlock[fish.Species] = true;
 
 								}
+
+								fish.Catch();
 
 							}
 
