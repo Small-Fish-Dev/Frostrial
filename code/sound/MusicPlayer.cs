@@ -16,14 +16,17 @@ namespace Frostrial
 
 		public void Initialize()
 		{
+			if ( IsInitialized )
+				return;
+
 			foreach ( var m in Music.All )
 			{
 				Log.Info( m.Key );
 				Queue.Add( m.Value );
 			}
-			Shuffle();
+			Shuffle( true );
 
-			PlayNext(false);
+			PlayNext( false );
 
 			IsInitialized = true;
 		}
@@ -33,7 +36,11 @@ namespace Frostrial
 			if ( !IsInitialized )
 				return;
 
-			if (isWaitingForTheNextTrack)
+#if false
+			DebugOverlay.ScreenText( $"{isWaitingForTheNextTrack}\n{tsLastTrack}:{TracksDelay}\n{tsTrackStart}:{Queue[currentQueuePosition].Length}" );
+#endif
+
+			if ( isWaitingForTheNextTrack )
 			{
 				if ( tsLastTrack >= TracksDelay )
 				{
@@ -48,12 +55,12 @@ namespace Frostrial
 			}
 		}
 
-		public void PlayNext(bool increment = true)
+		public void PlayNext( bool increment = true )
 		{
-			if (increment)
+			if ( increment )
 			{
 				int nextTrack = (currentQueuePosition + 1) % Queue.Count;
-				if (nextTrack < currentQueuePosition)
+				if ( nextTrack < currentQueuePosition )
 				{
 					Shuffle();
 				}
@@ -66,24 +73,29 @@ namespace Frostrial
 			Queue[currentQueuePosition].Play();
 		}
 
-		protected void Shuffle()
+		protected void Shuffle(bool ignoreFLRepeat = false)
 		{
 			Log.Info( $"Shuffle! {Queue.Count}" );
+			Music lastTrack = Queue[Queue.Count - 1];
 			for ( int i = 0; i < Queue.Count - 1; i++ )
 			{
-				for (int j = i + 1; j < Queue.Count; j++ )
+				for ( int j = i + 1; j < Queue.Count; j++ )
 				{
-					if (System.Random.Shared.Int(0, 1) == 0)
+					if ( System.Random.Shared.Int( 0, 1 ) == 0 )
 					{
+						if ( !ignoreFLRepeat
+							&& i == 0 && j == Queue.Count - 1
+							&& Queue[j].ResourceId == lastTrack.ResourceId ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
+							continue;
 						(Queue[i], Queue[j]) = (Queue[j], Queue[i]);
 					}
 				}
 			}
 		}
 
-		protected void NowPlaying(Music m)
+		protected void NowPlaying( Music m )
 		{
-			// TOOD:
+			// TODO:
 			Log.Info( $"Now playing: {m.Song} from {m.Album} by {m.Artist} ({m.URL})" );
 		}
 	}
