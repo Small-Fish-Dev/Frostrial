@@ -77,17 +77,7 @@
 			},
 			{
 				_class = "BoneMarkupList"
-				children = 
-				[
-					{
-						_class = "BoneMarkup"
-						target_bone = "hold_R"
-						ignore_Translation = false
-						ignore_rotation = false
-						do_not_discard = true
-					},
-				]
-				bone_cull_type = "Aggressive"
+				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""
