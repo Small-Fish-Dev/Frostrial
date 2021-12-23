@@ -12562,6 +12562,6 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "models/citizen/citizen.vanmgrph"
+		anim_graph_name = "models/citizen/jorma.vanmgrph"
 	}
 }
