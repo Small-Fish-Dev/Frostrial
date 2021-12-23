@@ -176,11 +176,11 @@ namespace Frostrial
 		public static float CalcValue( string species, float size, bool variant, float variantWeight)
 		{
 
-			float sizeRatio = size / Game.FishSizes[species];
+			float sizeRatio = size / Game.FishSizes[species] + 0.5f;
 			float variantBonus = variant ? variantWeight : 1;
 			float rarity = Game.FishRarity[species] + 0.5f;
 
-			return (float)Math.Pow( sizeRatio * rarity, 2 ) * variantBonus;
+			return (float)Math.Pow( sizeRatio * rarity, 6 ) * variantBonus;
 
 		}
 

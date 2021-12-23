@@ -24,6 +24,15 @@ namespace Frostrial
 
 		}
 
+		[ServerCmd( "setmoney" )]
+		public static void SetMoney( float amount )
+		{
+
+			var player = ConsoleSystem.Caller.Pawn as Player;
+			player.AddMoney( amount - player.Money );
+
+		}
+
 	}
 
 }
