@@ -9,7 +9,7 @@ namespace Frostrial
 
 		[Net] public bool Fishing { get; set; } = false;
 		public bool FishBaited { get; set; } = false;
-		public Fish CaughtFish { get; set; }
+		public List<Fish> CaughtFish { get; set; }
 		RealTimeUntil removeTools { get; set; }
 
 		public void HandleFishing()
@@ -33,13 +33,22 @@ namespace Frostrial
 					if ( FishBaited )
 					{
 
-						if ( CaughtFish.IsValid )
+						List<Fish> copyList = new(CaughtFish);
+
+						foreach ( Fish fish in copyList )
 						{
 
-							CaughtFish.Catch();
-							FishBaited = false;
+							if ( fish.IsValid )
+							{
+
+								fish.Catch();
+								FishBaited = false;
+
+							}
 
 						}
+
+						copyList.Clear();
 
 					}
 
