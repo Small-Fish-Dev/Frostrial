@@ -276,7 +276,7 @@ RootPanel {
 		.titleContainer {
 			position: absolute;
 			width: 100%;
-			top: 0%;
+			top: -10%;
 			align-items: center;
 			justify-content: center;
 
@@ -288,6 +288,7 @@ RootPanel {
 		}
 
 		.subtitleContainer {
+			top: 10%;
 			width: 100%;
 			align-items: center;
 			justify-content: center;
