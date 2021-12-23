@@ -15,27 +15,33 @@ namespace Frostrial
 			if ( clothes.ContainsKey( clothingSlot ) )
 			{
 
+				if ( clothes[clothingSlot].GetModelName() == modelPath ) return;
+
 				clothes[clothingSlot].Delete();
 
 			}
 
-			var entity = new ModelEntity();
+			if ( modelPath != "none" )
+			{
 
-			entity.SetModel( modelPath );
-			entity.SetParent( this, true );
+				var entity = new ModelEntity();
 
-			clothes[clothingSlot] = entity;
+				entity.SetModel( modelPath );
+				entity.SetParent( this, true );
+
+				clothes[clothingSlot] = entity;
+
+			}
 
 		}
 		public void BasicClothes()
 		{
 
-			SetClothing( "tool", "models/tools/basic_fishingrod.vmdl" );
 			SetClothing( "hat", "models/clothing/hats/ushanka.vmdl" );
 			SetClothing( "jacket", "models/clothing/jackets/jumper.vmdl");
 			SetClothing( "trousers", "models/clothing/trousers/fishing_trousers.vmdl" );
 			SetClothing( "gloves", "models/citizen_clothes/gloves/gloves_workgloves.vmdl" );
-			SetClothing( "boots", "models/clothing/shoes/winter_boots.vmdl" ); // They too big! -- They are now perfect size!
+			SetClothing( "boots", "models/clothing/shoes/winter_boots.vmdl" );
 
 		}
 

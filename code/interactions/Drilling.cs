@@ -17,6 +17,15 @@ namespace Frostrial
 		public void HandleDrilling()
 		{
 
+			SetAnimBool( "handdrill", Drilling );
+
+			if ( !Fishing )
+			{
+
+				SetClothing( "tool", Drilling ? "models/tools/hand_icedrill.vmdl" : "none" );
+
+			}
+
 			if ( IsClient ) return;
 
 			if ( Input.Pressed( InputButton.Attack1 ) && !PlacingCampfire )
@@ -25,9 +34,9 @@ namespace Frostrial
 				if ( lastAttempt >= attemptCooldown )
 				{
 
-					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 60f;
+					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 20f;
 
-					if ( Controller.Velocity.LengthSquared < 1 ) // Don't allow the player to make holes while sliding
+					if ( Controller.Velocity.LengthSquared < 3 ) // Don't allow the player to make holes while sliding
 					{
 
 						if( Game.IsOnIce( holePosition ) )

@@ -10,11 +10,19 @@ namespace Frostrial
 		[Net] public bool Fishing { get; set; } = false;
 		public bool FishBaited { get; set; } = false;
 		public Fish CaughtFish { get; set; }
+		RealTimeUntil removeTools { get; set; }
 
 		public void HandleFishing()
 		{
 
 			SetAnimBool( "fishing", Fishing );
+
+			if( !Drilling )
+			{
+
+				SetClothing( "tool", (Fishing || removeTools >= 0) ? "models/tools/basic_fishingrod.vmdl" : "none" );
+
+			}
 
 			if ( Input.Released( InputButton.Attack2 ) )
 			{
@@ -37,6 +45,8 @@ namespace Frostrial
 
 					Fishing = false;
 					BlockMovement = false;
+
+					removeTools = 0.66f;
 
 					CurrentHole = PhysicsWorld.WorldBody.Entity;
 

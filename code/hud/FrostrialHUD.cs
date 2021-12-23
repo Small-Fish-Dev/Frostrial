@@ -31,26 +31,26 @@ namespace Frostrial
 			var left = MathX.Clamp( hutScreen.x, 0.15f / Screen.Aspect, 1 - 0.15f / Screen.Aspect );
 			var top = MathX.Clamp( hutScreen.y, 0.15f, 0.85f );
 
-			//Style.Left = Length.Fraction( left );
-			//Style.Top = Length.Fraction( top );
+			//Style.Left = Length.Pixels( (left + 0.5f ) * 900);
+			//Style.Top = Length.Pixels( top * 400 );
+
 
 			var camera = player.Camera as IsometricCamera;
-			var baseDistance = 800f * camera.Zoom;
+			var baseDistance = 100f * camera.Zoom;
 			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
-			//Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
+			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
 
 			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
 			var arrowRotate = new PanelTransform();
-			arrowRotate.AddTranslateX( Length.Percent( ( MathF.Sin( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
-			arrowRotate.AddTranslateY( Length.Percent( ( MathF.Cos( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
+			//arrowRotate.AddTranslateX( Length.Percent( ( MathF.Sin( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
+			//arrowRotate.AddTranslateY( Length.Percent( ( MathF.Cos( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
 			arrowRotate.AddRotation( 0, 0, rotation );
 
-		//	arrow.Style.Transform = arrowRotate;
-			//arrow.Style.Left = Length.Percent( -100 );
-			//arrow.Style.Top = Length.Percent( -125 );
+			arrow.Style.Transform = arrowRotate;
+
 
 		}
 		
