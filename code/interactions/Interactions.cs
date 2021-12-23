@@ -57,6 +57,9 @@ namespace Frostrial
 
 							CurrentHole = selectedEntity;
 
+							Hole hole = CurrentHole as Hole;
+							hole.Bobber = true;
+
 							Hint( ".   .   .   .   .", 1f );
 
 						}

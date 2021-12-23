@@ -48,6 +48,9 @@ namespace Frostrial
 
 					removeTools = 0.66f;
 
+					Hole hole = CurrentHole as Hole;
+					hole.Bobber = false;
+
 					CurrentHole = PhysicsWorld.WorldBody.Entity;
 
 				}
