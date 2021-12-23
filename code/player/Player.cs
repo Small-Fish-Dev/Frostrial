@@ -48,6 +48,8 @@ namespace Frostrial
 
 			CaughtFish = new();
 
+			Money = Rand.Float( 2f, 9f );
+
 			BasicClothes();
 
 			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan

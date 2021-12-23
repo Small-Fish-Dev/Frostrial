@@ -8,7 +8,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public float Money { get; set; } = 1000f;
+		[Net] public float Money { get; set; } = 0f;
 		[Net] public bool ShopOpen { get; set; } = false;
 		[Net] public bool UpgradedDrill { get; set; } = false;
 		[Net] public bool UpgradedRod { get; set; } = false;
