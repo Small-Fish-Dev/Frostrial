@@ -1028,11 +1028,12 @@
 		},
 		{
 			_class = "C_OP_FadeAndKill"
-			m_flStartFadeOutTime = 0.7
+			m_flStartFadeOutTime = 0.85
+			m_flEndFadeInTime = 0.2
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
-			m_flEndScale = 3.0
+			m_flEndScale = 2.0
 			m_bEaseInAndOut = true
 		},
 		{
