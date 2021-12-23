@@ -305,7 +305,7 @@ RootPanel {
 	.Curtains {
 		pointer-events: none;
 		cursor: none;
-		top: -100px;
+		top: -110%;
 		left: 0;
 		width: 100%;
 		height: 1200px; // This should cover about any screens...
@@ -327,7 +327,7 @@ RootPanel {
 			.curtainsTitle {
 				font-family: akaPosse;
 				color: white;
-				font-size: 200px;
+				font-size: 120px;
 			}
 		}
 
@@ -340,7 +340,7 @@ RootPanel {
 			.curtainsSubtitle {
 				font-family: akaPosse;
 				color: white;
-				font-size: 90px;
+				font-size: 40px;
 			}
 		}
 
@@ -352,7 +352,7 @@ RootPanel {
 	.Jumpscare {
 		pointer-events: none;
 		cursor: none;
-		top: -110%;
+		top: -100px;
 		left: 0;
 		width: 110%;
 		height: 1200px; // This should cover about any screens...

@@ -254,6 +254,7 @@ namespace Frostrial
 
 			jumpscareImages[1] = "ui/yeti_jumpscare.jpg";
 			jumpscareImages[2] = "ui/yeti_window.jpg";
+			jumpscareImages[3] = "ui/takeoff.jpg";
 
 		}
 
@@ -261,8 +262,27 @@ namespace Frostrial
 		{
 
 			var player = Local.Pawn as Player;
+			float opacity = 0;
 
-			jumpscarePanel.Style.Opacity = player.Jumpscare == 2 ? 1 - player.JumpscareTimer/3 : player.Jumpscare;
+			switch (player.Jumpscare)
+			{
+
+				case  0:
+					opacity = 0;
+					break;
+				case 1:
+					opacity = 1;
+					break;
+				case 2:
+					opacity = 1 - player.JumpscareTimer / 3;
+					break;
+				case 3:
+					opacity = 1 - Math.Min( player.JumpscareTimer, 3 ) / 3;
+					break;
+
+			}
+
+			jumpscarePanel.Style.Opacity = opacity;
 
 			if ( player.Jumpscare != 0 )
 			{
@@ -293,8 +313,8 @@ namespace Frostrial
 			RootPanel.AddChild<Money>();
 			RootPanel.AddChild<Map>();
 			RootPanel.AddChild<HutIndicator>();
-			RootPanel.AddChild<Curtains>();
 			RootPanel.AddChild<Jumpscare>();
+			RootPanel.AddChild<Curtains>();
 			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
@@ -327,7 +347,7 @@ namespace Frostrial
 		[Net] public float? ForceUnskippable { get; set; }
 		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
-		RealTimeSince spawnedSince { get; set; } = 0f; 
+		[Net] public RealTimeSince SpawnedSince { get; set; } = 0f; 
 
 		public void Hint( string text, float duration = 1f, bool unskippable = false) // "Unskippable" dialog will be skipped by other unskippale dialogs
 		{
@@ -373,7 +393,7 @@ namespace Frostrial
 
 				}
 
-				if ( spawnedSince >= 4f && spawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
+				if ( SpawnedSince >= 4f && SpawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
 				{
 
 					Curtains = false;
@@ -381,16 +401,6 @@ namespace Frostrial
 				}
 
 			}
-
-		}
-
-		[ClientRpc]
-		public static void EndGameOnClients()
-		{
-
-			Player player = Local.Pawn as Player;
-
-			player.Curtains = true;
 
 		}
 

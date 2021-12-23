@@ -21,6 +21,40 @@ namespace Frostrial
 
 			SetClothing( "jacket", UpgradedCoat ? "models/clothing/jackets/parka.vmdl" : "models/clothing/jackets/jumper.vmdl" );
 
+			if ( Jumpscare == 3 )
+			{
+
+				if ( JumpscareTimer <= -2 )
+				{
+
+					Game.CurrentTitle = "Thank you for playing";
+					Game.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
+					Curtains = true;
+
+				}
+
+				if ( JumpscareTimer <= -9 )
+				{
+
+					Curtains = false;
+					Jumpscare = 1;
+
+				}
+
+			}
+
+			if ( Jumpscare == 1 )
+			{
+
+				if ( JumpscareTimer <= -9.8f )
+				{
+
+					Client.Kick();
+
+				}
+
+			}
+
 		}
 
 		[ServerCmd]
@@ -124,7 +158,13 @@ namespace Frostrial
 			if ( player.Money >= Game.Prices["plane"] )
 			{
 
-				//TODO WIN STUFF
+				player.BlockMovement = true;
+				player.Jumpscare = 3;
+				player.JumpscareTimer = 6f;
+
+				player.BlockMovement = true;
+				player.Hint( "Goodbye fishes.", 3, true );
+
 				player.AddMoney( -Game.Prices["plane"] );
 
 			}
@@ -221,8 +261,8 @@ namespace Frostrial
 			planeButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
-				Player.Win();
 				Player.CloseShop();
+				Player.Win();
 
 			} );
 
