@@ -83,7 +83,7 @@ namespace Frostrial
 						Rotation = originalRotation;
 
 						player.FishBaited = false;
-						player.CaughtFish = null;
+						player.CaughtFish.Remove( this );
 
 						nextAction = Rand.Float( 2f, 3f );
 
@@ -189,7 +189,7 @@ namespace Frostrial
 
 			Player player = Fisherman as Player;
 
-			float proMultiplier = (player.UpgradedRod ? 3f : 0) + (player.BaitEffect >= 0 ? 2f : 0);
+			float proMultiplier = 1 + (player.UpgradedRod ? 2.5f : 0) + (player.BaitEffect >= 1.5 ? 2f : 0);
 
 			float random = Rand.Float( 10 - proMultiplier); // Better chances with better tools
 
@@ -201,6 +201,7 @@ namespace Frostrial
 				Trapped = true;
 
 				player.FishBaited = true;
+
 				player.CaughtFish.Add( this );
 					
 				//TODO PLAY TRAPPED SOUND and particles

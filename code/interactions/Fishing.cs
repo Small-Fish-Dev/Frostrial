@@ -33,7 +33,9 @@ namespace Frostrial
 					if ( FishBaited )
 					{
 
-						foreach ( Fish fish in CaughtFish )
+						List<Fish> copyList = new(CaughtFish);
+
+						foreach ( Fish fish in copyList )
 						{
 
 							if ( fish.IsValid )
@@ -45,6 +47,8 @@ namespace Frostrial
 							}
 
 						}
+
+						copyList.Clear();
 
 					}
 
