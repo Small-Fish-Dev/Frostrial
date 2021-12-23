@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "ModelModifier_ScaleAndMirror"
-						scale = 0.6
+						scale = 0.3937
 						mirror_x = false
 						mirror_y = false
 						mirror_z = false
@@ -29,12 +29,12 @@
 						remaps = 
 						[
 							{
-								from = "wood.vmat"
-								to = "materials/randommodels/campfire.vmat"
-							},
-							{
 								from = "chimney.vmat"
 								to = "materials/randommodels/chimney.vmat"
+							},
+							{
+								from = "wood.vmat"
+								to = "materials/randommodels/campfire.vmat"
 							},
 						]
 						use_global_default = false
@@ -50,7 +50,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/randommodels/cabin_chimney.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 90.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -61,8 +61,6 @@
 							exclude_by_default = false
 							exception_list = 
 							[
-								"Cube_010",
-								"Cube_015",
 								"Cube_014",
 							]
 						}
