@@ -8,9 +8,14 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 		[Net] public bool ShopOpen { get; set; } = false;
+		[Net] public bool UpgradedDrill { get; set; } = true; //TODO REMEMBER TO TURN OFF
+		[Net] public bool UpgradedRod { get; set; } = false;
+		[Net] public bool UpgradedCoat { get; set; } = true;
 
 		public void HandleShopping()
 		{
+
+			SetClothing( "jacket", UpgradedCoat ? "models/clothing/jackets/parka.vmdl" : "models/clothing/jackets/jumper.vmdl" );
 
 		}
 

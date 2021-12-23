@@ -20,6 +20,13 @@ namespace Frostrial
 			Game current = Game.Current as Game;
 			float hutDistance = Position.Distance( current.HutEntity.Position );
 
+			if ( UpgradedCoat )
+			{
+
+				ColdMultiplier = 0.5f;
+
+			}
+
 			if ( hutDistance <= 400f )
 			{
 
@@ -30,11 +37,13 @@ namespace Frostrial
 			if ( Game.IsOnIce( Position ) )
 			{
 
-				ColdMultiplier += 2f;
+				ColdMultiplier += UpgradedCoat ? 0.5f : 2f;
 
 			}
 
 			ColdMultiplier -= (1f - Game.CampfireDistance( Position, 240 ) / 240) * 7;
+
+			ColdMultiplier += Velocity.Length / 150f / ( UpgradedCoat ? 2 : 1 ) ; // The faster you move, the colder you get. So people don't venture out too far without upgrading
 
 			Warmth = SuffersCold ? Math.Clamp( Warmth - Time.Delta * ColdMultiplier / BaseColdSpeed, 0, 1 ) : 1f;
 

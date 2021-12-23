@@ -8,8 +8,9 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public int Baits { get; set; } = 10;
-		[Net] public int Campfires { get; set; } = 10;
+		[Net] public int Baits { get; set; } = 5;
+		[Net] public int Campfires { get; set; } = 3;
+		[Net] public RealTimeUntil BaitEffect { get; set; } = 0;
 		[Net] public bool ItemsOpen { get; set; } = false;
 		[Net] public bool PlacingCampfire { get; set; } = false;
 
@@ -21,7 +22,7 @@ namespace Frostrial
 
 				var mousePos = MouseWorldPosition;
 				var playerDistance = mousePos.Distance( Position );
-				bool canPlace = !Game.IsNearEntity( mousePos, 30f ) && playerDistance <= 100f && playerDistance >= 45f;
+				bool canPlace = !Game.IsNearEntity( mousePos, 30f ) && playerDistance <= 110f && playerDistance >= 30f;
 
 				if ( IsClient )
 				{
@@ -86,6 +87,7 @@ namespace Frostrial
 
 				player.ItemsOpen = false;
 				player.BlockMovement = false;
+				player.BaitEffect = 20f;
 
 				player.Baits--;
 

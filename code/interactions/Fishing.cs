@@ -15,14 +15,14 @@ namespace Frostrial
 		public void HandleFishing()
 		{
 
-			SetAnimBool( "fishing", Fishing );
-
-			if( !Drilling )
+			if ( !Drilling )
 			{
 
-				SetClothing( "tool", (Fishing || removeTools >= 0) ? "models/tools/basic_fishingrod.vmdl" : "none" );
+				SetClothing( "tool", (Fishing || removeTools >= 0) ? ( UpgradedRod ? "models/tools/better_fishingrod.vmdl" : "models/tools/basic_fishingrod.vmdl" ) : "none" );
 
 			}
+
+			SetAnimBool( "fishing", Fishing );
 
 			if ( Input.Released( InputButton.Attack2 ) )
 			{
