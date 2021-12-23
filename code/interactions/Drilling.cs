@@ -52,7 +52,7 @@ namespace Frostrial
 					if ( Controller.Velocity.LengthSquared < 3 ) // Don't allow the player to make holes while sliding
 					{
 
-						if( Game.IsOnIce( holePosition ) )
+						if( Game.IsOnIce( holePosition ) || Game.IsOnDirt( holePosition ) )
 						{
 
 							if( !Game.IsNearEntity( holePosition, 5f ) )
@@ -114,8 +114,21 @@ namespace Frostrial
 						Drilling = false;
 						HandleDrillingEffects( false, holePosition );
 
-						var hole = new Hole();
-						hole.Position = holePosition;
+						if ( Game.IsOnIce( holePosition ) )
+						{
+
+							var hole = new Hole();
+							hole.Position = holePosition;
+
+						}
+						else if ( Game.IsOnDirt( holePosition ) )
+						{
+
+							Baits++;
+							Hint( "I found a worm, good for bait I guess.", 2.5f );
+
+						}
+						
 
 						BlockMovement = false;
 
