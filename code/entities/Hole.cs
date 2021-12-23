@@ -13,6 +13,8 @@ namespace Frostrial
 	public partial class Hole : AnimEntity
 	{
 
+		[Net] public bool Bobber { get; set; } = false;
+
 		public override void Spawn()
 		{
 
@@ -22,6 +24,14 @@ namespace Frostrial
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
+
+		}
+
+		[Event.Tick]
+		public void Tick()
+		{
+
+			SetBodyGroup( "bobber", Bobber ? 1 : 0 );
 
 		}
 
