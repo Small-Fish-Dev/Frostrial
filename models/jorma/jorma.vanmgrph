@@ -748,6 +748,20 @@
 				m_bPredicted = false
 				m_bDefaultValue = false
 			},
+			{
+				_class = "CBoolAnimParameter"
+				m_name = "handdrill"
+				m_id = 
+				{
+					m_id = 1949031036
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = false
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_bDefaultValue = false
+			},
 		]
 	}
 	m_pTagManager = 
@@ -1418,6 +1432,38 @@
 		{
 			key = 
 			{
+				m_id = 111910179
+			}
+			value = 
+			{
+				_class = "CSubtractAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ 4480.0, 656.0 ]
+				m_nNodeID = 
+				{
+					m_id = 111910179
+				}
+				m_networkMode = "ServerAuthoritative"
+				m_sNote = ""
+				m_baseChildID = 
+				{
+					m_id = 436110981
+				}
+				m_subtractChildID = 
+				{
+					m_id = 135623602
+				}
+				m_timingBehavior = "UseChild1"
+				m_flTimingBlend = 0.5
+				m_footMotionTiming = "Child1"
+				m_bResetBase = true
+				m_bResetSubtract = true
+				m_bApplyChannelsSeparately = true
+			}
+		},
+		{
+			key = 
+			{
 				m_id = 118963955
 			}
 			value = 
@@ -1753,7 +1799,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4336.0, 384.0 ]
+				m_vecPosition = [ 4144.0, 432.0 ]
 				m_nNodeID = 
 				{
 					m_id = 135623602
@@ -2613,7 +2659,7 @@
 			{
 				_class = "CSelectorAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4560.0, 0.0 ]
+				m_vecPosition = [ 4288.0, -64.0 ]
 				m_nNodeID = 
 				{
 					m_id = 391619027
@@ -2822,6 +2868,28 @@
 					m_fMinSpeed = 0.0
 					m_fMaxTension = 500.0
 				}
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 436110981
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ 4144.0, 608.0 ]
+				m_nNodeID = 
+				{
+					m_id = 436110981
+				}
+				m_networkMode = "ServerAuthoritative"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "drillsmash"
+				m_playbackSpeed = 1.0
+				m_bLoop = true
 			}
 		},
 		{
@@ -3801,7 +3869,7 @@
 			{
 				_class = "CSingleFrameAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4336.0, 304.0 ]
+				m_vecPosition = [ 4144.0, 352.0 ]
 				m_nNodeID = 
 				{
 					m_id = 584670111
@@ -3822,7 +3890,7 @@
 			{
 				_class = "CAddAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4832.0, 144.0 ]
+				m_vecPosition = [ 4640.0, 192.0 ]
 				m_nNodeID = 
 				{
 					m_id = 590518168
@@ -3867,6 +3935,38 @@
 				}
 				m_bFinishEarly = false
 				m_bResetOnFinish = false
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 631261014
+			}
+			value = 
+			{
+				_class = "CAddAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ 4672.0, 512.0 ]
+				m_nNodeID = 
+				{
+					m_id = 631261014
+				}
+				m_networkMode = "ServerAuthoritative"
+				m_sNote = ""
+				m_baseChildID = 
+				{
+					m_id = 391619027
+				}
+				m_additiveChildID = 
+				{
+					m_id = 111910179
+				}
+				m_timingBehavior = "UseChild2"
+				m_flTimingBlend = 0.5
+				m_footMotionTiming = "Child1"
+				m_bResetBase = true
+				m_bResetAdditive = true
+				m_bApplyChannelsSeparately = true
 			}
 		},
 		{
@@ -4244,7 +4344,7 @@
 			{
 				_class = "CSubtractAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4672.0, 448.0 ]
+				m_vecPosition = [ 4480.0, 496.0 ]
 				m_nNodeID = 
 				{
 					m_id = 745089947
@@ -4992,7 +5092,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4336.0, 464.0 ]
+				m_vecPosition = [ 4144.0, 512.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1082216859
@@ -5855,6 +5955,40 @@
 								m_bForceFootPlant = false
 								m_bDisabled = false
 							},
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CParameterAnimCondition"
+										m_comparisonOp = 0
+										m_paramID = 
+										{
+											m_id = 1949031036
+										}
+										m_comparisonValue = 
+										{
+											m_nType = 1
+											m_data = true
+										}
+									},
+								]
+								m_blendDuration = 0.2
+								m_destState = 
+								{
+									m_id = 925156307
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
 						]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
@@ -5975,6 +6109,63 @@
 							m_id = 2131023184
 						}
 						m_position = [ 32.0, 80.0 ]
+						m_bIsStartState = false
+						m_bIsEndtState = false
+						m_bIsPassthrough = false
+						m_bIsRootMotionExclusive = false
+						m_bAlwaysEvaluate = false
+					},
+					{
+						_class = "CAnimState"
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CParameterAnimCondition"
+										m_comparisonOp = 0
+										m_paramID = 
+										{
+											m_id = 1949031036
+										}
+										m_comparisonValue = 
+										{
+											m_nType = 1
+											m_data = false
+										}
+									},
+								]
+								m_blendDuration = 0.2
+								m_destState = 
+								{
+									m_id = 783698235
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
+						m_tags = [  ]
+						m_tagBehaviors = [  ]
+						m_name = "handdrill"
+						m_childNodeID = 
+						{
+							m_id = 631261014
+						}
+						m_stateID = 
+						{
+							m_id = 925156307
+						}
+						m_position = [ 64.0, -144.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -7130,7 +7321,7 @@
 			{
 				_class = "CSubtractAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4592.0, 240.0 ]
+				m_vecPosition = [ 4400.0, 288.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1531323330
@@ -8612,7 +8803,7 @@
 			{
 				_class = "CAddAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 4864.0, 304.0 ]
+				m_vecPosition = [ 4672.0, 352.0 ]
 				m_nNodeID = 
 				{
 					m_id = 2131913110
