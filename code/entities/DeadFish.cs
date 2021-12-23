@@ -29,12 +29,10 @@ namespace Frostrial
 
 			SetInteractsAs( CollisionLayer.Debris );
 			SetInteractsWith( CollisionLayer.WORLD_GEOMETRY );
-			SetInteractsExclude( CollisionLayer.Player | CollisionLayer.Debris );
+			SetInteractsExclude( CollisionLayer.Player );
 
-			Game game = Game.Current as Game;
-
-			Scale = Size * 10;
-			SetModel( game.FishNames[Species] );
+			SetModel( Game.FishNames[Species] );
+			Scale = 2 * ( Size / Game.FishSizes[Species] );
 
 
 		}

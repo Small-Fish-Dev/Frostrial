@@ -18,7 +18,10 @@ namespace Frostrial
 		[Net] public Hut HutEntity { get; set; }
 		public static Dictionary<string, string> InteractionsText = new();
 
-		public Dictionary<string, string> FishNames = new();
+		public static Dictionary<string, string> FishNames = new();
+		public static Dictionary<string, float[]> FishVariety = new();
+		public static Dictionary<string, float> FishSizes = new();
+		public static Dictionary<string, float> FishRarity = new();
 
 		public Game()
 		{
@@ -81,6 +84,30 @@ namespace Frostrial
 			FishNames.Add( "pike", "models/fishes/pike/pike.vmdl" );
 			FishNames.Add( "salmon", "models/fishes/salmon/salmon.vmdl" );
 			FishNames.Add( "trout", "models/fishes/trout/trout.vmdl" );
+
+			FishVariety.Add( "goldfish", new float[3]	{ 0, 0, 0 } );
+			FishVariety.Add( "minnow", new float[3]		{ 55, 5, 1 } );
+			FishVariety.Add( "herring", new float[3]	{ 30, 15, 4 } );
+			FishVariety.Add( "perch", new float[3]		{ 10, 40, 15 } );
+			FishVariety.Add( "pike", new float[3]		{ 4, 25, 25 } );
+			FishVariety.Add( "salmon", new float[3]		{ 1, 4, 35 } );
+			FishVariety.Add( "trout", new float[3]		{ 0, 1, 20 } );
+
+			FishSizes.Add( "goldfish",	0.01f );
+			FishSizes.Add( "minnow",	0.12f );
+			FishSizes.Add( "herring",	0.24f );
+			FishSizes.Add( "perch",		0.40f );
+			FishSizes.Add( "pike",		0.60f );
+			FishSizes.Add( "salmon",	0.80f );
+			FishSizes.Add( "trout",		1.00f );
+
+			FishRarity.Add( "goldfish", 0.1f );
+			FishRarity.Add( "minnow",	0.2f );
+			FishRarity.Add( "herring",	0.3f );
+			FishRarity.Add( "perch",	0.5f );
+			FishRarity.Add( "pike",		0.6f );
+			FishRarity.Add( "salmon",	0.9f );
+			FishRarity.Add( "trout",	1.0f );
 
 		}
 

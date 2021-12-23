@@ -91,7 +91,7 @@ namespace Frostrial
 					LastAngleChange = 0;
 					hasNewAngle = true;
 
-					// TODO: play a sound when the camera was rotated
+					Sound.FromScreen( "camera_crank" );
 				}
 			}
 
