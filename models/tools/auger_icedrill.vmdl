@@ -51,7 +51,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = "hold_R"
+						parent_bone = ""
 						import_filter = 
 						{
 							exclude_by_default = false
@@ -87,6 +87,10 @@
 					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""
