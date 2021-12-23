@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using System.Collections.Generic;
 
 namespace Frostrial
@@ -169,6 +170,17 @@ namespace Frostrial
 			}
 
 			return false;
+
+		}
+
+		public static float CalcValue( string species, float size, bool variant, float variantWeight)
+		{
+
+			float sizeRatio = size / Game.FishSizes[species];
+			float variantBonus = variant ? variantWeight : 1;
+			float rarity = Game.FishRarity[species] + 0.5f;
+
+			return (float)Math.Pow( sizeRatio * rarity, 2 ) * variantBonus;
 
 		}
 

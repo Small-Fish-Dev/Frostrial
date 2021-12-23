@@ -17,7 +17,7 @@ namespace Frostrial
 			get
 			{
 
-				return (float)Math.Pow( 12, ( Size / Game.FishSizes[Species] + 0.3f ) * (Rarity + 0.5f) ) * (Variant ? 5 : 1);
+				return Game.CalcValue( Species, Size, Variant, 5 );
 
 			}
 		}
@@ -27,7 +27,7 @@ namespace Frostrial
 			get
 			{
 
-				return (float)Math.Round( Math.Pow( 12, ( Size / Game.FishSizes[Species] + 0.3f ) * (Rarity + 0.5f) ) * (Variant ? 3 : 1), 2 );
+				return Game.CalcValue( Species, Size, Variant, 3 );
 
 			}
 		}
