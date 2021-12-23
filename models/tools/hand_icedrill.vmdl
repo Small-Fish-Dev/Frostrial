@@ -51,7 +51,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_R"
 						import_filter = 
 						{
 							exclude_by_default = false
@@ -61,53 +61,8 @@
 				]
 			},
 			{
-				_class = "AnimationList"
-				children = 
-				[
-					{
-						_class = "AnimFile"
-						name = "auger_drilling_anim"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.0
-						fade_out_time = 0.0
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/tools/auger_drilling_anim.fbx"
-						start_frame = -1
-						end_frame = 38
-						framerate = 20.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "auger_idle_anim"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/tools/auger_idle_anim.fbx"
-						start_frame = 0
-						end_frame = 1
-						framerate = 0.0
-						take = 1
-						reverse = false
-					},
-				]
-				default_root_bone_name = ""
+				_class = "BoneMarkupList"
+				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""
