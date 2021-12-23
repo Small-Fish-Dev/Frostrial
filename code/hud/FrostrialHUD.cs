@@ -83,7 +83,7 @@ namespace Frostrial
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom );
+			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom - 650 );
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
 			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
@@ -187,14 +187,15 @@ namespace Frostrial
 
 			curtainsPanel = Add.Panel( "Curtains" ).Add.Panel( "MapContainer" );
 			curtainsTitle = curtainsPanel.Add.Panel( "titleContainer" ).Add.Label( "Wake Up", "curtainsTitle" );
-			curtainsSubtitle = curtainsPanel.Add.Panel( "subtitleContainer" ).Add.Label( "Joe Biden, wake up", "curtainsSubtitle" );
+			curtainsSubtitle = curtainsPanel.Add.Panel( "subtitleContainer" ).Add.Label( "Today might just be your last day here", "curtainsSubtitle" );
 
 		}
 
 		public override void Tick()
 		{
+			var player = Local.Pawn as Player;
 
-
+			curtainsPanel.Parent.SetClass( "closed", !player.Curtains );
 
 		}
 
@@ -215,10 +216,10 @@ namespace Frostrial
 			RootPanel.StyleSheet.Load( "hud/FrostrialHUD.scss" );
 
 			RootPanel.AddChild<Interact>();
-			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Map>();
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Curtains>();
+			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
 
@@ -245,7 +246,9 @@ namespace Frostrial
 		[Net] public string HintText { get; set; } = "";
 		[Net] public float HintLifeTime { get; set; } = 0f;
 		[Net] public float HintLifeDuration { get; set; } = 0f;
+		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
+		RealTimeSince spawnedSince { get; set; } = 0f; 
 
 		public void Hint( string text, float duration = 1f )
 		{
@@ -275,7 +278,24 @@ namespace Frostrial
 
 				}
 
+				if ( spawnedSince >= 4f && spawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
+				{
+
+					Curtains = false;
+
+				}
+
 			}
+
+		}
+
+		[ClientRpc]
+		public static void EndGameOnClients()
+		{
+
+			Player player = Local.Pawn as Player;
+
+			player.Curtains = true;
 
 		}
 
