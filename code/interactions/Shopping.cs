@@ -36,18 +36,18 @@ namespace Frostrial
 	public class Shop : Panel
 	{
 
-		Button button1;
-		Button button2;
-		Button button3;
-		Button button4;
-		Button button5;
-		Button button6;
-		Label text1;
-		Label text2;
-		Label text3;
-		Label text4;
-		Label text5;
-		Label text6;
+		Button baitButton;
+		Button campfireButton;
+		Button coatButton;
+		Button drillButton;
+		Button rodButton;
+		Button planeButton;
+		Label baitText;
+		Label campfireText;
+		Label coatText;
+		Label drillText;
+		Label rodText;
+		Label planeText;
 
 		public Shop()
 		{
@@ -56,70 +56,63 @@ namespace Frostrial
 
 			Panel shopPanel = Add.Panel( "Shop" );
 
-			button1 = shopPanel.Add.Button( "", "button", () =>
-			{
-
-
-			} );
-
-			text1 = button1.Add.Label( "Buy Bait", "title" );
-
-			button2 = shopPanel.Add.Button( "", "button", () =>
-
-			{
-
-
-			} );
-
-			text2 = button2.Add.Label( "Buy Campfire", "title" );
-
-			button3 = shopPanel.Add.Button( "", "button", () =>
-			{
-
-
-			} );
-
-			text3 = button3.Add.Label( "Upgrade Coat", "title" );
-
-			button4 = shopPanel.Add.Button( "", "button", () =>
-
-			{
-
-
-			} );
-
-			text4 = button4.Add.Label( "Upgrade Drill", "title" );
-
-			button5 = shopPanel.Add.Button( "", "button", () =>
-			{
-
-
-			} );
-
-			text5 = button5.Add.Label( "Upgrade Rod", "title" );
-
-			button6 = shopPanel.Add.Button( "", "button", () =>
-
-			{
-
-
-			} );
-
-			text6 = button6.Add.Label( "BUY PLANE TICKET", "title" );
-
-		}
-
-		public override void OnButtonEvent( ButtonEvent e )
-		{
-
-			base.OnButtonEvent( e );
-
-			if ( e.Pressed == true && e.Button == "mouseright" )
+			Add.Panel( "Close" ).Add.Button( "", "button", () =>
 			{
 
 				Player.CloseShop();
 
-			}
+			} ).Add.Label( "Close", "title" );
+
+			baitButton = shopPanel.Add.Button( "", "button", () =>
+			{
+
+
+			} );
+
+			baitText = baitButton.Add.Label( "Buy Bait", "title" );
+
+			campfireButton = shopPanel.Add.Button( "", "button", () =>
+
+			{
+
+
+			} );
+
+			campfireText = campfireButton.Add.Label( "Buy Campfire", "title" );
+
+			coatButton = shopPanel.Add.Button( "", "button", () =>
+			{
+
+
+			} );
+
+			coatText = coatButton.Add.Label( "Upgrade Coat", "title" );
+
+			drillButton = shopPanel.Add.Button( "", "button", () =>
+
+			{
+
+
+			} );
+
+			drillText = drillButton.Add.Label( "Upgrade Drill", "title" );
+
+			rodButton = shopPanel.Add.Button( "", "button", () =>
+			{
+
+
+			} );
+
+			rodText = rodButton.Add.Label( "Upgrade Rod", "title" );
+
+			planeButton = shopPanel.Add.Button( "", "button", () =>
+
+			{
+
+
+			} );
+
+			planeText = planeButton.Add.Label( "BUY PLANE TICKET", "title" );
 
 		}
 
@@ -130,12 +123,12 @@ namespace Frostrial
 			Parent.Style.PointerEvents = player.ShopOpen ? "all" : "visible";
 			Style.Opacity = player.ShopOpen ? 1 : 0;
 
-			text1.Text = $"Buy Bait ({player.Baits})";
-			text2.Text = $"Buy Campfire ({player.Campfires})";
-			text3.Text = $"Upgrade Coat ({0})"; //TODO Actual stuff + Do "BOUGHT" after buying
-			text4.Text = $"Upgrade Drill ({0})";
-			text5.Text = $"Upgrade Rod ({0})";
-			text6.Text = $"BUY PLANCE TICKET";
+			baitText.Text = $"Buy Bait ({player.Baits})";
+			campfireText.Text = $"Buy Campfire ({player.Campfires})";
+			coatText.Text = $"Upgrade Coat ({0})"; //TODO Actual stuff + Do "BOUGHT" after buying
+			drillText.Text = $"Upgrade Drill ({0})";
+			rodText.Text = $"Upgrade Rod ({0})";
+			planeText.Text = $"BUY PLANE TICKET";
 
 		}
 

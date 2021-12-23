@@ -31,15 +31,15 @@ namespace Frostrial
 			var left = MathX.Clamp( hutScreen.x, 0.15f / Screen.Aspect, 1 - 0.15f / Screen.Aspect );
 			var top = MathX.Clamp( hutScreen.y, 0.15f, 0.85f );
 
-			Style.Left = Length.Fraction( left );
-			Style.Top = Length.Fraction( top );
+			//Style.Left = Length.Fraction( left );
+			//Style.Top = Length.Fraction( top );
 
 			var camera = player.Camera as IsometricCamera;
 			var baseDistance = 800f * camera.Zoom;
 			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
-			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
+			//Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
 
 			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
@@ -48,9 +48,9 @@ namespace Frostrial
 			arrowRotate.AddTranslateY( Length.Percent( ( MathF.Cos( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
 			arrowRotate.AddRotation( 0, 0, rotation );
 
-			arrow.Style.Transform = arrowRotate;
-			arrow.Style.Left = Length.Percent( -100 );
-			arrow.Style.Top = Length.Percent( -125 );
+		//	arrow.Style.Transform = arrowRotate;
+			//arrow.Style.Left = Length.Percent( -100 );
+			//arrow.Style.Top = Length.Percent( -125 );
 
 		}
 		
@@ -85,7 +85,7 @@ namespace Frostrial
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( -110 / camera.Zoom);
+			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom );
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
 			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
@@ -128,7 +128,7 @@ namespace Frostrial
 			if ( player.ItemsOpen )
 			{
 
-				text = "Select an item or Right Click to exit";
+				text = "Select an item to use";
 
 			}
 
@@ -142,7 +142,7 @@ namespace Frostrial
 			if ( player.ShopOpen )
 			{
 
-				text = "Select items/upgrades or Right Click to exit";
+				text = "Buy items or Upgrades";
 
 			}
 
@@ -192,12 +192,12 @@ namespace Frostrial
 
 			RootPanel.StyleSheet.Load( "hud/FrostrialHUD.scss" );
 
-			RootPanel.AddChild<HutIndicator>();
-			RootPanel.AddChild<Hint>();
 			RootPanel.AddChild<Interact>();
+			RootPanel.AddChild<Hint>();
+			RootPanel.AddChild<Map>();
+			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
-			RootPanel.AddChild<Map>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
 
