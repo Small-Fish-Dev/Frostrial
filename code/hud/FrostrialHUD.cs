@@ -282,6 +282,8 @@ namespace Frostrial
 
 			}
 
+			// TODO PLAY SOUNDS (PLANE, SCREAM, CREEPY)
+
 			jumpscarePanel.Style.Opacity = opacity;
 
 			if ( player.Jumpscare != 0 )
@@ -393,12 +395,12 @@ namespace Frostrial
 
 				}
 
-				if ( SpawnedSince >= 4f && SpawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
-				{
+			}
 
-					Curtains = false;
-
-				}
+			if ( SpawnedSince >= 4f && SpawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
+			{
+				Hint( "Today is the day I buy my way out of here.", 5, true );
+				Curtains = false;
 
 			}
 
