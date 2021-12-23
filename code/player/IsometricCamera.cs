@@ -97,7 +97,7 @@ namespace Frostrial
 
 			if ( input.MouseWheel != 0 )
 			{
-				Zoom = (Zoom - input.MouseWheel * 0.15f).Clamp( 0.3f, 1.3f );
+				Zoom = (Zoom - input.MouseWheel * 0.15f * Zoom).Clamp( 0.15f, 1f );
 			}
 
 

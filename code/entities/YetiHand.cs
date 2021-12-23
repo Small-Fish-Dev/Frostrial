@@ -17,15 +17,12 @@ namespace Frostrial
 			SetModel( "models/treasures/yeti_hand.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		}
+			GlowState = GlowStates.On;
+			GlowColor = new Color( 0.3f, 0.07f, 0.07f );
 
-		[Event.Tick.Client]
-		public void ClientTick()
-		{
-
-			DebugOverlay.Circle( Position - Vector3.Up * 3.7f, Rotation.FromPitch( 90 ), 13f, new Color( 1, 0.6f, 0.6f, 0.3f ), true, Time.Delta);
 
 		}
+
 
 	}
 
