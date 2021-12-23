@@ -28,15 +28,15 @@ namespace Frostrial
 			var player = Local.Pawn as Player;
 			var hut = current.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
-			var left = MathX.Clamp( hutScreen.x, 0.15f / Screen.Aspect, 1 - 0.15f / Screen.Aspect );
-			var top = MathX.Clamp( hutScreen.y, 0.15f, 0.85f );
+			var left = MathX.Clamp( hutScreen.x, 0.2f, 0.8f );
+			var top = MathX.Clamp( hutScreen.y, 0.1f, 1f);
 
-			//Style.Left = Length.Pixels( (left + 0.5f ) * 900);
-			//Style.Top = Length.Pixels( top * 400 );
+			Style.Left = Length.Pixels( ( left - 0.5f ) * 3000 );
+			Style.Top = Length.Pixels( ( top - 0.1f ) * 800 );
 
 
 			var camera = player.Camera as IsometricCamera;
-			var baseDistance = 100f * camera.Zoom;
+			var baseDistance = 1000f * camera.Zoom;
 			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
@@ -45,8 +45,6 @@ namespace Frostrial
 			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - left , 0.5 - top ) );
 
 			var arrowRotate = new PanelTransform();
-			//arrowRotate.AddTranslateX( Length.Percent( ( MathF.Sin( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
-			//arrowRotate.AddTranslateY( Length.Percent( ( MathF.Cos( rotation.DegreeToRadian() ) / 2 + 1 ) * 25 ) );
 			arrowRotate.AddRotation( 0, 0, rotation );
 
 			arrow.Style.Transform = arrowRotate;
