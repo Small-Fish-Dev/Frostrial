@@ -51,6 +51,7 @@ namespace Frostrial
 			SetInteractsExclude( CollisionLayer.Player );
 
 			SetModel( Game.FishNames[Species] );
+			SetMaterialGroup( Game.FishAlt[Species] );
 			Scale = 2 * ( Size / Game.FishSizes[Species] );
 
 

@@ -20,6 +20,7 @@ namespace Frostrial
 		public static Dictionary<string, string> InteractionsText = new();
 
 		public static Dictionary<string, string> FishNames = new();
+		public static Dictionary<string, string> FishAlt = new();
 		public static Dictionary<string, float[]> FishVariety = new();
 		public static Dictionary<string, float> FishSizes = new();
 		public static Dictionary<string, float> FishRarity = new();
@@ -120,6 +121,14 @@ namespace Frostrial
 			FishUnlock.Add( "pike", false );
 			FishUnlock.Add( "salmon", false );
 			FishUnlock.Add( "trout", false );
+
+			FishAlt.Add( "goldfish", "" );
+			FishAlt.Add( "minnow", "Gold" );
+			FishAlt.Add( "herring", "european" );
+			FishAlt.Add( "perch", "rainbow" );
+			FishAlt.Add( "pike", "chain" );
+			FishAlt.Add( "salmon", "coho" );
+			FishAlt.Add( "trout", "gold" );
 
 			Prices.Add( "bait", 1.49f );
 			Prices.Add( "campfire", 3.99f );

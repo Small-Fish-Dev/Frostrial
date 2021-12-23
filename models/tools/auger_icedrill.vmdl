@@ -61,40 +61,6 @@
 				]
 			},
 			{
-				_class = "AnimationList"
-				children = 
-				[
-					{
-						_class = "AnimFile"
-						name = "auger_drilling_anim"
-						children = 
-						[
-							{
-								_class = "AnimAutoLayer"
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.0
-						fade_out_time = 0.0
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/tools/auger_drilling_anim.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 35.0
-						take = 0
-						reverse = false
-					},
-				]
-				default_root_bone_name = ""
-			},
-			{
 				_class = "BoneMarkupList"
 				bone_cull_type = "None"
 			},

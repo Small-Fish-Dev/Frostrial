@@ -141,7 +141,7 @@ namespace Frostrial
 				if ( nextAction <= 0f )
 				{
 
-					Entity nearPlayer = Game.NearestPlayer( Position, 500f ); // TODO Bigger search if you put bait and have rod
+					Entity nearPlayer = Game.NearestPlayer( Position, 400f );
 
 					if ( nearPlayer is Player )
 					{
@@ -151,7 +151,7 @@ namespace Frostrial
 
 						var distance = player.Position.Distance( Position );
 
-						if ( distance <= ( 200 + ( player.UpgradedRod ? 200 : 0 ) + ( player.BaitEffect >= 0 ? 100 : 0 ) ) )
+						if ( distance <= ( 200 + ( player.UpgradedRod ? 125 : 0 ) + ( player.BaitEffect >= 0 ? 75 : 0 ) ) )
 						{
 
 
@@ -208,15 +208,15 @@ namespace Frostrial
 
 			Player player = Fisherman as Player;
 
-			float proMultiplier = 1 + (player.UpgradedRod ? 2.5f : 0) + (player.BaitEffect >= 1.5 ? 2f : 0);
+			float proMultiplier = 1 + (player.UpgradedRod ? 2f : 0) + (player.BaitEffect >= 0 ? 1f : 0);
 
-			float random = Rand.Float( 10 - proMultiplier); // Better chances with better tools
+			float random = Rand.Float( 11 - proMultiplier); // Better chances with better tools
 
 			if( random <= 1f / Rarity )
 			{
 
 				originalRotation = Rotation;
-				freeFromBait = 0.6f / Rarity * ( proMultiplier / 2.5f );
+				freeFromBait = 0.5f / Rarity * ( proMultiplier / 3f );
 				Trapped = true;
 
 				player.FishBaited = true;
