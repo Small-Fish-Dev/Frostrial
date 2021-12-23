@@ -33,6 +33,24 @@ namespace Frostrial
 
 		}
 
+		[ServerCmd( "spawnyeti" )]
+		public static void SpawnYeti()
+		{
+
+			var player = ConsoleSystem.Caller.Pawn as Player;
+
+			var spawnPos = player.Position + player.Rotation.Forward.WithZ( 0f ).Normal * 20f;
+
+			new Yeti()
+			{
+
+				Position = spawnPos,
+				Victim = player as Entity
+
+			};
+
+		}
+
 	}
 
 }
