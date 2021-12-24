@@ -28,9 +28,6 @@ namespace Frostrial
 			pawn.MovementDirection = Rotation.FromYaw( yaw );
 		}
 
-		private AmbientWindVMix vMix = new();
-		private MusicPlayer musicPlayer = new();
-
 		public override void Respawn()
 		{
 			SetModel( "models/jorma/jorma.vmdl" );
@@ -57,16 +54,7 @@ namespace Frostrial
 
 			BasicClothes();
 
-			ClientSide();
-
 			base.Respawn();
-		}
-
-		[ClientRpc]
-		protected void ClientSide()
-		{
-			// TODO: Dear Ubre, please call this function right after the intro cutscene ends. Thanks! - Ivan
-			musicPlayer.Initialize();
 		}
 
 		public override void Simulate( Client cl )
@@ -82,14 +70,6 @@ namespace Frostrial
 			HandleItems();
 			HandleFishing();
 			HandleShopping();
-
-			if ( IsClient )
-			{
-				vMix.Update( 1 - Warmth, Game.IsOnIce( Position ), Position.Distance( Game.HutEntity?.Position ?? Vector3.Zero ) < 200f );
-				vMix.Tick();
-
-				musicPlayer.Tick();
-			}
 		}
 
 		public override void OnKilled()

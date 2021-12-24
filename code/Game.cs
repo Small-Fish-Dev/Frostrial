@@ -29,6 +29,9 @@ namespace Frostrial
 
 		public static Dictionary<string, float> Prices = new();
 
+		private AmbientWindVMix vMix = new();
+		private MusicPlayer musicPlayer = new();
+
 		public Game()
 		{
 
@@ -80,7 +83,6 @@ namespace Frostrial
 				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
 				InteractionsText.Add( "DeadFish", "Interact to pick up the Dead Fish." );
 				InteractionsText.Add( "FishAuPoopooCaca", "Interact to pick up the Fish Au Poopoo Caca." );
-
 			}
 
 			FishNames.Add( "goldfish", "models/fishes/fishshadow.vmdl" );
@@ -150,7 +152,30 @@ namespace Frostrial
 			var player = new Player();
 			client.Pawn = player;
 
+			MusicInitRPC(To.Single(client));
+
 			player.Respawn();
+		}
+
+		[ClientRpc]
+		protected void MusicInitRPC()
+		{
+			musicPlayer.Initialize();
+		}
+
+		public override void Simulate( Client cl )
+		{
+			base.Simulate( cl );
+
+			if ( IsServer )
+				return;
+
+			var player = cl.Pawn as Player;
+
+			vMix.Update( 1 - player.Warmth, Game.IsOnIce( Position ), Position.Distance( HutEntity?.Position ?? Vector3.Zero ) < 200f );
+			vMix.Tick();
+
+			musicPlayer.Tick();
 		}
 
 		public static bool IsOnIce( Vector3 position )
@@ -194,7 +219,7 @@ namespace Frostrial
 
 		}
 
-		public static float CalcValue( string species, float size, bool variant, float variantWeight)
+		public static float CalcValue( string species, float size, bool variant, float variantWeight )
 		{
 
 			float sizeRatio = size / Game.FishSizes[species] + 0.5f;
