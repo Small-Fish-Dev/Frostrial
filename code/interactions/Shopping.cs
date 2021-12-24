@@ -31,6 +31,8 @@ namespace Frostrial
 					Game.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
 					Curtains = true;
 
+					Hint( "", 7, true );
+
 				}
 
 				if ( JumpscareTimer <= -9 )

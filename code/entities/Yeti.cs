@@ -46,6 +46,8 @@ namespace Frostrial
 					player.Jumpscare = 1;
 					player.JumpscareTimer = 4f;
 
+					player.Hint( "", 4, true );
+
 					PlayCreep( false );
 
 				}
@@ -74,6 +76,8 @@ namespace Frostrial
 						player.BlockMovement = true;
 
 						player.Jumpscare = 2;
+
+						player.Hint( "", 7, true ); // Keep him quiet during the cutscene
 
 						PlayCreep( true );
 

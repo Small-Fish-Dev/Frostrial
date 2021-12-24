@@ -46,9 +46,14 @@ namespace Frostrial
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
 
+			SpawnedSince = 0f;
+			BlockMovement = false;
+
 			CaughtFish = new();
 
 			Money = Rand.Float( 0f, 3f );
+
+			Hint( "", 4, true );
 
 			BasicClothes();
 
