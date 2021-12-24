@@ -294,12 +294,12 @@ namespace Frostrial
 			Parent.Style.PointerEvents = player.ShopOpen ? "all" : "visible";
 			Style.Opacity = player.ShopOpen ? 1 : 0;
 
-			baitText.Text = $"( ${Game.Prices["bait"]} ) Buy Bait ({player.Baits})";
-			campfireText.Text = $"( ${Game.Prices["campfire"]} ) Buy Campfire ({player.Campfires})";
-			coatText.Text = player.UpgradedCoat ? "[BOUGHT]" : $"( ${Game.Prices["coat"]} ) Upgrade Coat";
-			drillText.Text = player.UpgradedDrill ? "[BOUGHT]" : $"( ${Game.Prices["drill"]} ) Upgrade Drill";
-			rodText.Text = player.UpgradedRod ? "[BOUGHT]" :  $"( ${Game.Prices["rod"]} ) Upgrade Rod";
-			planeText.Text = $"( ${Game.Prices["plane"]} ) Buy Plane Ticket";
+			baitText.Text = $"( €{Game.Prices["bait"]} ) Buy Bait ({player.Baits})";
+			campfireText.Text = $"( €{Game.Prices["campfire"]} ) Buy Campfire ({player.Campfires})";
+			coatText.Text = player.UpgradedCoat ? "[BOUGHT]" : $"( €{Game.Prices["coat"]} ) Upgrade Coat";
+			drillText.Text = player.UpgradedDrill ? "[BOUGHT]" : $"( €{Game.Prices["drill"]} ) Upgrade Drill";
+			rodText.Text = player.UpgradedRod ? "[BOUGHT]" :  $"( €{Game.Prices["rod"]} ) Upgrade Rod";
+			planeText.Text = $"( €{Game.Prices["plane"]} ) Buy Plane Ticket";
 
 		}
 

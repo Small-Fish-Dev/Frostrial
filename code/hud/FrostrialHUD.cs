@@ -174,12 +174,12 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 
 			double text = Math.Round( player.Money, 2 );
-			moneyTitle.Text = $"$ { text }";
+			moneyTitle.Text = $"€ { text }";
 
 			float lastProfit = (float)Math.Round( player.LastProfit, 2 );
 
-			moreMoneyTitle.Text = player.LastProfit > 0 ? $"$+{lastProfit}" : "" ;
-			lessMoneyTitle.Text = player.LastProfit < 0 ? $"${lastProfit}" : "" ;
+			moreMoneyTitle.Text = player.LastProfit > 0 ? $"€+{lastProfit}" : "" ;
+			lessMoneyTitle.Text = player.LastProfit < 0 ? $"€{lastProfit}" : "" ;
 
 			moreMoneyTitle.Style.Opacity = player.ProfitTime;
 			lessMoneyTitle.Style.Opacity = player.ProfitTime;
