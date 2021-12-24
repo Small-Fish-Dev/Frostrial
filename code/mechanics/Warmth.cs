@@ -26,10 +26,10 @@ namespace Frostrial
 
 			}
 
-			if ( hutDistance <= 400f )
+			if ( Game.IsInside( Position, new Vector3( -1395, -2745, 0 ), new Vector3( -1164, -2394, 40 ) ) )
 			{
 
-				ColdMultiplier -= ( 1f - hutDistance / 400f ) * 7f;
+				ColdMultiplier -= 7;
 
 			}
 
@@ -40,12 +40,7 @@ namespace Frostrial
 
 			}
 
-			if ( Game.IsInside( Position, new Vector3( -1395, -2745, 0 ), new Vector3( -1164, -2394, 40 ) ) )
-			{
-
-				ColdMultiplier -= 7;
-
-			}
+			ColdMultiplier -= (1f - Game.CampfireDistance( Position, 240 ) / 240) * 7;
 
 			ColdMultiplier += Velocity.Length / 150f / ( UpgradedCoat ? 2 : 1 ) ; // The faster you move, the colder you get. So people don't venture out too far without upgrading
 
