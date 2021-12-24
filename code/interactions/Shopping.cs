@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 
 namespace Frostrial
 {
@@ -15,6 +16,7 @@ namespace Frostrial
 		[Net] public bool UpgradedCoat { get; set; } = false;
 		[Net] public float LastProfit { get; set; } = 0f;
 		[Net] public RealTimeUntil ProfitTime { get; set; } = 0f;
+		[Net] public bool MultiItems { get; set; } = false;
 
 		public void HandleShopping()
 		{
@@ -57,6 +59,8 @@ namespace Frostrial
 
 			}
 
+			MultiItems = Input.Down( InputButton.Run );
+
 		}
 
 		[ServerCmd]
@@ -76,11 +80,13 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["bait"] )
+			int totalBought = player.MultiItems ? (int)Math.Min( (int)player.Money / Game.Prices["bait"], 10 ) : 1;
+
+			if ( player.Money >= Game.Prices["bait"] * totalBought )
 			{
 
-				player.Baits++;
-				player.AddMoney( -Game.Prices["bait"] );
+				player.Baits += totalBought;
+				player.AddMoney( -Game.Prices["bait"] * totalBought );
 
 			}
 
@@ -92,11 +98,13 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			if ( player.Money >= Game.Prices["campfire"] )
+			int totalBought = player.MultiItems ? (int) Math.Min( (int)player.Money / Game.Prices["campfire"], 10 ) : 1;
+
+			if ( player.Money >= Game.Prices["campfire"] * totalBought )
 			{
 
-				player.Campfires++;
-				player.AddMoney( -Game.Prices["campfire"] );
+				player.Campfires += totalBought;
+				player.AddMoney( -Game.Prices["campfire"] * totalBought );
 
 			}
 

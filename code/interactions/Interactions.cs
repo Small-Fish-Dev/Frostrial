@@ -107,7 +107,7 @@ namespace Frostrial
 
 							selectedEntity.Delete();
 
-							AddMoney( 21f );
+							AddMoney( 19.84f );
 
 							Hint( "I can always count on French Cuisine", 2.5f );
 							PlayClick();

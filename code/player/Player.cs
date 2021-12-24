@@ -51,7 +51,7 @@ namespace Frostrial
 
 			CaughtFish = new();
 
-			Money = Rand.Float( 0f, 3f );
+			Money = Rand.Float( 4f, 12f );
 
 			Hint( "", 4, true );
 

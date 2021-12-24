@@ -139,7 +139,7 @@ namespace Frostrial
 			if ( player.ShopOpen )
 			{
 
-				text = "Buy items or Upgrades";
+				text = "Buy items or Upgrades ( Hold SHIFT to buy 10 )";
 
 			}
 
