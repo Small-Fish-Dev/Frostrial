@@ -14,6 +14,7 @@ namespace Frostrial
 		public string Song { get; set; }
 		public float Length { get; set; }
 		public string URL { get; set; }
+		public string AlbumCover { get; set; }
 
 		protected override void PostLoad()
 		{
