@@ -33,10 +33,6 @@ namespace Frostrial
 			crate.SetMaterialGroup( 1 );
 			crate.Position = Position + Vector3.Up * 12;
 
-			ModelEntity floor = new ModelEntity( "models/randommodels/cabin_floor.vmdl" );
-			floor.Position = Position;
-			floor.Rotation = Rotation.FromYaw( -90 );
-
 		}
 
 		public override void ClientSpawn()
