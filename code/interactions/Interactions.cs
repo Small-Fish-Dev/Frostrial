@@ -102,6 +102,17 @@ namespace Frostrial
 
 						}
 
+						if ( selectedEntity is FishAuPoopooCaca )
+						{
+
+							selectedEntity.Delete();
+
+							AddMoney( 21f );
+
+							Hint( "I can always count on French Cuisine", 2.5f );
+							PlayClick();
+
+						}
 
 						if ( selectedEntity is Hut )
 						{

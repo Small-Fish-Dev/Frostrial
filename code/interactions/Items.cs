@@ -8,8 +8,8 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public int Baits { get; set; } = 5;
-		[Net] public int Campfires { get; set; } = 3;
+		[Net] public int Baits { get; set; } = 0;
+		[Net] public int Campfires { get; set; } = 0;
 		[Net] public RealTimeUntil BaitEffect { get; set; } = 0;
 		[Net] public bool ItemsOpen { get; set; } = false;
 		[Net] public bool PlacingCampfire { get; set; } = false;

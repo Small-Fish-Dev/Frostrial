@@ -264,7 +264,6 @@ namespace Frostrial
 			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 ); // TODO it spawns in the middle of the map! what?!
 			
 
-
 		}
 
 	}

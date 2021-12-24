@@ -79,6 +79,7 @@ namespace Frostrial
 				InteractionsText.Add( "YetiHand", "Interact to pick up the Yeti Hand." );
 				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
 				InteractionsText.Add( "DeadFish", "Interact to pick up the Dead Fish." );
+				InteractionsText.Add( "FishAuPoopooCaca", "Interact to pick up the Fish Au Poopoo Caca." );
 
 			}
 

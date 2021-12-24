@@ -73,6 +73,8 @@ namespace Frostrial
 
 						player.Jumpscare = 2;
 
+						PlayCreep();
+
 					}
 
 					if ( player.JumpscareTimer <= -4f )
@@ -94,6 +96,14 @@ namespace Frostrial
 			Position += Velocity * Time.Delta;
 
 			SetAnimFloat( "move_x", Velocity.Length / Scale );
+
+		}
+
+		[ClientRpc]
+		public static void PlayCreep()
+		{
+
+			Sound.FromScreen( "yeti_window" );
 
 		}
 
