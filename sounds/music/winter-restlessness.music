@@ -7,5 +7,6 @@
 		song = "Winter Restlessness"
 		length = 609
 		url = "https://cryochamber.bandcamp.com/album/winter-restlessness"
+		albumcover = "winter-restlessness.jpg"
 	}
 }

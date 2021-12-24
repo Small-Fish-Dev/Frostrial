@@ -7,5 +7,6 @@
 		song = "Subtotem"
 		length = 434
 		url = "https://cryochamber.bandcamp.com/album/shortwave-ruins"
+		albumcover = "shortwave-ruins.png"
 	}
 }

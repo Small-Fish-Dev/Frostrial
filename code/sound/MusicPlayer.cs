@@ -95,8 +95,7 @@ namespace Frostrial
 
 		protected void NowPlaying( Music m )
 		{
-			// TODO:
-			Log.Info( $"Now playing: {m.Song} from {m.Album} by {m.Artist} ({m.URL})" );
+			Event.Run<Music>( "frostrial.next_song", m );
 		}
 	}
 }
