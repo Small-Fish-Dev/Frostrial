@@ -32,6 +32,17 @@
 							},
 						]
 					},
+					{
+						_class = "MaterialGroup"
+						name = "poo"
+						remaps = 
+						[
+							{
+								from = "models/fishes/perch/perch.vmat"
+								to = "models/fishes/perch/perch_poo.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
