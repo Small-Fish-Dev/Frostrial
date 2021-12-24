@@ -46,6 +46,8 @@ namespace Frostrial
 					player.Jumpscare = 1;
 					player.JumpscareTimer = 4f;
 
+					PlayCreep( false );
+
 				}
 
 				if ( player.JumpscareTimer <= 0f )
@@ -73,7 +75,7 @@ namespace Frostrial
 
 						player.Jumpscare = 2;
 
-						PlayCreep();
+						PlayCreep( true );
 
 					}
 
@@ -82,6 +84,9 @@ namespace Frostrial
 
 						player.BlockMovement = false;
 						player.Jumpscare = 0;
+
+						player.Hint( "********* ! ! !", 2, true );
+
 						Delete();
 
 					}
@@ -100,10 +105,10 @@ namespace Frostrial
 		}
 
 		[ClientRpc]
-		public static void PlayCreep()
+		public static void PlayCreep( bool window )
 		{
 
-			Sound.FromScreen( "yeti_window" );
+			Sound.FromScreen( window ? "yeti_window" : "yeti_jumpscare");
 
 		}
 

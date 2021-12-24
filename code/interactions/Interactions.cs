@@ -9,8 +9,8 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		public float InteractionRange { get; set; } = 80f;
-		public float InteractionMaxDistance { get; set; } = 100f;
+		public float InteractionRange { get; set; } = 40f;
+		public float InteractionMaxDistance { get; set; } = 120f;
 
 		public void HandleInteractions()
 		{
