@@ -27,6 +27,8 @@ namespace Frostrial
 			fire.Position = Position + Vector3.Up * 12;
 			fire.EnableShadowCasting = false;
 
+			Sound.FromEntity( "campfire", fire );
+
 			ModelEntity crate = new ModelEntity( "models/randommodels/crate.vmdl" );
 			crate.SetMaterialGroup( 1 );
 			crate.Position = Position + Vector3.Up * 12;

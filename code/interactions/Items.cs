@@ -153,6 +153,7 @@ namespace Frostrial
 			Add.Panel( "Close" ).Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.CloseItems();
 
 			} ).Add.Label( "Close", "title" );
@@ -160,6 +161,7 @@ namespace Frostrial
 			baitButton = itemPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.BaitSelected();
 
 			} );
@@ -170,6 +172,7 @@ namespace Frostrial
 
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.CampfireSelected();
 
 			} );

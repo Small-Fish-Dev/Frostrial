@@ -1,9 +1,6 @@
 RootPanel {
 	pointer-events: visible;
 	display: flex;
-	position: absolute;
-	top: 0;
-	left: 0;
 	height: 100%;
 	width: 100%;
 	flex-direction: column;
@@ -365,5 +362,49 @@ RootPanel {
 		background-size: 101%;
 		background-repeat: no-repeat;
 		opacity: 0; // We need to start with it already on
+	}
+
+	NowPlaying {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		flex-direction: row;
+		background-color: rgba(255, 255, 255, 0.25);
+		backdrop-filter: blur(15px);
+		height: 128px;
+		border-top-right-radius: 32px;
+		transition: all 2s ease-in;
+		transform: translateY(0%);
+
+		&:intro {
+			transform: translateY(100%);
+		}
+
+		&:outro {
+			transform: translateY(100%);
+		}
+
+		Image {
+			height: 100%;
+			aspect-ratio: 1;
+		}
+
+		.info {
+			flex-direction: column;
+			padding: 8px;
+
+			Label {
+				font-size: 18px;
+			}
+
+			.big {
+				font-size: 22px;
+				font-weight: bold;
+			}
+
+			Label:last-child {
+				margin-top: auto;
+			}
+		}
 	}
 }

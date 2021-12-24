@@ -8,5 +8,6 @@
 	song(string) : "Song" :  : ""
 	length(float) : "Length" : 0 : ""
 	url(string) : "URL" :  : ""
+	albumcover(string) : "Album Cover" :  : ""
 ]
 

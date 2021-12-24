@@ -297,6 +297,45 @@ namespace Frostrial
 
 	}
 
+	public class NowPlaying : Panel
+	{
+		Panel InfoContainer;
+		Label Song, Album, Artist, URL;
+		Image AlbumCover;
+
+		RealTimeSince TimeSinceBorn = 0;
+
+		public NowPlaying()
+		{
+		}
+
+		public NowPlaying( Music music ) : this()
+		{
+			AlbumCover = Add.Image( $"/ui/album-covers/{music.AlbumCover}" );
+			InfoContainer = Add.Panel( "info" );
+			{
+				Log.Info( $"Now playing: {music.Song} from {music.Album} by {music.Artist} ({music.URL})" );
+				Song = InfoContainer.Add.Label( "", "big" );
+				Album = InfoContainer.Add.Label();
+				Artist = InfoContainer.Add.Label();
+				URL = InfoContainer.Add.Label();
+
+				Song.Text = music.Song;
+				Album.Text = music.Album;
+				Artist.Text = $"by {music.Artist}";
+				URL.Text = music.URL;
+			}
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( TimeSinceBorn > 5 )
+				Delete();
+		}
+	}
+
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
 
@@ -335,6 +374,13 @@ namespace Frostrial
 
 			pp.FreezeStrength = 1 - player.Warmth;
 
+		}
+
+		[Event("frostrial.next_song")]
+		public void NextSong(Music music)
+		{
+			var np = new NowPlaying( music );
+			RootPanel.AddChild( np );
 		}
 
 	}
