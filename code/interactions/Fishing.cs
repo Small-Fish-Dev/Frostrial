@@ -100,6 +100,8 @@ namespace Frostrial
 					Fishing = false;
 					BlockMovement = false;
 
+					Play3D( "rod_woosh", this );
+
 					removeTools = 0.66f;
 
 					Hole hole = CurrentHole as Hole;

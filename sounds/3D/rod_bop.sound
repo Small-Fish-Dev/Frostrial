@@ -4,12 +4,12 @@
 	{
 		sounds = 
 		[
-			"sounds/3d/footstep_ice1.vsnd",
+			"sounds/3d/rod_throw.vsnd",
 		]
 		ui = false
 		volume = 1.0
 		volumerandom = 0.0
-		pitch = 1.0
+		pitch = 1.5
 		pitchrandom = 0.2
 		distancemax = 4000.0
 		selectionmode = "3"

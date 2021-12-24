@@ -209,6 +209,7 @@ namespace Frostrial
 			Add.Panel( "Close" ).Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.CloseShop();
 
 			} ).Add.Label( "Close", "title" );
@@ -216,6 +217,7 @@ namespace Frostrial
 			baitButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.BuyBait();
 
 			} );
@@ -225,6 +227,7 @@ namespace Frostrial
 			campfireButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.BuyCampfire();
 
 			} );
@@ -234,6 +237,7 @@ namespace Frostrial
 			coatButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.UpgradeCoat();
 
 			} );
@@ -243,6 +247,7 @@ namespace Frostrial
 			drillButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.UpgradeDrill();
 
 			} );
@@ -252,6 +257,7 @@ namespace Frostrial
 			rodButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.UpgradeRod();
 
 			} );
@@ -261,6 +267,7 @@ namespace Frostrial
 			planeButton = shopPanel.Add.Button( "", "button", () =>
 			{
 
+				Sound.FromScreen( "button_click" );
 				Player.CloseShop();
 				Player.Win();
 

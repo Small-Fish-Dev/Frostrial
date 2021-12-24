@@ -38,12 +38,14 @@ namespace Frostrial
 								BlockMovement = true;
 
 								Hint( "Let's see...", 1.2f );
+								PlayClick();
 
 							}
 							else
 							{
 
 								Hint( "Idiot.", 1f );
+								PlayClick();
 
 							}
 
@@ -61,6 +63,9 @@ namespace Frostrial
 							hole.Bobber = true;
 
 							Hint( ".   .   .   .   .", 1f );
+							Play3D( "rod_woosh", this );
+							Play3D( "rod_throw", selectedEntity );
+							PlayClick();
 
 						}
 
@@ -72,6 +77,7 @@ namespace Frostrial
 							AddMoney( 800f );
 
 							Hint( "This Yeti Hand is old, lucky", 2f, true );
+							PlayClick();
 
 						}
 
@@ -82,14 +88,17 @@ namespace Frostrial
 
 							AddMoney( 2500f );
 
-							new Yeti()
+							var yeti = new Yeti()
 							{
 								Position = new Vector3( 3275f, 3511.5f, 8f ),
 								Victim = this as Entity
 
 							};
 
+							Play3D( "yeti_roar", yeti );
+
 							Hint( "It's the Finnish Yeti! I must head back to the cabin!", 4f, true );
+							PlayClick();
 
 						}
 
@@ -101,6 +110,7 @@ namespace Frostrial
 							ShopOpen = true;
 							BlockMovement = true;
 							Hint( "I'm almost there", 2f );
+							PlayClick();
 
 						}
 
@@ -127,6 +137,9 @@ namespace Frostrial
 
 							}
 
+							Play3D( "fish_flop", selectedFish );
+							PlayClick();
+
 							AddMoney( selectedFish.Value );
 
 							selectedFish.Delete();
@@ -139,6 +152,7 @@ namespace Frostrial
 					{
 
 						Hint( "That's too far away!", 2f );
+						PlayClick();
 
 					}
 
@@ -147,10 +161,27 @@ namespace Frostrial
 				{
 
 					Hint( "I hate this place.", 1f );
+					PlayClick();
 
 				}
 
 			}
+
+		}
+
+		[ClientRpc]
+		public static void PlayClick()
+		{
+
+			Sound.FromScreen( "button_click" );
+
+		}
+
+		[ClientRpc]
+		public static void Play3D( string sound, Entity source )
+		{
+
+			Sound.FromEntity( sound, source );
 
 		}
 

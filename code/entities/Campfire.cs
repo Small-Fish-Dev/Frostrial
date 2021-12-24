@@ -26,6 +26,8 @@ namespace Frostrial
 
 			EnableShadowCasting = false;
 
+			Sound.FromEntity( "campfire", this );
+
 		}
 
 		public override void ClientSpawn()

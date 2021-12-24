@@ -246,6 +246,8 @@ namespace Frostrial
 			ragdoll.PhysicsGroup.Velocity = throwDirection + Vector3.Up * 400f;
 			ragdoll.PhysicsGroup.AngularVelocity = Vector3.Cross( throwDirection, Vector3.Up).Normal * -400 ;
 
+			Sound.FromEntity( "buzzing", ragdoll );
+
 			Player player = Fisherman as Player;
 
 			player.CaughtFish.Remove( this );

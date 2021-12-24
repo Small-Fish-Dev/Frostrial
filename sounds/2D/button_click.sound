@@ -7,11 +7,11 @@
 			"sounds/2d/button_click.vsnd",
 		]
 		ui = true
-		volume = 1.0
+		volume = 1.4
 		volumerandom = 0.0
 		pitch = 1.0
-		pitchrandom = 0.2
-		distancemax = 2000.0
+		pitchrandom = 0.1
+		distancemax = 4000.0
 		selectionmode = "3"
 	}
 }
