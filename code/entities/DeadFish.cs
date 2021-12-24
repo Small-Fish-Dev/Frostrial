@@ -52,8 +52,21 @@ namespace Frostrial
 
 			SetModel( Game.FishNames[Species] );
 			SetMaterialGroup( Game.FishAlt[Species] );
-			Scale = 2 * ( Size / Game.FishSizes[Species] );
+			Scale = 2 * (Size / Game.FishSizes[Species]);
 
+		}
+
+		public override void ClientSpawn()
+		{
+
+			base.ClientSpawn();
+
+			if ( Variant )
+			{
+
+				Particles.Create( "particles/rare_fish_particles.vpcf", this );
+
+			}
 
 		}
 
