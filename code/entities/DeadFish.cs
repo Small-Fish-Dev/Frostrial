@@ -61,6 +61,8 @@ namespace Frostrial
 
 			base.ClientSpawn();
 
+			Particles.Create( "particles/basic_fish_flies_particles.vpcf", this );
+
 			if ( Variant )
 			{
 
