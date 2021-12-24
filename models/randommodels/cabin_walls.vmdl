@@ -52,6 +52,10 @@
 								from = "snow.vmat"
 								to = "materials/randommodels/cabin_materials/snow.vmat"
 							},
+							{
+								from = "chimney.vmat"
+								to = "materials/randommodels/chimney.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -77,6 +81,35 @@
 						{
 							exclude_by_default = false
 							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "cabin_chimney"
+						filename = "models/randommodels/cabin_chimney.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 180.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = 
+							[
+								"Cylinder_079",
+								"Cylinder_083",
+								"Cylinder_082",
+								"Cylinder_080",
+								"Cylinder_081",
+								"Cylinder_084",
+								"Cylinder_078",
+								"Cube_013",
+								"Cube_015",
+								"Cube_010",
+							]
 						}
 					},
 				]

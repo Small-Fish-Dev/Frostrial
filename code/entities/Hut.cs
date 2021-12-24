@@ -23,9 +23,13 @@ namespace Frostrial
 
 			Game.HutEntity = this;
 
-			var fire = new ModelEntity( "models/randommodels/campfire.vmdl" );
+			var fire = new ModelEntity( "models/randommodels/cabin_chimney_base.vmdl" );
 			fire.Position = Position + Vector3.Up * 12;
 			fire.EnableShadowCasting = false;
+
+			ModelEntity crate = new ModelEntity( "models/randommodels/crate.vmdl" );
+			crate.SetMaterialGroup( 1 );
+			crate.Position = Position + Vector3.Up * 12;
 
 			ModelEntity floor = new ModelEntity( "models/randommodels/cabin_floor.vmdl" );
 			floor.Position = Position;
@@ -38,10 +42,10 @@ namespace Frostrial
 
 			base.ClientSpawn();
 
-			Particles.Create( "particles/fire_embers.vpcf", Position + Vector3.Up * 12 );
+			Particles.Create( "particles/fire_embers.vpcf", Position + (Vector3.Up * 15) + (Vector3.Left * 95) );
 
 			light = new PointLightEntity();
-			light.Position = Position + Vector3.Up * 22;
+			light.Position = Position + (Vector3.Up * 25) + (Vector3.Left * 95);
 			light.Color = Color.Orange;
 			light.DynamicShadows = true;
 
