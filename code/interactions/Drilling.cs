@@ -49,7 +49,7 @@ namespace Frostrial
 
 					holePosition = Position + Input.Rotation.Forward.WithZ( 0f ).Normal * 20f;
 
-					if ( Controller.Velocity.LengthSquared < 3 ) // Don't allow the player to make holes while sliding
+					if ( Controller.Velocity.LengthSquared < 10 ) // Don't allow the player to make holes while sliding
 					{
 
 						if( Game.IsOnIce( holePosition ) || Game.IsOnDirt( holePosition ) )

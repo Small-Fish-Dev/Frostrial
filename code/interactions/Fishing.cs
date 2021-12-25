@@ -87,6 +87,7 @@ namespace Frostrial
 
 								}
 
+								FishUI( fish.Species, fish.Variant );
 								fish.Catch();
 
 							}
@@ -141,6 +142,14 @@ namespace Frostrial
 				}
 
 			}
+
+		}
+
+		[ClientRpc]
+		public static void FishUI( string species, bool variant)
+		{
+
+			Event.Run( "frostrial.fish_caught", species, variant );
 
 		}
 

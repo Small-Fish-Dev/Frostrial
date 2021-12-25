@@ -32,7 +32,6 @@ namespace Frostrial
 					Game.CurrentTitle = "Thank you for playing";
 					Game.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
 					Curtains = true;
-
 					Hint( "", 7, true );
 
 				}
@@ -214,7 +213,7 @@ namespace Frostrial
 
 			Player player = Local.Pawn as Player;
 
-			Panel shopPanel = Add.Panel( "Shop" );
+			Panel shopPanel = Add.Panel( "Shop" ).Add.Panel( "container" );
 
 			Add.Panel( "Close" ).Add.Button( "", "button", () =>
 			{

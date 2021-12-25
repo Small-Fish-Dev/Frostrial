@@ -26,6 +26,17 @@ namespace Frostrial
 		public static Dictionary<string, float> FishSizes = new();
 		public static Dictionary<string, float> FishRarity = new();
 		public static Dictionary<string, bool> FishUnlock = new();
+		public static Dictionary<string, string[]> FishPictures = new()
+		{
+			{ "goldfish", new string[2] { "", "" } },
+			{ "minnow", new string[2] { "ui/fishes/minnow.png", "ui/fishes/minnow_gold.png" } },
+			{ "herring", new string[2] { "ui/fishes/herring.png", "ui/fishes/herring_european.png" } },
+			{ "perch", new string[2] { "ui/fishes/perch.png", "ui/fishes/perch_rainbow.png" } },
+			{ "pike", new string[2] { "ui/fishes/pike.png", "ui/fishes/pike_chain.png" } },
+			{ "salmon", new string[2] { "ui/fishes/salmon.png", "ui/fishes/salmon_coho.png" } },
+			{ "trout", new string[2] { "ui/fishes/trout.png", "ui/fishes/trout_gold.png" } },
+			{ "fishaupoopoocaca", new string[2] { "ui/fishes/perch_poo.png", "" } }
+		};
 
 		public static Dictionary<string, float> Prices = new();
 

@@ -109,6 +109,7 @@ namespace Frostrial
 
 							AddMoney( 19.84f );
 
+							FishPoopoo( To.Single(Client) );
 							Hint( "I can always count on French Cuisine", 2.5f );
 							PlayClick();
 
@@ -193,6 +194,14 @@ namespace Frostrial
 		{
 
 			Sound.FromEntity( sound, source );
+
+		}
+
+		[ClientRpc]
+		public static void FishPoopoo()
+		{
+
+			Event.Run( "frostrial.fish_caught", "fishaupoopoocaca", false );
 
 		}
 

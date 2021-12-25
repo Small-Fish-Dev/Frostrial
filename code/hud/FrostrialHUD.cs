@@ -297,6 +297,35 @@ namespace Frostrial
 
 	}
 
+	public class FishCaught : Panel
+	{
+
+		RealTimeSince TimeSinceBorn = 0;
+		public FishCaught() {}
+
+		public FishCaught( string species, bool variant ) : this()
+		{
+
+			Style.ZIndex = (int)Time.Now * 100 + 3;
+			Style.SetBackgroundImage( Game.FishPictures[species][variant ? 1 : 0] );
+
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( TimeSinceBorn > 2 )
+			{
+
+				Delete();
+
+			}
+				
+		}
+
+	}
+
 	public class NowPlaying : Panel
 	{
 		Panel InfoContainer;
@@ -381,6 +410,14 @@ namespace Frostrial
 		{
 			var np = new NowPlaying( music );
 			RootPanel.AddChild( np );
+		}
+
+		[Event( "frostrial.fish_caught" )]
+		public void AddFish( string species, bool variant )
+		{
+
+			var fish = new FishCaught( species, variant );
+			RootPanel.AddChild( fish );
 		}
 
 	}
