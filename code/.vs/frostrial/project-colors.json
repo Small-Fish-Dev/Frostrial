@@ -70,7 +70,17 @@
       "ProjectGuid": "767d8299-fef2-4fef-94d0-7ac68b6e92d9",
       "DisplayName": "frostrial",
       "ColorIndex": 12
+    },
+    "0001fa57-4bb1-4b36-a7f9-82a9e73bf0b5": {
+      "ProjectGuid": "0001fa57-4bb1-4b36-a7f9-82a9e73bf0b5",
+      "DisplayName": "frostrial",
+      "ColorIndex": 13
+    },
+    "a6b5eaf7-1b9b-4756-8e72-6cd31add2037": {
+      "ProjectGuid": "a6b5eaf7-1b9b-4756-8e72-6cd31add2037",
+      "DisplayName": "frostrial",
+      "ColorIndex": 14
     }
   },
-  "NextColorIndex": 13
+  "NextColorIndex": 15
 }
