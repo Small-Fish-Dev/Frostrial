@@ -82,7 +82,7 @@ namespace Frostrial
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( 260 * camera.Zoom - 800 );
+			hintContainer.Style.Top = Length.Pixels( 360 * camera.Zoom - 1000 );
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
 			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
