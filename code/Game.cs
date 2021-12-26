@@ -163,7 +163,7 @@ namespace Frostrial
 			var player = new Player();
 			client.Pawn = player;
 
-			MusicInitRPC(To.Single(client));
+			MusicInitRPC( To.Single(client) );
 
 			player.Respawn();
 		}
@@ -183,7 +183,7 @@ namespace Frostrial
 
 			var player = cl.Pawn as Player;
 
-			vMix.Update( 1 - player.Warmth, Game.IsOnIce( player.Position ), player.Position.Distance( HutEntity?.Position ?? Vector3.Zero ) < 200f );
+			vMix.Update( 1 - player.Warmth, IsOnIce( player.Position ), player.Position.Distance( HutEntity?.Position ?? Vector3.Zero ) < 200f );
 			vMix.Tick();
 
 			musicPlayer.Tick();

@@ -1,6 +1,4 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -12,6 +10,7 @@ namespace Frostrial
 		[Net] public float Size { get; set; } = 0.1f; // Meters
 		[Net] public bool Variant { get; set; } = false;
 		[Net] public float Rarity { get; set; } = 0;
+
 		public float TotalRarity
 		{
 			get
@@ -31,6 +30,8 @@ namespace Frostrial
 
 			}
 		}
+
+		protected Sound BuzzingSound { get; set; }
 
 		public DeadFish()
 		{ }
@@ -53,13 +54,14 @@ namespace Frostrial
 			SetModel( Game.FishNames[Species] );
 			SetMaterialGroup( Variant ? Game.FishAlt[Species] : "default" );
 			Scale = 2 * (Size / Game.FishSizes[Species]);
-
 		}
 
 		public override void ClientSpawn()
 		{
 
 			base.ClientSpawn();
+
+			BuzzingSound = Sound.FromEntity( "buzzing", this );
 
 			Particles.Create( "particles/basic_fish_flies_particles.vpcf", this );
 
@@ -70,6 +72,12 @@ namespace Frostrial
 
 			}
 
+		}
+
+		[ClientRpc]
+		public void StopBuzzing()
+		{
+			BuzzingSound.Stop();
 		}
 
 	}

@@ -1,7 +1,4 @@
 ﻿using Sandbox;
-using System.Collections.Generic;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
 
 namespace Frostrial
 {
@@ -109,7 +106,7 @@ namespace Frostrial
 
 							AddMoney( 19.84f );
 
-							FishPoopoo( To.Single(Client) );
+							FishPoopoo( To.Single( Client ) );
 							Hint( "I can always count on French Cuisine", 2.5f );
 							PlayClick();
 
@@ -154,6 +151,7 @@ namespace Frostrial
 
 							AddMoney( selectedFish.Value );
 
+							selectedFish.StopBuzzing();
 							selectedFish.Delete();
 
 						}
