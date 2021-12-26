@@ -85,7 +85,12 @@
       "ProjectGuid": "65c27c7d-a8f4-4c56-97e4-b81b11df36a5",
       "DisplayName": "frostrial",
       "ColorIndex": 15
+    },
+    "2e56254a-b6d0-4678-8629-29f05f6ffc65": {
+      "ProjectGuid": "2e56254a-b6d0-4678-8629-29f05f6ffc65",
+      "DisplayName": "frostrial",
+      "ColorIndex": 0
     }
   },
-  "NextColorIndex": 0
+  "NextColorIndex": 1
 }

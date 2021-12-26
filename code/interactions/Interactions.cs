@@ -120,6 +120,7 @@ namespace Frostrial
 							BlockMovement = true;
 							Hint( "I'm almost there", 2f );
 							PlayClick();
+							Event.Run( "frostrial.crate_used" );
 
 						}
 

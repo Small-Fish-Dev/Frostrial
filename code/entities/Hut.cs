@@ -10,6 +10,7 @@ namespace Frostrial
 	{
 
 		PointLightEntity light { get; set; }
+		ModelEntity crate;
 
 		public override void Spawn()
 		{
@@ -29,9 +30,11 @@ namespace Frostrial
 
 			Sound.FromEntity( "campfire", fire );
 
-			ModelEntity crate = new ModelEntity( "models/randommodels/crate.vmdl" );
+			crate = new ModelEntity( "models/randommodels/crate.vmdl" );
 			crate.SetMaterialGroup( 1 );
 			crate.Position = Position + Vector3.Up * 12;
+			crate.GlowState = GlowStates.On;
+			crate.GlowColor = new Color( 0.8f, 0.2f, 0.2f );
 
 		}
 
@@ -63,6 +66,14 @@ namespace Frostrial
 			RenderColor = RenderColor.WithAlpha( 1 - (startFadeDistance - distance ) / endFadeDistance );
 
 			light.SetLightBrightness( 20 + (float)Math.Cos( (float)Time.Now * 25 ) * 2 * ( 1 + Time.Now % 1 ) ); // Acceptable flickering
+
+		}
+
+		[Event( "frostrial.crate_used" )]
+		public void CrateUsed()
+		{
+
+			crate.GlowState = GlowStates.Off;
 
 		}
 
