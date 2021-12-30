@@ -9,6 +9,48 @@ namespace Frostrial
 		public float InteractionRange { get; set; } = 40f;
 		public float InteractionMaxDistance { get; set; } = 120f;
 
+		protected override void TickPlayerUse()
+		{
+			if ( !IsServer ) return;
+
+			Entity found = null;
+			using ( Prediction.Off() )
+			{
+				if ( Input.Pressed( InputButton.Attack2 ) )
+				{
+					PlayClick();
+
+					found = FindUsable();
+
+					if (found is WorldEntity)
+					{
+						Hint( "I hate this place.", 1f );
+						return;
+					}
+
+					if (found == null)
+					{
+						Hint( "That's too far away!", 2f );
+						return;
+					}
+				}
+
+				if ( found is IUse use && use.OnUse( this ) )
+					return;
+			}
+		}
+
+		protected override Entity FindUsable()
+		{
+			// First try a direct 0 width line
+			var selectedEntity = Game.NearestInteractiveEntity( MouseWorldPosition, InteractionRange );
+
+			if ( !(selectedEntity is WorldEntity) && selectedEntity.Position.Distance( Position ) < InteractionMaxDistance )
+				return null;
+
+			return selectedEntity;
+		}
+
 		public void HandleInteractions()
 		{
 
@@ -17,7 +59,7 @@ namespace Frostrial
 			if ( Input.Pressed( InputButton.Attack2 ) )
 			{
 
-				var selectedEntity = Game.NearestEntity( MouseWorldPosition, InteractionRange );
+				var selectedEntity = Game.NearestDescribableEntity( MouseWorldPosition, InteractionRange );
 
 				if ( selectedEntity is not WorldEntity )
 				{

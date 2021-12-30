@@ -1,13 +1,12 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System.Collections.Generic;
 using System;
-using System.Numerics;
+using System.Collections.Generic;
 
 namespace Frostrial
 {
-	
+
 	public class HutIndicator : Panel
 	{
 
@@ -28,10 +27,10 @@ namespace Frostrial
 			var hut = Game.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
 			var left = MathX.Clamp( hutScreen.x, 0.21f, 0.75f );
-			var top = MathX.Clamp( hutScreen.y, 0f, 1f);
+			var top = MathX.Clamp( hutScreen.y, 0f, 1f );
 
-			Style.Left = Length.Pixels( ( left - 0.5f ) * 3000 );
-			Style.Top = Length.Pixels( ( top + 0.1f ) * 800 );
+			Style.Left = Length.Pixels( (left - 0.5f) * 3000 );
+			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
 			var camera = player.Camera as IsometricCamera;
@@ -39,7 +38,7 @@ namespace Frostrial
 			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
-			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
+			Style.Opacity = MathX.Clamp( (player.Position.Distance( hut.Position ) - baseDistance) / baseDistance, 0, 1f ) * baseOpacity * (baseOpacity + 1 / baseOpacity * dangerLevel);
 
 			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - hutScreen.x, 0.5 - hutScreen.y ) );
 
@@ -50,7 +49,7 @@ namespace Frostrial
 
 
 		}
-		
+
 	}
 
 	public class Hint : Panel
@@ -78,14 +77,14 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 			IsometricCamera camera = player.Camera as IsometricCamera;
 
-			hintTitle.Text = player.HintText.Truncate( (int)( Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed ) );
+			hintTitle.Text = player.HintText.Truncate( (int)(Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed) );
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
 			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
 			hintTitle.Style.TextStrokeColor = Color.Black;
 			hintContainer.Style.Top = Length.Pixels( 360 * camera.Zoom - 1000 );
 
 			// Don't punish me, RealTimeSince doesn't seem to work when networked
-			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
+			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - (Time.Now - player.HintLifeTime), 0, 1 );
 		}
 
 	}
@@ -99,12 +98,8 @@ namespace Frostrial
 
 		public Interact()
 		{
-
-			Player player = Local.Pawn as Player;
-
 			interactContainer = Add.Panel( "Interact" ).Add.Panel( "InteractContainer" );
 			interactTitle = interactContainer.Add.Label( "Lorem Ipsum", "InteractTitle" );
-
 		}
 
 		public override void Tick()
@@ -112,8 +107,8 @@ namespace Frostrial
 
 			Player player = Local.Pawn as Player;
 
-			string type = Game.NearestEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
-			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : "";
+			string type = Game.NearestDescribableEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
+			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : ""; // TODO: use ent.Description instead
 
 			if ( player.PlacingCampfire )
 			{
@@ -153,37 +148,65 @@ namespace Frostrial
 	{
 		Panel moneyContainer;
 		Label moneyTitle;
-		Label moreMoneyTitle;
-		Label lessMoneyTitle;
+		Label moneyDifferenceTitle;
+		Label secondaryMoneyDifferenceTitle;
+
+		float currentDifference = 0;
+		float secondaryDifference = 0;
+
+		RealTimeUntil ProfitTime { get; set; } = 0f;
 
 		public Money()
 		{
-
-			Player player = Local.Pawn as Player;
-
 			moneyContainer = Add.Panel( "Money" ).Add.Panel( "moneyContainer" );
-			moneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moneyTitle" );
-			moreMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moreMoney" );
-			lessMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "lessMoney" );
-
+			moneyTitle = moneyContainer.Add.Label( "€0", "moneyTitle" );
+			moneyDifferenceTitle = moneyContainer.Add.Label( "", "difference" );
+			secondaryMoneyDifferenceTitle = moneyContainer.Add.Label( "", "difference secondary" );
 		}
 
 		public override void Tick()
 		{
+			moneyDifferenceTitle.Style.Opacity = ProfitTime;
+			secondaryMoneyDifferenceTitle.Style.Opacity = ProfitTime;
+		}
 
+		[Event( "frostrial.money" )]
+		protected void MoneyEvent( float difference )
+		{
+			Log.Info( "money event!!!" );
+			if ( ProfitTime <= 0 )
+				currentDifference = 0;
+
+			secondaryDifference = difference;
+			currentDifference += difference;
+			ProfitTime = 2f;
+
+			RenderMoney();
+		}
+
+		protected void RenderMoney()
+		{
 			Player player = Local.Pawn as Player;
 
-			double text = Math.Round( player.Money, 2 );
-			moneyTitle.Text = $"€ { text }";
+			moneyTitle.Text = $"€ { Math.Round( player.Money, 2 ) }";
 
-			float lastProfit = (float)Math.Round( player.LastProfit, 2 );
+			moneyDifferenceTitle.Text = MoneyToString( currentDifference );
+			secondaryMoneyDifferenceTitle.Text = secondaryDifference != currentDifference
+				? $"({MoneyToString( secondaryDifference )})"
+				: "";
 
-			moreMoneyTitle.Text = player.LastProfit > 0 ? $"€+{lastProfit}" : "" ;
-			lessMoneyTitle.Text = player.LastProfit < 0 ? $"€{lastProfit}" : "" ;
+			ChangePanelClasses( moneyDifferenceTitle, currentDifference );
+			ChangePanelClasses( secondaryMoneyDifferenceTitle, secondaryDifference );
+		}
 
-			moreMoneyTitle.Style.Opacity = player.ProfitTime;
-			lessMoneyTitle.Style.Opacity = player.ProfitTime;
+		protected void ChangePanelClasses( Panel p, float value )
+		{
+			p.SetClass( "negative", value < 0 );
+		}
 
+		protected string MoneyToString( float value )
+		{
+			return $"€{(value > 0 ? "+" : "")}{Math.Round( value, 2 )}";
 		}
 
 	}
@@ -207,8 +230,8 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 			var pos = player.Position;
 			mapPanel.SetClass( "open", player.OpenMap );
-			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
-			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( (pos.x - 550) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
+			playerPanel.Style.Top = Length.Fraction( Math.Clamp( (-pos.y - 500) / 10000 + 0.5f, 0.03f, 0.9f ) );
 
 		}
 
@@ -264,10 +287,10 @@ namespace Frostrial
 			var player = Local.Pawn as Player;
 			float opacity = 0;
 
-			switch (player.Jumpscare)
+			switch ( player.Jumpscare )
 			{
 
-				case  0:
+				case 0:
 					opacity = 0;
 					break;
 				case 1:
@@ -301,7 +324,7 @@ namespace Frostrial
 	{
 
 		RealTimeSince TimeSinceBorn = 0;
-		public FishCaught() {}
+		public FishCaught() { }
 
 		public FishCaught( string species, bool variant ) : this()
 		{
@@ -321,7 +344,7 @@ namespace Frostrial
 				Delete();
 
 			}
-				
+
 		}
 
 	}
@@ -405,8 +428,8 @@ namespace Frostrial
 
 		}
 
-		[Event("frostrial.next_song")]
-		public void NextSong(Music music)
+		[Event( "frostrial.next_song" )]
+		public void NextSong( Music music )
 		{
 			var np = new NowPlaying( music );
 			RootPanel.AddChild( np );
@@ -432,9 +455,9 @@ namespace Frostrial
 		[Net] public float? ForceUnskippable { get; set; }
 		public bool Curtains { get; set; } = true;
 		public bool OpenMap { get; set; } = false;
-		[Net] public RealTimeSince SpawnedSince { get; set; } = 0f; 
+		[Net] public RealTimeSince SpawnedSince { get; set; } = 0f;
 
-		public void Hint( string text, float duration = 1f, bool unskippable = false) // "Unskippable" dialog will be skipped by other unskippale dialogs
+		public void Hint( string text, float duration = 1f, bool unskippable = false ) // "Unskippable" dialog will be skipped by other unskippale dialogs
 		{
 
 			if ( ForceUnskippable == null || Time.Now >= ForceUnskippable )

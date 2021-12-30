@@ -48,25 +48,27 @@ namespace Frostrial
 
 			CaughtFish = new();
 
-			Money = Rand.Float( 4f, 12f );
-
 			Hint( "", 4, true );
 
 			BasicClothes();
 
 			base.Respawn();
+
+			//
+
+			AddMoney( Rand.Float( 4f, 12f ) );
 		}
 
 		public override void Simulate( Client cl )
 		{
 			base.Simulate( cl );
 
+			TickPlayerUse();
 			SimulateActiveChild( cl, ActiveChild );
 
 			HandleDrilling();
 			HandleWarmth();
 			HandleHUD();
-			HandleInteractions();
 			HandleItems();
 			HandleFishing();
 			HandleShopping();

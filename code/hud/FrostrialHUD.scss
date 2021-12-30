@@ -84,60 +84,36 @@ RootPanel {
 
 	Money {
 		position: absolute;
-		top: 0%;
-		left: 1%;
-		height: 10%;
-		display: flex;
-		flex-shrink: 0;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
+		top: 0;
+		left: 0;
+		padding: 16px;
 		opacity: 0.8;
 
 		.MoneyContainer {
-			left: 2%;
-			align-items: center;
+			align-items: flex-start;
 			justify-content: flex-start;
+			flex-direction: column;
+			font-family: Georgia;
 
 			.moneyTitle {
-				font-family: Georgia;
 				color: white;
 				font-size: 60px;
 				text-stroke: 5px #110c2e;
 			}
 
-			.moreMoney {
-				position: absolute;
-				font-family: Georgia;
-				font-size: 60px;
+			.difference {
 				color: #0cf251;
 				text-stroke: 5px #04523c;
-				top: 100%;
-
-				&:intro {
-					transform: translateY(100%);
-				}
-
-				&:outro {
-					transform: translateY(100%);
-				}
+				font-size: 60px;
 			}
 
-			.lessMoney {
-				position: absolute;
-				font-family: Georgia;
-				font-size: 60px;
+			.secondary {
+				font-size: 30px;
+			}
+
+			.negative {
 				color: #e81336;
 				text-stroke: 5px #4d0521;
-				top: 100%;
-
-				&:intro {
-					transform: translateY(100%);
-				}
-
-				&:outro {
-					transform: translateY(100%);
-				}
 			}
 		}
 	}
