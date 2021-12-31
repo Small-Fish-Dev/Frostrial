@@ -7,12 +7,12 @@ namespace Frostrial
 		public float AngleChangeDelay => 0.2f;
 		public Vector3? PointOfInterest { get; set; } = null;
 
-		Vector3 PositionBeforeZoomOut = new();
+		Vector3 PositionBeforeZoomOut = Vector3.Zero;
+		Vector3 PreviousInputDirection = Vector3.Zero;
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 30, 90, 0 );
 		Rotation TargetRotation = new();
 		public float Zoom = 0.7f; // Sorry I need this!
-		bool hasNewAngle = false;
 
 		public IsometricCamera()
 		{
@@ -89,7 +89,6 @@ namespace Frostrial
 					TargetRotation = TargetAngles.ToRotation();
 
 					LastAngleChange = 0;
-					hasNewAngle = true;
 
 					Sound.FromScreen( "camera_crank" );
 				}
@@ -101,20 +100,20 @@ namespace Frostrial
 			}
 
 
-			if ( ( Local.Pawn as Player ) is var player && player != null && !player.BlockMovement )
+			if ( Local.Pawn is Player player && player.IsValid && !player.BlockMovement )
 			{
 				// add the view move
-				input.ViewAngles = Rotation.LookAt((player.MouseWorldPosition - player.Position).WithZ(0), Vector3.Up).Angles();
+				input.ViewAngles = Rotation.LookAt( (player.MouseWorldPosition - player.Position).WithZ( 0 ), Vector3.Up ).Angles();
 				input.ViewAngles.roll = 0;
 			}
 
 			// Just copy input as is
 			input.InputDirection = input.AnalogMove;
 
-			if ( hasNewAngle && input.InputDirection.IsNearZeroLength ) // if the player have stopped moving
+			if ( input.InputDirection.Distance( PreviousInputDirection ) > 0.1 ) // if the player has changed the input direction
 			{
 				Player.ChangeMovementDirection( TargetAngles.yaw ); // change the angle
-				hasNewAngle = false;
+				PreviousInputDirection = input.InputDirection;
 			}
 		}
 	}
