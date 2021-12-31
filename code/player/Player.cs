@@ -2,7 +2,7 @@
 
 namespace Frostrial
 {
-	partial class Player : Sandbox.Player
+	partial class Player : Sandbox.Player, IUse
 	{
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 90, 0 ).ToRotation();
 		[Net, Local] public bool BlockMovement { get; set; } = false;
@@ -81,6 +81,22 @@ namespace Frostrial
 
 		}
 
+		public bool OnUse( Entity user )
+		{
+			if (user == this)
+			{
+				ItemsOpen = true;
+				BlockMovement = true;
+
+				Hint( "Let's see...", 1.2f );
+			}
+			else
+				Hint( "Idiot.", 1f );
+
+			return true;
+		}
+
+		public bool IsUsable( Entity user ) => true;
 	}
 
 }

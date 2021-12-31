@@ -6,8 +6,22 @@ namespace Frostrial
 
 	[Library( "frostrial_yeti_hand", Description = "Incredibly rare!!!" )]
 	[Hammer.EditorModel( "models/treasures/yeti_hand.vmdl" )]
-	public partial class YetiHand : AnimEntity
+	public partial class YetiHand : AnimEntity, IUse
 	{
+		bool canUse = true;
+		public bool IsUsable( Entity user ) => canUse;
+
+		public bool OnUse( Entity user )
+		{
+			canUse = false; // probably dodging some kind of race state or something
+
+			var p = user as Player;
+			p.AddMoney( 800f );
+			p.Hint( "This Yeti Hand is old, lucky", 2f, true );
+			Delete();
+
+			return true;
+		}
 
 		public override void Spawn()
 		{

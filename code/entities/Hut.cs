@@ -6,7 +6,7 @@ namespace Frostrial
 
 	[Library( "frostrial_hut", Description = "main base" )]
 	[Hammer.EditorModel( "models/randommodels/cabin_walls.vmdl" )]
-	public partial class Hut : AnimEntity
+	public partial class Hut : AnimEntity, IUse
 	{
 
 		PointLightEntity light { get; set; }
@@ -77,6 +77,20 @@ namespace Frostrial
 
 		}
 
+		public bool OnUse( Entity user )
+		{
+			var p = user as Player;
+
+			p.ShopOpen = true;
+			p.BlockMovement = true;
+			p.Hint( "I'm almost there", 2f );
+
+			Event.Run( "frostrial.crate_used" );
+
+			return true;
+		}
+
+		public bool IsUsable( Entity user ) => true;
 	}
 
 }

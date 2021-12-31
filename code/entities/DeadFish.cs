@@ -3,8 +3,42 @@
 namespace Frostrial
 {
 
-	public partial class DeadFish : ModelEntity
+	public partial class DeadFish : ModelEntity, IUse
 	{
+		bool canUse = true;
+		public bool IsUsable( Entity user ) => canUse;
+
+		public bool OnUse( Entity user )
+		{
+			canUse = false; // probably dodging some kind of race state or something
+
+			var p = user as Player;
+			switch ( Rarity )
+			{
+
+				case <= 0.3f:
+					p.Hint( "This isn't going to cut it", 1.7f );
+					break;
+
+				case <= 0.6f:
+					p.Hint( "There we go!", 1f );
+					break;
+
+				case > 0.6f:
+					p.Hint( "That's a big one!", 1.2f );
+					break;
+
+			}
+
+			Player.Play3D( "fish_flop", this );
+
+			p.AddMoney( Value );
+
+			StopBuzzing();
+			Delete();
+
+			return true;
+		}
 
 		[Net] public string Species { get; set; } = "goldfish";
 		[Net] public float Size { get; set; } = 0.1f; // Meters
