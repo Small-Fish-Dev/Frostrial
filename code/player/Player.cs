@@ -2,7 +2,7 @@
 
 namespace Frostrial
 {
-	partial class Player : Sandbox.Player, IUse
+	partial class Player : Sandbox.Player, IUse, IDescription
 	{
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 90, 0 ).ToRotation();
 		[Net, Local] public bool BlockMovement { get; set; } = false;
@@ -20,6 +20,8 @@ namespace Frostrial
 
 			}
 		}
+
+		public string Description => "Interact with yourself to use items.";
 
 		[ServerCmd]
 		public static void ChangeMovementDirection( float yaw )

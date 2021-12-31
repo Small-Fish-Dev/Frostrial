@@ -6,9 +6,12 @@ namespace Frostrial
 
 	[Library( "frostrial_yeti_scalp", Description = "Incredibly rare!!!" )]
 	[Hammer.EditorModel( "models/treasures/scalp.vmdl" )]
-	public partial class YetiScalp : AnimEntity, IUse
+	public partial class YetiScalp : AnimEntity, IUse, IDescription
 	{
 		bool canUse = true;
+
+		public string Description => "Interact to pick up the Yeti Scalp.";
+
 		public bool IsUsable( Entity user ) => canUse;
 
 		public bool OnUse( Entity user )

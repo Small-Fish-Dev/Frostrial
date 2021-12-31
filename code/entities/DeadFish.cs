@@ -3,7 +3,7 @@
 namespace Frostrial
 {
 
-	public partial class DeadFish : ModelEntity, IUse
+	public partial class DeadFish : ModelEntity, IUse, IDescription
 	{
 		bool canUse = true;
 		public bool IsUsable( Entity user ) => canUse;
@@ -66,6 +66,8 @@ namespace Frostrial
 		}
 
 		protected Sound BuzzingSound { get; set; }
+
+		public string Description => "Interact to pick up the Dead Fish.";
 
 		public DeadFish()
 		{ }

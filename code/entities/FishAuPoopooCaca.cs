@@ -6,9 +6,12 @@ namespace Frostrial
 
 	[Library( "frostrial_fish_au_poopoo_caca", Description = "What the hell is this" )]
 	[Hammer.EditorModel( "models/fishes/perch/perch.vmdl" )]
-	public partial class FishAuPoopooCaca : AnimEntity, IUse
+	public partial class FishAuPoopooCaca : AnimEntity, IUse, IDescription
 	{
 		bool canUse = true;
+
+		public string Description => "Interact to pick up the Fish Au Poopoo Caca.";
+
 		public bool IsUsable( Entity user ) => canUse;
 
 		public bool OnUse( Entity user )

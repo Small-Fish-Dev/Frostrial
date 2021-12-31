@@ -6,10 +6,12 @@ namespace Frostrial
 
 	[Library( "frostrial_hut", Description = "main base" )]
 	[Hammer.EditorModel( "models/randommodels/cabin_walls.vmdl" )]
-	public partial class Hut : AnimEntity, IUse
+	public partial class Hut : AnimEntity, IUse, IDescription
 	{
 
 		PointLightEntity light { get; set; }
+		public string Description => "Interact with the hut to buy items and upgrades.";
+
 		ModelEntity crate;
 
 		public override void Spawn()

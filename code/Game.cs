@@ -18,7 +18,6 @@ namespace Frostrial
 		[Net] public static Hut HutEntity { get; set; }
 		[Net] public static string CurrentTitle { get; set; } = "Wake up";
 		[Net] public static string CurrentSubtitle { get; set; } = "";
-		public static Dictionary<string, string> InteractionsText = new();
 
 		public static Dictionary<string, string> FishNames = new();
 		public static Dictionary<string, string> FishAlt = new();
@@ -83,17 +82,6 @@ namespace Frostrial
 				zone5.RarityLevel = 2;
 
 
-			}
-			else
-			{
-
-				InteractionsText.Add( "Hut", "Interact with the hut to buy items and upgrades." );
-				InteractionsText.Add( "Hole", "Interact with this hole to fish." );
-				InteractionsText.Add( "Player", "Interact with yourself to use items." );
-				InteractionsText.Add( "YetiHand", "Interact to pick up the Yeti Hand." );
-				InteractionsText.Add( "YetiScalp", "Interact to pick up the Yeti Scalp." );
-				InteractionsText.Add( "DeadFish", "Interact to pick up the Dead Fish." );
-				InteractionsText.Add( "FishAuPoopooCaca", "Interact to pick up the Fish Au Poopoo Caca." );
 			}
 
 			FishNames.Add( "goldfish", "models/fishes/fishshadow.vmdl" );
@@ -247,7 +235,7 @@ namespace Frostrial
 		{
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
-			Entity currentEntity = PhysicsWorld.WorldBody.Entity; // Technically correct to return the world
+			Entity currentEntity = null;
 			float currentDistance = range;
 
 			foreach ( Entity ent in entityList )

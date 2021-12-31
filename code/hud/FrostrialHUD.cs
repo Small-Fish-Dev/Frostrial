@@ -107,36 +107,18 @@ namespace Frostrial
 
 			Player player = Local.Pawn as Player;
 
-			string type = Game.NearestDescribableEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
-			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : ""; // TODO: use ent.Description instead
+			string text = "";
 
 			if ( player.PlacingCampfire )
-			{
-
 				text = "Click to place down the campfire";
-
-			}
-
-			if ( player.ItemsOpen )
-			{
-
+			else if ( player.ItemsOpen )
 				text = "Select an item to use";
-
-			}
-
-			if ( player.Fishing )
-			{
-
+			else if ( player.Fishing )
 				text = "Let go to catch the fish as it bites";
-
-			}
-
-			if ( player.ShopOpen )
-			{
-
+			else if ( player.ShopOpen )
 				text = "Buy items or Upgrades ( Hold SHIFT to buy 10 )";
-
-			}
+			else if ( Game.NearestDescribableEntity( player.MouseWorldPosition, player.InteractionRange ) is IDescription describable )
+				text = describable.Description;
 
 			interactTitle.Text = text;
 

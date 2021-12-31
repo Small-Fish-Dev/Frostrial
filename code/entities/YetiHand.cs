@@ -6,9 +6,12 @@ namespace Frostrial
 
 	[Library( "frostrial_yeti_hand", Description = "Incredibly rare!!!" )]
 	[Hammer.EditorModel( "models/treasures/yeti_hand.vmdl" )]
-	public partial class YetiHand : AnimEntity, IUse
+	public partial class YetiHand : AnimEntity, IUse, IDescription
 	{
 		bool canUse = true;
+
+		public string Description => "Interact to pick up the Yeti Hand.";
+
 		public bool IsUsable( Entity user ) => canUse;
 
 		public bool OnUse( Entity user )
