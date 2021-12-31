@@ -21,10 +21,10 @@
 		}
 		Sounds = 
 		{
-			FootLeft = "physics.glass.impact"
-			FootRight = "physics.glass.impact"
+			FootLeft = "footstep_ice1"
+			FootRight = "footstep_ice2"
 			FootLaunch = ""
-			FootLand = ""
+			FootLand = "footstep_ice3"
 			Bullet = "impact-bullet-glass"
 			ImpactHard = "physics.glass.impact"
 			ImpactSoft = "physics.glass.impact"
