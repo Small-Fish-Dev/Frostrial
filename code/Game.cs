@@ -188,14 +188,14 @@ namespace Frostrial
 
 		}
 
-		public static bool IsOnDirt( Vector3 position )
+		public static bool IsOnSnow( Vector3 position )
 		{
 
 			var trace = Trace.Ray( position + Vector3.Up * 10f, position + Vector3.Down * 2f )
 			.WorldOnly()
 			.Run();
 
-			return trace.Surface.Name == "dirt";
+			return trace.Surface.Name == "snow";
 
 		}
 

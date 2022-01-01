@@ -52,7 +52,7 @@ namespace Frostrial
 					if ( Controller.Velocity.LengthSquared < 10 ) // Don't allow the player to make holes while sliding
 					{
 
-						if( Game.IsOnIce( holePosition ) || Game.IsOnDirt( holePosition ) )
+						if( Game.IsOnIce( holePosition ) || Game.IsOnSnow( holePosition ) )
 						{
 
 							if( !Game.IsNearEntity( holePosition, 5f ) )
@@ -121,7 +121,7 @@ namespace Frostrial
 							hole.Position = holePosition;
 
 						}
-						else if ( Game.IsOnDirt( holePosition ) )
+						else if ( Game.IsOnSnow( holePosition ) )
 						{
 
 							Baits++;
