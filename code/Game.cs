@@ -241,7 +241,7 @@ namespace Frostrial
 			foreach ( Entity ent in entityList )
 			{
 
-				if ( !(ent is IDescription) ) continue;
+				if ( ent is not IDescription ) continue;
 
 				float entDistance = ent.Position.Distance( position );
 
@@ -269,7 +269,7 @@ namespace Frostrial
 			foreach ( Entity ent in entityList )
 			{
 
-				if ( !(ent is IUse ue) || !ue.IsUsable( Local.Pawn ) ) continue;
+				if ( ent is not IUse ue || !ue.IsUsable( Local.Pawn ) ) continue;
 
 				float entDistance = ent.Position.Distance( position );
 

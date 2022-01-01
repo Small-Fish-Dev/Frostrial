@@ -38,6 +38,7 @@ namespace Frostrial
 			crate.GlowState = GlowStates.On;
 			crate.GlowColor = new Color( 0.8f, 0.2f, 0.2f );
 
+			Tags.Add( "use" );
 		}
 
 		public override void ClientSpawn()

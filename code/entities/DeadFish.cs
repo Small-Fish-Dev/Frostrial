@@ -90,6 +90,8 @@ namespace Frostrial
 			SetModel( Game.FishNames[Species] );
 			SetMaterialGroup( Variant ? Game.FishAlt[Species] : "default" );
 			Scale = 2 * (Size / Game.FishSizes[Species]);
+
+			Tags.Add( "use" );
 		}
 
 		public override void ClientSpawn()

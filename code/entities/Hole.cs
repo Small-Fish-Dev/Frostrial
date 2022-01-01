@@ -47,6 +47,7 @@ namespace Frostrial
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
 
+			Tags.Add( "use" );
 		}
 
 		[Event.Tick]

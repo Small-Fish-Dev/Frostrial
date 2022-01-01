@@ -37,7 +37,7 @@ namespace Frostrial
 			GlowState = GlowStates.On;
 			GlowColor = new Color( 0.3f, 0.07f, 0.07f );
 
-
+			Tags.Add( "use" );
 		}
 
 

@@ -155,7 +155,6 @@ namespace Frostrial
 		[Event( "frostrial.money" )]
 		protected void MoneyEvent( float difference )
 		{
-			Log.Info( "money event!!!" );
 			if ( ProfitTime <= 0 )
 				currentDifference = 0;
 

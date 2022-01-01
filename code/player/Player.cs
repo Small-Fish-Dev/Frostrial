@@ -20,6 +20,21 @@ namespace Frostrial
 
 			}
 		}
+		[Net]
+		public Entity MouseEntityPoint
+		{
+			get
+			{
+
+				var tr = Trace.Ray( Input.Cursor, 5000.0f )
+				.EntitiesOnly()
+				.WithTag( "use" )
+				.Run();
+
+				return tr.Entity;
+
+			}
+		}
 
 		public string Description => "Interact with yourself to use items.";
 
@@ -54,6 +69,8 @@ namespace Frostrial
 
 			BasicClothes();
 
+			Tags.Add( "use" );
+
 			base.Respawn();
 
 			//
@@ -85,7 +102,7 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
-			if (user == this)
+			if ( user == this )
 			{
 				ItemsOpen = true;
 				BlockMovement = true;
