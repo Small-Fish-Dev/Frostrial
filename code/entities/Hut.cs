@@ -20,7 +20,7 @@ namespace Frostrial
 			base.Spawn();
 
 			SetModel( "models/randommodels/cabin_walls.vmdl" );
-			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -100, -170, 0 ), new Vector3( 100, 150, 12 ) );
+			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -15, -15, 0 ), new Vector3( 20, 15, 80 ) );
 
 			Rotation = Rotation.FromYaw( -90 );
 
