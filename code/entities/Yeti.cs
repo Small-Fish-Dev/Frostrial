@@ -36,8 +36,8 @@ namespace Frostrial
 
 			if ( Victim.Position.Distance( Position ) < 40f )
 			{
-
-				Player player = Victim as Player;
+				if ( Victim is not Player player )
+					return;
 
 				if ( player.Jumpscare == 0 )
 				{
@@ -67,7 +67,8 @@ namespace Frostrial
 				if ( Position.Distance( Game.HutEntity.Position ) <= 210 )
 				{
 
-					Player player = Victim as Player;
+					if ( Victim is not Player player )
+						return;
 
 					if ( player.Jumpscare == 0 )
 					{
