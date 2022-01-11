@@ -1,4 +1,6 @@
 {
+	"sharedassets": "*.*",
+	"type": "game",
 	"ident": "fish.frostrial",
-	"sharedassets": "*.*"
+	"rootnamespace": "Frostrial"
 }
