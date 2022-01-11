@@ -22,25 +22,28 @@ namespace Frostrial
 
 		public override void Tick()
 		{
+			if ( Local.Pawn is not Player player )
+				return;
 
-			var player = Local.Pawn as Player;
 			var hut = Game.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
-			var left = MathX.Clamp( hutScreen.x, 0.21f, 0.75f );
-			var top = MathX.Clamp( hutScreen.y, 0f, 1f );
+			var left = hutScreen.x.Clamp( 0.21f, 0.75f );
+			var top = hutScreen.y.Clamp( 0f, 1f );
 
 			Style.Left = Length.Pixels( (left - 0.5f) * 3000 );
 			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
-			var camera = player.Camera as IsometricCamera;
+			if ( player.Camera is not IsometricCamera camera )
+				return;
+
 			var baseDistance = 1000f * camera.Zoom;
 			var baseOpacity = 0.4f;
 			var dangerLevel = 1 - player.Warmth;
 
-			Style.Opacity = MathX.Clamp( (player.Position.Distance( hut.Position ) - baseDistance) / baseDistance, 0, 1f ) * baseOpacity * (baseOpacity + 1 / baseOpacity * dangerLevel);
+			Style.Opacity = ((player.Position.Distance( hut.Position ) - baseDistance) / baseDistance).Clamp( 0, 1f ) * baseOpacity * (baseOpacity + 1 / baseOpacity * dangerLevel);
 
-			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - hutScreen.x, 0.5 - hutScreen.y ) );
+			var rotation = -((float)Math.Atan2( 0.5f - hutScreen.x, 0.5 - hutScreen.y )).RadianToDegree();
 
 			var arrowRotate = new PanelTransform();
 			arrowRotate.AddRotation( 0, 0, rotation );
@@ -74,8 +77,8 @@ namespace Frostrial
 			float fadeTime = 1f;
 			float textSpeed = 20f; // Letters per second
 
-			Player player = Local.Pawn as Player;
-			IsometricCamera camera = player.Camera as IsometricCamera;
+			if ( Local.Pawn is not Player { Camera: IsometricCamera camera } player )
+				return;
 
 			hintTitle.Text = player.HintText.Truncate( (int)(Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed) );
 			hintTitle.Style.FontSize = 20 / camera.Zoom;
@@ -105,7 +108,8 @@ namespace Frostrial
 		public override void Tick()
 		{
 
-			Player player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
 			string text = "";
 
@@ -133,8 +137,8 @@ namespace Frostrial
 		Label moneyDifferenceTitle;
 		Label secondaryMoneyDifferenceTitle;
 
-		float currentDifference = 0;
-		float secondaryDifference = 0;
+		float currentDifference;
+		float secondaryDifference;
 
 		RealTimeUntil ProfitTime { get; set; } = 0f;
 
@@ -172,9 +176,9 @@ namespace Frostrial
 			moneyTitle.Text = $"€ { Math.Round( player.Money, 2 ) }";
 
 			moneyDifferenceTitle.Text = MoneyToString( currentDifference );
-			secondaryMoneyDifferenceTitle.Text = secondaryDifference != currentDifference
-				? $"({MoneyToString( secondaryDifference )})"
-				: "";
+			secondaryMoneyDifferenceTitle.Text = secondaryDifference.AlmostEqual( currentDifference )
+				? ""
+				: $"({MoneyToString( secondaryDifference )})";
 
 			ChangePanelClasses( moneyDifferenceTitle, currentDifference );
 			ChangePanelClasses( secondaryMoneyDifferenceTitle, secondaryDifference );
@@ -405,7 +409,7 @@ namespace Frostrial
 
 			var pp = PostProcess.Get<FreezePostProcessEffect>();
 
-			pp.FreezeStrength = 1 - player.Warmth;
+			pp.FreezeStrength = 1 - (player?.Warmth ?? 1);
 
 		}
 
@@ -422,75 +426,6 @@ namespace Frostrial
 
 			var fish = new FishCaught( species, variant );
 			RootPanel.AddChild( fish );
-		}
-
-	}
-
-	partial class Player : Sandbox.Player
-	{
-		[Net] public string HintText { get; set; } = "";
-		[Net] public float HintLifeTime { get; set; } = 0f;
-		[Net] public float HintLifeDuration { get; set; } = 0f;
-		[Net] public int Jumpscare { get; set; } = 0;
-		[Net] public RealTimeUntil JumpscareTimer { get; set; } = 0;
-		[Net] public float? ForceUnskippable { get; set; }
-		public bool Curtains { get; set; } = true;
-		public bool OpenMap { get; set; } = false;
-		[Net] public RealTimeSince SpawnedSince { get; set; } = 0f;
-
-		public void Hint( string text, float duration = 1f, bool unskippable = false ) // "Unskippable" dialog will be skipped by other unskippale dialogs
-		{
-
-			if ( ForceUnskippable == null || Time.Now >= ForceUnskippable )
-			{
-
-				HintText = text;
-				HintLifeDuration = duration;
-				HintLifeTime = Time.Now;
-
-			}
-
-			if ( unskippable )
-			{
-
-				ForceUnskippable = Time.Now + duration;
-
-				HintText = text;
-				HintLifeDuration = duration;
-				HintLifeTime = Time.Now;
-
-			}
-
-		}
-
-		public void HandleHUD()
-		{
-
-			if ( IsClient )
-			{
-
-				if ( Input.Down( InputButton.Score ) )
-				{
-
-					OpenMap = true;
-
-				}
-				else
-				{
-
-					OpenMap = false;
-
-				}
-
-			}
-
-			if ( SpawnedSince >= 4f && SpawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
-			{
-				Hint( "Today is the day I buy my way out of here.", 5, true );
-				Curtains = false;
-
-			}
-
 		}
 
 	}
