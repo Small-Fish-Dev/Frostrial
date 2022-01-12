@@ -16,9 +16,10 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
-			canUse = false; // probably dodging some kind of race state or something
+			if ( user is not Player p )
+				return false;
 
-			var p = user as Player;
+			canUse = false; // probably dodging some kind of race state or something
 
 			p.AddMoney( 2500f );
 
@@ -31,7 +32,7 @@ namespace Frostrial
 
 			Player.Play3D( "yeti_roar", yeti );
 
-			p.Hint( "It's the Finnish Yeti! I must head back to the cabin!", 4f, true );
+			p.Say( VoiceLine.FinnishYeti );
 
 			Delete();
 

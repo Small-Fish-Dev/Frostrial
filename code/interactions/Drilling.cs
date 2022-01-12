@@ -67,7 +67,7 @@ namespace Frostrial
 							else
 							{
 
-								Hint( "I'm not drilling there.", 2f );
+								Say( VoiceLine.NotDrillingHere );
 
 							}
 
@@ -75,7 +75,7 @@ namespace Frostrial
 						else
 						{
 
-							Hint( "I can't drill on here!", 2f );
+							Say( VoiceLine.CantDrillOnThere );
 
 						}
 
@@ -125,7 +125,7 @@ namespace Frostrial
 						{
 
 							Baits++;
-							Hint( "I found a worm, good for bait I guess.", 2.5f );
+							Say( VoiceLine.FoundBait );
 							WormsParticle();
 
 						}

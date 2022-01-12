@@ -16,11 +16,13 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
+			if ( user is not Player p )
+				return false;
+
 			canUse = false; // probably dodging some kind of race state or something
 
-			var p = user as Player;
 			p.AddMoney( 800f );
-			p.Hint( "This Yeti Hand is old, lucky", 2f, true );
+			p.Say( VoiceLine.OldYetiHand );
 			Delete();
 
 			return true;

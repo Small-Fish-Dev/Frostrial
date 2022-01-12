@@ -16,14 +16,15 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
-			canUse = false; // probably dodging some kind of race state or something
+			if ( user is not Player p )
+				return false;
 
-			var p = user as Player;
+			canUse = false; // probably dodging some kind of race state or something
 
 			p.AddMoney( 19.84f );
 
 			Player.FishPoopoo( To.Single( Client ) );
-			p.Hint( "I can always count on French Cuisine", 2.5f );
+			p.Say( VoiceLine.LeFishe );
 
 			Delete();
 

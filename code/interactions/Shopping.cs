@@ -27,10 +27,10 @@ namespace Frostrial
 				if ( JumpscareTimer <= -2 )
 				{
 
-					Game.CurrentTitle = "Thank you for playing";
-					Game.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
+					Game.Instance.CurrentTitle = "Thank you for playing";
+					Game.Instance.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
 					Curtains = true;
-					Hint( "", 7, true );
+					Delay( 7 );
 
 				}
 
@@ -170,7 +170,7 @@ namespace Frostrial
 				player.JumpscareTimer = 6f;
 
 				player.BlockMovement = true;
-				player.Hint( "Goodbye fishes.", 3, true );
+				player.Say( VoiceLine.Outro );
 
 				player.AddMoney( -Game.Prices["plane"] );
 
@@ -289,7 +289,8 @@ namespace Frostrial
 
 		public override void Tick()
 		{
-			Player player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
 			Parent.Style.PointerEvents = player.ShopOpen ? "all" : "visible";
 			Style.Opacity = player.ShopOpen ? 1 : 0;

@@ -14,10 +14,10 @@ namespace Frostrial
 	/// </summary>
 	public partial class Game : Sandbox.Game
 	{
-
-		[Net] public static Hut HutEntity { get; set; }
-		[Net] public static string CurrentTitle { get; set; } = "Wake up";
-		[Net] public static string CurrentSubtitle { get; set; } = "";
+		[Net] public Hut HutEntity { get; set; }
+		[Net] public FrostrialHUD HudEntity { get; set; }
+		[Net] public string CurrentTitle { get; set; } = "Wake up";
+		[Net] public string CurrentSubtitle { get; set; } = "";
 
 		public static Dictionary<string, string> FishNames = new();
 		public static Dictionary<string, string> FishAlt = new();
@@ -39,16 +39,18 @@ namespace Frostrial
 
 		public static Dictionary<string, float> Prices = new();
 
-		private AmbientWindVMix vMix = new();
-		private MusicPlayer musicPlayer = new();
+		private readonly AmbientWindVMix vMix = new();
+		private readonly MusicPlayer musicPlayer = new();
+
+		public static Game Instance { get; internal set; }
 
 		public Game()
 		{
+			Instance = this;
 
 			if ( IsServer )
 			{
-
-				new FrostrialHUD();
+				HudEntity = new FrostrialHUD();
 
 				//I could do this with an fgd, but time's running out!
 				var zone1 = new FishSpawner();
@@ -82,6 +84,11 @@ namespace Frostrial
 				zone5.RarityLevel = 2;
 
 
+			}
+
+			if ( IsClient )
+			{
+				Player.CheckVoiceLines();
 			}
 
 			FishNames.Add( "goldfish", "models/fishes/fishshadow.vmdl" );
@@ -156,6 +163,13 @@ namespace Frostrial
 			player.Respawn();
 		}
 
+		public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+		{
+			Event.Run( "frostrial.player.left", cl );
+			
+			base.ClientDisconnect( cl, reason );
+		}
+
 		[ClientRpc]
 		protected void MusicInitRPC()
 		{
@@ -169,7 +183,8 @@ namespace Frostrial
 			if ( IsServer )
 				return;
 
-			var player = cl.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
 			vMix.Update( 1 - player.Warmth, IsOnIce( player.Position ), player.Position.Distance( HutEntity?.Position ?? Vector3.Zero ) < 200f );
 			vMix.Tick();
@@ -204,7 +219,7 @@ namespace Frostrial
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
 
-			foreach ( Entity ent in entityList )
+			foreach ( var ent in entityList )
 			{
 
 				if ( ent is Player ) continue;
@@ -221,9 +236,9 @@ namespace Frostrial
 		public static float CalcValue( string species, float size, bool variant, float variantWeight )
 		{
 
-			float sizeRatio = size / Game.FishSizes[species] + 0.5f;
-			float variantBonus = variant ? variantWeight : 1;
-			float rarity = Game.FishRarity[species] + 0.5f;
+			var sizeRatio = size / FishSizes[species] + 0.5f;
+			var variantBonus = variant ? variantWeight : 1;
+			var rarity = FishRarity[species] + 0.5f;
 
 			return (float)Math.Pow( sizeRatio * rarity, 6 ) * variantBonus;
 
@@ -236,14 +251,14 @@ namespace Frostrial
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
 			Entity currentEntity = null;
-			float currentDistance = range;
+			var currentDistance = range;
 
-			foreach ( Entity ent in entityList )
+			foreach ( var ent in entityList )
 			{
 
 				if ( ent is not IDescription ) continue;
 
-				float entDistance = ent.Position.Distance( position );
+				var entDistance = ent.Position.Distance( position );
 
 				if ( entDistance < currentDistance )
 				{
@@ -263,15 +278,15 @@ namespace Frostrial
 		{
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
-			Entity currentEntity = PhysicsWorld.WorldBody.Entity; // Technically correct to return the world
-			float currentDistance = range;
+			var currentEntity = PhysicsWorld.WorldBody.Entity; // Technically correct to return the world
+			var currentDistance = range;
 
-			foreach ( Entity ent in entityList )
+			foreach ( var ent in entityList )
 			{
 
 				if ( ent is not IUse ue || !ue.IsUsable( Local.Pawn ) ) continue;
 
-				float entDistance = ent.Position.Distance( position );
+				var entDistance = ent.Position.Distance( position );
 
 				if ( entDistance < currentDistance )
 				{
@@ -291,16 +306,16 @@ namespace Frostrial
 		{
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
-			Entity currentEntity = PhysicsWorld.WorldBody.Entity;
-			float currentDistance = range;
+			var currentEntity = PhysicsWorld.WorldBody.Entity;
+			var currentDistance = range;
 
-			foreach ( Entity ent in entityList )
+			foreach ( var ent in entityList )
 			{
 
 				if ( ent is Player )
 				{
 
-					float entDistance = ent.Position.Distance( position );
+					var entDistance = ent.Position.Distance( position );
 
 					if ( entDistance < currentDistance )
 					{
@@ -322,15 +337,15 @@ namespace Frostrial
 		{
 
 			var entityList = Physics.GetEntitiesInSphere( position, range );
-			float currentDistance = range;
+			var currentDistance = range;
 
-			foreach ( Entity ent in entityList )
+			foreach ( var ent in entityList )
 			{
 
 				if ( ent is Campfire )
 				{
 
-					float entDistance = ent.Position.Distance( position );
+					var entDistance = ent.Position.Distance( position );
 
 					if ( entDistance < currentDistance )
 					{

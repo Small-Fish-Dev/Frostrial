@@ -6,7 +6,7 @@ namespace Frostrial
 	{
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 90, 0 ).ToRotation();
 		[Net, Local] public bool BlockMovement { get; set; } = false;
-		[Net]
+		
 		public Vector3 MouseWorldPosition
 		{
 			get
@@ -20,7 +20,7 @@ namespace Frostrial
 
 			}
 		}
-		[Net]
+		
 		public Entity MouseEntityPoint
 		{
 			get
@@ -38,11 +38,22 @@ namespace Frostrial
 
 		public string Description => "Interact with yourself to use items.";
 
+		protected VoiceLinePlayer vlp;
+
 		[ServerCmd]
 		public static void ChangeMovementDirection( float yaw )
 		{
-			var pawn = ConsoleSystem.Caller.Pawn as Player;
+			if ( ConsoleSystem.Caller.Pawn is not Player pawn )
+				return;
+
 			pawn.MovementDirection = Rotation.FromYaw( yaw );
+		}
+
+		public override void ClientSpawn()
+		{
+			base.ClientSpawn();
+
+			vlp = new VoiceLinePlayer( this );
 		}
 
 		public override void Respawn()
@@ -65,7 +76,7 @@ namespace Frostrial
 
 			CaughtFish = new();
 
-			Hint( "", 4, true );
+			Delay( 4 );
 
 			BasicClothes();
 
@@ -102,15 +113,18 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
+			if ( user is not Player p )
+				return false;
+
 			if ( user == this )
 			{
 				ItemsOpen = true;
 				BlockMovement = true;
 
-				Hint( "Let's see...", 1.2f );
+				Say( VoiceLine.LetsSee );
 			}
 			else
-				Hint( "Idiot.", 1f );
+				Say( VoiceLine.Idiot );
 
 			return true;
 		}

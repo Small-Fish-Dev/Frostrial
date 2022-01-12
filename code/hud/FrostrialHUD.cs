@@ -3,6 +3,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Frostrial
 {
@@ -25,7 +26,7 @@ namespace Frostrial
 			if ( Local.Pawn is not Player player )
 				return;
 
-			var hut = Game.HutEntity;
+			var hut = Game.Instance.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
 			var left = hutScreen.x.Clamp( 0.21f, 0.75f );
 			var top = hutScreen.y.Clamp( 0f, 1f );
@@ -55,43 +56,156 @@ namespace Frostrial
 
 	}
 
-	public class Hint : Panel
+	public class SpeechBubbles : Panel
 	{
+		Dictionary<int, BaseSpeechBubble> ActiveTags = new Dictionary<int, BaseSpeechBubble>();
 
-		Panel hintContainer;
-		Label hintTitle;
-
-		public Hint()
+		public class BaseSpeechBubble : Panel
 		{
+			internal enum State
+			{
+				Hidden,
+				Printing,
+				Fade
+			}
 
-			Player player = Local.Pawn as Player;
+			public Label TextLabel { get; set; }
+			public float TextDelay { get; set; } = 2f;
 
-			hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
-			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
+			TimeUntil TimeUntilFadeAway;
+			TimeSince TimeSinceSaid;
+			string text;
+			float duration;
+			State s;
 
+			public BaseSpeechBubble( Player player )
+			{
+				TextLabel = Add.Label();
+				TextLabel.Style.Opacity = 0;
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+
+				switch ( s )
+				{
+					case State.Hidden:
+						break;
+					case State.Printing:
+						TextLabel.Text = text.Truncate( (int)(text.Length * Math.Min( 1, TimeSinceSaid / duration )) );
+						if ( TextLabel.TextLength == text.Length )
+						{
+							TimeUntilFadeAway = TextDelay;
+							s = State.Fade;
+						}
+						break;
+					case State.Fade:
+						if ( TimeUntilFadeAway <= 0 )
+						{
+							TextLabel.Style.Opacity = 0;
+							s = State.Hidden;
+						}
+						break;
+				}
+			}
+
+			public void Say( Monologue m )
+			{
+				text = m.Text;
+				duration = m.Duration;
+
+				TextLabel.Style.Opacity = 1;
+				TimeSinceSaid = 0;
+				s = State.Printing;
+			}
+		}
+
+		public SpeechBubbles()
+		{
+			StyleSheet.Load( "/ui/nametags/NameTags.scss" );
 		}
 
 		public override void Tick()
 		{
+			base.Tick();
 
-			float fadeTime = 1f;
-			float textSpeed = 20f; // Letters per second
-
-			if ( Local.Pawn is not Player { Camera: IsometricCamera camera } player )
-				return;
-
-			hintTitle.Text = player.HintText.Truncate( (int)(Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed) );
-			hintTitle.Style.FontSize = 20 / camera.Zoom;
-			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
-			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( 360 * camera.Zoom - 1000 );
-
-			// Don't punish me, RealTimeSince doesn't seem to work when networked
-			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - (Time.Now - player.HintLifeTime), 0, 1 );
+			foreach ( var player in Entity.All.OfType<Player>() )
+			{
+				UpdateNameTag( player );
+			}
 		}
 
-	}
+		[Event( "frostrial.player.left" )]
+		protected void OnPlayerLeave( Client cl )
+		{
+			ActiveTags[cl.Id].Delete();
+			ActiveTags.Remove( cl.Id );
+		}
 
+		public virtual BaseSpeechBubble CreateNameTag( Player player )
+		{
+			if ( player.Client == null )
+				return null;
+
+			var tag = new BaseSpeechBubble( player );
+			tag.Parent = this;
+			return tag;
+		}
+
+		public void UpdateNameTag( Player player )
+		{
+			if ( player.Client == null )
+				return;
+
+			// TODO: would be nice to have but sadly in Frostrial death results in kick
+			/*if ( player.LifeState != LifeState.Alive )
+				return false;*/
+
+			//
+			// Where we putting the label, in world coords
+			//
+			var head = new Transform( player.EyePos );
+
+			var labelPos = head.Position + Vector3.Up * 10; // FIXME: magic number!!!!!!!!!!!!!!!
+
+			// TODO - can we see them
+
+			var fontSize = 30 / ((player.Camera as IsometricCamera)?.Zoom ?? 1);
+
+			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
+			{
+				tag = CreateNameTag( player );
+				if ( tag == null )
+				{
+					Log.Error( $"Fatal: failed to make a speech bubble for {player.Client.Name} ({player.Client.Id})" );
+					return;
+				}
+				ActiveTags[player.Client.Id] = tag;
+			}
+
+			var screenPos = labelPos.ToScreen();
+
+			tag.Style.Left = Length.Fraction( screenPos.x );
+			tag.Style.Top = Length.Fraction( screenPos.y );
+
+			tag.Style.FontSize = Length.Pixels( fontSize );
+
+			PanelTransform transform = new();
+			transform.AddTranslateY( Length.Fraction( -1.0f ) );
+			transform.AddTranslateX( Length.Fraction( -0.5f ) );
+
+			tag.Style.Transform = transform;
+		}
+
+		public void Say( Client cl, Monologue m )
+		{
+			if ( !ActiveTags.ContainsKey( cl.Id ) || ActiveTags[cl.Id] is not BaseSpeechBubble bubble )
+				return;
+
+			bubble.Say( m );
+		}
+	}
 
 	public class Interact : Panel
 	{
@@ -239,10 +353,11 @@ namespace Frostrial
 
 		public override void Tick()
 		{
-			var player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
-			curtainsTitle.Text = Game.CurrentTitle;
-			curtainsSubtitle.Text = Game.CurrentSubtitle;
+			curtainsTitle.Text = Game.Instance.CurrentTitle;
+			curtainsSubtitle.Text = Game.Instance.CurrentSubtitle;
 
 			curtainsPanel.Parent.SetClass( "closed", !player.Curtains );
 
@@ -375,6 +490,7 @@ namespace Frostrial
 
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
+		public SpeechBubbles SpeechBubbles { get; internal set; }
 
 		public FrostrialHUD()
 		{
@@ -393,7 +509,7 @@ namespace Frostrial
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Jumpscare>();
 			RootPanel.AddChild<Curtains>();
-			RootPanel.AddChild<Hint>();
+			SpeechBubbles = RootPanel.AddChild<SpeechBubbles>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
 
@@ -404,7 +520,6 @@ namespace Frostrial
 		[Event.Tick.Client]
 		private void ClientTick()
 		{
-
 			var player = Local.Pawn as Player;
 
 			var pp = PostProcess.Get<FreezePostProcessEffect>();

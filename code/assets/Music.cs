@@ -24,9 +24,12 @@ namespace Frostrial
 				_all.Add( Name, this );
 		}
 
-		public void Play()
+		public Sound Play(float volume = 1)
 		{
-			Sound.FromScreen( Name );
+			var s = Sound.FromScreen( Name );
+			s.SetVolume( volume );
+
+			return s;
 		}
 	}
 }

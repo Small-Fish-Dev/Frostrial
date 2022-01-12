@@ -23,13 +23,13 @@ namespace Frostrial
 
 					if ( found is WorldEntity )
 					{
-						Hint( "I hate this place.", 1f );
+						Say( VoiceLine.ClickOnGround );
 						return;
 					}
 
 					if ( found == null )
 					{
-						Hint( "That's too far away!", 2f );
+						Say( VoiceLine.TooFarAway );
 						return;
 					}
 
@@ -41,12 +41,14 @@ namespace Frostrial
 
 		protected override Entity FindUsable()
 		{
+			Host.AssertServer(  );
+
 			if ( MouseEntityPoint != null && MouseEntityPoint is IUse && MouseEntityPoint.IsValid ) // If we are pointing at the valid interactive entity
 				return MouseEntityPoint; // then return it
 
 			var selectedEntity = Game.NearestInteractiveEntity( MouseWorldPosition, InteractionRange );
 
-			if ( !(selectedEntity is WorldEntity) && selectedEntity.Position.Distance( Position ) > InteractionMaxDistance )
+			if ( selectedEntity is not WorldEntity || selectedEntity.Position.Distance( Position ) > InteractionMaxDistance )
 				return null;
 
 			return selectedEntity;

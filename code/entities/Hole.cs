@@ -21,7 +21,8 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
-			Player p = user as Player;
+			if ( user is not Player p )
+				return false;
 
 			p.Fishing = true;
 			p.BlockMovement = true;
@@ -30,7 +31,7 @@ namespace Frostrial
 
 			Bobber = true;
 
-			p.Hint( ".   .   .   .   .", 1f );
+			p.Say( VoiceLine.Fishing );
 			Player.Play3D( "rod_woosh", p );
 			Player.Play3D( "rod_throw", this );
 

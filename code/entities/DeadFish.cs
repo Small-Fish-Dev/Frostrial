@@ -10,22 +10,24 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
+			if ( user is not Player p )
+				return false;
+
 			canUse = false; // probably dodging some kind of race state or something
 
-			var p = user as Player;
 			switch ( Rarity )
 			{
 
 				case <= 0.3f:
-					p.Hint( "This isn't going to cut it", 1.7f );
+					p.Say( VoiceLine.CaughtSmallFish );
 					break;
 
 				case <= 0.6f:
-					p.Hint( "There we go!", 1f );
+					p.Say( VoiceLine.CaughtFish );
 					break;
 
 				case > 0.6f:
-					p.Hint( "That's a big one!", 1.2f );
+					p.Say( VoiceLine.CaughtBigFish );
 					break;
 
 			}

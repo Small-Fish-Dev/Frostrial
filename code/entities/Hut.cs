@@ -24,7 +24,7 @@ namespace Frostrial
 
 			Rotation = Rotation.FromYaw( -90 );
 
-			Game.HutEntity = this;
+			Game.Instance.HutEntity = this;
 
 			var fire = new ModelEntity( "models/randommodels/cabin_chimney_base.vmdl" );
 			fire.Position = Position + Vector3.Up * 12;
@@ -53,7 +53,7 @@ namespace Frostrial
 			light.Color = Color.Orange;
 			light.DynamicShadows = true;
 
-			Game.HutEntity = this;
+			Game.Instance.HutEntity = this;
 
 		}
 
@@ -82,11 +82,12 @@ namespace Frostrial
 
 		public bool OnUse( Entity user )
 		{
-			var p = user as Player;
+			if ( user is not Player p )
+				return false;
 
 			p.ShopOpen = true;
 			p.BlockMovement = true;
-			p.Hint( "I'm almost there", 2f );
+			p.Say( VoiceLine.ImAlmostThere );
 
 			Event.Run( "frostrial.crate_used" );
 

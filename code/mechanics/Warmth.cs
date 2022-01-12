@@ -17,7 +17,7 @@ namespace Frostrial
 
 			if ( IsClient ) return;
 
-			float hutDistance = Position.Distance( Game.HutEntity.Position );
+			float hutDistance = Position.Distance( Game.Instance.HutEntity.Position );
 
 			if ( UpgradedCoat )
 			{

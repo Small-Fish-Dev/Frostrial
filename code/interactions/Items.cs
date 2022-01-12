@@ -53,7 +53,7 @@ namespace Frostrial
 
 							PlacingCampfire = false;
 							BlockMovement = false;
-							Hint( "I can't put that there...", 2 );
+							Say( VoiceLine.CantPlace );
 
 						}
 
@@ -91,7 +91,7 @@ namespace Frostrial
 
 				player.Baits--;
 
-				player.Hint( "Oops, some slipped out", 1.5f );
+				player.Say( VoiceLine.UsedBait );
 
 				Particles.Create( "particles/worms_particle.vpcf", player.Position );
 
@@ -102,7 +102,7 @@ namespace Frostrial
 				player.ItemsOpen = false;
 				player.BlockMovement = false;
 
-				player.Hint( "I don't have any of those...", 2 );
+				player.Say( VoiceLine.NoItems );
 
 			}
 
@@ -127,7 +127,7 @@ namespace Frostrial
 				player.ItemsOpen = false;
 				player.BlockMovement = false;
 
-				player.Hint( "I don't have any of those...", 2 );
+				player.Say( VoiceLine.NoItems );
 
 			}
 
