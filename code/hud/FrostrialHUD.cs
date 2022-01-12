@@ -121,11 +121,6 @@ namespace Frostrial
 			}
 		}
 
-		public SpeechBubbles()
-		{
-			StyleSheet.Load( "/ui/nametags/NameTags.scss" );
-		}
-
 		public override void Tick()
 		{
 			base.Tick();
@@ -171,7 +166,7 @@ namespace Frostrial
 
 			// TODO - can we see them
 
-			var fontSize = 30 / ((player.Camera as IsometricCamera)?.Zoom ?? 1);
+			var fontSize = 30 / ((Local.Pawn.Camera as IsometricCamera)?.Zoom ?? 1);
 
 			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
 			{
@@ -190,12 +185,6 @@ namespace Frostrial
 			tag.Style.Top = Length.Fraction( screenPos.y );
 
 			tag.Style.FontSize = Length.Pixels( fontSize );
-
-			PanelTransform transform = new();
-			transform.AddTranslateY( Length.Fraction( -1.0f ) );
-			transform.AddTranslateX( Length.Fraction( -0.5f ) );
-
-			tag.Style.Transform = transform;
 		}
 
 		public void Say( Client cl, Monologue m )

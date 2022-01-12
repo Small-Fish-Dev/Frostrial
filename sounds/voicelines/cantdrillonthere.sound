@@ -7,7 +7,7 @@
 			"sounds/voicelines/cantdrillonthere.vsnd",
 		]
 		ui = false
-		volume = 1.0
+		volume = 5.0
 		volumerandom = 0.0
 		pitch = 1.0
 		pitchrandom = 0.0
