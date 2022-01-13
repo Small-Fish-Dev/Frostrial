@@ -43,12 +43,14 @@ namespace Frostrial
 		{
 			Host.AssertServer(  );
 
-			if ( MouseEntityPoint != null && MouseEntityPoint is IUse && MouseEntityPoint.IsValid ) // If we are pointing at the valid interactive entity
-				return MouseEntityPoint; // then return it
+			var mep = MouseEntityPoint;
+			var mwp = MouseWorldPosition;
+			if ( mep != null && mep is IUse && mep.IsValid && mwp.Distance( Position ) <= InteractionMaxDistance ) // If we are pointing at the valid interactive entity
+				return mep; // then return it
 
-			var selectedEntity = Game.NearestInteractiveEntity( MouseWorldPosition, InteractionRange );
+			var selectedEntity = Game.NearestInteractiveEntity( mwp, InteractionRange );
 
-			if ( selectedEntity is not WorldEntity || selectedEntity.Position.Distance( Position ) > InteractionMaxDistance )
+			if ( selectedEntity is not WorldEntity && mwp.Distance( Position ) > InteractionMaxDistance )
 				return null;
 
 			return selectedEntity;
