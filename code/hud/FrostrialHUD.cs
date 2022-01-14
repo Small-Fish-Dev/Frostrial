@@ -678,10 +678,10 @@ namespace Frostrial
 			RootPanel.AddChild<Jumpscare>();
 			RootPanel.AddChild<Curtains>();
 			SpeechBubbles = RootPanel.AddChild<SpeechBubbles>();
-			RootPanel.AddChild<Items>();
-			RootPanel.AddChild<Shop>();
 			RootPanel.AddChild<VirtualCursor>();
 			RootPanel.AddChild<ControlsTip>();
+			RootPanel.AddChild<Items>();
+			RootPanel.AddChild<Shop>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
 

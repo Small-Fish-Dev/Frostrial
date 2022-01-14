@@ -37,6 +37,7 @@ RootPanel {
 		width: 100%;
 
 		basespeechbubble {
+			transform: translate( -50%, -100% );
 			position: absolute;
 			align-items: center;
 			justify-content: center;
