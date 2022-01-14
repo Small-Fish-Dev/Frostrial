@@ -496,12 +496,17 @@ namespace Frostrial
 			if ( player.VirtualCursor.IsNearZeroLength )
 			{
 				if ( TimeUntilFadeOut <= 0 )
+				{
 					VisualPanel.Style.Opacity = 0;
-				return;
+					return;
+				}
+			}
+			else
+			{
+				TimeUntilFadeOut = 2;
 			}
 
 			VisualPanel.Style.Opacity = 1;
-			TimeUntilFadeOut = 2;
 			var mwp = player.MouseWorldPosition.ToScreen();
 			Style.Top = Length.Fraction( mwp.y );
 			Style.Left = Length.Fraction( mwp.x );
