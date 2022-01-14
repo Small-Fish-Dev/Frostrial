@@ -79,9 +79,13 @@ namespace Frostrial
 
 		public override void BuildInput( InputBuilder input )
 		{
+			var ibCameraCW = input.UsingController ? InputButton.SlotNext : InputButton.Menu;
+			var ibCameraCCW = input.UsingController ? InputButton.SlotPrev : InputButton.Use;
+			var ibCameraZoom = input.UsingController ? (input.Down(InputButton.Slot1) ? 1 : 0) - (input.Down(InputButton.Slot3) ? 1 : 0) : input.MouseWheel;
+
 			if ( LastAngleChange >= AngleChangeDelay )
 			{
-				float rotDir = (input.Pressed( InputButton.Menu ) ? -1 : 0) + (input.Pressed( InputButton.Use ) ? 1 : 0);
+				float rotDir = (input.Pressed( ibCameraCW ) ? -1 : 0) + (input.Pressed( ibCameraCCW ) ? 1 : 0);
 
 				if ( rotDir != 0 )
 				{
@@ -94,9 +98,9 @@ namespace Frostrial
 				}
 			}
 
-			if ( input.MouseWheel != 0 )
+			if ( ibCameraZoom != 0 )
 			{
-				Zoom = (Zoom - input.MouseWheel * 0.15f * Zoom).Clamp( 0.15f, 1f );
+				Zoom = (Zoom - ibCameraZoom * Time.Delta * Zoom).Clamp( 0.15f, 1f );
 			}
 
 

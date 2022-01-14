@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 
 namespace Frostrial
 {
@@ -6,37 +7,55 @@ namespace Frostrial
 	{
 		[Net, Local] public Rotation MovementDirection { get; set; } = new Angles( 0, 90, 0 ).ToRotation();
 		[Net, Local] public bool BlockMovement { get; set; } = false;
-		
+
 		public Vector3 MouseWorldPosition
 		{
 			get
 			{
+				if ( _MouseWorldPositionDirty )
+				{
+					var tr = Trace.Ray( Input.Cursor, 5000.0f )
+					.WorldOnly()
+					.Run();
+					_MouseWorldPosition = tr.EndPos;
+					_MouseWorldPositionDirty = false;
+				}
 
-				var tr = Trace.Ray( Input.Cursor, 5000.0f )
-				.WorldOnly()
-				.Run();
+#if false
+				DebugOverlay.Line( Position, tr.EndPos );
+				DebugOverlay.Sphere( tr.EndPos, 10f, tr.EndPos.Distance( Position ) <= InteractionMaxDistance ? Color.Cyan : Color.Red, false );
+#endif
 
-				return tr.EndPos;
-
+				return _MouseWorldPosition;
 			}
 		}
-		
+		private Vector3 _MouseWorldPosition;
+		private bool _MouseWorldPositionDirty = true;
+
 		public Entity MouseEntityPoint
 		{
 			get
 			{
+				if ( _MouseEntityPointDirty )
+				{
+					var tr = Trace.Ray( Input.Cursor, 5000.0f )
+					.EntitiesOnly()
+					.WithTag( "use" )
+					.Run();
+					_MouseEntityPoint = tr.Entity;
+					_MouseEntityPointDirty = false;
+				}
 
-				var tr = Trace.Ray( Input.Cursor, 5000.0f )
-				.EntitiesOnly()
-				.WithTag( "use" )
-				.Run();
-
-				return tr.Entity;
+				return _MouseEntityPoint;
 
 			}
 		}
+		private Entity _MouseEntityPoint;
+		private bool _MouseEntityPointDirty = true;
 
 		public string Description => "Interact with yourself to use items.";
+		public bool IsUsingController = Input.UsingController;
+		public Vector2 VirtualCursor { get; internal set; }
 
 		protected VoiceLinePlayer vlp;
 
@@ -54,6 +73,8 @@ namespace Frostrial
 			base.ClientSpawn();
 
 			vlp = new VoiceLinePlayer( this );
+
+			Event.Run( "frostrial.player.inputdevice", IsUsingController );
 		}
 
 		public override void Respawn()
@@ -93,6 +114,9 @@ namespace Frostrial
 		{
 			base.Simulate( cl );
 
+			_MouseWorldPositionDirty = true;
+			_MouseEntityPointDirty = true;
+
 			TickPlayerUse();
 			SimulateActiveChild( cl, ActiveChild );
 
@@ -111,11 +135,29 @@ namespace Frostrial
 
 		}
 
+		public override void BuildInput( InputBuilder input )
+		{
+			if ( input.UsingController != IsUsingController )
+			{
+				IsUsingController = input.UsingController;
+				Event.Run( "frostrial.player.inputdevice", IsUsingController );
+			}
+
+			if ( IsUsingController && Camera is IsometricCamera camera )
+			{
+				VirtualCursor = input.GetAnalog( InputAnalog.Look );
+				var angles = camera.Rotation.Angles();
+				input.Cursor = new(
+					camera.Position + (camera.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - camera.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
+					angles.Direction
+					);
+			}
+
+			base.BuildInput( input );
+		}
+
 		public bool OnUse( Entity user )
 		{
-			if ( user is not Player p )
-				return false;
-
 			if ( user == this )
 			{
 				ItemsOpen = true;
