@@ -41,7 +41,7 @@ namespace Frostrial
 
 			if ( IsClient ) return;
 
-			if ( Input.Pressed( InputButton.Attack1 ) && !PlacingCampfire )
+			if ( Input.Pressed( InputButton.Attack1 ) && !BlockMovement && !PlacingCampfire )
 			{
 
 				if ( lastAttempt >= attemptCooldown )
