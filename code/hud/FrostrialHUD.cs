@@ -446,11 +446,7 @@ namespace Frostrial
 
 		RealTimeSince TimeSinceBorn = 0;
 
-		public NowPlaying()
-		{
-		}
-
-		public NowPlaying( Music music ) : this()
+		public NowPlaying( Music music ) : base()
 		{
 			AlbumCover = Add.Image( $"/ui/album-covers/{music.AlbumCover}" );
 			InfoContainer = Add.Panel( "info" );
@@ -477,9 +473,50 @@ namespace Frostrial
 		}
 	}
 
+	public class VirtualCursor : Panel
+	{
+		Panel VisualPanel;
+		TimeUntil TimeUntilFadeOut;
+
+		public VirtualCursor()
+		{
+			VisualPanel = Add.Panel();
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( !HasClass( "active" ) )
+				return;
+
+			if ( Local.Pawn is not Player player )
+				return;
+
+			if ( player.VirtualCursor.IsNearZeroLength )
+			{
+				if ( TimeUntilFadeOut <= 0 )
+					VisualPanel.Style.Opacity = 0;
+				return;
+			}
+
+			VisualPanel.Style.Opacity = 1;
+			TimeUntilFadeOut = 2;
+			var mwp = player.MouseWorldPosition.ToScreen();
+			Style.Top = Length.Fraction( mwp.y );
+			Style.Left = Length.Fraction( mwp.x );
+		}
+
+		public void SetCursor( bool enabled )
+		{
+			SetClass( "active", enabled );
+		}
+	}
+
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
 		public SpeechBubbles SpeechBubbles { get; internal set; }
+		public VirtualCursor VirtualCursor { get; internal set; }
 
 		public FrostrialHUD()
 		{
@@ -501,6 +538,7 @@ namespace Frostrial
 			SpeechBubbles = RootPanel.AddChild<SpeechBubbles>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
+			VirtualCursor = RootPanel.AddChild<VirtualCursor>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
 
@@ -530,6 +568,12 @@ namespace Frostrial
 
 			var fish = new FishCaught( species, variant );
 			RootPanel.AddChild( fish );
+		}
+
+		[Event( "frostrial.player.inputdevice" )]
+		public void OnInputDeviceChange( bool usingController )
+		{
+			VirtualCursor.SetCursor( usingController );
 		}
 
 	}

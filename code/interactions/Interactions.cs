@@ -11,7 +11,7 @@ namespace Frostrial
 
 		protected override void TickPlayerUse()
 		{
-			if ( !IsServer ) return;
+			if ( !IsServer || BlockMovement ) return;
 
 			using ( Prediction.Off() )
 			{
