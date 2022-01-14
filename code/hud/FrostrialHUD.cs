@@ -512,16 +512,153 @@ namespace Frostrial
 			Style.Left = Length.Fraction( mwp.x );
 		}
 
+		[Event( "frostrial.player.inputdevice" )]
 		public void SetCursor( bool enabled )
 		{
 			SetClass( "active", enabled );
 		}
 	}
 
+	public class ControlsTip : Panel
+	{
+		public class Key : Panel
+		{
+			public Image Glyph { get; protected set; }
+			public InputButton Button { get; protected set; }
+			public Label Hint { get; protected set; }
+
+			public Key()
+			{
+				Glyph = Add.Image();
+				Hint = Add.Label();
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+				
+				if ( Input.GetGlyph( Button ) is not Texture texture )
+					return;
+
+				Glyph.Texture = texture;
+				Glyph.Style.Width = texture.Width;
+				Glyph.Style.Height = texture.Height;
+			}
+
+			public void SetButton( InputButton button )
+			{
+				Button = button;
+			}
+		}
+
+		public class Axis : Panel
+		{
+			public Image Glyph { get; protected set; }
+			public InputAnalog Analog { get; protected set; }
+			public Label Hint { get; protected set; }
+
+			public Axis()
+			{
+				Glyph = Add.Image();
+				Hint = Add.Label();
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+				
+				if ( Input.GetGlyph( Analog ) is not Texture texture )
+					return;
+
+				Glyph.Texture = texture;
+				Glyph.Style.Width = texture.Width;
+				Glyph.Style.Height = texture.Height;
+			}
+
+			public void SetAnalog( InputAnalog analog )
+			{
+				Analog = analog;
+			}
+		}
+
+		// Left side
+		protected Key CameraCCW;
+		protected Key CameraZoomIn;
+		protected Key CameraZoomOut;
+		protected Axis CameraZoomMouse;
+		// protected Key PlayerList;
+
+		// Right side
+		protected Key CameraCW;
+		protected Key Use;
+		protected Key Drill;
+		protected Axis VirtualCursor;
+
+		internal bool ready = false;
+
+		public ControlsTip()
+		{
+			var leftSide = Add.Panel( "left" );
+			CameraCCW = leftSide.AddChild<Key>();
+			CameraZoomIn = leftSide.AddChild<Key>();
+			CameraZoomOut = leftSide.AddChild<Key>();
+
+			CameraZoomMouse = leftSide.AddChild<Axis>();
+			// TODO: use a mouse wheel icon
+
+			var rightSide = Add.Panel( "right" );
+			CameraCW = rightSide.AddChild<Key>();
+			Use = rightSide.AddChild<Key>();
+			Drill = rightSide.AddChild<Key>();
+
+			VirtualCursor = rightSide.AddChild<Axis>();
+
+			CameraCCW.Hint.Text = "Rotate to the right";
+			CameraZoomIn.Hint.Text = "Zoom in";
+			CameraZoomOut.Hint.Text = "Zoom out";
+			CameraZoomMouse.Hint.Text = "Zoom";
+
+			CameraCW.Hint.Text = "Rotate to the left";
+			Use.Hint.Text = "Use";
+			Drill.Hint.Text = "Drill";
+			VirtualCursor.Hint.Text = "Select";
+
+			ready = true;
+
+			if ( Local.Pawn is not Player player )
+				return;
+
+			UpdateTip( player.IsUsingController );
+		}
+
+		[Event( "frostrial.player.inputdevice" )]
+		public void UpdateTip( bool usingController )
+		{
+			if ( !ready || Local.Pawn is not Player player )
+				return;
+
+			CameraCCW.SetButton(player.Input_CameraCCW);
+
+			CameraZoomIn.SetButton(player.Input_CameraZoomIn);
+			CameraZoomIn.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
+			CameraZoomOut.SetButton(player.Input_CameraZoomOut);
+			CameraZoomOut.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
+
+			// TODO: use a mouse wheel icon
+			CameraZoomMouse.Style.Display = player.IsUsingController ? DisplayMode.None : DisplayMode.Flex;
+
+			CameraCW.SetButton(player.Input_CameraCW);
+			Use.SetButton(player.Input_Use);
+			Drill.SetButton(player.Input_Drill);
+
+			VirtualCursor.SetAnalog( InputAnalog.Look );
+			VirtualCursor.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
+		}
+	}
+
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
 		public SpeechBubbles SpeechBubbles { get; internal set; }
-		public VirtualCursor VirtualCursor { get; internal set; }
 
 		public FrostrialHUD()
 		{
@@ -543,7 +680,8 @@ namespace Frostrial
 			SpeechBubbles = RootPanel.AddChild<SpeechBubbles>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
-			VirtualCursor = RootPanel.AddChild<VirtualCursor>();
+			RootPanel.AddChild<VirtualCursor>();
+			RootPanel.AddChild<ControlsTip>();
 
 			PostProcess.Add( new FreezePostProcessEffect() );
 
@@ -573,12 +711,6 @@ namespace Frostrial
 
 			var fish = new FishCaught( species, variant );
 			RootPanel.AddChild( fish );
-		}
-
-		[Event( "frostrial.player.inputdevice" )]
-		public void OnInputDeviceChange( bool usingController )
-		{
-			VirtualCursor.SetCursor( usingController );
 		}
 
 	}

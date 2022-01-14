@@ -434,7 +434,7 @@ RootPanel {
 		top: 0;
 		left: 0;
 		transform-origin: 50% 50%;
-		pointer-events: none;
+		//pointer-events: none;
 		opacity: 0;
 
 		Panel {
@@ -446,11 +446,56 @@ RootPanel {
 			background: radial-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
 			transition: opacity 0.5s ease-in;
 			opacity: 0;
-			pointer-events: none;
+			//pointer-events: none;
 		}
 
 		&.active {
 			opacity: 1;
+		}
+	}
+
+	ControlsTip {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+
+		Key, Axis {
+			flex-direction: row;
+			padding: 8px;
+			//gap: 5px; TODO: god i wish it worked
+
+			Label {
+				font-family: akaPosse;
+				font-size: 25px;
+				text-stroke: 4px black;
+				color: white;
+				margin-left: 8px;
+				align-items: center;
+			}
+		}
+
+		.left {
+			flex-direction: column;
+			justify-content: flex-end;
+			align-items: flex-start;
+		}
+
+		.right {
+			flex-direction: column;
+			justify-content: flex-end;
+			align-items: flex-end;
+
+			Key, Axis {
+				flex-direction: row-reverse;
+
+				Label {
+					margin-left: 0;
+					margin-right: 8px;
+				}
+			}
 		}
 	}
 }

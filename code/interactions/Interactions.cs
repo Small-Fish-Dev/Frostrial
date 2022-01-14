@@ -15,7 +15,7 @@ namespace Frostrial
 
 			using ( Prediction.Off() )
 			{
-				if ( Input.Pressed( InputButton.Attack2 ) )
+				if ( Input.Pressed( Input_Use ) )
 				{
 					PlayClick();
 
