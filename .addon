@@ -1,6 +1,15 @@
 {
-	"sharedassets": "*.*",
-	"type": "game",
-	"ident": "fish.frostrial",
-	"rootnamespace": "Frostrial"
+  "SharedAssets": null,
+  "Title": "Frostrial",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "frostrial",
+  "FullIdent": "local.frostrial",
+  "Schema": 1,
+  "NeedsUpgrade": false,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "HasCode": true,
+  "CodePath": "code",
+  "RootNamespace": "Sandbox"
 }
