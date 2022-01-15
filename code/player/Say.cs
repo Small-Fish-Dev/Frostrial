@@ -69,8 +69,12 @@ namespace Frostrial
 			if ( IsClient )
 			{
 
-				OpenMap = Input.Down( InputButton.Score );
+				if ( Input.Pressed( Input_Map ) )
+				{
 
+					OpenMap = !OpenMap;
+
+				}
 
 				if ( Curtains && SpawnedSince >= 4f ) //Just so I can be lazy and be able to put it back later on
 				{

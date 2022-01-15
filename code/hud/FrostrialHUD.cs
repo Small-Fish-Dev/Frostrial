@@ -582,6 +582,7 @@ namespace Frostrial
 		}
 
 		// Left side
+		protected Key Map;
 		protected Key CameraCCW;
 		protected Key CameraZoomIn;
 		protected Key CameraZoomOut;
@@ -600,6 +601,7 @@ namespace Frostrial
 		{
 			var leftSide = Add.Panel( "left" );
 			CameraCCW = leftSide.AddChild<Key>();
+			Map = leftSide.AddChild<Key>();
 			CameraZoomIn = leftSide.AddChild<Key>();
 			CameraZoomOut = leftSide.AddChild<Key>();
 
@@ -614,6 +616,7 @@ namespace Frostrial
 			VirtualCursor = rightSide.AddChild<Axis>();
 
 			CameraCCW.Hint.Text = "Rotate to the right";
+			Map.Hint.Text = "Toggle map";
 			CameraZoomIn.Hint.Text = "Zoom in";
 			CameraZoomOut.Hint.Text = "Zoom out";
 			CameraZoomMouse.Hint.Text = "Zoom";
@@ -638,7 +641,7 @@ namespace Frostrial
 				return;
 
 			CameraCCW.SetButton(player.Input_CameraCCW);
-
+			Map.SetButton( player.Input_Map );
 			CameraZoomIn.SetButton(player.Input_CameraZoomIn);
 			CameraZoomIn.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
 			CameraZoomOut.SetButton(player.Input_CameraZoomOut);
