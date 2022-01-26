@@ -9,17 +9,21 @@ namespace Frostrial
 
 		public override void Simulate()
 		{
-			var idealRotation = Rotation.LookAt( Input.Rotation.Forward, Vector3.Up ); // TODO: point at mouse
+
+			Player ply = Pawn as Player;
+
+			var idealRotation = Rotation.LookAt( ply.MouseWorldPosition.WithZ( Position.z ) - Position, Vector3.Up ); // TODO: point at mouse
 
 			DoRotation( idealRotation );
 			DoWalk();
 
-			Vector3 aimPos = Pawn.EyePos + Input.Rotation.Forward * 200;
+			Vector3 aimPos = Pawn.EyePos + idealRotation.Forward * 200;
 			Vector3 lookPos = aimPos;
-
+			DebugOverlay.Sphere( ply.MouseWorldPosition, 20f, Color.Red );
 			SetLookAt( "aim_eyes", lookPos );
 			SetLookAt( "aim_head", lookPos );
 			SetLookAt( "aim_body", aimPos );
+
 
 
 		}

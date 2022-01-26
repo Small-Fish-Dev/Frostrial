@@ -24,14 +24,14 @@ namespace Frostrial
 			LastAngleChange = AngleChangeDelay;
 		}
 
-		[ClientCmd( "camera_pitch" )]
-		public static void ChangeCameraPitch( float newPitch )
+		[ServerCmd]
+		public static void ChangeCameraYaw( float newYaw )
 		{
-			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			var cam = (ConsoleSystem.Caller.Pawn as Player).Camera as IsometricCamera;
 			if ( cam == null )
 				return;
 
-			cam.TargetAngles = cam.TargetAngles.WithPitch( newPitch.Clamp( 15.0f, 45.0f ) );
+			cam.TargetAngles = cam.TargetAngles.WithYaw( newYaw );
 			cam.TargetRotation = cam.TargetAngles.ToRotation();
 		}
 
@@ -72,7 +72,8 @@ namespace Frostrial
 			{
 				PositionBeforeZoomOut = player.Position;
 			}
-			Position = PositionBeforeZoomOut + Rotation.Backward * 2000 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
+			Position = PositionBeforeZoomOut + Vector3.Up * 64; 
+			ZNear = -4000f;
 			OrthoSize = MathX.LerpTo( OrthoSize, Zoom, 7.5f * Time.Delta );
 			Viewer = null;
 		}
@@ -97,13 +98,15 @@ namespace Frostrial
 
 					LastAngleChange = 0;
 
+					ChangeCameraYaw( Time.Now * 1000 );
+
 					Sound.FromScreen( "camera_crank" );
 				}
 			}
 
 			if ( ibCameraZoom != 0 )
 			{
-				Zoom = (Zoom - ibCameraZoom * Time.Delta * Zoom).Clamp( 0.15f, 1f );
+				Zoom = (Zoom - ibCameraZoom * Zoom * 0.15f).Clamp( 0.1f, 2f );
 			}
 
 

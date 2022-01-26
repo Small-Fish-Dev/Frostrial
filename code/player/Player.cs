@@ -12,9 +12,15 @@ namespace Frostrial
 		{
 			get
 			{
+
+				IsometricCamera camera = Camera as IsometricCamera;
+				var realRay = Input.Cursor;
+				//Log.Info( $"{(IsServer ? "Server: " : "Client: ")} {camera.Rotation.Forward * 5000}");
+				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
+
 				if ( _MouseWorldPositionDirty )
 				{
-					var tr = Trace.Ray( Input.Cursor, 5000.0f )
+					var tr = Trace.Ray( realRay, 5000.0f )
 					.WorldOnly()
 					.Run();
 					_MouseWorldPosition = tr.EndPos;
@@ -36,9 +42,14 @@ namespace Frostrial
 		{
 			get
 			{
+
+				IsometricCamera camera = Camera as IsometricCamera;
+				var realRay = Input.Cursor;
+				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
+
 				if ( _MouseEntityPointDirty )
 				{
-					var tr = Trace.Ray( Input.Cursor, 5000.0f )
+					var tr = Trace.Ray( realRay, 5000.0f )
 					.EntitiesOnly()
 					.WithTag( "use" )
 					.Run();

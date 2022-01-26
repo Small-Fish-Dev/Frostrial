@@ -16,7 +16,7 @@ namespace Frostrial
 
 			SetModel( "maps/lake.vmdl" );
 
-			RenderColor = RenderColor.WithAlpha( 0.6f );
+			RenderColor = RenderColor.WithAlpha( 0.5f );
 
 		}
 
