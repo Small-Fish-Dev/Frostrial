@@ -45,7 +45,8 @@ namespace Frostrial
 			if ( GetLineAndStopSound( m ) is not { } vl )
 				return;
 
-			currentSound = player.PlaySound( vl.Sound );
+			if ( vl.Sound != null )
+				currentSound = player.PlaySound( vl.Sound );
 			Game.Instance.HudEntity.SpeechBubbles.Say( player.Client, vl ); // TODO: make a 3d subtitle panel
 		}
 	}

@@ -50,7 +50,12 @@ namespace Frostrial
 			Duration = duration > 0 ? duration : Text.Split( ' ' ).Length / WPS + Text.Count( char.IsWhiteSpace ) * 0.2f;
 
 			if ( sound != null )
-				Precache.Add( $"sounds/voicelines/{sound}.vsnd" );
+			{
+				if ( sound == "" )
+					Log.Warning( $"Monologue: no sound for \"{text}\"!" );
+				else
+					Precache.Add( $"sounds/voicelines/{sound}.vsnd" );
+			}
 		}
 	}
 }
