@@ -19,7 +19,7 @@ namespace Frostrial
 
 				if ( _MouseWorldPositionDirty )
 				{
-					var tr = Trace.Ray( realRay, 5000.0f )
+					var tr = Trace.Ray( realRay, 7000.0f )
 					.WorldOnly()
 					.Run();
 					_MouseWorldPosition = tr.EndPos;
@@ -48,7 +48,7 @@ namespace Frostrial
 
 				if ( _MouseEntityPointDirty )
 				{
-					var tr = Trace.Ray( realRay, 5000.0f )
+					var tr = Trace.Ray( realRay, 7000.0f )
 					.EntitiesOnly()
 					.WithTag( "use" )
 					.Run();
