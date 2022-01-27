@@ -15,7 +15,6 @@ namespace Frostrial
 
 				IsometricCamera camera = Camera as IsometricCamera;
 				var realRay = Input.Cursor;
-				//Log.Info( $"{(IsServer ? "Server: " : "Client: ")} {camera.Rotation.Forward * 5000}");
 				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
 				if ( _MouseWorldPositionDirty )
@@ -137,6 +136,17 @@ namespace Frostrial
 			HandleItems();
 			HandleFishing();
 			HandleShopping();
+
+			// Dirty camera fix
+			if ( IsServer )
+			{
+
+				var cam = Camera as IsometricCamera;
+
+				cam.Rotation = Rotation.Slerp( cam.Rotation, cam.TargetRotation, 5f * Time.Delta );
+
+			}
+
 		}
 
 		public override void OnKilled()

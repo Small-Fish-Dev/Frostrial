@@ -11,7 +11,7 @@ namespace Frostrial
 		Vector3 PreviousInputDirection = Vector3.Zero;
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 30, 90, 0 );
-		Rotation TargetRotation = new();
+		public Rotation TargetRotation = new();
 		public float Zoom = 0.7f; // Sorry I need this!
 
 		public IsometricCamera()
@@ -33,6 +33,7 @@ namespace Frostrial
 
 			cam.TargetAngles = cam.TargetAngles.WithYaw( newYaw );
 			cam.TargetRotation = cam.TargetAngles.ToRotation();
+
 		}
 
 		[ClientCmd( "debug_set_poi" )]
@@ -80,6 +81,7 @@ namespace Frostrial
 
 		public override void BuildInput( InputBuilder input )
 		{
+
 			if ( Local.Pawn is not Player player || !player.IsValid )
 				return;
 
@@ -98,7 +100,7 @@ namespace Frostrial
 
 					LastAngleChange = 0;
 
-					ChangeCameraYaw( Time.Now * 1000 );
+					ChangeCameraYaw( TargetAngles.yaw );
 
 					Sound.FromScreen( "camera_crank" );
 				}

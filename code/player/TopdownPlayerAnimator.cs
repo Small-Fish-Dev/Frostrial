@@ -19,11 +19,9 @@ namespace Frostrial
 
 			Vector3 aimPos = Pawn.EyePos + idealRotation.Forward * 200;
 			Vector3 lookPos = aimPos;
-			DebugOverlay.Sphere( ply.MouseWorldPosition, 20f, Color.Red );
 			SetLookAt( "aim_eyes", lookPos );
 			SetLookAt( "aim_head", lookPos );
 			SetLookAt( "aim_body", aimPos );
-
 
 
 		}
