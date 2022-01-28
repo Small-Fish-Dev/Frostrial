@@ -11,7 +11,10 @@ namespace Frostrial
 
 		PointLightEntity light { get; set; }
 		public string Description => "Interact with the hut to buy items and upgrades.";
-
+		ModelEntity leftWall;
+		ModelEntity rightWall;
+		ModelEntity backWall;
+		ModelEntity frontWall;
 		ModelEntity crate;
 
 		public override void Spawn()
@@ -19,10 +22,8 @@ namespace Frostrial
 
 			base.Spawn();
 
-			SetModel( "models/randommodels/cabin_walls.vmdl" );
+			SetModel( "models/randommodels/cabin_roof.vmdl" );
 			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -15, -15, 0 ), new Vector3( 20, 15, 80 ) );
-
-			Rotation = Rotation.FromYaw( -90 );
 
 			Game.Instance.HutEntity = this;
 
@@ -39,6 +40,23 @@ namespace Frostrial
 			crate.GlowColor = new Color( 0.8f, 0.2f, 0.2f );
 
 			Tags.Add( "use" );
+
+			leftWall = new ModelEntity( "models/randommodels/cabin_wall_left.vmdl" );
+			leftWall.Position = Position;
+			leftWall.Rotation = Rotation;
+
+			rightWall = new ModelEntity( "models/randommodels/cabin_wall_right.vmdl" );
+			rightWall.Position = Position;
+			rightWall.Rotation = Rotation;
+
+			backWall = new ModelEntity( "models/randommodels/cabin_wall_back.vmdl" );
+			backWall.Position = Position;
+			backWall.Rotation = Rotation;
+
+			/*frontWall = new ModelEntity( "models/randommodels/cabin_wall_front.vmdl" );
+			frontWall.Position = Position;
+			frontWall.Rotation = Rotation;*/
+
 		}
 
 		public override void ClientSpawn()
