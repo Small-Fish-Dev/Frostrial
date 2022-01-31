@@ -11,11 +11,11 @@ namespace Frostrial
 
 		PointLightEntity light { get; set; }
 		public string Description => "Interact with the hut to buy items and upgrades.";
-		ModelEntity leftWall;
-		ModelEntity rightWall;
-		ModelEntity backWall;
-		ModelEntity frontWall;
-		ModelEntity crate;
+		[Net] ModelEntity leftWall { set; get; }
+		[Net] ModelEntity rightWall { set; get; }
+		[Net] ModelEntity backWall { set; get; }
+		[Net] ModelEntity frontWall { set; get; }
+		[Net] ModelEntity crate { set; get; }
 
 		public override void Spawn()
 		{
@@ -53,9 +53,9 @@ namespace Frostrial
 			backWall.Position = Position;
 			backWall.Rotation = Rotation;
 
-			/*frontWall = new ModelEntity( "models/randommodels/cabin_wall_front.vmdl" );
+			frontWall = new ModelEntity( "models/randommodels/cabin_wall_front.vmdl" );
 			frontWall.Position = Position;
-			frontWall.Rotation = Rotation;*/
+			frontWall.Rotation = Rotation;
 
 		}
 
@@ -87,6 +87,15 @@ namespace Frostrial
 			RenderColor = RenderColor.WithAlpha( 1 - (startFadeDistance - distance ) / endFadeDistance );
 
 			light.SetLightBrightness( 20 + (float)Math.Cos( (float)Time.Now * 25 ) * 2 * ( 1 + Time.Now % 1 ) ); // Acceptable flickering
+
+			var ply = Local.Pawn as Player;
+			var cam = ply.Camera as IsometricCamera;
+			var dir = cam.Rotation.Forward.WithZ( 0 ).Normal;
+
+			frontWall.RenderColor = frontWall.RenderColor.WithAlpha( 1 - dir.y + RenderColor.a );
+			backWall.RenderColor = backWall.RenderColor.WithAlpha( 1 + dir.y + RenderColor.a );
+			leftWall.RenderColor = leftWall.RenderColor.WithAlpha( 1 - dir.x + RenderColor.a );
+			rightWall.RenderColor = rightWall.RenderColor.WithAlpha( 1 + dir.x + RenderColor.a );
 
 		}
 
