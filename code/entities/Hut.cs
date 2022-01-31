@@ -79,23 +79,27 @@ namespace Frostrial
 		public void OnTick()
 		{
 
-			var startFadeDistance = 300f;
+			var startFadeDistance = 500f;
 			var endFadeDistance = 150f;
 			var player = Local.Pawn as Player;
-			var distance = player.Position.Distance( this.Position );
+			var playerPos = player.Position.WithZ( 0 );
+			var hutPos = this.Position.WithZ( 0 );
+			var distance = playerPos.Distance( hutPos );
 
 			RenderColor = RenderColor.WithAlpha( 1 - (startFadeDistance - distance ) / endFadeDistance );
 
 			light.SetLightBrightness( 20 + (float)Math.Cos( (float)Time.Now * 25 ) * 2 * ( 1 + Time.Now % 1 ) ); // Acceptable flickering
 
-			var ply = Local.Pawn as Player;
-			var cam = ply.Camera as IsometricCamera;
+			var cam = player.Camera as IsometricCamera;
 			var dir = cam.Rotation.Forward.WithZ( 0 ).Normal;
 
-			frontWall.RenderColor = frontWall.RenderColor.WithAlpha( 1 - dir.y + RenderColor.a );
-			backWall.RenderColor = backWall.RenderColor.WithAlpha( 1 + dir.y + RenderColor.a );
-			leftWall.RenderColor = leftWall.RenderColor.WithAlpha( 1 - dir.x + RenderColor.a );
-			rightWall.RenderColor = rightWall.RenderColor.WithAlpha( 1 + dir.x + RenderColor.a );
+			var distanceX = Math.Clamp( ( playerPos.x - hutPos.x ) / 100, -1, 1 );
+			var distanceY = Math.Clamp( ( playerPos.y - hutPos.y ) / 150, -1, 1 );
+
+			frontWall.RenderColor = frontWall.RenderColor.WithAlpha( (1 - dir.y + RenderColor.a ) * ( 1 + distanceY ) ) ;
+			backWall.RenderColor = backWall.RenderColor.WithAlpha( (1 + dir.y + RenderColor.a ) * ( 1 - distanceY ) );
+			leftWall.RenderColor = leftWall.RenderColor.WithAlpha( (1 - dir.x + RenderColor.a ) * ( 1 + distanceX ) );
+			rightWall.RenderColor = rightWall.RenderColor.WithAlpha( (1 + dir.x + RenderColor.a ) * ( 1 - distanceX ) );
 
 		}
 

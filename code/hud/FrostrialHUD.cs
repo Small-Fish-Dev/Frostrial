@@ -39,7 +39,7 @@ namespace Frostrial
 				return;
 
 			var baseDistance = 1000f * camera.Zoom;
-			var baseOpacity = 0.4f;
+			var baseOpacity = 0.8f;
 			var dangerLevel = 1 - player.Warmth;
 
 			Style.Opacity = ((player.Position.Distance( hut.Position ) - baseDistance) / baseDistance).Clamp( 0, 1f ) * baseOpacity * (baseOpacity + 1 / baseOpacity * dangerLevel);
