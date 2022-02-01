@@ -16,8 +16,8 @@
 		variantdescription = "What did they mean by that\?"
 		variantskin = "chain"
 		variantpreview = "ui/fishes/pike_chain.jpg"
-		weighted1 = 4
-		weighted2 = 30
-		weighted3 = 25
+		weightedzone1 = 4
+		weightedzone2 = 30
+		weightedzone3 = 25
 	}
 }

@@ -17,8 +17,8 @@
 	variantdescription(string) : "Variant Description" :  : ""
 	variantskin(string) : "Variant Skin" :  : ""
 	variantpreview(string) { editor = "AssetBrowse(png)" } : "Variant Preview" :  : ""
-	weighted1(integer) : "Weighted 1" : 0 : ""
-	weighted2(integer) : "Weighted 2" : 0 : ""
-	weighted3(integer) : "Weighted 3" : 0 : ""
+	weightedzone1(integer) : "Weighted Zone 1" : 0 : ""
+	weightedzone2(integer) : "Weighted Zone 2" : 0 : ""
+	weightedzone3(integer) : "Weighted Zone 3" : 0 : ""
 ]
 
