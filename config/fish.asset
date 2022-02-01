@@ -1,0 +1,24 @@
+//
+// Frostrial.FishAsset
+//
+@BaseClass = fish : ""
+[
+	fishname(string) : "Fish Name" :  : ""
+	commonname(string) : "Common Name" :  : ""
+	scientificname(string) : "Scientific Name" :  : ""
+	description(string) : "Description" :  : ""
+	model(resource:vmdl) : "Model" :  : ""
+	preview(string) { editor = "AssetBrowse(png)" } : "Preview" :  : ""
+	size(float) : "Size" : 0 : ""
+	rarity(float) : "Rarity" : 0 : ""
+	variantname(string) : "Variant Name" :  : ""
+	variantcommonname(string) : "Variant Common Name" :  : ""
+	variantscientificname(string) : "Variant Scientific Name" :  : ""
+	variantdescription(string) : "Variant Description" :  : ""
+	variantskin(string) : "Variant Skin" :  : ""
+	variantpreview(string) { editor = "AssetBrowse(png)" } : "Variant Preview" :  : ""
+	weighted1(integer) : "Weighted 1" : 0 : ""
+	weighted2(integer) : "Weighted 2" : 0 : ""
+	weighted3(integer) : "Weighted 3" : 0 : ""
+]
+
