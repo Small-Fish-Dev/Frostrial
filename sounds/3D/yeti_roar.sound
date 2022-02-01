@@ -7,11 +7,11 @@
 			"sounds/3d/yeti_roar.vsnd",
 		]
 		ui = false
-		volume = 1.0
+		volume = 2.0
 		volumerandom = 0.0
 		pitch = 1.0
 		pitchrandom = 0.0
-		distancemax = 4000.0
+		distancemax = 10000.0
 		selectionmode = "3"
 	}
 }
