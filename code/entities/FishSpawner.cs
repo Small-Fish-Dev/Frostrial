@@ -24,7 +24,12 @@ namespace Frostrial
 			foreach ( var fish in FishAsset.All ) // With the basic fishes it should always be 100, just in case I want to add more in the future.
 			{
 
-				totalValue += fish.Value.ZoneValue( rarity );
+				int zoneValue = fish.Value.ZoneValue( rarity );
+
+				if( zoneValue == 0 ) // If the weight is 0 then don't bother
+				{ continue; }
+
+				totalValue += zoneValue;
 				fishWeightedValues[fish.Key] = totalValue;
 
 			}
