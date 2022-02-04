@@ -39,11 +39,11 @@ namespace Frostrial
 		[Property, ResourceType( "png" )]
 		public string VariantPreview { get; set; }
 		[Property]
-		int WeightedZone1 { get; set; }
+		public int WeightedZone1 { get; set; }
 		[Property]
-		int WeightedZone2 { get; set; }
+		public int WeightedZone2 { get; set; }
 		[Property]
-		int WeightedZone3 { get; set; }
+		public int WeightedZone3 { get; set; }
 
 		public int ZoneValue( int index )
 		{

@@ -30,6 +30,7 @@ namespace Frostrial
 			}
 			int randomNumber = Rand.Int( totalValue );
 
+
 			foreach ( var weightedValue in fishWeightedValues )
 			{
 
@@ -37,6 +38,7 @@ namespace Frostrial
 				{
 
 					selectFish = weightedValue.Key;
+					break;
 
 				}
 
