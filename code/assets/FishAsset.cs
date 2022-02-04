@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using System.Collections.Generic;
 
 namespace Frostrial
@@ -6,8 +7,8 @@ namespace Frostrial
 	[Library("fish"), AutoGenerate]
 	public partial class FishAsset : Asset
 	{
-		public static IReadOnlyList<FishAsset> All => _all;
-		internal static List<FishAsset> _all = new();
+		public static IReadOnlyDictionary<string, FishAsset> All => _all;
+		internal static Dictionary<string, FishAsset> _all = new();
 
 		[Property]
 		public string FishName { get; set; }
@@ -38,20 +39,38 @@ namespace Frostrial
 		[Property, ResourceType( "png" )]
 		public string VariantPreview { get; set; }
 		[Property]
-		public int WeightedZone1 { get; set; }
+		int WeightedZone1 { get; set; }
 		[Property]
-		public int WeightedZone2 { get; set; }
+		int WeightedZone2 { get; set; }
 		[Property]
-		public int WeightedZone3 { get; set; }
+		int WeightedZone3 { get; set; }
 
+		public int ZoneValue( int index )
+		{
+
+			switch ( index )
+			{
+
+				case 0:
+					return WeightedZone1;
+				case 1:
+					return WeightedZone2;
+				case 2:
+					return WeightedZone3;
+				default:
+					return 0;
+
+			}
+
+		}
 
 
 		protected override void PostLoad()
 		{
 			base.PostLoad();
 
-			if ( !_all.Contains( this ) )
-				_all.Add( this );
+			if ( !_all.ContainsKey( Name ) )
+				_all.Add( Name, this );
 		}
 	}
 }

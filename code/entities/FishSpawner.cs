@@ -17,23 +17,32 @@ namespace Frostrial
 		public string GetRandomFish( int rarity )
 		{
 
-			string[] selectArray = new string[100];
-			int randomNumber = Rand.Int( 99 );
-			int currentNumber = 0;
+			int totalValue = 0;
+			Dictionary<string, int> fishWeightedValues = new();
+			string selectFish = "goldfish";
 
-			foreach ( var fish in Game.FishVariety )
+			foreach ( var fish in FishAsset.All ) // With the basic fishes it should always be 100, just in case I want to add more in the future.
 			{
 
-				for ( int i = 0; i < fish.Value[rarity]; i++ )
+				totalValue += fish.Value.ZoneValue( rarity );
+				fishWeightedValues[fish.Key] = totalValue;
+
+			}
+			int randomNumber = Rand.Int( totalValue );
+
+			foreach ( var weightedValue in fishWeightedValues )
+			{
+
+				if ( weightedValue.Value >= randomNumber )
 				{
-					selectArray[currentNumber] = fish.Key;
-					currentNumber++;
+
+					selectFish = weightedValue.Key;
 
 				}
 
 			}
 
-			return selectArray[randomNumber];
+			return selectFish;
 
 		}
 
@@ -45,7 +54,7 @@ namespace Frostrial
 			{
 
 				string randomFish = GetRandomFish( RarityLevel );
-				float fishSize = Game.FishSizes[randomFish];
+				float fishSize = FishAsset.All[randomFish].Size;
 				float randomSize = fishSize * (0.5f + RandomBell() * 1.5f);
 
 				var fish = new Fish()
@@ -59,7 +68,7 @@ namespace Frostrial
 					Scale = 0,
 					Spawner = this,
 					FishList = Fishes,
-					Rarity = Game.FishRarity[randomFish]
+					Rarity = FishAsset.All[randomFish].Rarity
 
 				};
 

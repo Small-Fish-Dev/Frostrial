@@ -418,8 +418,10 @@ namespace Frostrial
 		public FishCaught( string species, bool variant ) : this()
 		{
 
+			string fishPicture = variant ? FishAsset.All[species].VariantPreview : FishAsset.All[species].Preview;
+
 			Style.ZIndex = (int)Time.Now * 100 + 3;
-			Style.SetBackgroundImage( Game.FishPictures[species][variant ? 1 : 0] );
+			Style.SetBackgroundImage( fishPicture );
 
 		}
 
