@@ -87,7 +87,7 @@ namespace Frostrial
 
 								}
 
-								FishUI( fish.Species, fish.Variant );
+								FishUI( To.Single(this), fish.Species, fish.Variant );
 								fish.Catch();
 
 							}
