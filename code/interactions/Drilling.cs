@@ -59,7 +59,6 @@ namespace Frostrial
 							{
 
 								Drilling = true;
-								HandleDrillingEffects( true, holePosition );
 								drillingCompletion = DrillingSpeed * ( UpgradedDrill ? 0.2f : 1f ); 
 								BlockMovement = true;
 
@@ -94,7 +93,6 @@ namespace Frostrial
 				{
 
 					Drilling = false;
-					HandleDrillingEffects( false, holePosition );
 					drillingCompletion = 0f;
 					BlockMovement = false;
 
@@ -112,7 +110,6 @@ namespace Frostrial
 					{
 
 						Drilling = false;
-						HandleDrillingEffects( false, holePosition );
 
 						if ( Game.IsOnIce( holePosition ) )
 						{
@@ -140,39 +137,12 @@ namespace Frostrial
 			}
 
 		}
-		Particles drillingParticle { get; set; }
-		Sound drillingSound { get; set; }
 
 		[ClientRpc]
 		public void WormsParticle()
 		{
 
 			Particles.Create( "particles/small_worms_particle.vpcf", Position + Vector3.Up );
-
-		}
-
-		[ClientRpc]
-		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
-		{
-
-			if ( fxState )
-			{
-
-				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
-				drillingParticle = Particles.Create( "particles/drilling_particle.vpcf", fxPosition );
-
-			}
-			else
-			{
-
-				if ( drillingParticle != null )
-				{
-
-					drillingParticle.Destroy();
-
-				}
-
-			}
 
 		}
 

@@ -7142,9 +7142,9 @@
 									use_layer_sequence = false
 									tags = ""
 									attachment_point = "Drill"
-									attachment_type = "absorigin"
+									attachment_type = "point"
 									attachment_point_cp1 = ""
-									attachment_type_cp1 = "absorigin"
+									attachment_type_cp1 = "point"
 								}
 							},
 						]
@@ -7198,9 +7198,9 @@
 									use_layer_sequence = false
 									tags = ""
 									attachment_point = "Drill"
-									attachment_type = "absorigin"
+									attachment_type = "point"
 									attachment_point_cp1 = ""
-									attachment_type_cp1 = "absorigin"
+									attachment_type_cp1 = "point"
 								}
 							},
 						]
