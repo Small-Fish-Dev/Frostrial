@@ -23,7 +23,7 @@ namespace Frostrial
 
 			p.AddMoney( 19.84f );
 
-			Player.FishPoopoo( To.Single( Client ) );
+			Player.FishUI( To.Single( user ), "fishaupoopoocaca", true );
 			p.Say( VoiceLine.LeFishe );
 
 			Delete();
