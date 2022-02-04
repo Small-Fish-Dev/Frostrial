@@ -470,7 +470,7 @@ namespace Frostrial
 		{
 			base.Tick();
 
-			if ( TimeSinceBorn > 5 )
+			if ( TimeSinceBorn > 10 )
 				Delete();
 		}
 	}
