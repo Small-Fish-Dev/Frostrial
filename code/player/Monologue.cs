@@ -29,6 +29,7 @@ namespace Frostrial
 		WhatHappened,
 		LeFishe,
 		Fishing,
+		Bite,
 		YetiJumpscare
 	};
 

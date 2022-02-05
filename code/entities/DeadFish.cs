@@ -91,7 +91,7 @@ namespace Frostrial
 
 			SetModel( FishAsset.All[Species].Model );
 			SetMaterialGroup( Variant ? FishAsset.All[Species].VariantSkin : "default" );
-			Scale = 2 * (Size / FishAsset.All[Species].Size);
+			Scale = FishAsset.All[Species].ModelWorldSizeMultiplier * (Size / FishAsset.All[Species].Size);
 
 			Tags.Add( "use" );
 		}
@@ -103,12 +103,16 @@ namespace Frostrial
 
 			BuzzingSound = Sound.FromEntity( "buzzing", this );
 
-			Particles.Create( "particles/basic_fish_flies_particles.vpcf", this );
-
 			if ( Variant )
 			{
 
 				Particles.Create( "particles/rare_fish_particles.vpcf", this );
+
+			}
+			else
+			{
+
+				Particles.Create( "particles/basic_fish_flies_particles.vpcf", this );
 
 			}
 

@@ -7,11 +7,11 @@
 			"sounds/3d/rod_baited.vsnd",
 		]
 		ui = false
-		volume = 1.0
+		volume = 0.2
 		volumerandom = 0.0
-		pitch = 1.0
-		pitchrandom = 0.2
-		distancemax = 1000.0
+		pitch = 1.5
+		pitchrandom = 0.5
+		distancemax = 800.0
 		selectionmode = "3"
 	}
 }

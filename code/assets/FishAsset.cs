@@ -25,6 +25,8 @@ namespace Frostrial
 		[Property]
 		public float Size { get; set; }
 		[Property]
+		public float ModelWorldSizeMultiplier { get; set; }
+		[Property]
 		public float Rarity { get; set; }
 		[Property]
 		public string VariantName { get; set; }

@@ -19,5 +19,6 @@
 		weightedzone1 = 1
 		weightedzone2 = 4
 		weightedzone3 = 35
+		modelworldsizemultiplier = 2.0
 	}
 }

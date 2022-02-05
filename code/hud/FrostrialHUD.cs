@@ -221,7 +221,7 @@ namespace Frostrial
 			else if ( player.ItemsOpen )
 				text = "Select an item to use";
 			else if ( player.Fishing )
-				text = "Let go to catch the fish as it bites";
+				text = "Let go to catch the fish as it struggles";
 			else if ( player.ShopOpen )
 				text = "Buy items or Upgrades ( Hold SHIFT to buy 10 )";
 			else if ( Game.NearestDescribableEntity( player.MouseWorldPosition, player.InteractionRange ) is IDescription describable )

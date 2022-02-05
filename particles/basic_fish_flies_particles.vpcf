@@ -14,7 +14,8 @@
 	[
 		{
 			_class = "C_OP_MaintainEmitter"
-			m_flEmissionRate = 10.0
+			m_flEmissionRate = 2.0
+			m_nParticlesToMaintain = 20
 		},
 	]
 	m_Initializers = 

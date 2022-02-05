@@ -48,6 +48,8 @@ namespace Frostrial
 		Vector3 originalPosition;
 		Rotation originalRotation;
 		bool decidingBait = false;
+		Particles struggleParticle;
+		Sound struggleSound;
 
 		public override void Spawn()
 		{
@@ -105,6 +107,8 @@ namespace Frostrial
 						player.CaughtFish.Remove( this );
 
 						nextAction = Rand.Float( 2f, 3f );
+
+						StopStruggleEffects( this );
 
 					}
 
@@ -222,8 +226,10 @@ namespace Frostrial
 				player.FishBaited = true;
 
 				player.CaughtFish.Add( this );
-					
-				//TODO PLAY TRAPPED SOUND and particles
+
+				player.Say( VoiceLine.Bite );
+
+				StartStruggleEffects( this );
 
 			}
 
@@ -258,9 +264,26 @@ namespace Frostrial
 		public static void CreateEffects( Fish fish )
 		{
 
-			//TODO Sounds and particles
-			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 ); // TODO it spawns in the middle of the map! what?!
-			
+			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 );
+			Sound.FromEntity( "rod_caught", fish );
+
+		}
+
+		[ClientRpc]
+		public static void StartStruggleEffects( Fish fish )
+		{
+
+			fish.struggleParticle = Particles.Create( "particles/fish_struggle_splash.vpcf", fish );
+			fish.struggleSound = Sound.FromEntity( "rod_baited", fish );
+
+		}
+
+		[ClientRpc]
+		public static void StopStruggleEffects( Fish fish )
+		{
+
+			fish.struggleParticle.Dispose();
+			fish.struggleSound.Stop();
 
 		}
 
