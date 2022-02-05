@@ -12,7 +12,9 @@ namespace Frostrial
 
 			Player ply = Pawn as Player;
 
-			var idealRotation = Rotation.LookAt( ply.MouseWorldPosition.WithZ( Position.z ) - Position, Vector3.Up ); // TODO: point at mouse
+			if ( ply.BlockMovement ) return;
+
+			var idealRotation = Rotation.LookAt( ply.MouseWorldPosition.WithZ( Position.z ) - Position, Vector3.Up );
 
 			DoRotation( idealRotation );
 			DoWalk();
@@ -28,6 +30,7 @@ namespace Frostrial
 
 		public virtual void DoRotation( Rotation idealRotation )
 		{
+
 			//
 			// Our ideal player model rotation is the way we're facing
 			//
