@@ -285,9 +285,6 @@ namespace Frostrial
 			fish.struggleParticle.Destroy();
 			fish.struggleSound.Stop();
 
-			Log.Info( fish.struggleParticle );
-			Log.Info( fish.struggleSound );
-
 		}
 
 	}
