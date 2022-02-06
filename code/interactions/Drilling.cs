@@ -61,6 +61,7 @@ namespace Frostrial
 								Drilling = true;
 								drillingCompletion = DrillingSpeed * ( UpgradedDrill ? 0.2f : 1f ); 
 								BlockMovement = true;
+								Velocity = Vector3.Zero;
 
 							}
 							else

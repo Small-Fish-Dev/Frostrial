@@ -26,6 +26,7 @@ namespace Frostrial
 
 			p.Fishing = true;
 			p.BlockMovement = true;
+			Velocity = Vector3.Zero;
 
 			p.CurrentHole = this;
 

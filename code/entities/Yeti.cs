@@ -41,6 +41,7 @@ namespace Frostrial
 				{
 
 					player.BlockMovement = true;
+					player.Velocity = Vector3.Zero;
 					player.Jumpscare = 1;
 					player.JumpscareTimer = 4f;
 
@@ -73,6 +74,7 @@ namespace Frostrial
 
 						player.JumpscareTimer = 3f;
 						player.BlockMovement = true;
+						player.Velocity = Vector3.Zero;
 
 						player.Jumpscare = 2;
 

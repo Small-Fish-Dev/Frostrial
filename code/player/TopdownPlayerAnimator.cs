@@ -10,6 +10,9 @@ namespace Frostrial
 		public override void Simulate()
 		{
 
+
+			DoWalk();
+
 			Player ply = Pawn as Player;
 
 			if ( ply.BlockMovement ) return;
@@ -17,7 +20,6 @@ namespace Frostrial
 			var idealRotation = Rotation.LookAt( ply.MouseWorldPosition.WithZ( Position.z ) - Position, Vector3.Up );
 
 			DoRotation( idealRotation );
-			DoWalk();
 
 			Vector3 aimPos = Pawn.EyePos + idealRotation.Forward * 200;
 			Vector3 lookPos = aimPos;
@@ -70,6 +72,19 @@ namespace Frostrial
 				SetParam( "move_groundspeed", Velocity.WithZ( 0 ).Length );
 				SetParam( "move_y", sideward );
 				SetParam( "move_x", forward );
+
+				Player ply = Pawn as Player;
+
+				if ( ply.BlockMovement )
+				{
+
+					SetParam( "move_direction", 0 );
+					SetParam( "move_speed", 0 );
+					SetParam( "move_groundspeed", 0 );
+					SetParam( "move_y", 0 );
+					SetParam( "move_x", 0 );
+
+				}
 
 			}
 

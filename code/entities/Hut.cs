@@ -118,6 +118,7 @@ namespace Frostrial
 
 			p.ShopOpen = true;
 			p.BlockMovement = true;
+			Velocity = Vector3.Zero;
 			p.Say( VoiceLine.ImAlmostThere );
 
 			Event.Run( "frostrial.crate_used" );

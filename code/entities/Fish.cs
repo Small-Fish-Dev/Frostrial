@@ -265,7 +265,7 @@ namespace Frostrial
 		{
 
 			Particles.Create( "particles/splash_particle.vpcf", fish.baitPosition + Vector3.Up * 10 );
-			Sound.FromEntity( "rod_caught", fish );
+			Sound.FromWorld( "rod_caught", fish.baitPosition );
 
 		}
 
@@ -282,8 +282,11 @@ namespace Frostrial
 		public static void StopStruggleEffects( Fish fish )
 		{
 
-			fish.struggleParticle.Dispose();
+			fish.struggleParticle.Destroy();
 			fish.struggleSound.Stop();
+
+			Log.Info( fish.struggleParticle );
+			Log.Info( fish.struggleSound );
 
 		}
 

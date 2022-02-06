@@ -183,6 +183,7 @@ namespace Frostrial
 			{
 				ItemsOpen = true;
 				BlockMovement = true;
+				Velocity = Vector3.Zero;
 
 				Say( VoiceLine.LetsSee );
 			}

@@ -127,7 +127,7 @@ namespace Frostrial
 			if ( fxState )
 			{
 
-				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
+				Sound.FromWorld( "", fxPosition );
 				fishingParticle = Particles.Create( "particles/drilling_particle.vpcf", fxPosition );
 
 			}
