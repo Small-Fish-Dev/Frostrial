@@ -7,7 +7,7 @@
 		scientificname = "Semotilus Astromaculatus"
 		description = "Where the journey started."
 		model = resource:"models/fishes/minnow/minnow.vmdl"
-		preview = "ui/fishes/minnow.jpg"
+		preview = "ui/fishes/minnow.png"
 		size = 0.12
 		rarity = 0.1
 		variantname = "Golden Minnow"
@@ -15,7 +15,7 @@
 		variantscientificname = "Notemigonus Crysoleucas"
 		variantdescription = "I\'ve struck river gold!"
 		variantskin = "Gold"
-		variantpreview = "ui/fishes/minnow_gold.jpg"
+		variantpreview = "ui/fishes/minnow_gold.png"
 		weightedzone1 = 55
 		weightedzone2 = 5
 		weightedzone3 = 1

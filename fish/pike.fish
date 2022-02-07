@@ -7,7 +7,7 @@
 		scientificname = "Esox Masquinongy"
 		description = "He looks happy."
 		model = resource:"models/fishes/pike/pike.vmdl"
-		preview = "ui/fishes/pike.jpg"
+		preview = "ui/fishes/pike.png"
 		size = 0.6
 		rarity = 0.5
 		variantname = "Pike Chain"
@@ -15,7 +15,7 @@
 		variantscientificname = "Esox Niger"
 		variantdescription = "What did they mean by that\?"
 		variantskin = "chain"
-		variantpreview = "ui/fishes/pike_chain.jpg"
+		variantpreview = "ui/fishes/pike_chain.png"
 		weightedzone1 = 4
 		weightedzone2 = 30
 		weightedzone3 = 25

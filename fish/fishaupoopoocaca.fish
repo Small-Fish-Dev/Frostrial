@@ -7,7 +7,7 @@
 		scientificname = "Perca Flavescens Kakkao Kakkao"
 		description = "A common perch covered in liquid faeces."
 		model = resource:"models/fishes/perch/perch.vmdl"
-		preview = "ui/fishes/perch_poo.jpg"
+		preview = "ui/fishes/perch_poo.png"
 		size = 0.01
 		rarity = 0.01
 		variantname = "Hello :-)"
@@ -15,7 +15,7 @@
 		variantscientificname = "If you see this, favorite Frostrial"
 		variantdescription = "Thank you :-)"
 		variantskin = "poo"
-		variantpreview = "ui/fishes/perch_poo.jpg"
+		variantpreview = "ui/fishes/perch_poo.png"
 		weightedzone1 = 0
 		weightedzone2 = 0
 		weightedzone3 = 0

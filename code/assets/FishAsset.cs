@@ -74,15 +74,6 @@ namespace Frostrial
 			if ( !_all.ContainsKey( Name ) )
 				_all.Add( Name, this );
 
-			//// Cheeky workaround while Rubat fixes my issue
-			foreach ( var kvp in _all )
-			{
-				
-				Preview = Preview.Replace( "jpg", "png" );
-				VariantPreview = VariantPreview.Replace( "jpg", "png" );
-
-			}
-
 		}
 	}
 }

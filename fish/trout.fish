@@ -7,7 +7,7 @@
 		scientificname = "Salmo Trutta"
 		description = "All hail the river king!"
 		model = resource:"models/fishes/trout/trout.vmdl"
-		preview = "ui/fishes/trout.jpg"
+		preview = "ui/fishes/trout.png"
 		size = 1.0
 		rarity = 1.0
 		variantname = "Golden Trout"
@@ -15,7 +15,7 @@
 		variantscientificname = "Oncorhynchus Aguabonita"
 		variantdescription = "Where the journey ended."
 		variantskin = "gold"
-		variantpreview = "ui/fishes/trout_gold.jpg"
+		variantpreview = "ui/fishes/trout_gold.png"
 		weightedzone1 = 0
 		weightedzone2 = 1
 		weightedzone3 = 20

@@ -7,7 +7,7 @@
 		scientificname = "Perca Flavescens"
 		description = "A wild goldfish!"
 		model = resource:"models/fishes/perch/perch.vmdl"
-		preview = "ui/fishes/perch.jpg"
+		preview = "ui/fishes/perch.png"
 		size = 0.4
 		rarity = 0.35
 		variantname = "Rainbow Perch"
@@ -15,7 +15,7 @@
 		variantscientificname = "Hypsurus Caryi"
 		variantdescription = "Wait, how did this get here\?"
 		variantskin = "rainbow"
-		variantpreview = "ui/fishes/perch_rainbow.jpg"
+		variantpreview = "ui/fishes/perch_rainbow.png"
 		weightedzone1 = 10
 		weightedzone2 = 40
 		weightedzone3 = 15

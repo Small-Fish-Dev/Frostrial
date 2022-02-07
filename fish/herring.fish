@@ -7,7 +7,7 @@
 		scientificname = "Clupea Harengus Membras"
 		description = "Tastes good when canned."
 		model = resource:"models/fishes/herring/herring.vmdl"
-		preview = "ui/fishes/herring.jpg"
+		preview = "ui/fishes/herring.png"
 		size = 0.24
 		rarity = 0.2
 		variantname = "European Herring"
@@ -15,7 +15,7 @@
 		variantscientificname = "Sprattus Sprattus"
 		variantdescription = "Doesn\'t get along with the other one."
 		variantskin = "european"
-		variantpreview = "ui/fishes/herring_european.jpg"
+		variantpreview = "ui/fishes/herring_european.png"
 		weightedzone1 = 30
 		weightedzone2 = 20
 		weightedzone3 = 4

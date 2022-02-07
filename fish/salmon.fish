@@ -7,7 +7,7 @@
 		scientificname = "Oncorhynchus Tshawytscha"
 		description = "This one\'s intimidating."
 		model = resource:"models/fishes/salmon/salmon.vmdl"
-		preview = "ui/fishes/salmon.jpg"
+		preview = "ui/fishes/salmon.png"
 		size = 0.8
 		rarity = 0.75
 		variantname = "Coho Salmon"
@@ -15,7 +15,7 @@
 		variantscientificname = "Oncorhynchus Kisutch"
 		variantdescription = "The colours jump at you... AGH!"
 		variantskin = "coho"
-		variantpreview = "ui/fishes/salmon_coho.jpg"
+		variantpreview = "ui/fishes/salmon_coho.png"
 		weightedzone1 = 1
 		weightedzone2 = 4
 		weightedzone3 = 35
