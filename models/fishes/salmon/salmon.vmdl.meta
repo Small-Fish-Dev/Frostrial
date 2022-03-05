@@ -1,0 +1,8 @@
+{
+  "publish": {
+    "Enabled": true,
+    "Title": "Salmon",
+    "Organisation": "fish",
+    "Ident": "salmon"
+  }
+}

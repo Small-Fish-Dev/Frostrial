@@ -1,0 +1,8 @@
+{
+  "publish": {
+    "Enabled": true,
+    "Title": "Herring",
+    "Organisation": "fish",
+    "Ident": "herring"
+  }
+}
