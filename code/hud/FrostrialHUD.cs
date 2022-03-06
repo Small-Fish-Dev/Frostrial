@@ -166,7 +166,7 @@ namespace Frostrial
 
 			// TODO - can we see them
 
-			var fontSize = 30 / ((Local.Pawn.CameraMode as IsometricCamera)?.Zoom ?? 1);
+			var fontSize = 30 / (((Local.Pawn as Player).CameraMode as IsometricCamera)?.Zoom ?? 1);
 
 			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
 			{
@@ -585,14 +585,14 @@ namespace Frostrial
 
 		// Left side
 		protected Key Map;
-		protected Key CameraModeCCW;
-		protected Key CameraModeZoomIn;
-		protected Key CameraModeZoomOut;
-		protected Axis CameraModeZoomMouse;
+		protected Key CameraCCW;
+		protected Key CameraZoomIn;
+		protected Key CameraZoomOut;
+		protected Axis CameraZoomMouse;
 		// protected Key PlayerList;
 
 		// Right side
-		protected Key CameraModeCW;
+		protected Key CameraCW;
 		protected Key Use;
 		protected Key Drill;
 		protected Axis VirtualCursor;

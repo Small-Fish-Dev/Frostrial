@@ -36,7 +36,7 @@ namespace Frostrial
 			//
 			// Our ideal player model rotation is the way we're facing
 			//
-			var allowYawDiff = Pawn.ActiveChild == null ? 90 : 50;
+			var allowYawDiff = (Pawn as Player).ActiveChild == null ? 90 : 50;
 
 			float turnSpeed = 0.01f;
 

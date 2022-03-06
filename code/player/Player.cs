@@ -14,7 +14,7 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera camera = CameraMore as IsometricCamera;
+				IsometricCamera camera = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
 				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
@@ -165,12 +165,12 @@ namespace Frostrial
 				Event.Run( "frostrial.player.inputdevice", IsUsingController );
 			}
 
-			if ( IsUsingController && CameraMode is IsometricCamera CameraMode )
+			if ( IsUsingController && CameraMode is IsometricCamera )
 			{
 				VirtualCursor = input.GetAnalog( InputAnalog.Look );
 				var angles = CameraMode.Rotation.Angles();
 				input.Cursor = new(
-					camera.Position + (camera.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - CameraMode.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
+					CameraMode.Position + (CameraMode.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - CameraMode.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
 					angles.Direction
 					);
 			}
