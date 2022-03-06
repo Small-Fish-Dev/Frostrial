@@ -166,7 +166,7 @@ namespace Frostrial
 
 			// TODO - can we see them
 
-			var fontSize = 30 / ((Local.Pawn.Camera as IsometricCamera)?.Zoom ?? 1);
+			var fontSize = 30 / ((Local.Pawn.CameraMode as IsometricCamera)?.Zoom ?? 1);
 
 			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
 			{

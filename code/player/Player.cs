@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Component;
 using System;
 
 namespace Frostrial
@@ -13,16 +14,16 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera CameraMode = CameraMode as IsometricCamera;
+				IsometricCamera camera = CameraMore as IsometricCamera;
 				var realRay = Input.Cursor;
-				realRay.Origin = Input.Cursor.Origin - CameraMode.Rotation.Forward * 5000;
+				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
 				if ( _MouseWorldPositionDirty )
 				{
 					var tr = Trace.Ray( realRay, 7000.0f )
 					.WorldOnly()
 					.Run();
-					_MouseWorldPosition = tr.EndPos;
+					_MouseWorldPosition = tr.EndPosition;
 					_MouseWorldPositionDirty = false;
 				}
 
@@ -42,9 +43,9 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera CameraMode = CameraMode as IsometricCamera;
+				IsometricCamera camera = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
-				realRay.Origin = Input.Cursor.Origin - CameraMode.Rotation.Forward * 5000;
+				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
 				if ( _MouseEntityPointDirty )
 				{
@@ -95,7 +96,7 @@ namespace Frostrial
 
 			Animator = new TopdownPlayerAnimator();
 
-			Camera = new IsometricCamera();
+			CameraMode = new IsometricCamera();
 
 			EnableAllCollisions = true;
 			EnableDrawing = true;

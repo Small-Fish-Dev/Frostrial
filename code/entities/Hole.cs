@@ -7,7 +7,7 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public Entity CurrentHole { get; set; } = PhysicsWorld.WorldBody.Entity;
+		[Net] public Entity CurrentHole { get; set; } = Sandbox.Internal.GlobalGameNamespace.Map.Entity;
 
 	}
 	public partial class Hole : AnimEntity, IUse, IDescription
