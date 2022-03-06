@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Component;
 using System;
 
 namespace Frostrial
@@ -47,8 +48,9 @@ namespace Frostrial
 			SetModel( "models/treasures/scalp.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-			GlowState = GlowStates.On;
-			GlowColor = new Color( 0.3f, 0.07f, 0.07f );
+			var glow = Components.GetOrCreate<Glow>();
+			glow.Active = true;
+			glow.Color = new Color( 0.3f, 0.07f, 0.07f );
 
 			Tags.Add( "use" );
 		}

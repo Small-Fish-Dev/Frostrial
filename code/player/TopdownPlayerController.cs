@@ -74,16 +74,16 @@ namespace Frostrial
 		{
 			base.FrameSimulate();
 
-			EyeRot = Input.Rotation;
+			EyeRotation = Input.Rotation;
 		}
 
 		public override void Simulate()
 		{
-			EyePosLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
+			EyePositionLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
 			UpdateBBox();
 
-			EyePosLocal += TraceOffset;
-			EyeRot = Input.Rotation;
+			EyePositionLocal += TraceOffset;
+			EyeRotation = Input.Rotation;
 
 			//Velocity += BaseVelocity * ( 1 + Time.Delta * 0.5f );
 			//BaseVelocity = Vector3.Zero;

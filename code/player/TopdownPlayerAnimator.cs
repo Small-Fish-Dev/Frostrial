@@ -21,7 +21,7 @@ namespace Frostrial
 
 			DoRotation( idealRotation );
 
-			Vector3 aimPos = Pawn.EyePos + idealRotation.Forward * 200;
+			Vector3 aimPos = Pawn.EyePosition + idealRotation.Forward * 200;
 			Vector3 lookPos = aimPos;
 			SetLookAt( "aim_eyes", lookPos );
 			SetLookAt( "aim_head", lookPos );

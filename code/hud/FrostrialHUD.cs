@@ -160,7 +160,7 @@ namespace Frostrial
 			//
 			// Where we putting the label, in world coords
 			//
-			var head = new Transform( player.EyePos );
+			var head = new Transform( player.EyePosition );
 
 			var labelPos = head.Position + Vector3.Up * 10; // FIXME: magic number!!!!!!!!!!!!!!!
 
