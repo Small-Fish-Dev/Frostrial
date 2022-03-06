@@ -2,7 +2,7 @@
 
 namespace Frostrial
 {
-	public class IsometricCamera : Camera
+	public class IsometricCamera : CameraMode
 	{
 		public float AngleChangeDelay => 0.2f;
 		public Vector3? PointOfInterest { get; set; } = null;

@@ -13,9 +13,9 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera camera = Camera as IsometricCamera;
+				IsometricCamera CameraMode = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
-				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
+				realRay.Origin = Input.Cursor.Origin - CameraMode.Rotation.Forward * 5000;
 
 				if ( _MouseWorldPositionDirty )
 				{
@@ -42,9 +42,9 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera camera = Camera as IsometricCamera;
+				IsometricCamera CameraMode = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
-				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
+				realRay.Origin = Input.Cursor.Origin - CameraMode.Rotation.Forward * 5000;
 
 				if ( _MouseEntityPointDirty )
 				{
@@ -137,11 +137,11 @@ namespace Frostrial
 			HandleFishing();
 			HandleShopping();
 
-			// Dirty camera fix
+			// Dirty CameraMode fix
 			if ( IsServer )
 			{
 
-				var cam = Camera as IsometricCamera;
+				var cam = CameraMode as IsometricCamera;
 
 				cam.Rotation = Rotation.Slerp( cam.Rotation, cam.TargetRotation, 5f * Time.Delta );
 
@@ -164,12 +164,12 @@ namespace Frostrial
 				Event.Run( "frostrial.player.inputdevice", IsUsingController );
 			}
 
-			if ( IsUsingController && Camera is IsometricCamera camera )
+			if ( IsUsingController && CameraMode is IsometricCamera CameraMode )
 			{
 				VirtualCursor = input.GetAnalog( InputAnalog.Look );
-				var angles = camera.Rotation.Angles();
+				var angles = CameraMode.Rotation.Angles();
 				input.Cursor = new(
-					camera.Position + (camera.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - camera.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
+					camera.Position + (camera.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - CameraMode.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
 					angles.Direction
 					);
 			}

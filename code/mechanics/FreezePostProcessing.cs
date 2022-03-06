@@ -17,7 +17,7 @@ namespace Sandbox
 			{
 
 				freezeStrength = value;
-				Set( "freeze.strength", value );
+				Attributes.Set( "freeze.strength", value );
 
 			}
 		}

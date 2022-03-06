@@ -35,10 +35,10 @@ namespace Frostrial
 			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
-			if ( player.Camera is not IsometricCamera camera )
+			if ( player.Camera is not IsometricCamera CameraMode )
 				return;
 
-			var baseDistance = 1000f * camera.Zoom;
+			var baseDistance = 1000f * CameraMode.Zoom;
 			var baseOpacity = 0.8f;
 			var dangerLevel = 1 - player.Warmth;
 
@@ -585,14 +585,14 @@ namespace Frostrial
 
 		// Left side
 		protected Key Map;
-		protected Key CameraCCW;
-		protected Key CameraZoomIn;
-		protected Key CameraZoomOut;
-		protected Axis CameraZoomMouse;
+		protected Key CameraModeCCW;
+		protected Key CameraModeZoomIn;
+		protected Key CameraModeZoomOut;
+		protected Axis CameraModeZoomMouse;
 		// protected Key PlayerList;
 
 		// Right side
-		protected Key CameraCW;
+		protected Key CameraModeCW;
 		protected Key Use;
 		protected Key Drill;
 		protected Axis VirtualCursor;
