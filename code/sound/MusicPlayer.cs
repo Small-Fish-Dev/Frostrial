@@ -6,8 +6,9 @@ namespace Frostrial
 	public partial class MusicPlayer
 	{
 		public List<Music> Queue { get; internal set; } = new();
-		public bool IsInitialized { get; internal set; } = false;
-		public float TracksDelay { get; set; } = 30.0f;
+		public bool IsInitialized { get; internal set; }
+		public float TracksDelay { get; set; } = 30f;
+		public float Volume { get; set; } = 0.5f;
 
 		protected int currentQueuePosition = 0;
 		protected bool isWaitingForTheNextTrack = false;
@@ -19,10 +20,10 @@ namespace Frostrial
 			if ( IsInitialized )
 				return;
 
-			foreach ( var m in Music.All )
+			foreach ( var (key, value) in Music.All )
 			{
-				Log.Info( m.Key );
-				Queue.Add( m.Value );
+				Log.Info( key );
+				Queue.Add( value );
 			}
 			Shuffle( true );
 
@@ -59,7 +60,7 @@ namespace Frostrial
 		{
 			if ( increment )
 			{
-				int nextTrack = (currentQueuePosition + 1) % Queue.Count;
+				var nextTrack = (currentQueuePosition + 1) % Queue.Count;
 				if ( nextTrack < currentQueuePosition )
 				{
 					Shuffle();
@@ -70,32 +71,33 @@ namespace Frostrial
 			NowPlaying( Queue[currentQueuePosition] );
 
 			tsTrackStart = 0;
-			Queue[currentQueuePosition].Play();
+			Queue[currentQueuePosition].Play( Volume );
 		}
 
 		protected void Shuffle(bool ignoreFLRepeat = false)
 		{
 			Log.Info( $"Shuffle! {Queue.Count}" );
-			Music lastTrack = Queue[Queue.Count - 1];
-			for ( int i = 0; i < Queue.Count - 1; i++ )
+			Music lastTrack = Queue[^1];
+			for ( var i = 0; i < Queue.Count - 1; i++ )
 			{
-				for ( int j = i + 1; j < Queue.Count; j++ )
+				for ( var j = i + 1; j < Queue.Count; j++ )
 				{
-					if ( System.Random.Shared.Int( 0, 1 ) == 0 )
-					{
-						if ( !ignoreFLRepeat
-							&& i == 0 && j == Queue.Count - 1
-							&& Queue[j].ResourceId == lastTrack.ResourceId ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
-							continue;
-						(Queue[i], Queue[j]) = (Queue[j], Queue[i]);
-					}
+					if ( System.Random.Shared.Int( 0, 1 ) != 0 )
+						continue;
+
+					if ( !ignoreFLRepeat
+					     && i == 0 && j == Queue.Count - 1
+					     && Queue[j].ResourceId == lastTrack.ResourceId ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
+						continue;
+				
+					(Queue[i], Queue[j]) = (Queue[j], Queue[i]);
 				}
 			}
 		}
 
 		protected void NowPlaying( Music m )
 		{
-			Event.Run<Music>( "frostrial.next_song", m );
+			Event.Run( "frostrial.next_song", m );
 		}
 	}
 }

@@ -7,11 +7,11 @@
 			"sounds/3d/footstep_snow1.vsnd",
 		]
 		ui = false
-		volume = 1.0
-		volumerandom = 0.0
+		volume = 0.6
+		volumerandom = 0.1
 		pitch = 1.0
 		pitchrandom = 0.2
-		distancemax = 4000.0
+		distancemax = 500.0
 		selectionmode = "3"
 	}
 }

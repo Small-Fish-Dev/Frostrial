@@ -9,13 +9,11 @@ namespace Frostrial
 	partial class Player : Sandbox.Player
 	{
 
-		[Net] public float Money { get; set; } = 0f;
+		[Net, Local, Change] public float Money { get; set; } = 0f;
 		[Net] public bool ShopOpen { get; set; } = false;
 		[Net] public bool UpgradedDrill { get; set; } = false;
 		[Net] public bool UpgradedRod { get; set; } = false;
 		[Net] public bool UpgradedCoat { get; set; } = false;
-		[Net] public float LastProfit { get; set; } = 0f;
-		[Net] public RealTimeUntil ProfitTime { get; set; } = 0f;
 		[Net] public bool MultiItems { get; set; } = false;
 
 		public void HandleShopping()
@@ -29,10 +27,10 @@ namespace Frostrial
 				if ( JumpscareTimer <= -2 )
 				{
 
-					Game.CurrentTitle = "Thank you for playing";
-					Game.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
+					Game.Instance.CurrentTitle = "Thank you for playing";
+					Game.Instance.CurrentSubtitle = "Game made by SmallFish and friends for JamBox 2021";
 					Curtains = true;
-					Hint( "", 7, true );
+					Delay( 7 );
 
 				}
 
@@ -97,7 +95,7 @@ namespace Frostrial
 
 			Player player = ConsoleSystem.Caller.Pawn as Player;
 
-			int totalBought = player.MultiItems ? (int) Math.Min( (int)player.Money / Game.Prices["campfire"], 10 ) : 1;
+			int totalBought = player.MultiItems ? (int)Math.Min( (int)player.Money / Game.Prices["campfire"], 10 ) : 1;
 
 			if ( player.Money >= Game.Prices["campfire"] * totalBought )
 			{
@@ -168,11 +166,12 @@ namespace Frostrial
 			{
 
 				player.BlockMovement = true;
+				player.Velocity = Vector3.Zero;
 				player.Jumpscare = 3;
 				player.JumpscareTimer = 6f;
 
 				player.BlockMovement = true;
-				player.Hint( "Goodbye fishes.", 3, true );
+				player.Say( VoiceLine.Outro );
 
 				player.AddMoney( -Game.Prices["plane"] );
 
@@ -182,12 +181,15 @@ namespace Frostrial
 
 		public void AddMoney( float amount )
 		{
+			Host.AssertServer();
 
 			Money += amount;
 
-			LastProfit = amount;
-			ProfitTime = 2f;
+		}
 
+		public void OnMoneyChanged( float oldValue, float newValue )
+		{
+			Event.Run( "frostrial.money", newValue - oldValue );
 		}
 
 	}
@@ -288,7 +290,8 @@ namespace Frostrial
 
 		public override void Tick()
 		{
-			Player player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
 			Parent.Style.PointerEvents = player.ShopOpen ? "all" : "visible";
 			Style.Opacity = player.ShopOpen ? 1 : 0;
@@ -297,7 +300,7 @@ namespace Frostrial
 			campfireText.Text = $"( €{Game.Prices["campfire"]} ) Buy Campfire ({player.Campfires})";
 			coatText.Text = player.UpgradedCoat ? "[BOUGHT]" : $"( €{Game.Prices["coat"]} ) Upgrade Coat";
 			drillText.Text = player.UpgradedDrill ? "[BOUGHT]" : $"( €{Game.Prices["drill"]} ) Upgrade Drill";
-			rodText.Text = player.UpgradedRod ? "[BOUGHT]" :  $"( €{Game.Prices["rod"]} ) Upgrade Rod";
+			rodText.Text = player.UpgradedRod ? "[BOUGHT]" : $"( €{Game.Prices["rod"]} ) Upgrade Rod";
 			planeText.Text = $"( €{Game.Prices["plane"]} ) Buy Plane Ticket";
 
 		}

@@ -7,12 +7,12 @@ namespace Frostrial
 		public float AngleChangeDelay => 0.2f;
 		public Vector3? PointOfInterest { get; set; } = null;
 
-		Vector3 PositionBeforeZoomOut = new();
+		Vector3 PositionBeforeZoomOut = Vector3.Zero;
+		Vector3 PreviousInputDirection = Vector3.Zero;
 		TimeSince LastAngleChange = 0;
 		Angles TargetAngles = new Angles( 30, 90, 0 );
-		Rotation TargetRotation = new();
+		public Rotation TargetRotation = new();
 		public float Zoom = 0.7f; // Sorry I need this!
-		bool hasNewAngle = false;
 
 		public IsometricCamera()
 		{
@@ -24,15 +24,16 @@ namespace Frostrial
 			LastAngleChange = AngleChangeDelay;
 		}
 
-		[ClientCmd( "camera_pitch" )]
-		public static void ChangeCameraPitch( float newPitch )
+		[ServerCmd]
+		public static void ChangeCameraYaw( float newYaw )
 		{
-			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			var cam = (ConsoleSystem.Caller.Pawn as Player).Camera as IsometricCamera;
 			if ( cam == null )
 				return;
 
-			cam.TargetAngles = cam.TargetAngles.WithPitch( newPitch.Clamp( 15.0f, 45.0f ) );
+			cam.TargetAngles = cam.TargetAngles.WithYaw( newYaw );
 			cam.TargetRotation = cam.TargetAngles.ToRotation();
+
 		}
 
 		[ClientCmd( "debug_set_poi" )]
@@ -72,16 +73,25 @@ namespace Frostrial
 			{
 				PositionBeforeZoomOut = player.Position;
 			}
-			Position = PositionBeforeZoomOut + Rotation.Backward * 2000 + Rotation.FromYaw( Rotation.Yaw() ).Forward * 10; // move it back a little bit
+			Position = PositionBeforeZoomOut + Vector3.Up * 64; 
+			ZNear = -4000f;
 			OrthoSize = MathX.LerpTo( OrthoSize, Zoom, 7.5f * Time.Delta );
 			Viewer = null;
 		}
 
 		public override void BuildInput( InputBuilder input )
 		{
+
+			if ( Local.Pawn is not Player player || !player.IsValid )
+				return;
+
+			var ibCameraZoom = input.UsingController
+				? (input.Down(player.Input_CameraZoomIn) ? 1 : 0) - (input.Down(player.Input_CameraZoomOut) ? 1 : 0)
+				: input.MouseWheel;
+
 			if ( LastAngleChange >= AngleChangeDelay )
 			{
-				float rotDir = (input.Pressed( InputButton.Menu ) ? -1 : 0) + (input.Pressed( InputButton.Use ) ? 1 : 0);
+				float rotDir = (input.Pressed( player.Input_CameraCW ) ? -1 : 0) + (input.Pressed( player.Input_CameraCCW ) ? 1 : 0);
 
 				if ( rotDir != 0 )
 				{
@@ -89,32 +99,33 @@ namespace Frostrial
 					TargetRotation = TargetAngles.ToRotation();
 
 					LastAngleChange = 0;
-					hasNewAngle = true;
+
+					ChangeCameraYaw( TargetAngles.yaw );
 
 					Sound.FromScreen( "camera_crank" );
 				}
 			}
 
-			if ( input.MouseWheel != 0 )
+			if ( ibCameraZoom != 0 )
 			{
-				Zoom = (Zoom - input.MouseWheel * 0.15f * Zoom).Clamp( 0.15f, 1f );
+				Zoom = (Zoom - ibCameraZoom * Zoom * 0.15f).Clamp( 0.1f, 2f );
 			}
 
 
-			if ( ( Local.Pawn as Player ) is var player && player != null && !player.BlockMovement )
+			if ( !player.BlockMovement )
 			{
 				// add the view move
-				input.ViewAngles = Rotation.LookAt((player.MouseWorldPosition - player.Position).WithZ(0), Vector3.Up).Angles();
+				input.ViewAngles = Rotation.LookAt( (player.MouseWorldPosition - player.Position).WithZ( 0 ), Vector3.Up ).Angles();
 				input.ViewAngles.roll = 0;
 			}
 
 			// Just copy input as is
 			input.InputDirection = input.AnalogMove;
 
-			if ( hasNewAngle && input.InputDirection.IsNearZeroLength ) // if the player have stopped moving
+			if ( input.InputDirection.Distance( PreviousInputDirection ) > 0.1 ) // if the player has changed the input direction
 			{
 				Player.ChangeMovementDirection( TargetAngles.yaw ); // change the angle
-				hasNewAngle = false;
+				PreviousInputDirection = input.InputDirection;
 			}
 		}
 	}

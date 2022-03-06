@@ -87,7 +87,7 @@ namespace Frostrial
 
 								}
 
-								FishUI( fish.Species, fish.Variant );
+								FishUI( To.Single(this), fish.Species, fish.Variant );
 								fish.Catch();
 
 							}
@@ -127,7 +127,7 @@ namespace Frostrial
 			if ( fxState )
 			{
 
-				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
+				Sound.FromWorld( "", fxPosition );
 				fishingParticle = Particles.Create( "particles/drilling_particle.vpcf", fxPosition );
 
 			}

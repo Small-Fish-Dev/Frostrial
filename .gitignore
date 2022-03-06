@@ -1,4 +1,6 @@
+.vs
 code/*.csproj
+code/.vs
 code/obj
 code/Properties/launchSettings.json
 .intermediate

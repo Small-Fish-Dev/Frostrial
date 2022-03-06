@@ -1,6 +1,4 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
 
 namespace Frostrial
 {
@@ -32,21 +30,22 @@ namespace Frostrial
 		{
 
 			Velocity = Rotation.Forward * 165f;
-			Rotation = (Victim.Position.WithZ(0) - Position.WithZ(0)).EulerAngles.ToRotation();
+			Rotation = (Victim.Position.WithZ( 0 ) - Position.WithZ( 0 )).EulerAngles.ToRotation();
 
 			if ( Victim.Position.Distance( Position ) < 40f )
 			{
-
-				Player player = Victim as Player;
+				if ( Victim is not Player player )
+					return;
 
 				if ( player.Jumpscare == 0 )
 				{
 
 					player.BlockMovement = true;
+					player.Velocity = Vector3.Zero;
 					player.Jumpscare = 1;
 					player.JumpscareTimer = 4f;
 
-					player.Hint( "", 4, true );
+					player.Delay( 4 );
 
 					PlayCreep( false );
 
@@ -64,20 +63,22 @@ namespace Frostrial
 			if ( Game.IsInside( Victim.Position, new Vector3( -1395, -2745, 0 ), new Vector3( -1164, -2394, 40 ) ) )
 			{
 
-				if ( Position.Distance( Game.HutEntity.Position ) <= 210 )
+				if ( Position.Distance( Game.Instance.HutEntity.Position ) <= 210 )
 				{
 
-					Player player = Victim as Player;
+					if ( Victim is not Player player )
+						return;
 
 					if ( player.Jumpscare == 0 )
 					{
 
 						player.JumpscareTimer = 3f;
 						player.BlockMovement = true;
+						player.Velocity = Vector3.Zero;
 
 						player.Jumpscare = 2;
 
-						player.Hint( "", 7, true ); // Keep him quiet during the cutscene
+						player.Delay( 7 ); // Keep him quiet during the cutscene
 
 						PlayCreep( true );
 
@@ -89,7 +90,7 @@ namespace Frostrial
 						player.BlockMovement = false;
 						player.Jumpscare = 0;
 
-						player.Hint( "********* ! ! !", 2, true );
+						player.Say( VoiceLine.YetiJumpscare );
 
 						Delete();
 
@@ -112,7 +113,7 @@ namespace Frostrial
 		public static void PlayCreep( bool window )
 		{
 
-			Sound.FromScreen( window ? "yeti_window" : "yeti_jumpscare");
+			Sound.FromScreen( window ? "yeti_window" : "yeti_jumpscare" );
 
 		}
 

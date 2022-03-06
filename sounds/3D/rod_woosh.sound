@@ -11,7 +11,7 @@
 		volumerandom = 0.0
 		pitch = 1.0
 		pitchrandom = 0.2
-		distancemax = 4000.0
+		distancemax = 1000.0
 		selectionmode = "3"
 	}
 }

@@ -1,13 +1,13 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System.Collections.Generic;
 using System;
-using System.Numerics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Frostrial
 {
-	
+
 	public class HutIndicator : Panel
 	{
 
@@ -23,25 +23,28 @@ namespace Frostrial
 
 		public override void Tick()
 		{
+			if ( Local.Pawn is not Player player )
+				return;
 
-			var player = Local.Pawn as Player;
-			var hut = Game.HutEntity;
+			var hut = Game.Instance.HutEntity;
 			var hutScreen = hut.Position.ToScreen();
-			var left = MathX.Clamp( hutScreen.x, 0.21f, 0.75f );
-			var top = MathX.Clamp( hutScreen.y, 0f, 1f);
+			var left = hutScreen.x.Clamp( 0.21f, 0.75f );
+			var top = hutScreen.y.Clamp( 0f, 1f );
 
-			Style.Left = Length.Pixels( ( left - 0.5f ) * 3000 );
-			Style.Top = Length.Pixels( ( top + 0.1f ) * 800 );
+			Style.Left = Length.Pixels( (left - 0.5f) * 3000 );
+			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
-			var camera = player.Camera as IsometricCamera;
+			if ( player.Camera is not IsometricCamera camera )
+				return;
+
 			var baseDistance = 1000f * camera.Zoom;
-			var baseOpacity = 0.4f;
+			var baseOpacity = 0.8f;
 			var dangerLevel = 1 - player.Warmth;
 
-			Style.Opacity = MathX.Clamp( ( player.Position.Distance( hut.Position ) - baseDistance ) / baseDistance , 0, 1f ) * baseOpacity * ( baseOpacity + 1 / baseOpacity * dangerLevel );
+			Style.Opacity = ((player.Position.Distance( hut.Position ) - baseDistance) / baseDistance).Clamp( 0, 1f ) * baseOpacity * (baseOpacity + 1 / baseOpacity * dangerLevel);
 
-			var rotation = -MathX.RadianToDegree( (float)Math.Atan2( 0.5f - hutScreen.x, 0.5 - hutScreen.y ) );
+			var rotation = -((float)Math.Atan2( 0.5f - hutScreen.x, 0.5 - hutScreen.y )).RadianToDegree();
 
 			var arrowRotate = new PanelTransform();
 			arrowRotate.AddRotation( 0, 0, rotation );
@@ -50,46 +53,148 @@ namespace Frostrial
 
 
 		}
-		
+
 	}
 
-	public class Hint : Panel
+	public class SpeechBubbles : Panel
 	{
+		Dictionary<int, BaseSpeechBubble> ActiveTags = new Dictionary<int, BaseSpeechBubble>();
 
-		Panel hintContainer;
-		Label hintTitle;
-
-		public Hint()
+		public class BaseSpeechBubble : Panel
 		{
+			internal enum State
+			{
+				Hidden,
+				Printing,
+				Fade
+			}
 
-			Player player = Local.Pawn as Player;
+			public Label TextLabel { get; set; }
+			public float TextDelay { get; set; } = 2f;
 
-			hintContainer = Add.Panel( "Hint" ).Add.Panel( "HintContainer" );
-			hintTitle = hintContainer.Add.Label( "Lorem Ipsum", "HintTitle" );
+			TimeUntil TimeUntilFadeAway;
+			TimeSince TimeSinceSaid;
+			string text;
+			float duration;
+			State s;
 
+			public BaseSpeechBubble( Player player )
+			{
+				TextLabel = Add.Label();
+				TextLabel.Style.Opacity = 0;
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+
+				switch ( s )
+				{
+					case State.Hidden:
+						break;
+					case State.Printing:
+						TextLabel.Text = text.Truncate( (int)(text.Length * Math.Min( 1, TimeSinceSaid / duration )) );
+						if ( TextLabel.TextLength == text.Length )
+						{
+							TimeUntilFadeAway = TextDelay;
+							s = State.Fade;
+						}
+						break;
+					case State.Fade:
+						if ( TimeUntilFadeAway <= 0 )
+						{
+							TextLabel.Style.Opacity = 0;
+							s = State.Hidden;
+						}
+						break;
+				}
+			}
+
+			public void Say( Monologue m )
+			{
+				text = m.Text;
+				duration = m.Duration;
+
+				TextLabel.Style.Opacity = 1;
+				TimeSinceSaid = 0;
+				s = State.Printing;
+			}
 		}
 
 		public override void Tick()
 		{
+			base.Tick();
 
-			float fadeTime = 1f;
-			float textSpeed = 20f; // Letters per second
-
-			Player player = Local.Pawn as Player;
-			IsometricCamera camera = player.Camera as IsometricCamera;
-
-			hintTitle.Text = player.HintText.Truncate( (int)( Math.Max( Time.Now - player.HintLifeTime, 0 ) * textSpeed ) );
-			hintTitle.Style.FontSize = 20 / camera.Zoom;
-			hintTitle.Style.TextStrokeWidth = 3 / camera.Zoom;
-			hintTitle.Style.TextStrokeColor = Color.Black;
-			hintContainer.Style.Top = Length.Pixels( 360 * camera.Zoom - 1000 );
-
-			// Don't punish me, RealTimeSince doesn't seem to work when networked
-			Style.Opacity = Math.Clamp( player.HintLifeDuration + fadeTime - ( Time.Now - player.HintLifeTime ), 0, 1 );
+			foreach ( var player in Entity.All.OfType<Player>() )
+			{
+				UpdateNameTag( player );
+			}
 		}
 
-	}
+		[Event( "frostrial.player.left" )]
+		protected void OnPlayerLeave( Client cl )
+		{
+			ActiveTags[cl.Id].Delete();
+			ActiveTags.Remove( cl.Id );
+		}
 
+		public virtual BaseSpeechBubble CreateNameTag( Player player )
+		{
+			if ( player.Client == null )
+				return null;
+
+			var tag = new BaseSpeechBubble( player );
+			tag.Parent = this;
+			return tag;
+		}
+
+		public void UpdateNameTag( Player player )
+		{
+			if ( player.Client == null )
+				return;
+
+			// TODO: would be nice to have but sadly in Frostrial death results in kick
+			/*if ( player.LifeState != LifeState.Alive )
+				return false;*/
+
+			//
+			// Where we putting the label, in world coords
+			//
+			var head = new Transform( player.EyePos );
+
+			var labelPos = head.Position + Vector3.Up * 10; // FIXME: magic number!!!!!!!!!!!!!!!
+
+			// TODO - can we see them
+
+			var fontSize = 30 / ((Local.Pawn.Camera as IsometricCamera)?.Zoom ?? 1);
+
+			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
+			{
+				tag = CreateNameTag( player );
+				if ( tag == null )
+				{
+					Log.Error( $"Fatal: failed to make a speech bubble for {player.Client.Name} ({player.Client.Id})" );
+					return;
+				}
+				ActiveTags[player.Client.Id] = tag;
+			}
+
+			var screenPos = labelPos.ToScreen();
+
+			tag.Style.Left = Length.Fraction( screenPos.x );
+			tag.Style.Top = Length.Fraction( screenPos.y );
+
+			tag.Style.FontSize = Length.Pixels( fontSize );
+		}
+
+		public void Say( Client cl, Monologue m )
+		{
+			if ( !ActiveTags.ContainsKey( cl.Id ) || ActiveTags[cl.Id] is not BaseSpeechBubble bubble )
+				return;
+
+			bubble.Say( m );
+		}
+	}
 
 	public class Interact : Panel
 	{
@@ -99,49 +204,28 @@ namespace Frostrial
 
 		public Interact()
 		{
-
-			Player player = Local.Pawn as Player;
-
 			interactContainer = Add.Panel( "Interact" ).Add.Panel( "InteractContainer" );
 			interactTitle = interactContainer.Add.Label( "Lorem Ipsum", "InteractTitle" );
-
 		}
 
 		public override void Tick()
 		{
 
-			Player player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
-			string type = Game.NearestEntity( player.MouseWorldPosition, player.InteractionRange ).GetType().Name;
-			string text = Game.InteractionsText.ContainsKey( type ) ? Game.InteractionsText[type] : "";
+			string text = "";
 
 			if ( player.PlacingCampfire )
-			{
-
 				text = "Click to place down the campfire";
-
-			}
-
-			if ( player.ItemsOpen )
-			{
-
+			else if ( player.ItemsOpen )
 				text = "Select an item to use";
-
-			}
-
-			if ( player.Fishing )
-			{
-
-				text = "Let go to catch the fish as it bites";
-
-			}
-
-			if ( player.ShopOpen )
-			{
-
+			else if ( player.Fishing )
+				text = "Let go to catch the fish as it struggles";
+			else if ( player.ShopOpen )
 				text = "Buy items or Upgrades ( Hold SHIFT to buy 10 )";
-
-			}
+			else if ( Game.NearestDescribableEntity( player.MouseWorldPosition, player.InteractionRange ) is IDescription describable )
+				text = describable.Description;
 
 			interactTitle.Text = text;
 
@@ -153,37 +237,64 @@ namespace Frostrial
 	{
 		Panel moneyContainer;
 		Label moneyTitle;
-		Label moreMoneyTitle;
-		Label lessMoneyTitle;
+		Label moneyDifferenceTitle;
+		Label secondaryMoneyDifferenceTitle;
+
+		float currentDifference;
+		float secondaryDifference;
+
+		RealTimeUntil ProfitTime { get; set; } = 0f;
 
 		public Money()
 		{
-
-			Player player = Local.Pawn as Player;
-
 			moneyContainer = Add.Panel( "Money" ).Add.Panel( "moneyContainer" );
-			moneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moneyTitle" );
-			moreMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "moreMoney" );
-			lessMoneyTitle = moneyContainer.Add.Label( "Lorem Ipsum", "lessMoney" );
-
+			moneyTitle = moneyContainer.Add.Label( "€0", "moneyTitle" );
+			moneyDifferenceTitle = moneyContainer.Add.Label( "", "difference" );
+			secondaryMoneyDifferenceTitle = moneyContainer.Add.Label( "", "difference secondary" );
 		}
 
 		public override void Tick()
 		{
+			moneyDifferenceTitle.Style.Opacity = ProfitTime;
+			secondaryMoneyDifferenceTitle.Style.Opacity = ProfitTime;
+		}
 
+		[Event( "frostrial.money" )]
+		protected void MoneyEvent( float difference )
+		{
+			if ( ProfitTime <= 0 )
+				currentDifference = 0;
+
+			secondaryDifference = difference;
+			currentDifference += difference;
+			ProfitTime = 2f;
+
+			RenderMoney();
+		}
+
+		protected void RenderMoney()
+		{
 			Player player = Local.Pawn as Player;
 
-			double text = Math.Round( player.Money, 2 );
-			moneyTitle.Text = $"€ { text }";
+			moneyTitle.Text = $"€ { Math.Round( player.Money, 2 ) }";
 
-			float lastProfit = (float)Math.Round( player.LastProfit, 2 );
+			moneyDifferenceTitle.Text = MoneyToString( currentDifference );
+			secondaryMoneyDifferenceTitle.Text = secondaryDifference.AlmostEqual( currentDifference )
+				? ""
+				: $"({MoneyToString( secondaryDifference )})";
 
-			moreMoneyTitle.Text = player.LastProfit > 0 ? $"€+{lastProfit}" : "" ;
-			lessMoneyTitle.Text = player.LastProfit < 0 ? $"€{lastProfit}" : "" ;
+			ChangePanelClasses( moneyDifferenceTitle, currentDifference );
+			ChangePanelClasses( secondaryMoneyDifferenceTitle, secondaryDifference );
+		}
 
-			moreMoneyTitle.Style.Opacity = player.ProfitTime;
-			lessMoneyTitle.Style.Opacity = player.ProfitTime;
+		protected void ChangePanelClasses( Panel p, float value )
+		{
+			p.SetClass( "negative", value < 0 );
+		}
 
+		protected string MoneyToString( float value )
+		{
+			return $"€{(value > 0 ? "+" : "")}{Math.Round( value, 2 )}";
 		}
 
 	}
@@ -207,8 +318,8 @@ namespace Frostrial
 			Player player = Local.Pawn as Player;
 			var pos = player.Position;
 			mapPanel.SetClass( "open", player.OpenMap );
-			playerPanel.Style.Left = Length.Fraction( Math.Clamp( ( pos.x - 550 ) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
-			playerPanel.Style.Top = Length.Fraction( Math.Clamp( ( -pos.y - 500 )  / 10000 + 0.5f, 0.03f, 0.9f ) );
+			playerPanel.Style.Left = Length.Fraction( Math.Clamp( (pos.x - 550) / 9200 + 0.5f, 0.03f, 0.9f ) ); // This took a while to find the good map spot
+			playerPanel.Style.Top = Length.Fraction( Math.Clamp( (-pos.y - 500) / 10000 + 0.5f, 0.03f, 0.9f ) );
 
 		}
 
@@ -231,10 +342,11 @@ namespace Frostrial
 
 		public override void Tick()
 		{
-			var player = Local.Pawn as Player;
+			if ( Local.Pawn is not Player player )
+				return;
 
-			curtainsTitle.Text = Game.CurrentTitle;
-			curtainsSubtitle.Text = Game.CurrentSubtitle;
+			curtainsTitle.Text = Game.Instance.CurrentTitle;
+			curtainsSubtitle.Text = Game.Instance.CurrentSubtitle;
 
 			curtainsPanel.Parent.SetClass( "closed", !player.Curtains );
 
@@ -264,10 +376,10 @@ namespace Frostrial
 			var player = Local.Pawn as Player;
 			float opacity = 0;
 
-			switch (player.Jumpscare)
+			switch ( player.Jumpscare )
 			{
 
-				case  0:
+				case 0:
 					opacity = 0;
 					break;
 				case 1:
@@ -301,13 +413,15 @@ namespace Frostrial
 	{
 
 		RealTimeSince TimeSinceBorn = 0;
-		public FishCaught() {}
+		public FishCaught() { }
 
 		public FishCaught( string species, bool variant ) : this()
 		{
 
+			string fishPicture = variant ? FishAsset.All[species].VariantPreview : FishAsset.All[species].Preview;
+
 			Style.ZIndex = (int)Time.Now * 100 + 3;
-			Style.SetBackgroundImage( Game.FishPictures[species][variant ? 1 : 0] );
+			Style.SetBackgroundImage( fishPicture );
 
 		}
 
@@ -321,7 +435,7 @@ namespace Frostrial
 				Delete();
 
 			}
-				
+
 		}
 
 	}
@@ -334,11 +448,7 @@ namespace Frostrial
 
 		RealTimeSince TimeSinceBorn = 0;
 
-		public NowPlaying()
-		{
-		}
-
-		public NowPlaying( Music music ) : this()
+		public NowPlaying( Music music ) : base()
 		{
 			AlbumCover = Add.Image( $"/ui/album-covers/{music.AlbumCover}" );
 			InfoContainer = Add.Panel( "info" );
@@ -360,13 +470,200 @@ namespace Frostrial
 		{
 			base.Tick();
 
-			if ( TimeSinceBorn > 5 )
+			if ( TimeSinceBorn > 10 )
 				Delete();
+		}
+	}
+
+	public class VirtualCursor : Panel
+	{
+		Panel VisualPanel;
+		TimeUntil TimeUntilFadeOut;
+
+		public VirtualCursor()
+		{
+			VisualPanel = Add.Panel();
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( !HasClass( "active" ) )
+				return;
+
+			if ( Local.Pawn is not Player player )
+				return;
+
+			if ( player.VirtualCursor.IsNearZeroLength )
+			{
+				if ( TimeUntilFadeOut <= 0 )
+				{
+					VisualPanel.Style.Opacity = 0;
+					return;
+				}
+			}
+			else
+			{
+				TimeUntilFadeOut = 2;
+			}
+
+			VisualPanel.Style.Opacity = 1;
+			var mwp = player.MouseWorldPosition.ToScreen();
+			Style.Top = Length.Fraction( mwp.y );
+			Style.Left = Length.Fraction( mwp.x );
+		}
+
+		[Event( "frostrial.player.inputdevice" )]
+		public void SetCursor( bool enabled )
+		{
+			SetClass( "active", enabled );
+		}
+	}
+
+	public class ControlsTip : Panel
+	{
+		public class Key : Panel
+		{
+			public Image Glyph { get; protected set; }
+			public InputButton Button { get; protected set; }
+			public Label Hint { get; protected set; }
+
+			public Key()
+			{
+				Glyph = Add.Image();
+				Hint = Add.Label();
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+				
+				if ( Input.GetGlyph( Button ) is not Texture texture )
+					return;
+
+				Glyph.Texture = texture;
+				Glyph.Style.Width = texture.Width;
+				Glyph.Style.Height = texture.Height;
+			}
+
+			public void SetButton( InputButton button )
+			{
+				Button = button;
+			}
+		}
+
+		public class Axis : Panel
+		{
+			public Image Glyph { get; protected set; }
+			public InputAnalog Analog { get; protected set; }
+			public Label Hint { get; protected set; }
+
+			public Axis()
+			{
+				Glyph = Add.Image();
+				Hint = Add.Label();
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+				
+				if ( Input.GetGlyph( Analog ) is not Texture texture )
+					return;
+
+				Glyph.Texture = texture;
+				Glyph.Style.Width = texture.Width;
+				Glyph.Style.Height = texture.Height;
+			}
+
+			public void SetAnalog( InputAnalog analog )
+			{
+				Analog = analog;
+			}
+		}
+
+		// Left side
+		protected Key Map;
+		protected Key CameraCCW;
+		protected Key CameraZoomIn;
+		protected Key CameraZoomOut;
+		protected Axis CameraZoomMouse;
+		// protected Key PlayerList;
+
+		// Right side
+		protected Key CameraCW;
+		protected Key Use;
+		protected Key Drill;
+		protected Axis VirtualCursor;
+
+		internal bool ready = false;
+
+		public ControlsTip()
+		{
+			var leftSide = Add.Panel( "left" );
+			CameraCCW = leftSide.AddChild<Key>();
+			Map = leftSide.AddChild<Key>();
+			CameraZoomIn = leftSide.AddChild<Key>();
+			CameraZoomOut = leftSide.AddChild<Key>();
+
+			CameraZoomMouse = leftSide.AddChild<Axis>();
+			// TODO: use a mouse wheel icon
+
+			var rightSide = Add.Panel( "right" );
+			CameraCW = rightSide.AddChild<Key>();
+			Use = rightSide.AddChild<Key>();
+			Drill = rightSide.AddChild<Key>();
+
+			VirtualCursor = rightSide.AddChild<Axis>();
+
+			CameraCCW.Hint.Text = "Rotate to the right";
+			Map.Hint.Text = "Toggle map";
+			CameraZoomIn.Hint.Text = "Zoom in";
+			CameraZoomOut.Hint.Text = "Zoom out";
+			CameraZoomMouse.Hint.Text = "Zoom";
+
+			CameraCW.Hint.Text = "Rotate to the left";
+			Use.Hint.Text = "Use";
+			Drill.Hint.Text = "Drill";
+			VirtualCursor.Hint.Text = "Select";
+
+			ready = true;
+
+			if ( Local.Pawn is not Player player )
+				return;
+
+			UpdateTip( player.IsUsingController );
+		}
+
+		[Event( "frostrial.player.inputdevice" )]
+		public void UpdateTip( bool usingController )
+		{
+			if ( !ready || Local.Pawn is not Player player )
+				return;
+
+			CameraCCW.SetButton(player.Input_CameraCCW);
+			Map.SetButton( player.Input_Map );
+			CameraZoomIn.SetButton(player.Input_CameraZoomIn);
+			CameraZoomIn.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
+			CameraZoomOut.SetButton(player.Input_CameraZoomOut);
+			CameraZoomOut.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
+
+			// TODO: use a mouse wheel icon
+			CameraZoomMouse.Style.Display = player.IsUsingController ? DisplayMode.None : DisplayMode.Flex;
+
+			CameraCW.SetButton(player.Input_CameraCW);
+			Use.SetButton(player.Input_Use);
+			Drill.SetButton(player.Input_Drill);
+
+			VirtualCursor.SetAnalog( InputAnalog.Look );
+			VirtualCursor.Style.Display = player.IsUsingController ? DisplayMode.Flex : DisplayMode.None;
 		}
 	}
 
 	public partial class FrostrialHUD : Sandbox.HudEntity<RootPanel>
 	{
+		public SpeechBubbles SpeechBubbles { get; internal set; }
 
 		public FrostrialHUD()
 		{
@@ -385,7 +682,9 @@ namespace Frostrial
 			RootPanel.AddChild<HutIndicator>();
 			RootPanel.AddChild<Jumpscare>();
 			RootPanel.AddChild<Curtains>();
-			RootPanel.AddChild<Hint>();
+			SpeechBubbles = RootPanel.AddChild<SpeechBubbles>();
+			RootPanel.AddChild<VirtualCursor>();
+			RootPanel.AddChild<ControlsTip>();
 			RootPanel.AddChild<Items>();
 			RootPanel.AddChild<Shop>();
 
@@ -396,17 +695,16 @@ namespace Frostrial
 		[Event.Tick.Client]
 		private void ClientTick()
 		{
-
 			var player = Local.Pawn as Player;
 
 			var pp = PostProcess.Get<FreezePostProcessEffect>();
 
-			pp.FreezeStrength = 1 - player.Warmth;
+			pp.FreezeStrength = 1 - (player?.Warmth ?? 1);
 
 		}
 
-		[Event("frostrial.next_song")]
-		public void NextSong(Music music)
+		[Event( "frostrial.next_song" )]
+		public void NextSong( Music music )
 		{
 			var np = new NowPlaying( music );
 			RootPanel.AddChild( np );
@@ -418,75 +716,6 @@ namespace Frostrial
 
 			var fish = new FishCaught( species, variant );
 			RootPanel.AddChild( fish );
-		}
-
-	}
-
-	partial class Player : Sandbox.Player
-	{
-		[Net] public string HintText { get; set; } = "";
-		[Net] public float HintLifeTime { get; set; } = 0f;
-		[Net] public float HintLifeDuration { get; set; } = 0f;
-		[Net] public int Jumpscare { get; set; } = 0;
-		[Net] public RealTimeUntil JumpscareTimer { get; set; } = 0;
-		[Net] public float? ForceUnskippable { get; set; }
-		public bool Curtains { get; set; } = true;
-		public bool OpenMap { get; set; } = false;
-		[Net] public RealTimeSince SpawnedSince { get; set; } = 0f; 
-
-		public void Hint( string text, float duration = 1f, bool unskippable = false) // "Unskippable" dialog will be skipped by other unskippale dialogs
-		{
-
-			if ( ForceUnskippable == null || Time.Now >= ForceUnskippable )
-			{
-
-				HintText = text;
-				HintLifeDuration = duration;
-				HintLifeTime = Time.Now;
-
-			}
-
-			if ( unskippable )
-			{
-
-				ForceUnskippable = Time.Now + duration;
-
-				HintText = text;
-				HintLifeDuration = duration;
-				HintLifeTime = Time.Now;
-
-			}
-
-		}
-
-		public void HandleHUD()
-		{
-
-			if ( IsClient )
-			{
-
-				if ( Input.Down( InputButton.Score ) )
-				{
-
-					OpenMap = true;
-
-				}
-				else
-				{
-
-					OpenMap = false;
-
-				}
-
-			}
-
-			if ( SpawnedSince >= 4f && SpawnedSince <= 5f ) //Just so I can be lazy and be able to put it back later on
-			{
-				Hint( "Today is the day I buy my way out of here.", 5, true );
-				Curtains = false;
-
-			}
-
 		}
 
 	}

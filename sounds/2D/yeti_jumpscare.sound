@@ -7,7 +7,7 @@
 			"sounds/2d/yeti_jumpscare.vsnd",
 		]
 		ui = true
-		volume = 1.0
+		volume = 5.0
 		volumerandom = 0.0
 		pitch = 1.0
 		pitchrandom = 0.0

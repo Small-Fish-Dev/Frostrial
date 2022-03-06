@@ -41,7 +41,7 @@ namespace Frostrial
 
 			if ( IsClient ) return;
 
-			if ( Input.Pressed( InputButton.Attack1 ) && !PlacingCampfire )
+			if ( Input.Pressed( Input_Drill ) && !BlockMovement && !PlacingCampfire )
 			{
 
 				if ( lastAttempt >= attemptCooldown )
@@ -52,22 +52,22 @@ namespace Frostrial
 					if ( Controller.Velocity.LengthSquared < 10 ) // Don't allow the player to make holes while sliding
 					{
 
-						if( Game.IsOnIce( holePosition ) || Game.IsOnDirt( holePosition ) )
+						if( Game.IsOnIce( holePosition ) || Game.IsOnSnow( holePosition ) )
 						{
 
 							if( !Game.IsNearEntity( holePosition, 5f ) )
 							{
 
 								Drilling = true;
-								HandleDrillingEffects( true, holePosition );
 								drillingCompletion = DrillingSpeed * ( UpgradedDrill ? 0.2f : 1f ); 
 								BlockMovement = true;
+								Velocity = Vector3.Zero;
 
 							}
 							else
 							{
 
-								Hint( "I'm not drilling there.", 2f );
+								Say( VoiceLine.NotDrillingHere );
 
 							}
 
@@ -75,7 +75,7 @@ namespace Frostrial
 						else
 						{
 
-							Hint( "I can't drill on here!", 2f );
+							Say( VoiceLine.CantDrillOnThere );
 
 						}
 
@@ -94,7 +94,6 @@ namespace Frostrial
 				{
 
 					Drilling = false;
-					HandleDrillingEffects( false, holePosition );
 					drillingCompletion = 0f;
 					BlockMovement = false;
 
@@ -112,7 +111,6 @@ namespace Frostrial
 					{
 
 						Drilling = false;
-						HandleDrillingEffects( false, holePosition );
 
 						if ( Game.IsOnIce( holePosition ) )
 						{
@@ -121,11 +119,11 @@ namespace Frostrial
 							hole.Position = holePosition;
 
 						}
-						else if ( Game.IsOnDirt( holePosition ) )
+						else if ( Game.IsOnSnow( holePosition ) )
 						{
 
 							Baits++;
-							Hint( "I found a worm, good for bait I guess.", 2.5f );
+							Say( VoiceLine.FoundBait );
 							WormsParticle();
 
 						}
@@ -140,39 +138,12 @@ namespace Frostrial
 			}
 
 		}
-		Particles drillingParticle { get; set; }
-		Sound drillingSound { get; set; }
 
 		[ClientRpc]
 		public void WormsParticle()
 		{
 
 			Particles.Create( "particles/small_worms_particle.vpcf", Position + Vector3.Up );
-
-		}
-
-		[ClientRpc]
-		public void HandleDrillingEffects( bool fxState, Vector3 fxPosition )
-		{
-
-			if ( fxState )
-			{
-
-				Sound.FromWorld( "", fxPosition ); // TODO Play the drilling
-				drillingParticle = Particles.Create( "particles/drilling_particle.vpcf", fxPosition );
-
-			}
-			else
-			{
-
-				if ( drillingParticle != null )
-				{
-
-					drillingParticle.Destroy();
-
-				}
-
-			}
 
 		}
 
