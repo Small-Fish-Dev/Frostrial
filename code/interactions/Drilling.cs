@@ -25,15 +25,15 @@ namespace Frostrial
 
 					SetClothing( "tool", UpgradedDrill ? "models/tools/auger_icedrill.vmdl" : "models/tools/hand_icedrill.vmdl" );
 
-					SetAnimBool( "handdrill", !UpgradedDrill );
-					SetAnimBool( "autodrill", UpgradedDrill );
+					SetAnimParameter( "handdrill", !UpgradedDrill );
+					SetAnimParameter( "autodrill", UpgradedDrill );
 
 				}
 				else
 				{
 
-					SetAnimBool( "handdrill", false );
-					SetAnimBool( "autodrill", false );
+					SetAnimParameter( "handdrill", false );
+					SetAnimParameter( "autodrill", false );
 
 				}
 

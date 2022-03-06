@@ -55,7 +55,7 @@ namespace Frostrial
 			//
 			if ( change > 1 && WishVelocity.Length <= 1 ) TimeSinceFootShuffle = 0;
 
-			SetParam( "b_shuffle", TimeSinceFootShuffle < 0.1 );
+			SetAnimParameter( "b_shuffle", TimeSinceFootShuffle < 0.1 );
 		}
 
 		void DoWalk()
@@ -67,22 +67,22 @@ namespace Frostrial
 
 				var angle = MathF.Atan2( sideward, forward ).RadianToDegree().NormalizeDegrees();
 
-				SetParam( "move_direction", angle );
-				SetParam( "move_speed", Velocity.Length );
-				SetParam( "move_groundspeed", Velocity.WithZ( 0 ).Length );
-				SetParam( "move_y", sideward );
-				SetParam( "move_x", forward );
+				SetAnimParameter( "move_direction", angle );
+				SetAnimParameter( "move_speed", Velocity.Length );
+				SetAnimParameter( "move_groundspeed", Velocity.WithZ( 0 ).Length );
+				SetAnimParameter( "move_y", sideward );
+				SetAnimParameter( "move_x", forward );
 
 				Player ply = Pawn as Player;
 
 				if ( ply.BlockMovement )
 				{
 
-					SetParam( "move_direction", 0 );
-					SetParam( "move_speed", 0 );
-					SetParam( "move_groundspeed", 0 );
-					SetParam( "move_y", 0 );
-					SetParam( "move_x", 0 );
+					SetAnimParameter( "move_direction", 0 );
+					SetAnimParameter( "move_speed", 0 );
+					SetAnimParameter( "move_groundspeed", 0 );
+					SetAnimParameter( "move_y", 0 );
+					SetAnimParameter( "move_x", 0 );
 
 				}
 

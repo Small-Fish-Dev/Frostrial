@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Component;
 using System;
 
 namespace Frostrial
@@ -36,8 +37,9 @@ namespace Frostrial
 			crate = new ModelEntity( "models/randommodels/crate.vmdl" );
 			crate.SetMaterialGroup( 1 );
 			crate.Position = Position + Vector3.Up * 12;
-			crate.GlowState = GlowStates.On;
-			crate.GlowColor = new Color( 0.8f, 0.2f, 0.2f );
+			var glow = crate.Components.GetOrCreate<Glow>();
+			glow.Active = true;
+			glow.Color = new Color( 0.8f, 0.2f, 0.2f );
 
 			Tags.Add( "use" );
 
@@ -90,7 +92,7 @@ namespace Frostrial
 
 			light.SetLightBrightness( 20 + (float)Math.Cos( (float)Time.Now * 25 ) * 2 * ( 1 + Time.Now % 1 ) ); // Acceptable flickering
 
-			var cam = player.Camera as IsometricCamera;
+			var cam = player.CameraMode as IsometricCamera;
 			var dir = cam.Rotation.Forward.WithZ( 0 ).Normal;
 
 			var distanceX = Math.Clamp( ( playerPos.x - hutPos.x ) / 100, -1, 1 );
@@ -107,7 +109,8 @@ namespace Frostrial
 		public void CrateUsed()
 		{
 
-			crate.GlowState = GlowStates.Off;
+			var glow = crate.Components.GetOrCreate<Glow>();
+			glow.Active = false;
 
 		}
 

@@ -105,7 +105,7 @@ namespace Frostrial
 
 			Position += Velocity * Time.Delta;
 
-			SetAnimFloat( "move_x", Velocity.Length / Scale );
+			SetAnimParameter( "move_x", Velocity.Length / Scale );
 
 		}
 
