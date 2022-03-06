@@ -55,7 +55,7 @@ namespace Frostrial
 
 			}
 
-			SetAnimBool( "fishing", Fishing );
+			SetAnimParameter( "fishing", Fishing );
 
 			if ( Input.Released( InputButton.Attack2 ) )
 			{
@@ -108,7 +108,7 @@ namespace Frostrial
 					Hole hole = CurrentHole as Hole;
 					hole.Bobber = false;
 
-					CurrentHole = PhysicsWorld.WorldBody.Entity;
+					CurrentHole = Sandbox.Internal.GlobalGameNamespace.Map.Entity;
 
 				}
 

@@ -2,7 +2,7 @@
 
 namespace Frostrial
 {
-	public class IsometricCamera : Camera
+	public class IsometricCamera : CameraMode
 	{
 		public float AngleChangeDelay => 0.2f;
 		public Vector3? PointOfInterest { get; set; } = null;
@@ -27,7 +27,7 @@ namespace Frostrial
 		[ServerCmd]
 		public static void ChangeCameraYaw( float newYaw )
 		{
-			var cam = (ConsoleSystem.Caller.Pawn as Player).Camera as IsometricCamera;
+			var cam = (ConsoleSystem.Caller.Pawn as Player).CameraMode as IsometricCamera;
 			if ( cam == null )
 				return;
 
@@ -39,7 +39,7 @@ namespace Frostrial
 		[ClientCmd( "debug_set_poi" )]
 		public static void DebugSetPOI( float x, float y, float z )
 		{
-			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			var cam = (Local.Pawn as Player).CameraMode as IsometricCamera;
 			if ( cam == null )
 				return;
 
@@ -51,7 +51,7 @@ namespace Frostrial
 		[ClientCmd( "debug_reset_poi" )]
 		public static void DebugSetPOI()
 		{
-			var cam = (Local.Pawn as Player).Camera as IsometricCamera;
+			var cam = (Local.Pawn as Player).CameraMode as IsometricCamera;
 			if ( cam == null )
 				return;
 

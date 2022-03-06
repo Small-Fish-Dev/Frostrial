@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Component;
 using System;
 
 namespace Frostrial
@@ -13,7 +14,7 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera camera = Camera as IsometricCamera;
+				IsometricCamera camera = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
 				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
@@ -22,7 +23,7 @@ namespace Frostrial
 					var tr = Trace.Ray( realRay, 7000.0f )
 					.WorldOnly()
 					.Run();
-					_MouseWorldPosition = tr.EndPos;
+					_MouseWorldPosition = tr.EndPosition;
 					_MouseWorldPositionDirty = false;
 				}
 
@@ -42,7 +43,7 @@ namespace Frostrial
 			get
 			{
 
-				IsometricCamera camera = Camera as IsometricCamera;
+				IsometricCamera camera = CameraMode as IsometricCamera;
 				var realRay = Input.Cursor;
 				realRay.Origin = Input.Cursor.Origin - camera.Rotation.Forward * 5000;
 
@@ -95,7 +96,7 @@ namespace Frostrial
 
 			Animator = new TopdownPlayerAnimator();
 
-			Camera = new IsometricCamera();
+			CameraMode = new IsometricCamera();
 
 			EnableAllCollisions = true;
 			EnableDrawing = true;
@@ -137,11 +138,11 @@ namespace Frostrial
 			HandleFishing();
 			HandleShopping();
 
-			// Dirty camera fix
+			// Dirty CameraMode fix
 			if ( IsServer )
 			{
 
-				var cam = Camera as IsometricCamera;
+				var cam = CameraMode as IsometricCamera;
 
 				cam.Rotation = Rotation.Slerp( cam.Rotation, cam.TargetRotation, 5f * Time.Delta );
 
@@ -164,12 +165,12 @@ namespace Frostrial
 				Event.Run( "frostrial.player.inputdevice", IsUsingController );
 			}
 
-			if ( IsUsingController && Camera is IsometricCamera camera )
+			if ( IsUsingController && CameraMode is IsometricCamera )
 			{
 				VirtualCursor = input.GetAnalog( InputAnalog.Look );
-				var angles = camera.Rotation.Angles();
+				var angles = CameraMode.Rotation.Angles();
 				input.Cursor = new(
-					camera.Position + (camera.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - camera.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
+					CameraMode.Position + (CameraMode.Rotation.Up * VirtualCursor.y * MathF.Abs( MathF.Sin( angles.pitch.DegreeToRadian() ) ) - CameraMode.Rotation.Left * VirtualCursor.x) * InteractionMaxDistance,
 					angles.Direction
 					);
 			}

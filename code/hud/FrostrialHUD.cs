@@ -35,10 +35,10 @@ namespace Frostrial
 			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
-			if ( player.Camera is not IsometricCamera camera )
+			if ( player.CameraMode is not IsometricCamera CameraMode )
 				return;
 
-			var baseDistance = 1000f * camera.Zoom;
+			var baseDistance = 1000f * CameraMode.Zoom;
 			var baseOpacity = 0.8f;
 			var dangerLevel = 1 - player.Warmth;
 
@@ -160,13 +160,13 @@ namespace Frostrial
 			//
 			// Where we putting the label, in world coords
 			//
-			var head = new Transform( player.EyePos );
+			var head = new Transform( player.EyePosition );
 
 			var labelPos = head.Position + Vector3.Up * 10; // FIXME: magic number!!!!!!!!!!!!!!!
 
 			// TODO - can we see them
 
-			var fontSize = 30 / ((Local.Pawn.Camera as IsometricCamera)?.Zoom ?? 1);
+			var fontSize = 30 / (((Local.Pawn as Player).CameraMode as IsometricCamera)?.Zoom ?? 1);
 
 			if ( !ActiveTags.TryGetValue( player.Client.Id, out var tag ) )
 			{
