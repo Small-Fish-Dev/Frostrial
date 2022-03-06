@@ -35,7 +35,7 @@ namespace Frostrial
 			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
 
-			if ( player.Camera is not IsometricCamera CameraMode )
+			if ( player.CameraMode is not IsometricCamera CameraMode )
 				return;
 
 			var baseDistance = 1000f * CameraMode.Zoom;

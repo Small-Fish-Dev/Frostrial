@@ -161,7 +161,7 @@ namespace Frostrial
 		public static bool IsNearEntity( Vector3 position, float range )
 		{
 
-			var entityList = Physics.GetEntitiesInSphere( position, range );
+			var entityList = Entity.FindInSphere( position, range );
 
 			foreach ( var ent in entityList )
 			{
@@ -193,7 +193,7 @@ namespace Frostrial
 		public static Entity NearestDescribableEntity( Vector3 position, float range = 30f )
 		{
 
-			var entityList = Physics.GetEntitiesInSphere( position, range );
+			var entityList = Entity.FindInSphere( position, range );
 			Entity currentEntity = null;
 			var currentDistance = range;
 
@@ -221,8 +221,8 @@ namespace Frostrial
 		public static Entity NearestInteractiveEntity( Vector3 position, float range = 30f )
 		{
 
-			var entityList = Physics.GetEntitiesInSphere( position, range );
-			var currentEntity = PhysicsWorld.WorldBody.Entity; // Technically correct to return the world
+			var entityList = Entity.FindInSphere( position, range );
+			Entity currentEntity =  Sandbox.Internal.GlobalGameNamespace.Map.Entity; // Technically correct to return the world
 			var currentDistance = range;
 
 			foreach ( var ent in entityList )
@@ -249,8 +249,8 @@ namespace Frostrial
 		public static Entity NearestPlayer( Vector3 position, float range = 30f )
 		{
 
-			var entityList = Physics.GetEntitiesInSphere( position, range );
-			var currentEntity = PhysicsWorld.WorldBody.Entity;
+			var entityList = Entity.FindInSphere( position, range );
+			Entity currentEntity = Sandbox.Internal.GlobalGameNamespace.Map.Entity;
 			var currentDistance = range;
 
 			foreach ( var ent in entityList )
@@ -280,7 +280,7 @@ namespace Frostrial
 		public static float CampfireDistance( Vector3 position, float range = 100f )
 		{
 
-			var entityList = Physics.GetEntitiesInSphere( position, range );
+			var entityList = Entity.FindInSphere( position, range );
 			var currentDistance = range;
 
 			foreach ( var ent in entityList )
