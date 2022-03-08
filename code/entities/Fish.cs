@@ -254,6 +254,8 @@ namespace Frostrial
 
 			Player player = Fisherman as Player;
 
+			StopStruggleEffects( this );
+
 			player.CaughtFish.Remove( this );
 			FishList.Remove( this );
 			Delete();

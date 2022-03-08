@@ -34,7 +34,6 @@ namespace Frostrial
 			Style.Left = Length.Pixels( (left - 0.5f) * 3000 );
 			Style.Top = Length.Pixels( (top + 0.1f) * 800 );
 
-
 			if ( player.CameraMode is not IsometricCamera CameraMode )
 				return;
 

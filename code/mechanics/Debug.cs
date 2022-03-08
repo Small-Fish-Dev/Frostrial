@@ -5,7 +5,7 @@ namespace Frostrial
 
 	public partial class Game : Sandbox.Game
 	{
-		[ServerCmd( "setclothes" )]
+	/*	[ServerCmd( "setclothes" )]
 		public static void SetClothes( string clothingSlot, string modelPath )
 		{
 
@@ -48,7 +48,7 @@ namespace Frostrial
 
 			};
 
-		}
+		}*/
 
 	}
 

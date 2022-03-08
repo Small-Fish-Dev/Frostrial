@@ -88,6 +88,9 @@ namespace Frostrial
 								}
 
 								FishUI( To.Single(this), fish.Species, fish.Variant );
+
+								GameServices.SubmitScore( Client.PlayerId, fish.TotalRarity );
+
 								fish.Catch();
 
 							}
