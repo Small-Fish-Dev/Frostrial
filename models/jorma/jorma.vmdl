@@ -4297,7 +4297,7 @@
 										hidden = false
 										anim_markup_ordered = false
 										disable_compression = false
-										source_filename = "models/citizen/animations/weapons/Citizen@Pistol_2H_Aim_Standing_01.fbx"
+										source_filename = "models/citizen/animations/weapons/citizen@pistol_2h_aimmatrix_standing_01.fbx"
 										start_frame = 1
 										end_frame = -1
 										framerate = -1.0
@@ -12744,5 +12744,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/jorma/jorma.vanmgrph"
+		base_model_name = ""
 	}
 }
