@@ -27,13 +27,13 @@ namespace Frostrial
 				if ( IsClient )
 				{
 
-					DebugOverlay.Circle( MouseWorldPosition + Vector3.Up, Rotation.FromPitch( 90 ), 20f, new Color( canPlace ? 0 : 1, canPlace ? 1 : 0, 0, 0.1f ), true, 0.1f);
+					DebugOverlay.Circle( MouseWorldPosition + Vector3.Up, Rotation.FromPitch( 90 ), 20f, new Color( canPlace ? 0 : 1, canPlace ? 1 : 0, 0, 0.1f ), 0.1f);
 
 				}
 				else
 				{
 
-					if ( Input.Pressed( InputButton.Attack1 ) )
+					if ( Input.Pressed( InputButton.PrimaryAttack ) )
 					{
 
 						if ( canPlace )
@@ -65,7 +65,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void CloseItems()
 		{
 
@@ -76,7 +76,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void BaitSelected()
 		{
 
@@ -108,7 +108,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void CampfireSelected()
 		{
 

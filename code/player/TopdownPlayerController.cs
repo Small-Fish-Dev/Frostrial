@@ -137,13 +137,13 @@ namespace Frostrial
 				var lineOffset = 0;
 				if ( Host.IsServer ) lineOffset = 10;
 
-				DebugOverlay.ScreenText( lineOffset + 0, $"         Position: {Position}" );
-				DebugOverlay.ScreenText( lineOffset + 1, $"         Velocity: {Velocity}" );
-				DebugOverlay.ScreenText( lineOffset + 2, $"     BaseVelocity: {BaseVelocity}" );
-				DebugOverlay.ScreenText( lineOffset + 3, $"     GroundEntity: {GroundEntity} [{GroundEntity?.Velocity}]" );
-				DebugOverlay.ScreenText( lineOffset + 4, $"  SurfaceFriction: {SurfaceFriction}" );
-				DebugOverlay.ScreenText( lineOffset + 5, $"     WishVelocity: {WishVelocity}" );
-				DebugOverlay.ScreenText( lineOffset + 6, $"MovementDirection: {player.MovementDirection.Angles()}" );
+				DebugOverlay.ScreenText( $"         Position: {Position}", lineOffset + 0 );
+				DebugOverlay.ScreenText( $"         Velocity: {Velocity}", lineOffset + 1 );
+				DebugOverlay.ScreenText( $"     BaseVelocity: {BaseVelocity}", lineOffset + 2 );
+				DebugOverlay.ScreenText( $"     GroundEntity: {GroundEntity} [{GroundEntity?.Velocity}]", lineOffset + 3 );
+				DebugOverlay.ScreenText( $"  SurfaceFriction: {SurfaceFriction}", lineOffset + 4 );
+				DebugOverlay.ScreenText( $"     WishVelocity: {WishVelocity}", lineOffset + 5 );
+				DebugOverlay.ScreenText( $"MovementDirection: {player.MovementDirection.Angles()}", lineOffset + 6 );
 			}
 
 		}

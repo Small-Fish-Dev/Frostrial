@@ -51,7 +51,6 @@ namespace Frostrial
 				{
 					var tr = Trace.Ray( realRay, 7000.0f )
 					.EntitiesOnly()
-					.WithTag( "use" )
 					.Run();
 					_MouseEntityPoint = tr.Entity;
 					_MouseEntityPointDirty = false;
@@ -70,7 +69,7 @@ namespace Frostrial
 
 		protected VoiceLinePlayer vlp;
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void ChangeMovementDirection( float yaw )
 		{
 			if ( ConsoleSystem.Caller.Pawn is not Player pawn )

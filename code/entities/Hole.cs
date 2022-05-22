@@ -10,7 +10,7 @@ namespace Frostrial
 		[Net] public Entity CurrentHole { get; set; } = Sandbox.Internal.GlobalGameNamespace.Map.Entity;
 
 	}
-	public partial class Hole : AnimEntity, IUse, IDescription
+	public partial class Hole : ModelEntity, IUse, IDescription
 	{
 
 		[Net] public bool Bobber { get; set; } = false;
@@ -46,6 +46,7 @@ namespace Frostrial
 
 			SetModel( "models/randommodels/icehole_low.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			PhysicsEnabled = true;
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
 

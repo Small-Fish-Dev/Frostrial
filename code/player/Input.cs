@@ -4,8 +4,8 @@ namespace Frostrial
 {
 	partial class Player
 	{
-		public InputButton Input_Use => InputButton.Attack2;
-		public InputButton Input_Drill => InputButton.Attack1;
+		public InputButton Input_Use => InputButton.SecondaryAttack;
+		public InputButton Input_Drill => InputButton.PrimaryAttack;
 		public InputButton Input_Run => InputButton.Run;
 		public InputButton Input_Map => InputButton.Score;
 		public InputButton Input_CameraCW => IsUsingController ? InputButton.SlotNext : InputButton.Menu;

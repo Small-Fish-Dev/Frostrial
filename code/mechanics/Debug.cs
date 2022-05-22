@@ -5,7 +5,7 @@ namespace Frostrial
 
 	public partial class Game : Sandbox.Game
 	{
-		[ServerCmd( "setclothes" )]
+		[ConCmd.Server( "setclothes" )]
 		public static void SetClothes( string clothingSlot, string modelPath )
 		{
 
@@ -14,7 +14,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd( "sufferscold" )]
+		[ConCmd.Server( "sufferscold" )]
 		public static void DisableCold( bool var )
 		{
 
@@ -23,7 +23,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd( "setmoney" )]
+		[ConCmd.Server( "setmoney" )]
 		public static void SetMoney( float amount )
 		{
 
@@ -32,7 +32,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd( "spawnyeti" )]
+		[ConCmd.Server( "spawnyeti" )]
 		public static void SpawnYeti()
 		{
 

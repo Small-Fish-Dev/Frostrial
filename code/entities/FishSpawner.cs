@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Frostrial
 {
 
-	public partial class FishSpawner : AnimEntity
+	public partial class FishSpawner : Entity
 	{
 
 		[Net] public int RarityLevel { get; set; } = 0; // 0 = $, 1 = $$, 2 = $$$

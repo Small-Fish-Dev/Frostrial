@@ -24,7 +24,7 @@ namespace Frostrial
 			LastAngleChange = AngleChangeDelay;
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void ChangeCameraYaw( float newYaw )
 		{
 			var cam = (ConsoleSystem.Caller.Pawn as Player).CameraMode as IsometricCamera;
@@ -36,7 +36,7 @@ namespace Frostrial
 
 		}
 
-		[ClientCmd( "debug_set_poi" )]
+		[ConCmd.Client( "debug_set_poi" )]
 		public static void DebugSetPOI( float x, float y, float z )
 		{
 			var cam = (Local.Pawn as Player).CameraMode as IsometricCamera;
@@ -48,7 +48,7 @@ namespace Frostrial
 			cam.PointOfInterest = poi;
 		}
 
-		[ClientCmd( "debug_reset_poi" )]
+		[ConCmd.Client( "debug_reset_poi" )]
 		public static void DebugSetPOI()
 		{
 			var cam = (Local.Pawn as Player).CameraMode as IsometricCamera;

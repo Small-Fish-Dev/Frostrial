@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace Frostrial
 {
-	[Library("music"), AutoGenerate]
-	public partial class Music : Asset
+
+	[GameResource( "Music", "music", "Frostrial Music", Icon = "approval" )]
+	public partial class Music : GameResource
 	{
 		public static IReadOnlyDictionary<string, Music> All => _all;
 		internal static Dictionary<string, Music> _all = new();

@@ -87,7 +87,7 @@ namespace Frostrial
 
 					if ( !ignoreFLRepeat
 					     && i == 0 && j == Queue.Count - 1
-					     && Queue[j].Id == lastTrack.Id ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
+					     && Queue[j].ResourceId == lastTrack.ResourceId ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
 						continue;
 				
 					(Queue[i], Queue[j]) = (Queue[j], Queue[i]);
