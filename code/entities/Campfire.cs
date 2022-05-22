@@ -4,7 +4,7 @@ using System;
 namespace Frostrial
 {
 
-	public partial class Campfire : AnimEntity
+	public partial class Campfire : ModelEntity
 	{
 
 		public Particles ParticleEffect { get; set; }
@@ -19,6 +19,7 @@ namespace Frostrial
 
 			SetModel( "models/randommodels/campfire.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			PhysicsEnabled = true;
 
 			Rotation = Rotation.FromYaw( Rand.Float( 360f ) );
 

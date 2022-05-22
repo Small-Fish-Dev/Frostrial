@@ -1,13 +1,17 @@
 ﻿using Sandbox;
 using Sandbox.Component;
 using System;
+using SandboxEditor;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Frostrial
 {
 
 	[Library( "frostrial_fish_au_poopoo_caca", Description = "What the hell is this" )]
-	[Hammer.EditorModel( "models/fishes/perch/perch.vmdl" )]
-	public partial class FishAuPoopooCaca : AnimEntity, IUse, IDescription
+	[HammerEntity]
+	[Model( Model = "models/fishes/perch/perch.vmdl" )]
+	public partial class FishAuPoopooCaca : ModelEntity, IUse, IDescription
 	{
 		bool canUse = true;
 
@@ -41,6 +45,7 @@ namespace Frostrial
 			SetMaterialGroup( "poo" );
 			Scale = 2;
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			PhysicsEnabled = true;
 
 			var glow = Components.GetOrCreate<Glow>();
 			glow.Active = true;

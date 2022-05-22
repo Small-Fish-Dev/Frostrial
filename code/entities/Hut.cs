@@ -1,13 +1,17 @@
 ﻿using Sandbox;
 using Sandbox.Component;
 using System;
+using SandboxEditor;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Frostrial
 {
 
 	[Library( "frostrial_hut", Description = "main base" )]
-	[Hammer.EditorModel( "models/randommodels/cabin_walls.vmdl" )]
-	public partial class Hut : AnimEntity, IUse, IDescription
+	[HammerEntity]
+	[Model( Model = "models/randommodels/cabin_walls.vmdl" )]
+	public partial class Hut : ModelEntity, IUse, IDescription
 	{
 
 		PointLightEntity light { get; set; }
@@ -25,6 +29,7 @@ namespace Frostrial
 
 			SetModel( "models/randommodels/cabin_roof.vmdl" );
 			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -15, -15, 0 ), new Vector3( 20, 15, 80 ) );
+			PhysicsEnabled = true;
 
 			Game.Instance.HutEntity = this;
 

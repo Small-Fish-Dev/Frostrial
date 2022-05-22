@@ -60,7 +60,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void CloseShop()
 		{
 
@@ -71,7 +71,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void BuyBait()
 		{
 
@@ -89,7 +89,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void BuyCampfire()
 		{
 
@@ -107,7 +107,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void UpgradeCoat()
 		{
 
@@ -123,7 +123,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void UpgradeDrill()
 		{
 
@@ -139,7 +139,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void UpgradeRod()
 		{
 
@@ -156,7 +156,7 @@ namespace Frostrial
 
 		}
 
-		[ServerCmd]
+		[ConCmd.Server]
 		public static void Win()
 		{
 

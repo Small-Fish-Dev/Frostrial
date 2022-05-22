@@ -45,6 +45,7 @@ namespace Frostrial
 
 			var mep = MouseEntityPoint;
 			var mwp = MouseWorldPosition;
+
 			if ( mep != null && mep is IUse && mep.IsValid && mwp.Distance( Position ) <= InteractionMaxDistance ) // If we are pointing at the valid interactive entity
 				return mep; // then return it
 

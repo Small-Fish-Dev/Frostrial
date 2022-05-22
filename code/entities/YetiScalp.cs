@@ -1,13 +1,17 @@
 ﻿using Sandbox;
 using Sandbox.Component;
 using System;
+using SandboxEditor;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Frostrial
 {
 
 	[Library( "frostrial_yeti_scalp", Description = "Incredibly rare!!!" )]
-	[Hammer.EditorModel( "models/treasures/scalp.vmdl" )]
-	public partial class YetiScalp : AnimEntity, IUse, IDescription
+	[HammerEntity]
+	[Model( Model = "models/treasures/scalp.vmdl" )]
+	public partial class YetiScalp : ModelEntity, IUse, IDescription
 	{
 		bool canUse = true;
 
@@ -47,6 +51,7 @@ namespace Frostrial
 
 			SetModel( "models/treasures/scalp.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			PhysicsEnabled = true;
 
 			var glow = Components.GetOrCreate<Glow>();
 			glow.Active = true;

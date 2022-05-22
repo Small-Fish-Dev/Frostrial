@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Frostrial
 {
 
-	public partial class Fish : AnimEntity
+	public partial class Fish : ModelEntity
 	{
 
 		[Net] public string Species { get; set; } = "goldfish";

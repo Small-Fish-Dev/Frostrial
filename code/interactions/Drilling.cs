@@ -87,7 +87,7 @@ namespace Frostrial
 
 			}
 
-			if ( Input.Released( InputButton.Attack1 ) )
+			if ( Input.Released( InputButton.PrimaryAttack ) )
 			{
 
 				if ( Drilling )
@@ -101,7 +101,7 @@ namespace Frostrial
 
 			}
 
-			if ( Input.Down( InputButton.Attack1 ) )
+			if ( Input.Down( InputButton.PrimaryAttack ) )
 			{
 
 				if ( Drilling )

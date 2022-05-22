@@ -57,7 +57,7 @@ namespace Frostrial
 
 			SetAnimParameter( "fishing", Fishing );
 
-			if ( Input.Released( InputButton.Attack2 ) )
+			if ( Input.Released( InputButton.SecondaryAttack ) )
 			{
 
 				if ( Fishing )

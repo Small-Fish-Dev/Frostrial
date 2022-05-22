@@ -3,7 +3,7 @@
 namespace Frostrial
 {
 
-	public partial class Yeti : AnimEntity
+	public partial class Yeti : AnimatedEntity
 	{
 
 		[Net] public Entity Victim { get; set; }

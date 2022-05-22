@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 namespace Frostrial
 {
-	[Library("fish"), AutoGenerate]
-	public partial class FishAsset : Asset
+
+	[GameResource( "Fish", "fish", "Frostrial Fish Asset", Icon = "approval" )]
+	public partial class FishAsset : GameResource
 	{
 		public static IReadOnlyDictionary<string, FishAsset> All => _all;
 		internal static Dictionary<string, FishAsset> _all = new();
