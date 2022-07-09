@@ -6,7 +6,9 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "ResourcePaths": null,
+  "ResourcePaths": [
+    "/ui/*"
+  ],
   "HasCode": true,
   "CodePath": "code",
   "RootNamespace": "Sandbox",
@@ -19,6 +21,7 @@
     "GameNetworkType": 1,
     "MapSelect": 1,
     "RankType": 2,
-    "LeaderboardType": 1
+    "LeaderboardType": 1,
+    "PerMapRanking": false
   }
 }
