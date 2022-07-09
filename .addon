@@ -19,7 +19,6 @@
     "GameNetworkType": 1,
     "MapSelect": 1,
     "RankType": 2,
-    "LeaderboardType": 1,
-    "PerMapRanking": false
+    "LeaderboardType": 1
   }
 }
