@@ -3201,7 +3201,7 @@
 										hidden = false
 										anim_markup_ordered = false
 										disable_compression = false
-										source_filename = "models/citizen/animations/citizen@crouchidlepose.fbx"
+										source_filename = "models/citizen/animations/citizen@crouchidlepose_default.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -4256,7 +4256,7 @@
 								hidden = false
 								anim_markup_ordered = false
 								disable_compression = false
-								source_filename = "models/citizen/animations/Citizen@SitPoseDefault.fbx"
+								source_filename = "models/citizen/animations/citizen@sitpose_default.fbx"
 								start_frame = -1
 								end_frame = -1
 								framerate = -1.0
@@ -6866,7 +6866,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/citizen/animations/Citizen@IdlePoseDefault.fbx"
+						source_filename = "models/citizen/animations/citizen@idlepose_default.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
@@ -7019,7 +7019,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/citizen/animations/Citizen@IdlePose_01.fbx"
+						source_filename = "models/citizen/animations/citizen@idlepose_01_l.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
