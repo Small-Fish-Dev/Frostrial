@@ -1,0 +1,20 @@
+{
+	"fishname": "Fish Au Poo Poo Caca",
+	"commonname": "Poisson comme de la merde",
+	"scientificname": "Perca Flavescens Kakkao Kakkao",
+	"description": "A common perch covered in liquid faeces.",
+	"model": "models/fishes/perch/perch.vmdl",
+	"preview": "ui/fishes/perch_poo.png",
+	"size": 0.010000,
+	"rarity": 0.010000,
+	"variantname": "Hello :-)",
+	"variantcommonname": "Thank you for playing our game",
+	"variantscientificname": "If you see this, favorite Frostrial",
+	"variantdescription": "Thank you :-)",
+	"variantskin": "poo",
+	"variantpreview": "ui/fishes/perch_poo.png",
+	"weightedzone1": 0,
+	"weightedzone2": 0,
+	"weightedzone3": 0,
+	"modelworldsizemultiplier": 1.000000
+}

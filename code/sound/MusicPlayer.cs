@@ -1,103 +1,82 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using System.Linq;
+using Sandbox.Events;
 
-namespace Frostrial
+namespace Frostrial;
+
+public record NextSongEvent(Music Music) : IGameEvent;
+
+public sealed class MusicPlayer : Component
 {
-	public partial class MusicPlayer
-	{
-		public List<Music> Queue { get; internal set; } = new();
-		public bool IsInitialized { get; internal set; }
-		public float TracksDelay { get; set; } = 30f;
-		public float Volume { get; set; } = 0.5f;
+    public List<Music> Queue { get; private set; } = new();
+    [Property] public float TracksDelay { get; set; } = 30f;
 
-		protected int currentQueuePosition = 0;
-		protected bool isWaitingForTheNextTrack = false;
-		protected RealTimeSince tsLastTrack = 0;
-		protected RealTimeSince tsTrackStart = 0;
+    private int _currentQueuePosition = 0;
+    private RealTimeSince _tsLastTrack = 0;
+    private SoundHandle _currentSoundHandle = null;
 
-		public void Initialize()
-		{
-			if ( IsInitialized )
-				return;
+    protected override void OnEnabled()
+    {
+        Queue = Music.All.Values.ToList();
+        Shuffle(true);
+        PlayNext(false);
+    }
 
-			foreach ( var (key, value) in Music.All )
-			{
-				Log.Info( key );
-				Queue.Add( value );
-			}
-			Shuffle( true );
+    protected override void OnUpdate()
+    {
+        if (!_currentSoundHandle.IsValid())
+        {
+            if (_tsLastTrack >= TracksDelay)
+            {
+                PlayNext();
+            }
+        }
+        else if (_currentSoundHandle.Finished)
+        {
+            _currentSoundHandle = null;
+            _tsLastTrack = 0;
+        }
+    }
 
-			PlayNext( false );
+    public void PlayNext(bool increment = true)
+    {
+        if (increment)
+        {
+            var nextTrack = (_currentQueuePosition + 1) % Queue.Count;
+            if (nextTrack < _currentQueuePosition)
+            {
+                Shuffle();
+            }
 
-			IsInitialized = true;
-		}
+            _currentQueuePosition = nextTrack;
+        }
 
-		public void Tick()
-		{
-			if ( !IsInitialized )
-				return;
+        GameObject.Dispatch(new NextSongEvent(Queue[_currentQueuePosition]));
 
-#if false
-			DebugOverlay.ScreenText( $"{isWaitingForTheNextTrack}\n{tsLastTrack}:{TracksDelay}\n{tsTrackStart}:{Queue[currentQueuePosition].Length}" );
-#endif
+        _currentSoundHandle = Queue[_currentQueuePosition].Play();
+    }
 
-			if ( isWaitingForTheNextTrack )
-			{
-				if ( tsLastTrack >= TracksDelay )
-				{
-					isWaitingForTheNextTrack = false;
-					PlayNext();
-				}
-			}
-			else if ( tsTrackStart >= Queue[currentQueuePosition].Length )
-			{
-				isWaitingForTheNextTrack = true;
-				tsLastTrack = 0;
-			}
-		}
+    private void Shuffle(bool ignoreFirstLastRepeat = false)
+    {
+        Log.Info($"Shuffling {Queue.Count} tracks");
+        var lastTrack = Queue[^1];
+        for (var i = 0; i < Queue.Count - 1; i++)
+        {
+            for (var j = i + 1; j < Queue.Count; j++)
+            {
+                if (System.Random.Shared.Int(0, 1) != 0)
+                    continue;
 
-		public void PlayNext( bool increment = true )
-		{
-			if ( increment )
-			{
-				var nextTrack = (currentQueuePosition + 1) % Queue.Count;
-				if ( nextTrack < currentQueuePosition )
-				{
-					Shuffle();
-				}
-				currentQueuePosition = nextTrack;
-			}
+                if (!ignoreFirstLastRepeat
+                    && i == 0 && j == Queue.Count - 1
+                    && Queue[j].ResourceId ==
+                    lastTrack
+                        .ResourceId) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
+                    continue;
 
-			NowPlaying( Queue[currentQueuePosition] );
-
-			tsTrackStart = 0;
-			Queue[currentQueuePosition].Play( Volume );
-		}
-
-		protected void Shuffle(bool ignoreFLRepeat = false)
-		{
-			Log.Info( $"Shuffle! {Queue.Count}" );
-			Music lastTrack = Queue[^1];
-			for ( var i = 0; i < Queue.Count - 1; i++ )
-			{
-				for ( var j = i + 1; j < Queue.Count; j++ )
-				{
-					if ( System.Random.Shared.Int( 0, 1 ) != 0 )
-						continue;
-
-					if ( !ignoreFLRepeat
-					     && i == 0 && j == Queue.Count - 1
-					     && Queue[j].ResourceId == lastTrack.ResourceId ) // If we are swapping the first and the last queue entry, make sure we won't make the listener to hear the same song twice
-						continue;
-				
-					(Queue[i], Queue[j]) = (Queue[j], Queue[i]);
-				}
-			}
-		}
-
-		protected void NowPlaying( Music m )
-		{
-			Event.Run( "frostrial.next_song", m );
-		}
-	}
+                (Queue[i], Queue[j]) = (Queue[j], Queue[i]);
+            }
+        }
+    }
 }

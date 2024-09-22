@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/3d/rod_baited.vsnd"
+	],
+	"ui": false,
+	"volume": 0.200000,
+	"volumerandom": 0.000000,
+	"pitch": 1.500000,
+	"pitchrandom": 0.500000,
+	"distancemax": 800.000000,
+	"selectionmode": "3"
+}

@@ -1,0 +1,34 @@
+{
+	"Friction": 0.800000,
+	"Elasticity": 0.050000,
+	"Density": 700.000000,
+	"Thickness": -1.000000,
+	"Dampening": 0.000000,
+	"ImpactEffects":
+	{
+		"Regular":
+		[
+		],
+		"Bullet":
+		[
+			"particles/impact.generic.vpcf"
+		],
+		"BulletDecal":
+		[
+			"decals/bullethole.decal"
+		]
+	},
+	"Sounds":
+	{
+		"FootLeft": "footstep_snow1",
+		"FootRight": "footstep_snow2",
+		"FootLaunch": "",
+		"FootLand": "footstep_snow3",
+		"Bullet": "impact-bullet-glass",
+		"ImpactHard": "physics.glass.impact",
+		"ImpactSoft": "physics.glass.impact"
+	},
+	"basesurface": "surfaces/default.surface",
+	"description": "",
+	"bouncethreshold": 0.000000
+}

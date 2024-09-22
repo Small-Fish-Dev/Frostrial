@@ -1,36 +1,36 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using Sandbox.Audio;
 
-namespace Frostrial
+namespace Frostrial;
+
+[GameResource("Music", "music", "Frostrial Music", Icon = "approval")]
+public class Music : GameResource
 {
+    public static IReadOnlyDictionary<string, Music> All => _all;
+    internal static Dictionary<string, Music> _all = new();
 
-	[GameResource( "Music", "music", "Frostrial Music", Icon = "approval" )]
-	public partial class Music : GameResource
-	{
-		public static IReadOnlyDictionary<string, Music> All => _all;
-		internal static Dictionary<string, Music> _all = new();
+    public string Artist { get; set; }
+    public string Album { get; set; }
+    public string Song { get; set; }
+    public string URL { get; set; }
+    public string AlbumCover { get; set; }
+    public SoundFile File { get; set; }
 
-		public string Artist { get; set; }
-		public string Album { get; set; }
-		public string Song { get; set; }
-		public float Length { get; set; }
-		public string URL { get; set; }
-		public string AlbumCover { get; set; }
+    protected override void PostLoad()
+    {
+        base.PostLoad();
 
-		protected override void PostLoad()
-		{
-			base.PostLoad();
+        if (!_all.ContainsKey(ResourceName))
+            _all.Add(ResourceName, this);
+    }
 
-			if ( !_all.ContainsKey( Name ) )
-				_all.Add( Name, this );
-		}
+    public SoundHandle Play()
+    {
+        File.Preload();
+        var s = Sound.PlayFile(File);
+        s.TargetMixer = Mixer.FindMixerByName("Music");
 
-		public Sound Play(float volume = 1)
-		{
-			var s = Sound.FromScreen( Name );
-			s.SetVolume( volume );
-
-			return s;
-		}
-	}
+        return s;
+    }
 }

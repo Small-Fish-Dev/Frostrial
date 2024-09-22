@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/3d/rod_woosh.vsnd"
+	],
+	"ui": false,
+	"volume": 1.000000,
+	"volumerandom": 0.000000,
+	"pitch": 1.000000,
+	"pitchrandom": 0.200000,
+	"distancemax": 1000.000000,
+	"selectionmode": "3"
+}

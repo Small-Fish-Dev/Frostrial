@@ -1,0 +1,5 @@
+"Layer0"
+{
+	"shader"		"post_freezing.shader"
+	"TextureColor"		"materials/map/ice/ice_color.jpg"
+}

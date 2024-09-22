@@ -1,0 +1,20 @@
+{
+	"fishname": "Perch",
+	"commonname": "Yellow Perch",
+	"scientificname": "Perca Flavescens",
+	"description": "A wild goldfish!",
+	"model": "models/fishes/perch/perch.vmdl",
+	"preview": "ui/fishes/perch.png",
+	"size": 0.400000,
+	"rarity": 0.350000,
+	"variantname": "Rainbow Perch",
+	"variantcommonname": "Rainbow Surfperch",
+	"variantscientificname": "Hypsurus Caryi",
+	"variantdescription": "Wait, how did this get here?",
+	"variantskin": "rainbow",
+	"variantpreview": "ui/fishes/perch_rainbow.png",
+	"weightedzone1": 10,
+	"weightedzone2": 40,
+	"weightedzone3": 15,
+	"modelworldsizemultiplier": 1.600000
+}

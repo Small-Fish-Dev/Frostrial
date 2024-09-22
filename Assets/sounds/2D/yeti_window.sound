@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/2d/yeti_window.vsnd"
+	],
+	"ui": true,
+	"volume": 2.000000,
+	"volumerandom": 0.000000,
+	"pitch": 1.000000,
+	"pitchrandom": 0.000000,
+	"distancemax": 2000.000000,
+	"selectionmode": "3"
+}

@@ -1,0 +1,20 @@
+{
+	"fishname": "Pike",
+	"commonname": "Muskellunge",
+	"scientificname": "Esox Masquinongy",
+	"description": "He looks happy.",
+	"model": "models/fishes/pike/pike.vmdl",
+	"preview": "ui/fishes/pike.png",
+	"size": 0.600000,
+	"rarity": 0.500000,
+	"variantname": "Pike Chain",
+	"variantcommonname": "Chain Pickerel",
+	"variantscientificname": "Esox Niger",
+	"variantdescription": "What did they mean by that?",
+	"variantskin": "chain",
+	"variantpreview": "ui/fishes/pike_chain.png",
+	"weightedzone1": 4,
+	"weightedzone2": 30,
+	"weightedzone3": 25,
+	"modelworldsizemultiplier": 2.000000
+}

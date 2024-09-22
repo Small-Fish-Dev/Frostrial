@@ -1,0 +1,20 @@
+{
+	"fishname": "Minnow",
+	"commonname": "Creek Chub",
+	"scientificname": "Semotilus Astromaculatus",
+	"description": "Where the journey started.",
+	"model": "models/fishes/minnow/minnow.vmdl",
+	"preview": "ui/fishes/minnow.png",
+	"size": 0.120000,
+	"rarity": 0.100000,
+	"variantname": "Golden Minnow",
+	"variantcommonname": "Golden Shiner",
+	"variantscientificname": "Notemigonus Crysoleucas",
+	"variantdescription": "I've struck river gold!",
+	"variantskin": "Gold",
+	"variantpreview": "ui/fishes/minnow_gold.png",
+	"weightedzone1": 55,
+	"weightedzone2": 5,
+	"weightedzone3": 1,
+	"modelworldsizemultiplier": 3.500000
+}

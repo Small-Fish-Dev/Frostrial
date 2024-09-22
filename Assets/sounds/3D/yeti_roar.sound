@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/3d/yeti_roar.vsnd"
+	],
+	"ui": false,
+	"volume": 2.000000,
+	"volumerandom": 0.000000,
+	"pitch": 1.000000,
+	"pitchrandom": 0.000000,
+	"distancemax": 10000.000000,
+	"selectionmode": "3"
+}

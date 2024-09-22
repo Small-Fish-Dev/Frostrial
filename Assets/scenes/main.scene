@@ -1,0 +1,99 @@
+{
+  "__guid": "6e4dc038-785c-4c16-bfb3-7f02b0d3ea4a",
+  "GameObjects": [
+    {
+      "__guid": "2de5ae5b-e9bb-4403-93d6-36aa0307cde0",
+      "Flags": 0,
+      "Name": "Map",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "3548fb3e-20ad-4ab4-b021-663bad5ba5d8",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "maps/tundra_lake.vmap",
+          "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "fde23950-b397-49ab-b47f-1606c25d4267",
+      "Flags": 0,
+      "Name": "Game Manager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Frostrial.AmbientWindManager",
+          "__guid": "47e9cb01-2fcd-4cb6-8b07-913254941586",
+          "WindVolumeLowerBound": 0.3,
+          "WindNormal": "sounds/ambient.wind.normal.sound",
+          "WindNormalMuffled": "sounds/ambient.wind.normal.muffled.sound",
+          "WindStrong": "sounds/ambient.wind.strong.sound",
+          "WindStrongMuffled": "sounds/ambient.wind.strong.muffled.sound"
+        },
+        {
+          "__type": "Frostrial.MusicPlayer",
+          "__guid": "f4380674-b959-4308-b567-c3e5efeeec73",
+          "TracksDelay": 30
+        }
+      ]
+    },
+    {
+      "__guid": "562fef36-9258-4f57-861a-efd8125f0b73",
+      "Flags": 0,
+      "Name": "Camera",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "2cbcd172-7e9a-4631-9495-3580ecfd23b8",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "main",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

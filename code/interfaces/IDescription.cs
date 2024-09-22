@@ -1,7 +1,6 @@
-﻿namespace Frostrial
+﻿namespace Frostrial;
+
+public interface IDescription
 {
-	public interface IDescription
-	{
-		public string Description { get; }
-	}
+	public string Description { get; }
 }

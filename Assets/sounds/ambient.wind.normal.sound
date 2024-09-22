@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/ambient.wind.normal.vsnd"
+	],
+	"ui": true,
+	"volume": 1.000000,
+	"volumerandom": 0.100000,
+	"pitch": 1.000000,
+	"pitchrandom": 0.010000,
+	"distancemax": 2000.000000,
+	"selectionmode": "3"
+}

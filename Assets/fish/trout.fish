@@ -1,0 +1,20 @@
+{
+	"fishname": "Trout",
+	"commonname": "Brown Trout",
+	"scientificname": "Salmo Trutta",
+	"description": "All hail the river king!",
+	"model": "models/fishes/trout/trout.vmdl",
+	"preview": "ui/fishes/trout.png",
+	"size": 1.000000,
+	"rarity": 1.000000,
+	"variantname": "Golden Trout",
+	"variantcommonname": "Golden Trout",
+	"variantscientificname": "Oncorhynchus Aguabonita",
+	"variantdescription": "Where the journey ended.",
+	"variantskin": "gold",
+	"variantpreview": "ui/fishes/trout_gold.png",
+	"weightedzone1": 0,
+	"weightedzone2": 1,
+	"weightedzone3": 20,
+	"modelworldsizemultiplier": 2.000000
+}

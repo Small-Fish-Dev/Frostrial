@@ -1,0 +1,20 @@
+{
+	"fishname": "Salmon",
+	"commonname": "Chinook Salmon",
+	"scientificname": "Oncorhynchus Tshawytscha",
+	"description": "This one's intimidating.",
+	"model": "models/fishes/salmon/salmon.vmdl",
+	"preview": "ui/fishes/salmon.png",
+	"size": 0.800000,
+	"rarity": 0.750000,
+	"variantname": "Coho Salmon",
+	"variantcommonname": "Salmon Coho",
+	"variantscientificname": "Oncorhynchus Kisutch",
+	"variantdescription": "The colours jump at you... AGH!",
+	"variantskin": "coho",
+	"variantpreview": "ui/fishes/salmon_coho.png",
+	"weightedzone1": 1,
+	"weightedzone2": 4,
+	"weightedzone3": 35,
+	"modelworldsizemultiplier": 2.000000
+}

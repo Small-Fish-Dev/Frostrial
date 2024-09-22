@@ -1,0 +1,13 @@
+{
+	"sounds":
+	[
+		"sounds/2d/camera_crank.vsnd"
+	],
+	"ui": true,
+	"volume": 1.500000,
+	"volumerandom": 0.000000,
+	"pitch": 1.000000,
+	"pitchrandom": 0.200000,
+	"distancemax": 4000.000000,
+	"selectionmode": "3"
+}

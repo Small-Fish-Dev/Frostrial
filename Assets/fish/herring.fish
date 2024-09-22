@@ -1,0 +1,20 @@
+{
+	"fishname": "Herring",
+	"commonname": "Baltic Herring",
+	"scientificname": "Clupea Harengus Membras",
+	"description": "Tastes good when canned.",
+	"model": "models/fishes/herring/herring.vmdl",
+	"preview": "ui/fishes/herring.png",
+	"size": 0.240000,
+	"rarity": 0.200000,
+	"variantname": "European Herring",
+	"variantcommonname": "European Sprat",
+	"variantscientificname": "Sprattus Sprattus",
+	"variantdescription": "Doesn't get along with the other one.",
+	"variantskin": "european",
+	"variantpreview": "ui/fishes/herring_european.png",
+	"weightedzone1": 30,
+	"weightedzone2": 20,
+	"weightedzone3": 4,
+	"modelworldsizemultiplier": 2.700000
+}
