@@ -47,6 +47,7 @@
       "__guid": "562fef36-9258-4f57-861a-efd8125f0b73",
       "Flags": 0,
       "Name": "Camera",
+      "Position": "-1482.69,242.5557,170.2123",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -66,6 +67,29 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "3f22f544-42ff-4876-9a55-50a25ef97148",
+      "Flags": 0,
+      "Name": "Lake",
+      "Position": "938,305,250",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "a19d2037-80a5-4d4e-bb5c-79769a6d55cd",
+          "BodyGroups": 18446744073709551615,
+          "Model": "maps/lake.vmdl",
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1000,1000,1000,0.55"
         }
       ]
     }
