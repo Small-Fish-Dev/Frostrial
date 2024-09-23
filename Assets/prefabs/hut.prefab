@@ -1,0 +1,274 @@
+{
+  "RootObject": {
+    "__guid": "f4967edc-4603-4184-86c8-6abc8ae2d436",
+    "Flags": 0,
+    "Name": "hut",
+    "Tags": "trigger",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "397a126d-7cac-45cf-8ad4-cc38b902b765",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/randommodels/cabin_roof.vmdl",
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "e4bfcd93-ff14-4482-ba60-8cac3f6a16ec",
+        "Center": "0,0,80",
+        "IsTrigger": true,
+        "Scale": "300,200,150",
+        "Static": true
+      },
+      {
+        "__type": "Frostrial.Interactable",
+        "__guid": "f70ed8a0-5986-42d0-8ace-eb9f178d6d7a",
+        "CanUse": null,
+        "InteractDistance": 150,
+        "Name": "Interact with the hut to buy items and upgrades."
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "b5e9e72d-221e-40c2-a642-93738de3a87e",
+        "Flags": 0,
+        "Name": "Chimney Base",
+        "Position": "0,0,7.999995",
+        "Rotation": "0,0,0.7071068,0.7071068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "e5e493d9-83cd-4ec2-806d-8b1d2f878c33",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/randommodels/cabin_chimney_base.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "Off",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.SoundPointComponent",
+            "__guid": "1785e047-1599-4571-ae70-decefc5c0574",
+            "DistanceAttenuation": false,
+            "DistanceAttenuationOverride": false,
+            "Force2d": false,
+            "MaxRepeatTime": 1,
+            "MinRepeatTime": 1,
+            "Occlusion": false,
+            "OcclusionOverride": false,
+            "OcclusionRadius": 32,
+            "Pitch": 1,
+            "PlayOnStart": true,
+            "ReflectionOverride": false,
+            "Reflections": false,
+            "Repeat": true,
+            "SoundEvent": "sounds/3d/campfire.sound",
+            "SoundOverride": false,
+            "StopOnNew": false,
+            "TargetMixer": {
+              "Name": "game",
+              "Id": "353ccaae-9c6b-4b96-adc4-0843be95bbbc"
+            },
+            "Volume": 1
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "5630a640-00a0-4dd7-9818-64ad8816b444",
+            "Flags": 0,
+            "Name": "Light",
+            "Position": "0.00002831221,95.00001,17.00001",
+            "Rotation": "0,0,-0.7071068,0.7071068",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.PointLight",
+                "__guid": "d2b31d25-a067-455a-ac81-160c20e0693f",
+                "Attenuation": 1,
+                "FogMode": "Enabled",
+                "FogStrength": 1,
+                "LightColor": "1,0.65,0,1",
+                "Radius": 285.19974,
+                "Shadows": true
+              },
+              {
+                "__type": "Frostrial.LightFlicker",
+                "__guid": "881e2ea0-e6e5-419d-97d8-36a9dea412f5",
+                "BaseRadius": 300,
+                "CosAmplitude": 50,
+                "CosFrequency": 2,
+                "Light": {
+                  "_type": "component",
+                  "component_id": "d2b31d25-a067-455a-ac81-160c20e0693f",
+                  "go": "5630a640-00a0-4dd7-9818-64ad8816b444",
+                  "component_type": "PointLight"
+                }
+              }
+            ]
+          },
+          {
+            "__guid": "88fa71d7-d1c9-4bb6-95da-41c8047659f1",
+            "Flags": 0,
+            "Name": "Fire Embers",
+            "Position": "0.00001132488,95.00001,7",
+            "Rotation": "0,0,-0.7071068,0.7071068",
+            "Tags": "particles,light_point,light",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.LegacyParticleSystem",
+                "__guid": "8550f337-79cd-43c3-9e06-0fc36c6c2867",
+                "ControlPoints": [],
+                "Looped": true,
+                "Particles": "particles/fire_embers.vpcf",
+                "PlaybackSpeed": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "ac09ce39-51b2-4f9c-bd4c-e2a52440215f",
+        "Flags": 0,
+        "Name": "Crate",
+        "Position": "0,0,5",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "a0802570-58a9-4297-8ce6-4f448ab25210",
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": "shopping",
+            "Model": "models/randommodels/crate.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.HighlightOutline",
+            "__guid": "e878f3f2-1398-4fe4-af70-86d2ef900b12",
+            "Color": "0.8,0.2,0.2,1",
+            "InsideColor": "0,0,0,0",
+            "InsideObscuredColor": "0,0,0,0",
+            "ObscuredColor": "0,0,0,0.4",
+            "Width": 0.25
+          }
+        ]
+      },
+      {
+        "__guid": "0c6bb078-69b7-42db-abee-1e33d2532e9f",
+        "Flags": 0,
+        "Name": "Left Wall",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "e116d6fd-3dc2-4ced-88c5-afa139fb8dae",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/randommodels/cabin_wall_left.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "c8697e10-5e8c-48ce-9784-556ba42e8d3d",
+        "Flags": 0,
+        "Name": "Right Wall",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "aeace54e-2e90-4811-9d55-60b5f33cd3ff",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/randommodels/cabin_wall_right.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "e5e73f9d-9d67-4b8b-98da-cd9d50b0d165",
+        "Flags": 0,
+        "Name": "Front Wall",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "2c352c2d-9d00-4f57-994d-ca430ebd6e90",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/randommodels/cabin_wall_front.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "fc75f028-69d0-4224-a573-1c446a78939e",
+        "Flags": 0,
+        "Name": "Back Wall",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "6ee86c1f-cf42-4b02-a429-927676593154",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/randommodels/cabin_wall_back.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

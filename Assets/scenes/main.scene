@@ -47,7 +47,8 @@
       "__guid": "562fef36-9258-4f57-861a-efd8125f0b73",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-1482.69,242.5557,170.2123",
+      "Position": "-1324.595,-2623.684,64.10199",
+      "Rotation": "0,0,0.6018152,0.7986354",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -67,6 +68,10 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Highlight",
+          "__guid": "b7d4fc99-7a9a-45b1-8fe6-f970742d006e"
         }
       ]
     },
@@ -92,6 +97,17 @@
           "Tint": "1000,1000,1000,0.55"
         }
       ]
+    },
+    {
+      "__guid": "fb166d54-90e4-40eb-b3e7-d5b14323f5d5",
+      "Flags": 0,
+      "Name": "hut",
+      "Position": "-1280,-2560,8.796",
+      "Rotation": "0.00000003996739,-0.00000003996739,-0.7071068,0.7071068",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/hut.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

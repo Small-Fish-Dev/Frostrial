@@ -5,8 +5,12 @@
   "Ident": "frostrial",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": null,
-  "PackageReferences": [],
+  "Resources": "/*",
+  "PackageReferences": [
+    "rust.creeping_tree_e",
+    "rust.creeping_tree_g",
+    "rust.creeping_tree_f"
+  ],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
   "Metadata": {
@@ -19,6 +23,102 @@
     "MapSelect": 1,
     "RankType": 2,
     "LeaderboardType": 1,
-    "PerMapRanking": false
+    "PerMapRanking": false,
+    "CsProjName": "",
+    "Compiler": {
+      "RootNamespace": "Frostrial",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;",
+      "WarningsAsErrors": "",
+      "Whitelist": true,
+      "AssemblyReferences": [],
+      "IgnoreFolders": [
+        "editor",
+        "unittest"
+      ],
+      "DistinctAssemblyReferences": []
+    },
+    "StartupScene": "scenes/main.scene",
+    "LaunchMode": "Normal",
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "Forward",
+          "KeyboardCode": "W",
+          "GamepadCode": "None",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Backward",
+          "KeyboardCode": "S",
+          "GamepadCode": "None",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Left",
+          "KeyboardCode": "A",
+          "GamepadCode": "None",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Right",
+          "KeyboardCode": "D",
+          "GamepadCode": "None",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Jump",
+          "KeyboardCode": "space",
+          "GamepadCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Run",
+          "KeyboardCode": "shift",
+          "GamepadCode": "LeftJoystickButton",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Walk",
+          "KeyboardCode": "alt",
+          "GamepadCode": "None",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Duck",
+          "KeyboardCode": "ctrl",
+          "GamepadCode": "B",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "attack1",
+          "KeyboardCode": "mouse1",
+          "GamepadCode": "RightTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "LeftTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "reload",
+          "KeyboardCode": "r",
+          "GamepadCode": "X",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "Use",
+          "KeyboardCode": "e",
+          "GamepadCode": "Y",
+          "GroupName": "Actions"
+        }
+      ],
+      "__guid": "cb75e388-26eb-47c1-8752-66cf00f925d5"
+    }
   }
 }
