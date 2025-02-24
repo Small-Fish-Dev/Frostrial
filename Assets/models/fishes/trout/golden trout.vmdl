@@ -1,0 +1,297 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "trout.vmat"
+								to = "models/fishes/trout/trout_gold.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "gold"
+						remaps = 
+						[
+							{
+								from = "models/fishes/trout/trout.vmat"
+								to = "models/fishes/trout/trout_gold.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.806524
+						point0 = [ -0.899522, -1.84177, -0.000002 ]
+						point1 = [ -1.169849, 2.012409, -0.000002 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.806524
+						point0 = [ 1.153897, -1.863552, 0.000002 ]
+						point1 = [ 1.433988, 1.984788, 0.000003 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "neck"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.612224
+						point0 = [ -0.9617, 1.434241, -0.000004 ]
+						point1 = [ 1.0383, 1.434241, -0.000004 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.534754
+						point0 = [ -0.206827, -0.117175, -0.0 ]
+						point1 = [ -0.430831, 4.138179, -0.000004 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.455805
+						point0 = [ 0.000001, 0.955434, -1.163283 ]
+						point1 = [ 0.000009, 0.919804, 0.847779 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "tail2"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ -0.000005, 2.475548, -0.002318 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 2.0, 9.37488, 3.19222 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 0.0, 3.562706, 0.339466 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 0.5, 3.84116, 8.29865 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/fishes/trout/trout.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "body"
+							radius = 2.96901
+							point0 = [ 0.079032, -1.85215, 0.0 ]
+							point1 = [ 0.066835, 1.99929, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "neck"
+							radius = 1.612224
+							point0 = [ -0.9617, 1.434241, -0.000004 ]
+							point1 = [ 1.0383, 1.434241, -0.000004 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "head"
+							radius = 2.30895
+							point0 = [ -0.206827, -0.117175, -0.0 ]
+							point1 = [ -0.430831, 4.138179, -0.000004 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 1.455805
+							point0 = [ 0.000001, 0.955434, -1.163283 ]
+							point1 = [ 0.000009, 0.919804, 0.847779 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "tail2"
+							dimensions = [ 2.0, 9.37488, 3.19222 ]
+							offset_origin = [ -0.000005, 2.475548, -0.002318 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "fin"
+							dimensions = [ 0.5, 3.84116, 8.29865 ]
+							offset_origin = [ 0.0, 3.562706, 0.339466 ]
+							offset_angles = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "neck"
+						child_body = "head"
+						anchor_origin = [ 0.221599, 4.042496, 0.000001 ]
+						anchor_angles = [ 180.0, -90.0, -90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "neck"
+						anchor_origin = [ 0.064179, 3.548333, 0.000002 ]
+						anchor_angles = [ 180.0, -90.0, -90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ 0.112602, -3.584149, -0.0 ]
+						anchor_angles = [ 180.0, 90.0, 90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "tail2"
+						anchor_origin = [ -0.000001, 3.831245, -0.009379 ]
+						anchor_angles = [ 0.0, 90.0, 180.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail2"
+						child_body = "fin"
+						anchor_origin = [ -0.000002, 4.704979, 0.027588 ]
+						anchor_angles = [ 0.0, 90.0, 180.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

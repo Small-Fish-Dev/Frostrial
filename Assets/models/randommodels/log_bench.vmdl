@@ -33,8 +33,8 @@
 								to = "materials/randommodels/log_bench.vmat"
 							},
 						]
-						use_global_default = false
-						global_default_material = ""
+						use_global_default = true
+						global_default_material = "materials/randommodels/log_bench.vmat"
 					},
 					{
 						_class = "MaterialGroup"
@@ -79,7 +79,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						radius = 9.5
 						point0 = [ 10.5687, 23.5, 10.0 ]
 						point1 = [ -10.9037, 23.5, 10.0 ]
@@ -88,7 +88,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						radius = 9.5
 						point0 = [ 10.5687, -23.5, 10.0 ]
 						point1 = [ -10.9037, -23.5, 10.0 ]
@@ -97,7 +97,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ 0.276291, -0.077299, 19.71273 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 20.552582, 77.025032, 7.76054 ]
@@ -125,5 +125,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
