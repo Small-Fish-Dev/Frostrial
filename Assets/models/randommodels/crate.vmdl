@@ -30,11 +30,11 @@
 						[
 							{
 								from = "cube.vmat"
-								to = "materials/randommodels/normal_crate.vmat"
+								to = ""
 							},
 						]
-						use_global_default = false
-						global_default_material = ""
+						use_global_default = true
+						global_default_material = "materials/randommodels/normal_crate.vmat"
 					},
 					{
 						_class = "MaterialGroup"
@@ -79,7 +79,7 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						faceMergeAngle = 20.0
 						maxHullVertices = 32
 					},
@@ -106,5 +106,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

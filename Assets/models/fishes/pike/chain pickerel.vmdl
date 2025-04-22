@@ -1,0 +1,288 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "pike.vmat"
+								to = "models/fishes/pike/pikechain.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "chain"
+						remaps = 
+						[
+							{
+								from = "models/fishes/pike/pike.vmat"
+								to = "models/fishes/pike/pikechain.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.291353
+						point0 = [ 0.137254, -1.448621, 0.00001 ]
+						point1 = [ 0.246089, 1.997389, 0.000001 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "neck"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 0.069414, 2.002649, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.760572
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 0.101007, 2.186071, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.216237
+						point0 = [ -0.000001, -0.003361, -0.130251 ]
+						point1 = [ -0.000002, 1.992825, -0.278028 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail2"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 1.0
+						point0 = [ -0.000001, -0.001039, -0.131919 ]
+						point1 = [ -0.000003, 2.21684, -0.244119 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ -0.000041, 2.06096, -0.008744 ]
+						angles = [ 0.000035, -0.000017, 4.974643 ]
+						dimensions = [ 0.2, 1.835337, 3.111 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/fishes/pike/pike.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "neck"
+						child_body = "head"
+						anchor_origin = [ 0.044656, 1.777765, -0.0 ]
+						anchor_angles = [ 180.0, -90.0, -90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "neck"
+						anchor_origin = [ 0.10938, 1.948755, 0.0 ]
+						anchor_angles = [ 180.0, -90.0, -90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ -0.002395, -2.080385, -0.0 ]
+						anchor_angles = [ 0.0, -90.0, -90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "tail2"
+						anchor_origin = [ 0.000001, 2.054142, -0.173871 ]
+						anchor_angles = [ 0.0, 90.0, 180.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail2"
+						child_body = "fin"
+						anchor_origin = [ 0.0, 1.837154, -0.186526 ]
+						anchor_angles = [ 0.0, 90.0, 180.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "body"
+							radius = 1.291353
+							point0 = [ 0.137254, -1.448621, 0.00001 ]
+							point1 = [ 0.246089, 1.997389, 0.000001 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "neck"
+							radius = 1.0
+							point0 = [ 0.0, 0.0, 0.0 ]
+							point1 = [ 0.069414, 2.002649, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "head"
+							radius = 0.760572
+							point0 = [ 0.0, 0.0, 0.0 ]
+							point1 = [ 0.101007, 2.186071, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 1.216237
+							point0 = [ -0.000001, -0.003361, -0.130251 ]
+							point1 = [ -0.000002, 1.992825, -0.278028 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail2"
+							radius = 1.0
+							point0 = [ -0.000001, -0.001039, -0.131919 ]
+							point1 = [ -0.000003, 2.21684, -0.244119 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_box"
+						game_keys = 
+						{
+							bonename = "fin"
+							dimensions = [ 0.2, 1.835337, 3.111 ]
+							offset_origin = [ -0.000041, 2.06096, -0.008744 ]
+							offset_angles = [ 0.000035, -0.000017, 4.974643 ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

@@ -15,7 +15,7 @@
 						[
 							{
 								from = "wood.vmat"
-								to = "models/sbox_props/trees/horse_chestnut/horse_chestnut.vmat"
+								to = "materials/randommodels/cabin_materials/aged_wood.vmat"
 							},
 							{
 								from = "pine_01.vmat"
@@ -47,7 +47,7 @@
 						_class = "PhysicsShapeCylinder"
 						parent_bone = ""
 						surface_prop = "wood"
-						collision_prop = "default"
+						collision_tags = "solid"
 						radius = 24.093512
 						point0 = [ 14.670723, -7.674599, -19.963287 ]
 						point1 = [ 14.670723, -7.674599, 497.027557 ]
@@ -115,5 +115,6 @@
 		model_archetype = "static_prop_model"
 		primary_associated_entity = "prop_static"
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

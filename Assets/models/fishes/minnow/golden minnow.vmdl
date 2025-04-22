@@ -1,0 +1,181 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "body"
+							radius = 0.21648
+							point0 = [ -0.00014, -0.124336, 0.000005 ]
+							point1 = [ 0.000402, 0.679384, -0.000014 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "ao_proxy_capsule"
+						game_keys = 
+						{
+							bonename = "tail"
+							radius = 0.176622
+							point0 = [ -0.000003, -0.16605, -0.002633 ]
+							point1 = [ -0.000022, 0.901857, -0.019718 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "minnow.vmat"
+								to = "models/fishes/minnow/minnowgold.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.173384
+						point0 = [ 0.0, -0.025963, 0.0 ]
+						point1 = [ 0.0, 0.28164, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.21648
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 0.0, 0.323376, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.176622
+						point0 = [ 0.0, -0.240667, 0.0 ]
+						point1 = [ 0.0, 0.342982, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ -0.0, 0.245712, 0.000324 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 0.03, 0.683848, 0.464302 ]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/fishes/minnow/minnow.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "head"
+						anchor_origin = [ -0.000001, 0.43312, 0.0 ]
+						anchor_angles = [ 0.0, 90.0, 90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ -0.003969, -0.383787, 0.0 ]
+						anchor_angles = [ 180.0, 90.0, 90.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 30.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -45.0
+						max_twist_angle = 45.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "fin"
+						anchor_origin = [ -0.0, 0.476968, 0.000001 ]
+						anchor_angles = [ 0.0, 90.0, 180.0 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.3
+						enable_swing_limit = true
+						swing_limit = 15.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}
