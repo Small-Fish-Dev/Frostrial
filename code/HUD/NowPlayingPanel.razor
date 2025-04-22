@@ -1,0 +1,40 @@
+@using System
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Events;
+@inherits PanelComponent
+@implements IGameEventHandler<NextSongEvent>
+@namespace Frostrial
+
+<root>
+    @if (CurrentTrack != null && !ShouldHide)
+    {
+        <div class="popup">
+            <img src="/ui/album-covers/@CurrentTrack.AlbumCover"/>
+            
+            <div class="info">
+                <label class="big">@CurrentTrack.Song</label>
+                <label>@CurrentTrack.Album</label>
+                <label>by @CurrentTrack.Artist</label>
+                <label>@CurrentTrack.URL</label>
+            </div>
+        </div>
+    }
+</root>
+
+@code
+{
+    [Property] public float NotificationDuration { get; set; } = 5.0f;
+
+    private Music CurrentTrack = null;
+    private TimeUntil ShouldHide = 0;
+
+    public void OnGameEvent(NextSongEvent eventArgs)
+    {
+        CurrentTrack = eventArgs.Music;
+        ShouldHide = NotificationDuration;
+        Log.Info($"New Track: {CurrentTrack}");
+    }
+
+    protected override int BuildHash() => HashCode.Combine(CurrentTrack, (bool)ShouldHide);
+}

@@ -1,0 +1,18 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Frostrial
+
+<root>
+	<div class="title">hello</div>
+</root>
+
+@code
+{
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+
+		Mouse.Visible = true;
+	}
+}

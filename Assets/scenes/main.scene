@@ -86,7 +86,55 @@
           "TracksDelay": 30
         }
       ],
-      "Children": []
+      "Children": [
+        {
+          "__guid": "4bba6f12-66b2-41f5-a742-f66459e40dde",
+          "Flags": 0,
+          "Name": "Screen",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "9944c7b2-2497-49c8-bfe2-83c4d38b19b8",
+              "AutoScreenScale": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Opacity": 1,
+              "Scale": 1,
+              "ScaleStrategy": "ConsistentHeight",
+              "TargetCamera": null,
+              "ZIndex": 100
+            },
+            {
+              "__type": "Frostrial.FrostrialHUD",
+              "__guid": "5b0a7641-54d6-4d81-92dc-01823ea7b3fe",
+              "__enabled": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            },
+            {
+              "__type": "Frostrial.NowPlayingPanel",
+              "__guid": "600a8692-18b4-4d90-a348-a6893db3f74d",
+              "NotificationDuration": 10,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        }
+      ]
     },
     {
       "__guid": "562fef36-9258-4f57-861a-efd8125f0b73",
@@ -171,7 +219,7 @@
       "__guid": "fb166d54-90e4-40eb-b3e7-d5b14323f5d5",
       "Flags": 0,
       "Name": "hut",
-      "Position": "-1280,-2560,8.796",
+      "Position": "-1280,-2560,14.02013",
       "Rotation": "0.00000003996739,-0.00000003996739,-0.7071068,0.7071068",
       "Tags": "trigger",
       "Enabled": true,

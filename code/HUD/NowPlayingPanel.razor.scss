@@ -1,0 +1,46 @@
+NowPlayingPanel {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	
+	.popup {
+		flex-direction: row;
+		background-color: rgba(255, 255, 255, 0.25);
+		backdrop-filter: blur(15px);
+		height: 128px;
+		border-top-right-radius: 32px;
+		transition: transform 2s ease-in;
+		transform: translateY(0%);
+
+		&:intro {
+			transform: translateY(100%);
+		}
+
+		&:outro {
+			transform: translateY(100%);
+		}
+
+		Image {
+			height: 100%;
+			aspect-ratio: 1;
+		}
+
+		.info {
+			flex-direction: column;
+			padding: 8px;
+
+			Label {
+				font-size: 18px;
+			}
+
+			.big {
+				font-size: 22px;
+				font-weight: bold;
+			}
+
+			Label:last-child {
+				margin-top: auto;
+			}
+		}
+	}
+}
