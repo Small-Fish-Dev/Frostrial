@@ -19,7 +19,7 @@ public sealed class Interactable : Component
     /// Defines whether a player can use this object or not
     /// </summary>
     [Property, Category( "Optional" )]
-    protected CanUseEvent CanUse { get; set; } = _ => true;
+    private CanUseEvent CanUse { get; set; } = _ => true;
 
     public delegate bool CanUseEvent( Player subject );
 
