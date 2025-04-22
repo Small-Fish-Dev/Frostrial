@@ -2,6 +2,32 @@
   "__guid": "6e4dc038-785c-4c16-bfb3-7f02b0d3ea4a",
   "GameObjects": [
     {
+      "__guid": "01ef340d-8dd8-45d9-845e-c739d5faec21",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "d4033545-d325-41fd-a290-ec08a81f93a4",
+          "Author": null,
+          "Changes": "",
+          "Description": "",
+          "Group": null,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SceneTags": "",
+          "Title": "main",
+          "Version": null
+        }
+      ],
+      "Children": []
+    },
+    {
       "__guid": "2de5ae5b-e9bb-4403-93d6-36aa0307cde0",
       "Flags": 0,
       "Name": "Map",
@@ -14,6 +40,12 @@
           "EnableCollision": true,
           "MapName": "maps/tundra_lake.vmap",
           "NoOrigin": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,
           "UseMapFromLaunch": false
@@ -30,18 +62,31 @@
         {
           "__type": "Frostrial.AmbientWindManager",
           "__guid": "47e9cb01-2fcd-4cb6-8b07-913254941586",
-          "WindVolumeLowerBound": 0.3,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "WindNormal": "sounds/ambient.wind.normal.sound",
           "WindNormalMuffled": "sounds/ambient.wind.normal.muffled.sound",
           "WindStrong": "sounds/ambient.wind.strong.sound",
-          "WindStrongMuffled": "sounds/ambient.wind.strong.muffled.sound"
+          "WindStrongMuffled": "sounds/ambient.wind.strong.muffled.sound",
+          "WindVolumeLowerBound": 0.3
         },
         {
           "__type": "Frostrial.MusicPlayer",
           "__guid": "f4380674-b959-4308-b567-c3e5efeeec73",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "TracksDelay": 30
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "562fef36-9258-4f57-861a-efd8125f0b73",
@@ -58,7 +103,14 @@
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
+          "FovAxis": "Horizontal",
           "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
@@ -71,9 +123,16 @@
         },
         {
           "__type": "Sandbox.Highlight",
-          "__guid": "b7d4fc99-7a9a-45b1-8fe6-f970742d006e"
+          "__guid": "b7d4fc99-7a9a-45b1-8fe6-f970742d006e",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "3f22f544-42ff-4876-9a55-50a25ef97148",
@@ -86,7 +145,16 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "a19d2037-80a5-4d4e-bb5c-79769a6d55cd",
           "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
           "Model": "maps/lake.vmdl",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "RenderOptions": {
             "GameLayer": true,
             "OverlayLayer": false,
@@ -96,7 +164,8 @@
           "RenderType": "On",
           "Tint": "1000,1000,1000,0.55"
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "fb166d54-90e4-40eb-b3e7-d5b14323f5d5",
@@ -111,13 +180,12 @@
     }
   ],
   "SceneProperties": {
-    "FixedUpdateFrequency": 50,
-    "MaxFixedUpdates": 5,
-    "NetworkFrequency": 30,
     "NetworkInterpolation": true,
-    "ThreadedAnimation": true,
     "TimeScale": 1,
-    "UseFixedUpdate": true,
+    "WantsSystemScene": true,
+    "Metadata": {
+      "Title": "main"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -131,9 +199,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "main",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

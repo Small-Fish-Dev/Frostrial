@@ -1,3 +1,5 @@
+.sbox/
+
 .codegen/
 obj/
 code/accesslist.txt
