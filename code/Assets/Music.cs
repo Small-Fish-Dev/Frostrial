@@ -8,7 +8,7 @@ namespace Frostrial;
 public class Music : GameResource
 {
     public static IReadOnlyDictionary<string, Music> All => _all;
-    internal static Dictionary<string, Music> _all = new();
+    private static Dictionary<string, Music> _all = new();
 
     public string Artist { get; set; }
     public string Album { get; set; }
@@ -25,10 +25,11 @@ public class Music : GameResource
             _all.Add(ResourceName, this);
     }
 
-    public SoundHandle Play()
+    public MusicPlayer Play()
     {
-        File.Preload();
-        var s = Sound.PlayFile(File);
+        // TODO: HACK: MusicPlayer.Play doesn't like the raw paths
+        var s = MusicPlayer.Play(FileSystem.Mounted, File.ResourcePath + "_c");
+        s.Repeat = false;
         s.TargetMixer = Mixer.FindMixerByName("Music");
 
         return s;

@@ -7,54 +7,47 @@ namespace Frostrial;
 
 public record NextSongEvent(Music Music) : IGameEvent;
 
-public sealed class MusicPlayer : Component
+public sealed class FrostrialMusicPlayer : Component
 {
     public List<Music> Queue { get; private set; } = new();
     [Property] public float TracksDelay { get; set; } = 30f;
 
-    private int _currentQueuePosition = 0;
+    private int _currentQueuePosition = -1;
     private RealTimeSince _tsLastTrack = 0;
-    private SoundHandle _currentSoundHandle = null;
+    private MusicPlayer _currentMusicPlayer = null;
 
     protected override void OnEnabled()
     {
         Queue = Music.All.Values.ToList();
         Shuffle(true);
-        PlayNext(false);
+        PlayNext();
     }
 
     protected override void OnUpdate()
     {
-        if (!_currentSoundHandle.IsValid())
+        if (_currentMusicPlayer is null && _tsLastTrack >= TracksDelay)
         {
-            if (_tsLastTrack >= TracksDelay)
-            {
-                PlayNext();
-            }
-        }
-        else if (_currentSoundHandle.Finished)
-        {
-            _currentSoundHandle = null;
-            _tsLastTrack = 0;
+            PlayNext();
         }
     }
 
-    public void PlayNext(bool increment = true)
+    public void PlayNext()
     {
-        if (increment)
+        var nextTrack = (_currentQueuePosition + 1) % Queue.Count;
+        if (nextTrack < _currentQueuePosition)
         {
-            var nextTrack = (_currentQueuePosition + 1) % Queue.Count;
-            if (nextTrack < _currentQueuePosition)
-            {
-                Shuffle();
-            }
-
-            _currentQueuePosition = nextTrack;
+            Shuffle();
         }
+        _currentQueuePosition = nextTrack;
+
+        _currentMusicPlayer = Queue[_currentQueuePosition].Play();
+        _currentMusicPlayer.OnFinished = () =>
+        {
+            _currentMusicPlayer = null;
+            _tsLastTrack = 0;
+        };
 
         GameObject.Dispatch(new NextSongEvent(Queue[_currentQueuePosition]));
-
-        _currentSoundHandle = Queue[_currentQueuePosition].Play();
     }
 
     private void Shuffle(bool ignoreFirstLastRepeat = false)

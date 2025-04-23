@@ -75,8 +75,8 @@
           "WindVolumeLowerBound": 0.3
         },
         {
-          "__type": "Frostrial.MusicPlayer",
-          "__guid": "f4380674-b959-4308-b567-c3e5efeeec73",
+          "__type": "Frostrial.FrostrialMusicPlayer",
+          "__guid": "2c02bf01-9773-43cb-ab44-4ec9c4cfd862",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
