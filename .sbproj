@@ -42,7 +42,9 @@
     "StartupScene": "scenes/main.scene",
     "LaunchMode": "Normal",
     "ControlModes": {
-      "Keyboard": true
+      "Keyboard": true,
+      "VR": false,
+      "Gamepad": false
     }
   }
 }
