@@ -5,7 +5,7 @@ namespace Frostrial;
 
 partial class Player
 {
-    [Property] [Category("Camera")] public float CameraRotateDelay = 0.5f;
+    [Property] [Category("Camera")] public float CameraRotateDelay = 0.3f;
     [Property] [Category("Camera")] public float CameraRotateRate = 5.0f;
     [Property] [Category("Camera")] public float CameraPitch = 30f;
     [Property] [Category("Camera")] public float CameraDistance = 500f;

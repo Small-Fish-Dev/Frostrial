@@ -3,6 +3,7 @@
     "__guid": "a6e61de5-5642-4596-a38e-a37be69858eb",
     "Flags": 0,
     "Name": "player",
+    "Tags": "player",
     "Enabled": true,
     "Components": [
       {
@@ -16,7 +17,7 @@
         },
         "CameraDistance": 2000,
         "CameraPitch": 30,
-        "CameraRotateDelay": 0.3,
+        "CameraRotateDelay": 0.2,
         "CameraRotateRate": 5,
         "Controller": {
           "_type": "component",
@@ -47,7 +48,7 @@
           "go": "a6e61de5-5642-4596-a38e-a37be69858eb",
           "component_type": "Rigidbody"
         },
-        "BodyCollisionTags": null,
+        "BodyCollisionTags": "player",
         "BodyHeight": 72,
         "BodyMass": 500,
         "BodyRadius": 16,
@@ -61,7 +62,7 @@
         "DuckedHeight": 36,
         "DuckedSpeed": 0,
         "EnableFootstepSounds": true,
-        "EnablePressing": true,
+        "EnablePressing": false,
         "EyeDistanceFromTop": 8,
         "FootstepMixer": {
           "Name": "unknown",
@@ -91,15 +92,15 @@
         "RunByDefault": false,
         "RunSpeed": 320,
         "ShowColliderComponents": false,
-        "ShowRigidbodyComponent": false,
+        "ShowRigidbodyComponent": true,
         "ThirdPerson": true,
         "ToggleCameraModeButton": "view",
         "UseAnimatorControls": true,
         "UseButton": "use",
         "UseCameraControls": false,
         "UseFovFromPreferences": true,
-        "UseInputControls": false,
-        "UseLookControls": true,
+        "UseInputControls": true,
+        "UseLookControls": false,
         "WalkSpeed": 110
       },
       {
@@ -169,7 +170,7 @@
             "OnComponentStart": null,
             "OnComponentUpdate": null,
             "Orthographic": true,
-            "OrthographicHeight": 1204,
+            "OrthographicHeight": 800,
             "Priority": 1,
             "RenderExcludeTags": "",
             "RenderTags": "",

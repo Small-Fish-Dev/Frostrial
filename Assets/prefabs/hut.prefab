@@ -5,6 +5,7 @@
     "Name": "hut",
     "Tags": "trigger",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "Frostrial.Interactable",
@@ -49,6 +50,7 @@
         "Name": "Chimney Base",
         "Position": "0,0,7.999995",
         "Rotation": "0,0,0.7071068,0.7071068",
+        "Tags": "solid",
         "Enabled": true,
         "Components": [
           {
@@ -75,59 +77,32 @@
             "Tint": "1,1,1,1"
           },
           {
-            "__type": "Sandbox.SoundPointComponent",
-            "__guid": "1785e047-1599-4571-ae70-decefc5c0574",
-            "Distance": 512,
-            "DistanceAttenuation": false,
-            "DistanceAttenuationOverride": false,
-            "Falloff": [
-              {
-                "x": 0,
-                "y": 1,
-                "in": 3.1415927,
-                "out": -3.1415927,
-                "mode": "Mirrored"
-              },
-              {
-                "x": 1,
-                "y": 0,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              }
-            ],
-            "Force2d": false,
-            "MaxRepeatTime": 1,
-            "MinRepeatTime": 1,
-            "Occlusion": false,
-            "OcclusionOverride": false,
-            "OcclusionRadius": 32,
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "d74cc575-4d7f-4b97-a26d-e7b1d97a859a",
+            "Center": "-1.411316,97.85818,12.47204",
+            "Friction": null,
+            "IsTrigger": false,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
             "OnComponentEnabled": null,
             "OnComponentFixedUpdate": null,
             "OnComponentStart": null,
             "OnComponentUpdate": null,
-            "Pitch": 1,
-            "PlayOnStart": true,
-            "ReflectionOverride": false,
-            "Reflections": false,
-            "Repeat": true,
-            "SoundEvent": "sounds/3d/campfire.sound",
-            "SoundOverride": false,
-            "StopOnNew": false,
-            "TargetMixer": {
-              "Name": "game",
-              "Id": "353ccaae-9c6b-4b96-adc4-0843be95bbbc"
-            },
-            "Volume": 1
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "Scale": "70.32346,57.86562,25.05592",
+            "Static": true,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
           }
         ],
         "Children": [
           {
             "__guid": "5630a640-00a0-4dd7-9818-64ad8816b444",
             "Flags": 0,
-            "Name": "Light",
+            "Name": "Fire",
             "Position": "0.00002831221,95.00001,17.00001",
             "Rotation": "0,0,-0.7071068,0.7071068",
             "Tags": "light_point,light",
@@ -167,6 +142,54 @@
                 "OnComponentFixedUpdate": null,
                 "OnComponentStart": null,
                 "OnComponentUpdate": null
+              },
+              {
+                "__type": "Sandbox.SoundPointComponent",
+                "__guid": "2ec5567d-dec4-4859-ad39-dabda3d867a2",
+                "Distance": 512,
+                "DistanceAttenuation": false,
+                "DistanceAttenuationOverride": false,
+                "Falloff": [
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "in": 3.1415927,
+                    "out": -3.1415927,
+                    "mode": "Mirrored"
+                  },
+                  {
+                    "x": 1,
+                    "y": 0,
+                    "in": 0,
+                    "out": 0,
+                    "mode": "Mirrored"
+                  }
+                ],
+                "Force2d": false,
+                "MaxRepeatTime": 1,
+                "MinRepeatTime": 1,
+                "Occlusion": false,
+                "OcclusionOverride": false,
+                "OcclusionRadius": 32,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Pitch": 1,
+                "PlayOnStart": true,
+                "ReflectionOverride": false,
+                "Reflections": false,
+                "Repeat": true,
+                "SoundEvent": "sounds/3d/campfire.sound",
+                "SoundOverride": false,
+                "StopOnNew": false,
+                "TargetMixer": {
+                  "Name": "game",
+                  "Id": "353ccaae-9c6b-4b96-adc4-0843be95bbbc"
+                },
+                "Volume": 1
               }
             ],
             "Children": []
@@ -244,6 +267,26 @@
             "OnComponentStart": null,
             "OnComponentUpdate": null,
             "Width": 0.25
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "705db748-af9e-42a9-aadf-0d9a5d294adb",
+            "Friction": null,
+            "IsTrigger": false,
+            "Model": "models/randommodels/crate.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "Static": true,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
           }
         ],
         "Children": []
@@ -253,7 +296,9 @@
         "Flags": 0,
         "Name": "Left Wall",
         "Position": "0,0,-2.622179",
+        "Tags": "hide_camera",
         "Enabled": true,
+        "NetworkMode": 0,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
@@ -286,7 +331,9 @@
         "Flags": 0,
         "Name": "Right Wall",
         "Position": "0,0,-2.622179",
+        "Tags": "hide_camera",
         "Enabled": true,
+        "NetworkMode": 0,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
@@ -319,7 +366,9 @@
         "Flags": 0,
         "Name": "Front Wall",
         "Position": "0,0.01033324,-2.611986",
+        "Tags": "hide_camera",
         "Enabled": true,
+        "NetworkMode": 0,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
@@ -352,7 +401,9 @@
         "Flags": 0,
         "Name": "Back Wall",
         "Position": "0,0,-2.622179",
+        "Tags": "hide_camera",
         "Enabled": true,
+        "NetworkMode": 0,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
@@ -386,6 +437,7 @@
         "Name": "Roof",
         "Position": "0,0,-0.5807858",
         "Enabled": true,
+        "NetworkMode": 0,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
@@ -409,6 +461,75 @@
             },
             "RenderType": "On",
             "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Frostrial.HideOnEnter",
+            "__guid": "fe6d3de3-0966-454d-a6d8-07ba1f2ea257",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Renderer": {
+              "_type": "component",
+              "component_id": "41312ad1-3e4e-44bb-a16b-875676b18292",
+              "go": "ff9899c4-157e-4c94-98b0-6db3a40fb9f4",
+              "component_type": "ModelRenderer"
+            }
+          },
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "39d62f54-2ede-47e1-9479-7925555c0623",
+            "Center": "13,-2,90",
+            "Friction": null,
+            "IsTrigger": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "Scale": "307,194,160",
+            "Static": false,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
+          }
+        ],
+        "Children": []
+      },
+      {
+        "__guid": "613b1a2a-f83c-4133-83fc-c3b0e8e18481",
+        "Flags": 0,
+        "Name": "Floor",
+        "Position": "0,0,8.389581",
+        "Tags": "solid",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.PlaneCollider",
+            "__guid": "c972fc66-74a2-424f-a848-c69ca3335ee9",
+            "Center": "0,0,0",
+            "Friction": null,
+            "IsTrigger": false,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "Scale": "290.4989,192.0005",
+            "Static": true,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
           }
         ],
         "Children": []
